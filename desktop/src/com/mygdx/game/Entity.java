@@ -1,65 +1,113 @@
 package com.mygdx.game;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-//Not sure what else to import 
+//Not sure what else to import for now
 public abstract class Entity
   {
-    private int id;                  //Id
-    private float x,y;               //Position
-    private float xScale,yScale;     //Scale
-    //private control string;          //Control input
-    
-    
-    //Constructors
-    public Entity()
-    {
+    protected int id;                 
+    protected int health;              
+    protected float x,y;               //Position
+    protected float scale;     
+    protected Sprite sprite;          
+
+
+    // Default constructor
+    public Entity(int id) {
+      this.id = id;
+      this.health = 100;        //Just sets default health can be adjusted if needed
+      this.x = 0.0f;
+      this.y = 0.0f;
+      this.scale = 1.0f;        // *1.0 (no scaling)
+      this.sprite = null;       // left it as null for now until we insert some placeholder default sprite
     }
-      public Entity(float x, float y)
-    {
-      this.x = x; 
+    //parameterized constructor
+    public Entity(int id, int health ,float x , float y, float scale, Sprite sprite) {
+      this.id = id; 
+      this.health = health;
+      this.x = x;
+      this.y = y;
+      this.scale = scale;
+      this.sprite = sprite;
+    }
+    //Setters and Getters methods 
+    public int getId() {
+      return id;
+    }
+
+    public void setId(int id) {
+      this.id = id;
+    }
+
+    public int getHealth() {
+      return health;
+    }
+
+    public void setHealth(int health) {
+      this.health = health;
+    }
+
+    public float getX() {
+      return x;
+    }
+
+    public void setX(float x) {
+      this.x = x;
+    }
+
+    public float getY() {
+      return y;
+    }
+
+    public void setY(float y) {
       this.y = y;
     }
-      public Entity(float x, float y ,float xScale ,float yScale)
-    {
-      this.x = x; 
-      this.y = y; 
-      this.xScale = xScale;
-      this.yScale = yScale;
+
+    public float getScale() {
+      return scale;
     }
-    //Getters and Setters
-      public float getX()
-    {
-        return x;
+
+    public void setScale(float scale) {
+      this.scale = scale;
     }
-      public float getY()
-    {
-        return y;
+
+    public Sprite getSprite() {
+      return sprite;
     }
-      public float getxScale()
-    {
-        return xScale;
+
+    public void setSprite(Sprite sprite) {
+      this.sprite = sprite;
     }
-      public float getyScale()
-    {
-        return yScale;
+    //Methods 
+    public abstract void update();
+
+    public abstract void render():
+    
+    public abstract boolean collidesWith(Entity other);       //Can fine-tune what each entity class is able to collide with using this abstract method
+
+    public abstract void takeDamage(int damage);              //Not sure if we need these 2 damage/heal
+
+    public abstract void heal(int amount);             
+    
+    public abstract void destroy();
+
+    public void push(float deltaX, float deltaY) {
+      this.x += deltaX;
+      this.y += deltaY;
+    }                                                         //Simple push method maybe can implement for collisions,pretty much just knockback
+
+    public void setScale(float scale) {
+      this.scale = scale;
+    }                                                         //Mario mushroom
+
+    public String testString() {
+      return "Entity{" +
+             "id=" + id +
+             ", health=" + health +
+             ", x=" + x +
+             ", y=" + y +
+             ", scale=" + scale +
+             ", sprite=" + sprite +
+             "}";
     }
-      public void setX(float x) 
-    {
-        this.x = x;
-    }
-      public void setY(float y)
-    {
-        this.y = y;
-    }
-      public void setXScale(float xScale)
-    {
-        this.xScale = xScale;
-    }
-      public void setYScale(float yScale)
-    {
-        this.yScale = yScale;
-    }
- //methods
-      public abstract void render();
-      public abstract void update();
-      public abstract void movement();
+  
   }
+  
