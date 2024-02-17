@@ -1,5 +1,7 @@
 package com.mygdx.game;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch; //might need
 //Not sure what else to import for now
 public abstract class Entity
   {
@@ -94,9 +96,10 @@ public abstract class Entity
       this.y += deltaY;
     }                                                         //Simple push method maybe can implement for collisions,pretty much just knockback
 
-    public void setScale(float scale) {
-      this.scale = scale;
-    }                                                         //Mario mushroom
+// Duplicate method
+//    public void setScale(float scale) {
+//      this.scale = scale;
+//    }                                                         //Mario mushroom
 
     public String testString() {
       return "Entity{" +
