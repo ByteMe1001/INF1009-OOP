@@ -79,7 +79,7 @@ public abstract class Entity
     //Methods 
     public abstract void update();
 
-    public abstract void render():
+    public abstract void render();
     
     public abstract boolean collidesWith(Entity other);       //Can fine-tune what each entity class is able to collide with using this abstract method
 
