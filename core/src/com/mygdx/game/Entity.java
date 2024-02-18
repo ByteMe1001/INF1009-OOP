@@ -1,7 +1,6 @@
 package com.mygdx.game;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch; //might need
+
 //Not sure what else to import for now
 public abstract class Entity
   {

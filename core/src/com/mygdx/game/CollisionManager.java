@@ -1,7 +1,6 @@
 package com.mygdx.game;
 
-
- public class CollisionManager implements iCollision{
+abstract public class CollisionManager implements iCollision{
 
     float x, y;
     int width, height;
@@ -9,7 +8,7 @@ package com.mygdx.game;
 
 
     public CollisionManager (float x, float y, int width, int height){
-
+        super();
         this.x = x;
         this.y = y;
         this.width = width;
@@ -17,13 +16,7 @@ package com.mygdx.game;
 
     }
 
-
-     @Override
-    public boolean collidesWith(CollisionManager rect){
-        return x < rect.x + rect.width && y < rect.y + rect.height && x + width > rect.x && y + height > rect.y;
-     }
-
-     //private Entity entity;
+    //private Entity entity;
 
 
     /*@Override
@@ -50,4 +43,8 @@ package com.mygdx.game;
          }
      }
  */
+     @Override
+    public boolean collidesWith(CollisionManager rect){
+        return x < rect.x + rect.width && y < rect.y + rect.height && x + width > rect.x && y + height > rect.y;
+     }
 }

@@ -3,7 +3,7 @@ package com.mygdx.game;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AiManager {
+public class AiManager implements iAiMovement{
     private List<Entity> aiEntities; // Stores all AI-controlled entities
     private iAiMovement defaultMovementBehavior;
 
