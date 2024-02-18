@@ -15,7 +15,7 @@ public class GameScreen implements Screen {
     private Viewport viewport;
 
     //Graphics variables
-    private SpriteBatch batch;
+    protected SpriteBatch batch;
     private Texture background;
 
     //Timing

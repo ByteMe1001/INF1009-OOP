@@ -1,7 +1,9 @@
 package com.mygdx.game;
 
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -9,11 +11,14 @@ import com.badlogic.gdx.utils.ScreenUtils;
 public class MyGdxGame extends Game {
 
 	GameScreen gameScreen;
+	Player player;
 
 	@Override
 	public void create() {
+		player = new Player();
 		gameScreen = new GameScreen();
 		setScreen(gameScreen);
+		Gdx.app.log("MyGDXGame", player.getName()); //testing line
 	}
 
 	@Override

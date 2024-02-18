@@ -5,7 +5,9 @@ abstract public class CollisionManager implements iCollision{
     float x, y;
     int width, height;
 
-
+    // Default constructor
+    public CollisionManager() {
+    }
 
     public CollisionManager (float x, float y, int width, int height){
         super();

@@ -12,7 +12,8 @@ public class AiManager implements iAiMovement{
         this.aiEntities = new ArrayList<>();
         this.defaultMovementBehavior = new AiMovement(maxMoveDistance);
     } */
-    
+
+    // Default constructor
     public AiManager() {
         this.aiEntities = new ArrayList<>();
         //this.defaultMovementBehavior = new AiMovement();

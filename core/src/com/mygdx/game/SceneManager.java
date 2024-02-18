@@ -10,6 +10,7 @@ public class SceneManager {
     private List<Scene> scenes;
     private Scene currentScene;
 
+    // Default constructor
     public SceneManager() {
         scenes = new ArrayList<>();
     }
