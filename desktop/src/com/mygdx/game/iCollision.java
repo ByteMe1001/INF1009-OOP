@@ -5,7 +5,7 @@ public interface iCollision {
     //public void enemyCollide();
     //public void playerCollide();
 
-    public boolean collidesWith();
+    //public boolean collidesWith();
 
     /*@Override
         public void enemyCollide() {
@@ -19,6 +19,6 @@ public interface iCollision {
 
         }
         */
-    boolean collidesWith(CollisionManager rect);
+    public boolean collidesWith(CollisionManager rect);
 }
 

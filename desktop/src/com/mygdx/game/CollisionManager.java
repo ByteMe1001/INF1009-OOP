@@ -1,11 +1,7 @@
 package com.mygdx.game;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
- public abstract class CollisionManager extends EntityManager implements iCollision{
+ public class CollisionManager implements iCollision{
 
     float x, y;
     int width, height;
@@ -21,7 +17,13 @@ import java.util.ListIterator;
 
     }
 
-    //private Entity entity;
+
+     @Override
+    public boolean collidesWith(CollisionManager rect){
+        return x < rect.x + rect.width && y < rect.y + rect.height && x + width > rect.x && y + height > rect.y;
+     }
+
+     //private Entity entity;
 
 
     /*@Override
@@ -36,12 +38,6 @@ import java.util.ListIterator;
 
         }
         */
-     @Override
-    public boolean collidesWith(CollisionManager rect){
-        return x < rect.x + rect.width && y < rect.y + rect.height && x + width > rect.x && y + height > rect.y;
-     }
-
-
 /*
      private void detectCollisions(){
          ListIterator<Entity> iterator = entity.ListIterator();
