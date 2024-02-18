@@ -1,8 +1,20 @@
 package com.mygdx.game;
 
 public class LifeCycleManager {
-    Player player;
+    private Player player;
+    private GameScreen gameScreen;
+    private SceneManager sceneManager;
 
     public LifeCycleManager() {
+
+    }
+
+    public LifeCycleManager(MyGdxGame myGdxGame, Player player) {
+        this.player = player;
+        gameScreen = new GameScreen();
+        if (gameScreen == null){
+            throw new IllegalStateException("Unable to create screen");
+        }
+        myGdxGame.setScreen(gameScreen);
     }
 }

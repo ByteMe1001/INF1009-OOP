@@ -12,19 +12,22 @@ public class MyGdxGame extends Game {
 
 	GameScreen gameScreen;
 	Player player;
+	LifeCycleManager lifeCycleManager;
 
 	@Override
 	public void create() {
 		player = new Player();
-		gameScreen = new GameScreen();
-		setScreen(gameScreen);
+		lifeCycleManager = new LifeCycleManager(this, player);
+
+		//gameScreen = new GameScreen();
+		//setScreen(gameScreen);
 		Gdx.app.log("MyGDXGame", player.getName()); //testing line
 	}
 
 	@Override
 	public void dispose() {
 		super.dispose();
-		gameScreen.dispose();
+		//gameScreen.dispose();
 	}
 
 	@Override
@@ -39,6 +42,6 @@ public class MyGdxGame extends Game {
 
 	@Override
 	public void resize(int width, int height) {
-		gameScreen.resize(width, height);
+		//gameScreen.resize(width, height);
 	}
 }

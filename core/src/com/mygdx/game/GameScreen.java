@@ -33,7 +33,6 @@ public class GameScreen implements Screen {
         backgroundOffset = 0;
 
         batch = new SpriteBatch();
-
     }
 
     @Override
@@ -58,14 +57,14 @@ public class GameScreen implements Screen {
 
         batch.end();
 
-
     }
 
     @Override
     public void resize(int width, int height) {
+        if (this != null) {
         viewport.update(width, height, true);
         batch.setProjectionMatrix(camera.combined);
-
+        }
     }
 
     @Override
