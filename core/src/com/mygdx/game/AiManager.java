@@ -15,7 +15,7 @@ public class AiManager implements iAiMovement{
     
     public AiManager() {
         this.aiEntities = new ArrayList<>();
-        this.defaultMovementBehavior = new AiMovement();
+        //this.defaultMovementBehavior = new AiMovement();
     }
 
     // Method to add an AI-controlled entity
@@ -27,6 +27,10 @@ public class AiManager implements iAiMovement{
         for (Entity entity : aiEntities) {
             defaultMovementBehavior.move(entity);
         }
+    }
+
+    public void move(Entity entity) {
+
     }
 
 }

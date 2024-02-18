@@ -8,7 +8,7 @@ public class EntityManager {
     private List<Entity> entities;
     private CollisionManager collisionManager;
 
-    // Default Constructornani
+    // Default Constructor
     public EntityManager() {
 
     }
@@ -25,7 +25,7 @@ public class EntityManager {
     public void removeEntity(Entity entity) {
         entities.remove(entity);
     }
-    //Iterates through entites and calls their update method
+    //Iterates through entities and calls their update method
     public void updateEntities() {
         Iterator<Entity> iterator = entities.iterator();
 //        while (iterator.hasNext()) {

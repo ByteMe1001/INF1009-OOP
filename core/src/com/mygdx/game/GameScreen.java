@@ -54,6 +54,7 @@ public class GameScreen implements Screen {
         }
 
         batch.draw(background, 0, -backgroundOffset, WORLD_WIDTH, WORLD_HEIGHT);
+        batch.draw(background, 0, -backgroundOffset+WORLD_HEIGHT, WORLD_WIDTH, WORLD_HEIGHT);
 
         batch.end();
 
