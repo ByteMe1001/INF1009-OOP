@@ -28,16 +28,17 @@ public class EntityManager {
     //Iterates through entities and calls their update method
     public void updateEntities() {
         Iterator<Entity> iterator = entities.iterator();
-//        while (iterator.hasNext()) {
-//            Entity entity = iterator.next();
-//            entity.update();
-//
-//            if (entity.isDestroyed()) {
-//                iterator.remove();
-//            }
-//        }
-//        // Handle collisions using the ConflictManager
-//        collisionManager.handleCollisions(entities);
+        while (iterator.hasNext()) {
+            Entity entity = iterator.next();
+            entity.update();
+
+            if (!entity.isAlive()) {
+                entity = null;
+                iterator.remove();
+            }
+        }
+        // Handle collisions using the ConflictManager
+        //collisionManager.handleCollisions(entities);
     }
     //Rendering method
 //    public void renderEntities(SpriteBatch spriteBatch, ShapeRenderer shapeRenderer) {

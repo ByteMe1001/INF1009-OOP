@@ -4,11 +4,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 //Not sure what else to import for now
 public abstract class Entity
   {
-    protected int id;                 
-    protected int health;              
-    protected float x,y;               //Position
-    protected float scale;     
-    protected Sprite sprite;          
+    private int id;
+    private int health;
+    private float x,y;               //Position
+    private float scale;
+    private Sprite sprite;
+    private boolean isAlive;
 
 
     // Default constructor
@@ -77,23 +78,28 @@ public abstract class Entity
     public void setSprite(Sprite sprite) {
       this.sprite = sprite;
     }
-    //Methods 
+
+    public boolean isAlive() {
+      return isAlive;
+    }
+    //Methods
     public abstract void update();
 
     public abstract void render();
-    
+
     public abstract boolean collidesWith(Entity other);       //Can fine-tune what each entity class is able to collide with using this abstract method
 
     public abstract void takeDamage(int damage);              //Not sure if we need these 2 damage/heal
 
-    public abstract void heal(int amount);             
-    
+    public abstract void heal(int amount);
+
     public abstract void destroy();
 
     public void push(float deltaX, float deltaY) {
       this.x += deltaX;
       this.y += deltaY;
     }                                                         //Simple push method maybe can implement for collisions,pretty much just knockback
+
 
 // Duplicate method
 //    public void setScale(float scale) {
