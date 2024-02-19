@@ -13,8 +13,6 @@ public class Bucket extends Entity {
     // Default constructor
     public Bucket(int id) {
         super(id);
-        this.setWidth(BUCKET_WIDTH);
-        this.setHeight(BUCKET_HEIGHT);
         this.setSprite(new Sprite(new Texture("bucket.png"))); 
         this.setAlive(true);
     }
