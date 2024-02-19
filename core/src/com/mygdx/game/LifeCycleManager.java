@@ -10,16 +10,29 @@ public class LifeCycleManager {
     }
 
     public void startGame() {
-        screenmanager.setScreen(startScreen);
+        sceneManager.setScreen(startScreen);
+    }
+
+    public void pause() {
+
+    }
+
+    public void endGame() {
+
     }
 
 
     public LifeCycleManager(MyGdxGame myGdxGame, Player player) {
         this.player = player;
-        gameScreen = new GameScreen();
-        if (gameScreen == null){
-            throw new IllegalStateException("Unable to create screen");
-        }
+        //gameScreen = new GameScreen();
+        sceneManager = new SceneManager();
+//        sceneManager.startGame();
+//        sceneManager.endGame();
+//        if (gameScreen == null){
+//            throw new IllegalStateException("Unable to create screen");
+//        }
         myGdxGame.setScreen(gameScreen);
+
+
     }
 }

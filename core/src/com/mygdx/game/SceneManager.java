@@ -7,6 +7,8 @@ public class SceneManager {
     private List<Scene> scenes;
     private Scene currentScene;
 
+    // SceneManager to swap scenes, each scene should do all the world logic
+
     public SceneManager() {
         scenes = new ArrayList<>();
     }

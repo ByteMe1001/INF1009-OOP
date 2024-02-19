@@ -128,6 +128,8 @@ public abstract class Entity
 
     public abstract void destroy();
 
+    public abstract void movement();
+
     public CollisionManager getRect(){ //get entity position?
       return rect;
     }         //might not be using this

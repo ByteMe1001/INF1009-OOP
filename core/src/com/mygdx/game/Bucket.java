@@ -64,7 +64,11 @@ public class Bucket extends Entity {
     @Override
     public void destroy() {
         // Handle destruction logic for the bucket
-        }
+    }
+
+    public void movement() {
+        playerControlManager.update();
+    }
 
     }
 
