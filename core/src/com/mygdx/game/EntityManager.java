@@ -1,7 +1,6 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.CollisionManager;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,7 +10,6 @@ public class EntityManager {
 
     private CollisionManager collisionManager;
     private List<Entity> entities;
-    //private ConflictManager conflictManager;
     private AiManager aiManager;
     private SpriteBatch spriteBatch;
     
@@ -48,12 +46,16 @@ public class EntityManager {
                 iterator.remove();
             }
         }
-        // Handle collisions using the ConflictManager
         //collisionManager.handleCollisions(entities);
     }
     //Rendering method
 //    public void renderEntities(SpriteBatch spriteBatch, ShapeRenderer shapeRenderer) {
 //        for (Entity entity : entities) {
+//            entity.render(spriteBatch, shapeRenderer);
+//        }
+//    }
+}
+
 //            entity.render(spriteBatch, shapeRenderer);
 //        }
 //    }
