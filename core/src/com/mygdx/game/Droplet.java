@@ -41,7 +41,7 @@ public class Droplet extends Entity {
     }
 
     @Override
-    public boolean collidesWith(Entity other) {
+    public boolean collideWith(Entity other) {
         // Collision logic for the droplet with another entity
         return false;
     }
