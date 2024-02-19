@@ -19,10 +19,8 @@ public abstract class Scene {
     public abstract void create();
     public abstract void update();
     public abstract void render(SpriteBatch batch);
-    public Texture loadTexture(String path) {
-        // to add other entities such as bucket
-        em.addEntity(new TextureObject("droplet.png", xPosition, 50, speed, true)); // to change parameters
-        return texture;
+
+    public void TextureObject(String t, float x, float y, float speed, boolean isAIControlled) {
     }
     public abstract void dispose();
 
