@@ -7,6 +7,7 @@ import java.util.List;
 public class EntityManager {
     private List<Entity> entities;
     private ConflictManager conflictManager;
+    private AiManager aiManager;
     private SpriteBatch spriteBatch;
     
     //Constructor with collisionManager as an instance variable
@@ -14,6 +15,14 @@ public class EntityManager {
         entities = new ArrayList<>();
         this.collisionManager = collisionManager;
     }
+    
+     // Constructor with collisionManager and aiManager as instance variables
+    public EntityManager(CollisionManager collisionManager, AiManager aiManager) {
+        entities = new ArrayList<>();
+        this.collisionManager = collisionManager;
+        this.aiManager = aiManager;  // Step 3: Initialize AiManager
+    }
+    
     //Add
     public void addEntity(Entity entity) {
         entities.add(entity);
