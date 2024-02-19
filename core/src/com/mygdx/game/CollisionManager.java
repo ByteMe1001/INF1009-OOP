@@ -1,6 +1,6 @@
 package com.mygdx.game;
 
-abstract public class CollisionManager implements iCollision{
+public class CollisionManager implements iCollision{
 
     float x, y;
     int width, height;
