@@ -13,7 +13,7 @@ public class GameMaster extends ApplicationAdapter {
         entityManager = new EntityManager();
     }
 
-    @Override
+   // @Override
 //    public void render() {
 //        ScreenUtils.clear(0, 0, 0.5f, 1);
 //
@@ -23,7 +23,7 @@ public class GameMaster extends ApplicationAdapter {
 //    }
 
     //@Override
-    public void dispose() {
-        entityManager.dispose();
-    }
+//    public void dispose() {
+//        entityManager.dispose();
+//    }
 }

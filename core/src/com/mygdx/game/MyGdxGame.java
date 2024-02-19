@@ -1,31 +1,47 @@
 package com.mygdx.game;
 
+
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class MyGdxGame extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
-	
+public class MyGdxGame extends Game {
+
+	GameScreen gameScreen;
+	Player player;
+	LifeCycleManager lifeCycleManager;
+
 	@Override
-	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+	public void create() {
+		player = new Player();
+		lifeCycleManager = new LifeCycleManager(this, player);
+
+		//gameScreen = new GameScreen();
+		//setScreen(gameScreen);
+		Gdx.app.log("MyGDXGame", player.getName()); //testing line
 	}
 
 	@Override
-	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+	public void dispose() {
+		super.dispose();
+		//gameScreen.dispose();
 	}
-	
+
 	@Override
-	public void dispose () {
-		batch.dispose();
-		img.dispose();
+	public void pause() {
+		super.pause();
+	}
+
+	@Override
+	public void render() {
+		super.render();
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		//gameScreen.resize(width, height);
 	}
 }
