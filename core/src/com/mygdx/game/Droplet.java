@@ -59,7 +59,9 @@ public class Droplet extends Entity {
     @Override
     public void destroy() {
         // Handle destruction logic for the droplet
+
+        }
     }
-}
+
 
 
