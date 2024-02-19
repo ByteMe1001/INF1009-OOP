@@ -132,17 +132,17 @@ public abstract class Entity
       return rect;
     }         //might not be using this
 
-    public void push(float deltaX, float deltaY) {
+    public void push(float deltaX, float deltaY) {  //Simple push method maybe can implement for collisions,pretty much just knockback
       this.x += deltaX;
       this.y += deltaY;
     }
 
+
+
+
     public boolean intersects(Rectangle other){
         return boundingBox.overlaps(other);
     }
-
-    //Simple push method maybe can implement for collisions,pretty much just knockback
-
 
 // Duplicate method
 //    public void setScale(float scale) {
