@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 
-public class CollisionManager implements iCollision{
+public class CollisionManager implements iCollision {
 
     float x, y;
     int width, height;
@@ -17,7 +17,7 @@ public class CollisionManager implements iCollision{
     public CollisionManager() {
     }
 
-    public CollisionManager (float x, float y, int width, int height){
+    public CollisionManager(float x, float y, int width, int height) {
         super();
         this.x = x;
         this.y = y;
@@ -42,25 +42,27 @@ public class CollisionManager implements iCollision{
         }
         */
 
-/*     private void detectCollisions(){
-         ListIterator<Droplet> dropletIterator = Droplet.listIterator();
-         while(dropletIterator.hasNext()){
-             Droplet droplet = dropletIterator.next();
-             ListIterator<Bucket> bucketIterator = Bucket.listIterator();
-             while (bucketIterator.hasNext()){
-             Bucket bucket = bucketIterator.next();
+    private void detectCollisions() {
+        ListIterator<Droplet> dropletIterator = Droplet.listIterator();
+        while (dropletIterator.hasNext()) {
+            Droplet droplet = dropletIterator.next();
+            ListIterator<Bucket> bucketIterator = Bucket.listIterator();
+            while (bucketIterator.hasNext()) {
+                Bucket bucket = bucketIterator.next();
 
-             if(bucket.collideWith(droplet.getBoundingBox())){ //based on youtube tutorial, getBoundingBox returns a rectangle
-                 if(droplet.destroy(bucket)){
-                 System.out.println("Collision Detected");
-                 iterator.remove();
-                 }
-             }
-         }
-     }
- */
+                if (bucket.intersects(droplet.boundingBox)) { //based on youtube tutorial, getBoundingBox returns a rectangle
+                    if (droplet.collideWith(bucket)) {
+                        System.out.println("Collision Detected");
+                        bucketIterator.remove();
+                    }
+                }
+            }
+        }
+    }
 
-    private void detectCollision(){
+
+
+ /*   private void detectCollision(){
 
         for (Droplet droplet : Droplet){
             for (Bucket bucket : Bucket){
@@ -70,7 +72,7 @@ public class CollisionManager implements iCollision{
             }
         }
     }
-
+*/
     public void move(float x, float y){ //x and y of what we are colliding is not the same so will need to move the rect as well
         this.x  = x;
         this.y = y;
@@ -80,6 +82,7 @@ public class CollisionManager implements iCollision{
         return x < rect.x + rect.width && y < rect.y + rect.height && x + width > rect.x && y + height > rect.y;
      }
 }
+
 
 
 
