@@ -27,7 +27,8 @@ public class ExampleScene extends Scene {
 
     @Override
     public void update() {
-        // Update scene logic
+        // Update scene logic ?? im assuming the bucket movement?
+        // might be wrong
         for (Entity entity : entities) {
             entity.update();
         }
