@@ -8,13 +8,11 @@ public abstract class Entity
     private int id;
     private int health;
     private float x,y;               //Position
-
     private int width, height;
     private float scale;
     private Sprite sprite;
     private boolean isAlive;
-
-    CollisionManager rect;
+    private CollisionManager rect;
 
     // Default constructor
     public Entity(int id) {
@@ -24,18 +22,22 @@ public abstract class Entity
       this.y = 0.0f;
       this.scale = 1.0f;        // *1.0 (no scaling)
       this.sprite = null;       // left it as null for now until we insert some placeholder default sprite
+      this.width = 30;
+      this.height = 30;
       this.rect = new CollisionManager(x, y, width, height);
 
     }
-    //parameterized constructor
-    public Entity(int id, int health ,float x , float y, float scale, Sprite sprite) {
-      this.id = id; 
-      this.health = health;
-      this.x = x;
-      this.y = y;
-      this.scale = scale;
-      this.sprite = sprite;
-      this.rect = new CollisionManager(x, y, width, height);
+   // Parameterized constructor
+    public Entity(int id, int health, float x, float y, float scale, Sprite sprite, int width, int height) {
+        this.id = id;
+        this.health = health;
+        this.x = x;
+        this.y = y;
+        this.scale = scale;
+        this.sprite = sprite;
+        this.width = width;
+        this.height = height;
+        this.rect = new CollisionManager(x, y, width, height);
     }
     //Setters and Getters methods 
     public int getId() {
@@ -86,8 +88,28 @@ public abstract class Entity
       this.sprite = sprite;
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
     public boolean isAlive() {
-      return isAlive;
+        return isAlive;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
     }
     //Methods
     public abstract void update();
