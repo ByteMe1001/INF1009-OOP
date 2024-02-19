@@ -1,12 +1,17 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.CollisionManager;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class EntityManager {
+
+    private CollisionManager collisionManager;
     private List<Entity> entities;
-    private ConflictManager conflictManager;
+    //private ConflictManager conflictManager;
     private AiManager aiManager;
     private SpriteBatch spriteBatch;
     
