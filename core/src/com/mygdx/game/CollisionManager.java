@@ -65,16 +65,24 @@ public class CollisionManager implements iCollision {
 
 
 
-    private boolean detectCollision(){
+    private boolean detectCollision() {
 
-        for (Droplet droplet : Droplet){
-            for (Bucket bucket : Bucket){
-                if (droplet.getRect().collidesWith(bucket.getRect())){
+        for (Droplet droplet : Droplet) {
+            for (Bucket bucket : Bucket) {
+                /*if (droplet.getRect().collidesWith(bucket.getRect())){
                     System.out.println("Collision Detected");
                     return true;
                 }
 
+            }*/
+                if (bucket.intersects(droplet.boundingBox)) {
+                    if (droplet.collideWith(bucket)) {
+                        System.out.println("Collision Detected");
+                        return true;
+                    }
+                }
             }
+
         }
         return false;
     }
