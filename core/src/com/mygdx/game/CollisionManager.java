@@ -42,7 +42,7 @@ public class CollisionManager implements iCollision {
         }
         */
 
-    private void detectCollisions() {
+    private boolean detectCollisions() {
         ListIterator<Droplet> dropletIterator = Droplet.listIterator();
         while (dropletIterator.hasNext()) {
             Droplet droplet = dropletIterator.next();
@@ -52,27 +52,33 @@ public class CollisionManager implements iCollision {
 
                 if (bucket.intersects(droplet.boundingBox)) { //based on youtube tutorial, getBoundingBox returns a rectangle
                     if (droplet.collideWith(bucket)) {
+
                         System.out.println("Collision Detected");
                         bucketIterator.remove();
+                        return true;
                     }
                 }
             }
         }
+        return false;
     }
 
 
 
- /*   private void detectCollision(){
+    private boolean detectCollision(){
 
         for (Droplet droplet : Droplet){
             for (Bucket bucket : Bucket){
                 if (droplet.getRect().collidesWith(bucket.getRect())){
                     System.out.println("Collision Detected");
+                    return true;
                 }
+
             }
         }
+        return false;
     }
-*/
+
     public void move(float x, float y){ //x and y of what we are colliding is not the same so will need to move the rect as well
         this.x  = x;
         this.y = y;
