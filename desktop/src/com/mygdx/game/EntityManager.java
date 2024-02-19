@@ -5,6 +5,8 @@ import java.util.List;
 public class EntityManager {
     private List<Entity> entities;
     private ConflictManager conflictManager;
+    private SpriteBatch spriteBatch;
+    
     //Constructor with collisionManager as an instance variable
     public EntityManager(ConflictManager conflictManager) {
         entities = new ArrayList<>();
