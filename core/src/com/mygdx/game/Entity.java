@@ -102,7 +102,7 @@ public abstract class Entity
 
     public abstract void destroy();
 
-    public CollisionManager getRect(){
+    public CollisionManager getRect(){ //get entity position?
       return rect;
     }
 
