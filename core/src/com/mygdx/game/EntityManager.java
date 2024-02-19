@@ -25,7 +25,7 @@ public class EntityManager {
         this.collisionManager = collisionManager;
         this.aiManager = aiManager;  // Step 3: Initialize AiManager
     }
-    
+
     //Add
     public void addEntity(Entity entity) {
         entities.add(entity);
@@ -59,4 +59,5 @@ public class EntityManager {
 //            entity.render(spriteBatch, shapeRenderer);
 //        }
 //    }
-}
+
+
