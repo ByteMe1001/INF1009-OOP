@@ -1,6 +1,3 @@
-// keeps track of the scenes in a game, allowing to switch between them
-// to be further edited :(
-
 package com.mygdx.game;
 
 import java.util.ArrayList;
@@ -10,7 +7,6 @@ public class SceneManager {
     private List<Scene> scenes;
     private Scene currentScene;
 
-    // Default constructor
     public SceneManager() {
         scenes = new ArrayList<>();
     }
@@ -19,22 +15,29 @@ public class SceneManager {
         scenes.add(scene);
     }
 
-    public void setStartingScene(Scene startingScene) {
-        currentScene = startingScene;
+    public void setCurrentScene(Scene scene) {
+        currentScene = scene;
+        currentScene.create();
     }
 
     public Scene getCurrentScene() {
         return currentScene;
     }
 
-    public void setCurrentScene(Scene scene) {
-        currentScene = scene;
+    public void updateCurrentScene() {
+        currentScene.update();
     }
 
-    public void dispose() {
-        for (Scene scene : scenes) {
-            scene.dispose();
-        }
+    public void renderCurrentScene(SpriteBatch batch) {
+        currentScene.render(batch);
+    }
+
+    public void disposeCurrentScene() { //remove current scene
+        currentScene.dispose();
+    }
+
+    public void swapScene(Scene newScene) { // to change between scenes (to be called by gameMaster)
+        disposeCurrentScene();
+        setCurrentScene(newScene);
     }
 }
-
