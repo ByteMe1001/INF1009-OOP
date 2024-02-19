@@ -1,6 +1,7 @@
 package com.mygdx.game;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.CollisionManager;
+import com.badlogic.gdx.math.Rectangle;
 
 //Not sure what else to import for now
 public abstract class Entity
@@ -14,6 +15,8 @@ public abstract class Entity
     private boolean isAlive;
     private CollisionManager rect;
 
+    Rectangle boundingBox;
+
     // Default constructor
     public Entity(int id) {
       this.id = id;
@@ -25,7 +28,7 @@ public abstract class Entity
       this.width = 30;
       this.height = 30;
       this.rect = new CollisionManager(x, y, width, height);
-
+      this.boundingBox = new Rectangle(x, y, width, height);
     }
    // Parameterized constructor
     public Entity(int id, int health, float x, float y, float scale, Sprite sprite, int width, int height) {
@@ -38,6 +41,7 @@ public abstract class Entity
         this.width = width;
         this.height = height;
         this.rect = new CollisionManager(x, y, width, height);
+        this.boundingBox = new Rectangle(x, y, width, height);
     }
     //Setters and Getters methods 
     public int getId() {
@@ -116,7 +120,7 @@ public abstract class Entity
 
     public abstract void render();
 
-    public abstract boolean collidesWith(Entity other);       //Can fine-tune what each entity class is able to collide with using this abstract method
+    public abstract boolean collideWith(Entity other);       //Can fine-tune what each entity class is able to collide with using this abstract method
 
     public abstract void takeDamage(int damage);              //Not sure if we need these 2 damage/heal
 
@@ -126,12 +130,18 @@ public abstract class Entity
 
     public CollisionManager getRect(){ //get entity position?
       return rect;
-    }
+    }         //might not be using this
 
     public void push(float deltaX, float deltaY) {
       this.x += deltaX;
       this.y += deltaY;
-    }                                                         //Simple push method maybe can implement for collisions,pretty much just knockback
+    }
+
+    public boolean intersects(Rectangle other){
+        return boundingBox.overlaps(other);
+    }
+
+    //Simple push method maybe can implement for collisions,pretty much just knockback
 
 
 // Duplicate method
