@@ -55,6 +55,7 @@ public class CollisionManager implements iCollision {
 
                         System.out.println("Collision Detected");
                         bucketIterator.remove();
+                        //Entity.setAlive(false) ;
                         return true;
                     }
                 }
