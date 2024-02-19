@@ -6,8 +6,13 @@ public class LifeCycleManager {
     private SceneManager sceneManager;
 
     public LifeCycleManager() {
-
+    
     }
+
+    public void startGame() {
+        screenmanager.setScreen(startScreen);
+    }
+
 
     public LifeCycleManager(MyGdxGame myGdxGame, Player player) {
         this.player = player;
