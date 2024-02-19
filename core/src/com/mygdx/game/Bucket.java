@@ -17,7 +17,7 @@ public class Bucket extends Entity {
         super(id);
         this.setWidth(BUCKET_WIDTH);
         this.setHeight(BUCKET_HEIGHT);
-        this.setSprite(new Sprite(new Texture("bucket.png"))); // Assuming you have an image file named "bucket.png"
+        this.setSprite(new Sprite(new Texture("bucket.png"))); 
         this.setAlive(true);
     }
 
