@@ -159,6 +159,6 @@ public abstract class Entity
              ", sprite=" + sprite +
              "}";
     }
-  
+
   }
   
