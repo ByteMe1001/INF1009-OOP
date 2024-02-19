@@ -13,6 +13,7 @@ public abstract class Scene {
         entities = new ArrayList<>();
     }
 
+    // to be implemented by subclasses
     public abstract void create();
     public abstract void update();
     public abstract void render(SpriteBatch batch);
