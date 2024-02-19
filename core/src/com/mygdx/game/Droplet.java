@@ -20,6 +20,7 @@ public class Droplet extends Entity {
     public Droplet(int id, int health, float x, float y, float scale, Sprite sprite, int width ,int height) {
         super(id, health, x, y, scale, sprite, width, height);
         this.setAlive(true);
+        Droplet droplet = new Droplet(id, health, boundingBox.x, boundingBox.y, scale, sprite, width, height);
     }
 
     @Override
@@ -61,7 +62,8 @@ public class Droplet extends Entity {
         // Handle destruction logic for the droplet
 
         }
-    }
+
+}
 
 
 
