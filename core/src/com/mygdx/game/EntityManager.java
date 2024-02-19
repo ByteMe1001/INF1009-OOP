@@ -26,6 +26,7 @@ public class EntityManager {
         this.aiManager = aiManager;  // Step 3: Initialize AiManager
     }
 
+
     //Add
     public void addEntity(Entity entity) {
         entities.add(entity);
