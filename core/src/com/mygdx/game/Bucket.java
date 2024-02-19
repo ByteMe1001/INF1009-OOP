@@ -8,8 +8,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 public class Bucket extends Entity {
 
     // Additional properties for Bucket class
-    private static final int BUCKET_WIDTH = 64;
-    private static final int BUCKET_HEIGHT = 64;
     private static final float BUCKET_SPEED = 200.0f;
 
     // Default constructor
@@ -22,10 +20,8 @@ public class Bucket extends Entity {
     }
 
     // Parameterized constructor
-    public Bucket(int id, int health, float x, float y, float scale, Sprite sprite) {
-        super(id, health, x, y, scale, sprite);
-        this.setWidth(BUCKET_WIDTH);
-        this.setHeight(BUCKET_HEIGHT);
+    public Bucket(int id, int health, float x, float y, float scale, Sprite sprite, int width ,int height) {
+        super(id, health, x, y, scale, sprite, width, height);
         this.setAlive(true);
     }
 
