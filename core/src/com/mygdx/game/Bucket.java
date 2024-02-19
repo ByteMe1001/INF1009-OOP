@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Rectangle;
+
 
 public class Bucket extends Entity {
 
@@ -40,7 +42,7 @@ public class Bucket extends Entity {
     }
 
     @Override
-    public boolean collidesWith(Entity other) {
+    public boolean collideWith(Entity other) {
         // Collision logic for the bucket with another entity
         return false;
     }
@@ -58,5 +60,7 @@ public class Bucket extends Entity {
     @Override
     public void destroy() {
         // Handle destruction logic for the bucket
+        }
+
     }
-}
+
