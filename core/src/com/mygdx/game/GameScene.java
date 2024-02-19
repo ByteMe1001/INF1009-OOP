@@ -33,7 +33,7 @@ public class ExampleScene extends Scene {
             entity.update();
         }
 
-        // Handle user input for the bucket
+        // Handle user input for the bucket (not sure if this is needed)
         float bucketSpeed = 5f;
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             entities.get(1).setX(entities.get(1).getX() - bucketSpeed);
