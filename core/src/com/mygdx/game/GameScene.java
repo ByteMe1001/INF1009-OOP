@@ -22,15 +22,7 @@ public class ExampleScene extends Scene {
     public void create() {
         em = new EntityManager();
         // Create entities for this scene
-        for (int i =0; i < NUM_DROPS; i++) {
-            int xPosition = random.nextInt(600);
-            int speed = random.nextInt(9)+2;
-            drops[i] = new TextureObject("droplet.png", xPosition,50,speed,true);
-            em.addEntity(drops[i]);
-        }
-        addEntity(new TextureObject("bucket.png", 200, 0, 5, false));
-        addEntity(new Circle(300, 300, Color.GREEN, 200));
-        addEntity(new Triangle(200, 200, Color.RED, 200));
+        addentity(); // add in droplet and bucket accordingly idk
     }
 
     @Override
