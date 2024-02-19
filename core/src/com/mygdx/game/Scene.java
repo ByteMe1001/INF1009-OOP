@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public abstract class Scene {
     protected SceneManager sceneManager;
     protected List<Entity> entities;
+    // protected SoundManager sm; // to create a sound manager
+    protected EntityManager em;
 
     public Scene(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
@@ -17,6 +19,11 @@ public abstract class Scene {
     public abstract void create();
     public abstract void update();
     public abstract void render(SpriteBatch batch);
+    public Texture loadTexture(String path) {
+        // to add other entities such as bucket
+        em.addEntity(new TextureObject("droplet.png", xPosition, 50, speed, true));
+        return texture;
+    }
     public abstract void dispose();
 
     public void addEntity(Entity entity) {
