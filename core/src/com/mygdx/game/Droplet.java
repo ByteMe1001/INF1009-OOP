@@ -7,8 +7,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 public class Droplet extends Entity {
 
     // Additional properties for Droplet class
-    private static final int DROPLET_WIDTH = 32;
-    private static final int DROPLET_HEIGHT = 32;
     private static final float DROPLET_SPEED = 100.0f;
 
     // Default constructor
@@ -21,10 +19,8 @@ public class Droplet extends Entity {
     }
 
     // Parameterized constructor
-    public Droplet(int id, int health, float x, float y, float scale, Sprite sprite) {
-        super(id, health, x, y, scale, sprite);
-        this.setWidth(DROPLET_WIDTH);
-        this.setHeight(DROPLET_HEIGHT);
+    public Droplet(int id, int health, float x, float y, float scale, Sprite sprite int width, int height) {
+        super(id, health, x, y, scale, sprite, width, height);
         this.setAlive(true);
     }
 
