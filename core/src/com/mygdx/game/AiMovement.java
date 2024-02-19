@@ -1,4 +1,4 @@
-/* package com.mygdx.game;
+ package com.mygdx.game;
 
 import java.util.Random;
 
@@ -25,8 +25,10 @@ public class AiMovement implements iAiMovement {
 
 // THIS CODE IS FOR NEXT TIME WHEN WE ACTUALLY IMPLEMENT RANDOM MOVEMENTS
 
-*/
 
+
+
+/*
 package com.mygdx.game;
 
 public class AiMovement implements iAiMovement {
@@ -41,3 +43,4 @@ public class AiMovement implements iAiMovement {
     }
 }
 
+*/
