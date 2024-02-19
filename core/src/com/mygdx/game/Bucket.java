@@ -43,6 +43,10 @@ public class Bucket extends Entity {
 
     @Override
     public boolean collideWith(Entity other) {
+        return false;
+    }
+
+    public boolean collideWith(Rectangle other) {
         // Collision logic for the bucket with another entity
         return false;
     }
