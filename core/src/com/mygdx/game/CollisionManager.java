@@ -43,12 +43,18 @@ public class CollisionManager implements iCollision{
         */
 
 /*     private void detectCollisions(){
-         ListIterator<Droplet> iterator = Droplet.listIterator();
-         while(iterator.hasNext()){
-             Entity Bucket = iterator.next();
-             if(entity2.intersects(entity.getBoundingBox())){ //based on youtube tutorial, getBoundingBox returns a rectangle
-                 entity2.hit(entity0);
+         ListIterator<Droplet> dropletIterator = Droplet.listIterator();
+         while(dropletIterator.hasNext()){
+             Droplet droplet = dropletIterator.next();
+             ListIterator<Bucket> bucketIterator = Bucket.listIterator();
+             while (bucketIterator.hasNext()){
+             Bucket bucket = bucketIterator.next();
+
+             if(bucket.collideWith(droplet.getBoundingBox())){ //based on youtube tutorial, getBoundingBox returns a rectangle
+                 if(droplet.destroy(bucket)){
+                 System.out.println("Collision Detected");
                  iterator.remove();
+                 }
              }
          }
      }
