@@ -10,8 +10,8 @@ import java.util.Random;
 // an example of a scene that can be used in the game (test out main codes)
 public class ExampleScene extends Scene {
     private final int NUM_DROPS = 10;
-    private Entity[] drops = new Entity[NUM_DROPS];
-    Random random = new Random();
+    //private Entity[] drops = new Entity[NUM_DROPS];
+    //Random random = new Random();
     EntityManager em;;
 
     public ExampleScene(SceneManager sceneManager) {
