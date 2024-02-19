@@ -45,8 +45,24 @@ public class CollisionManager implements iCollision{
          }
      }
  */
-     @Override
+
+    public void move(float x, float y){ //x and y of what we are colliding is not the same so will need to move the rect as well
+        this.x  = x;
+        this.y = y;
+    }
+
     public boolean collidesWith(CollisionManager rect){
         return x < rect.x + rect.width && y < rect.y + rect.height && x + width > rect.x && y + height > rect.y;
      }
 }
+
+
+
+//No Collision, Got Collision
+//collisionManager get entityManager
+
+//Destroy or stay put for results
+
+//if collide is true and collidable is true
+
+//need to call entity manager to update
