@@ -12,14 +12,12 @@ public class Droplet extends Entity {
     // Default constructor
     public Droplet(int id) {
         super(id);
-        this.setWidth(DROPLET_WIDTH);
-        this.setHeight(DROPLET_HEIGHT);
         this.setSprite(new Sprite(new Texture("droplet.png"))); 
         this.setAlive(true);
     }
 
     // Parameterized constructor
-    public Droplet(int id, int health, float x, float y, float scale, Sprite sprite int width, int height) {
+    public Droplet(int id, int health, float x, float y, float scale, Sprite sprite, int width ,int height) {
         super(id, health, x, y, scale, sprite, width, height);
         this.setAlive(true);
     }
@@ -63,4 +61,5 @@ public class Droplet extends Entity {
         // Handle destruction logic for the droplet
     }
 }
+
 
