@@ -16,7 +16,7 @@ public class Droplet extends Entity {
         super(id);
         this.setWidth(DROPLET_WIDTH);
         this.setHeight(DROPLET_HEIGHT);
-        this.setSprite(new Sprite(new Texture("droplet.png"))); // Assuming you have an image file named "droplet.png"
+        this.setSprite(new Sprite(new Texture("droplet.png"))); 
         this.setAlive(true);
     }
 
