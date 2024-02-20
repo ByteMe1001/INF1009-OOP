@@ -120,7 +120,7 @@ public abstract class Entity
 
     public abstract void render();
 
-    public abstract boolean collideWith(Entity other);       //Can fine-tune what each entity class is able to collide with using this abstract method
+    public abstract void collideWith(Entity other);       //Can fine-tune what each entity class is able to collide with using this abstract method
 
     public abstract void takeDamage(int damage);              //Not sure if we need these 2 damage/heal
 
@@ -139,12 +139,10 @@ public abstract class Entity
       this.y += deltaY;
     }
 
+    public Rectangle getBoundingBox(){
+        return boundingBox;
+    };
 
-
-
-    public boolean intersects(Rectangle other){
-        return boundingBox.overlaps(other);
-    }
 
 // Duplicate method
 //    public void setScale(float scale) {

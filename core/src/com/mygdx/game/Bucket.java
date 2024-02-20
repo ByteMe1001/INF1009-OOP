@@ -42,8 +42,9 @@ public class Bucket extends Entity {
     }
 
     @Override
-    public boolean collideWith(Entity other) {
-        return false;
+    public void collideWith(Entity other) {
+        System.out.println("Collision Detected");
+        //return false;
     }
 
     public boolean collideWith(Rectangle other) {

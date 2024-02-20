@@ -13,6 +13,8 @@ public class CollisionManager implements iCollision {
     private List<Droplet> Droplet;
     private List<Bucket> Bucket;
 
+    private List<Entity> entities;
+
     // Default constructor
     public CollisionManager() {
     }
@@ -25,6 +27,36 @@ public class CollisionManager implements iCollision {
         this.height = height;
 
     }
+
+    public void detectCollision(List<Entity> entities){
+        for(Entity Droplet: entities){
+            for (Entity Bucket: entities){
+                if(Droplet != Bucket && Bucket.getBoundingBox().overlaps(Droplet.getBoundingBox())){
+                    System.out.println("");
+                }
+            }
+        }
+    }
+
+    @Override
+    public boolean collidesWith(CollisionManager rect) {
+        return false;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //private Entity entity;
 
@@ -40,7 +72,7 @@ public class CollisionManager implements iCollision {
         public void playerCollide() {
 
         }
-        */
+
 
     private boolean detectCollisions() {
         ListIterator<Droplet> dropletIterator = Droplet.listIterator();
@@ -75,12 +107,12 @@ public class CollisionManager implements iCollision {
                     return true;
                 }
 
-            }*/
-                if (bucket.intersects(droplet.boundingBox)) {
-                    if (droplet.collideWith(bucket)) {
+            }
+                if (bucket.boundingBox.overlaps(droplet.boundingBox)) {
+
                         System.out.println("Collision Detected");
                         return true;
-                    }
+
                 }
             }
 
@@ -99,7 +131,7 @@ public class CollisionManager implements iCollision {
 }
 
 
-
+*/
 
 //No Collision, Got Collision
 //collisionManager get entityManager
