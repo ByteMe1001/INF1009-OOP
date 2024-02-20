@@ -129,7 +129,7 @@ public abstract class Entity
 
     public abstract void render();
 
-    public abstract void collideWith(Entity other);       //Can fine-tune what each entity class is able to collide with using this abstract method
+    public abstract boolean collidesWith(Entity other);       //Can fine-tune what each entity class is able to collide with using this abstract method
 
     public boolean isCollidable(){
         return collidable;
@@ -139,7 +139,9 @@ public abstract class Entity
         this.collidable = collidable;
     }
 
-    public abstract void takeDamage(int damage);              //Not sure if we need these 2 damage/heal
+      public abstract void collideWith(Entity other);
+
+      public abstract void takeDamage(int damage);              //Not sure if we need these 2 damage/heal
 
     public abstract void heal(int amount);
 
@@ -176,6 +178,7 @@ public abstract class Entity
              ", sprite=" + sprite +
              "}";
     }
+
 
   }
   
