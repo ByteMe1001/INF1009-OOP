@@ -15,6 +15,8 @@ public abstract class Entity
     private boolean isAlive;
     private CollisionManager rect;
 
+    private boolean collidable;
+
     Rectangle boundingBox;
 
     // Default constructor
@@ -43,7 +45,7 @@ public abstract class Entity
         this.rect = new CollisionManager(x, y, width, height);
         this.boundingBox = new Rectangle(getX(), getY(), width, height);
     }
-    //Setters and Getters methods 
+    //Setters and Getters methods
     public int getId() {
       return id;
     }
@@ -122,6 +124,14 @@ public abstract class Entity
 
     public abstract void collideWith(Entity other);       //Can fine-tune what each entity class is able to collide with using this abstract method
 
+    public boolean isCollidable(){
+        return collidable;
+    };
+
+    public void setCollidable(boolean collidable){
+        this.collidable = collidable;
+    }
+
     public abstract void takeDamage(int damage);              //Not sure if we need these 2 damage/heal
 
     public abstract void heal(int amount);
@@ -161,4 +171,4 @@ public abstract class Entity
     }
 
   }
-  
+
