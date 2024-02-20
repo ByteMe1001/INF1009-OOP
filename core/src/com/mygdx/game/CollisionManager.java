@@ -1,17 +1,16 @@
 package com.mygdx.game;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import com.mygdx.game.entity.Entity;
+
 import java.util.List;
-import java.util.ListIterator;
 
 
 public class CollisionManager {
 
     float x, y;
     int width, height;
-    private List<Droplet> Droplet;
-    private List<Bucket> Bucket;
+    private List<com.mygdx.game.entity.Droplet> Droplet;
+    private List<com.mygdx.game.entity.Bucket> Bucket;
 
     private List<Entity> entities;
 

@@ -4,8 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.Entity;
-import com.mygdx.game.EntityManager;
+import com.mygdx.game.entity.Entity;
+import com.mygdx.game.entity.EntityManager;
 
 // an example of a scene that can be used in the game (test out main codes)
 public class ExampleScene extends Scene {

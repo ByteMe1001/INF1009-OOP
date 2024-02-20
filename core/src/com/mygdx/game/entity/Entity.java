@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.entity;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.CollisionManager;
 import com.badlogic.gdx.math.Rectangle;
@@ -11,6 +11,7 @@ public abstract class Entity
     private float x,y;               //Position
     private int width, height;
     private float scale;
+    private int speed;
     private Sprite sprite;
     private boolean isAlive;
     private CollisionManager rect;
@@ -18,12 +19,18 @@ public abstract class Entity
     Rectangle boundingBox;
 
     // Default constructor
+      public Entity() {
+          // do nothing
+      }
+
+      // prob wont use, how does the entity know what to create based on ID, unless you have a storage class, but that has to be inside entitymgr
     public Entity(int id) {
       this.id = id;
       this.health = 100;        //Just sets default health can be adjusted if needed
       this.x = 0.0f;
       this.y = 0.0f;
       this.scale = 1.0f;        // *1.0 (no scaling)
+      this.speed = 1;           // Temp place
       this.sprite = null;       // left it as null for now until we insert some placeholder default sprite
       this.width = 30;
       this.height = 30;
@@ -31,7 +38,7 @@ public abstract class Entity
       this.boundingBox = new Rectangle(x, y, width, height);
     }
    // Parameterized constructor
-    public Entity(int id, int health, float x, float y, float scale, Sprite sprite, int width, int height) {
+    public Entity(int id, int health, float x, float y, float scale, Sprite sprite, int width, int height, int speed) {
         this.id = id;
         this.health = health;
         this.x = x;
@@ -40,6 +47,7 @@ public abstract class Entity
         this.sprite = sprite;
         this.width = width;
         this.height = height;
+        this.speed = speed;
         this.rect = new CollisionManager(x, y, width, height);
         this.boundingBox = new Rectangle(getX(), getY(), width, height);
     }

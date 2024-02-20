@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.entity;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -20,8 +20,8 @@ public class Bucket extends Entity {
     }
 
     // Parameterized constructor
-    public Bucket(int id, int health, float x, float y, float scale, Sprite sprite, int width ,int height) {
-        super(id, health, x, y, scale, sprite, width, height);
+    public Bucket(int id, int health, float x, float y, float scale, Sprite sprite, int width ,int height, int speed) {
+        super(id, health, x, y, scale, sprite, width, height, speed);
         this.setAlive(true);
     }
 

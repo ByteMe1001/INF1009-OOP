@@ -1,7 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.entity.EntityManager;
 
 
 public class GameMaster extends ApplicationAdapter {

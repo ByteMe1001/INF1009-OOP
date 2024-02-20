@@ -1,6 +1,8 @@
-package com.mygdx.game;
+package com.mygdx.game.entity;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.AiManager;
+import com.mygdx.game.CollisionManager;
 
 import java.util.ArrayList;
 import java.util.Iterator;
