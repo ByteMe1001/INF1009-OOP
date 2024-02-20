@@ -18,6 +18,7 @@ public class Droplet extends Entity {
         super(id);
         this.setSprite(new Sprite(new Texture("droplet.png")));
         this.setAlive(true);
+        this.setCollidable(true);
     }
 
     // Parameterized constructor
@@ -47,7 +48,7 @@ public class Droplet extends Entity {
 
     @Override
     public boolean collidesWith(Entity other) {
-        return false;
+        return getBoundingBox().overlaps(other.getBoundingBox());//if entity's bounding box overlaps another entities bounding box
     }
 
     @Override
