@@ -16,7 +16,7 @@ public abstract class Entity
     private boolean isAlive;
     private CollisionManager rect;
 
-    private boolean collidable;
+    private boolean isCollidable;
 
     Rectangle boundingBox;
 
@@ -35,7 +35,7 @@ public abstract class Entity
       this.sprite = null;       // left it as null for now until we insert some placeholder default sprite
       this.width = 30;
       this.height = 30;
-      this.rect = new CollisionManager(x, y, width, height);
+      //this.rect = new CollisionManager(x, y, width, height);
       this.boundingBox = new Rectangle(x, y, width, height);
     }
    // Parameterized constructor
@@ -49,6 +49,7 @@ public abstract class Entity
         this.width = width;
         this.height = height;
         this.speed = speed;
+        //this.collidable = collidable;
         //this.rect = new CollisionManager(x, y, width, height);
         this.boundingBox = new Rectangle(getX(), getY(), width, height);
     }
@@ -132,12 +133,12 @@ public abstract class Entity
     public abstract boolean collidesWith(Entity other);       //Can fine-tune what each entity class is able to collide with using this abstract method
 
     public boolean isCollidable(){
-        return collidable;
+        return isCollidable;
     };
 
     public void setCollidable(boolean collidable){
-        this.collidable = collidable;
-    }
+        isCollidable = collidable;
+    };
 
       public abstract void collideWith(Entity other);
 
