@@ -4,23 +4,35 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.AiManager;
 import com.mygdx.game.CollisionManager;
 
+import java.lang.reflect.Method;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import com.mygdx.game.entity.Bucket;
+import com.mygdx.game.entity.Droplet;
 
 public class EntityManager {
 
     private CollisionManager collisionManager;
     private List<Entity> entities;
-    private AiManager aiManager;
+    //private AiManager aiManager;
     private SpriteBatch spriteBatch;
-    
+
+    // REMEMBER to dispose texture
+
+    //Default constructor
+    public EntityManager() {
+
+    }
+
     //Constructor with collisionManager as an instance variable
     public EntityManager(CollisionManager collisionManager) {
         entities = new ArrayList<>();
         this.collisionManager = collisionManager;
     }
-    
+
      // Constructor with collisionManager and aiManager as instance variables
     public EntityManager(CollisionManager collisionManager, AiManager aiManager) {
         entities = new ArrayList<>();
@@ -28,9 +40,34 @@ public class EntityManager {
         this.aiManager = aiManager;  // Step 3: Initialize AiManager
     }
 
-    public EntityManager() {
-
+    public void createBucket() {
+        Bucket bucket = new Bucket();
+        addEntity(bucket);
     }
+
+    public void createDroplet() {
+        Droplet droplet = new Droplet();
+        addEntity(droplet);
+    }
+
+
+    // maybe to use enum?
+    public void createEntities(int player, int ai, int entity) {
+        for (int i = 0; i < player; i++){
+            Bucket bucket = new Bucket(); //not sure
+        }
+    }
+
+    public void createEntities (int player, int ai) {
+        for (int i = 0; i < player; i++){
+            Bucket bucket = new Bucket(); //not sure
+        }
+
+        for (int i = 0; i < player; i++){
+            Bucket bucket = new Bucket(); //not sure
+        }
+    }
+
 
 
     //Add
@@ -61,10 +98,14 @@ public class EntityManager {
 //            entity.render(spriteBatch, shapeRenderer);
 //        }
 //    }
-}
-
 //            entity.render(spriteBatch, shapeRenderer);
 //        }
 //    }
+
+    public void dispose() {
+        // for loop to dispose entities
+    }
+}
+
 
 

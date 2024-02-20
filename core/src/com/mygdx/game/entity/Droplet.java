@@ -10,6 +10,10 @@ public class Droplet extends Entity {
     private static final float DROPLET_SPEED = 100.0f;
 
     // Default constructor
+    public void Droplet() {
+        // do nothing don't touch
+    }
+    // Constructor with id parameter
     public Droplet(int id) {
         super(id);
         this.setSprite(new Sprite(new Texture("droplet.png")));

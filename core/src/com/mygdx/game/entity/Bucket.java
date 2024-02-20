@@ -13,6 +13,10 @@ public class Bucket extends Entity {
     private static final float BUCKET_SPEED = 200.0f;
 
     // Default constructor
+    public Bucket() {
+        //do nothing for now
+    }
+    // Constructor with ID
     public Bucket(int id) {
         super(id);
         this.setSprite(new Sprite(new Texture("bucket.png"))); 

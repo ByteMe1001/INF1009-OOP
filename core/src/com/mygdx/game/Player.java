@@ -50,4 +50,8 @@ public class Player {
     public void setPlaying(boolean playing) {
         isPlaying = playing;
     }
+
+
 }
+
+

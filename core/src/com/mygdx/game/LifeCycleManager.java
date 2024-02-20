@@ -27,8 +27,8 @@ public class LifeCycleManager {
 
     public LifeCycleManager(MyGdxGame myGdxGame, Player player) {
         this.player = player;
-        //gameScreen = new GameScreen();
         sceneManager = new SceneManager();
+
 //        sceneManager.startGame();
 //        sceneManager.endGame();
 //        if (gameScreen == null){
@@ -37,5 +37,26 @@ public class LifeCycleManager {
         //myGdxGame.setScreen(gameScreen);
 
 
+    }
+
+    public void run() {
+        // can also use array
+        sceneManager.startGame();
+        sceneManager.gameScreen();
+        sceneManager.endGame();
+        player.setScore();
+        playerStop(); // to stop the game
+    }
+
+    public void playerStop() {
+        player.setPlaying(false);
+    }
+
+    public void playerStart() {
+        player.setPlaying(true);
+    }
+
+    public void dispose() {
+        sceneManager.dispose();
     }
 }

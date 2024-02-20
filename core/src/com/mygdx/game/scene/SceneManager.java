@@ -42,4 +42,5 @@ public class SceneManager {
         disposeCurrentScene();
         setCurrentScene(newScene);
     }
+
 }
