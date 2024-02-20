@@ -17,10 +17,11 @@ public class Droplet extends Entity {
     }
 
     // Parameterized constructor
-    public Droplet(int id, int health, float x, float y, float scale, Sprite sprite, int width, int height) {
-        super(id, health, x, y, scale, sprite, width, height);
+    public Droplet(int id, int health, float x, float y, float scale, Sprite sprite, int width, int height, int speed) {
+        super(id, health, x, y, scale, sprite, width, height, speed);
         this.setAlive(true);
-        Droplet droplet = new Droplet(id, health, boundingBox.x, boundingBox.y, scale, sprite, width, height);
+        Droplet droplet = new Droplet(id, health, boundingBox.x, boundingBox.y, scale, sprite, width, height, speed);
+        this.setCollidable(true);
     }
 
     @Override

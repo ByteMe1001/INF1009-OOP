@@ -23,6 +23,7 @@ public class Bucket extends Entity {
     public Bucket(int id, int health, float x, float y, float scale, Sprite sprite, int width ,int height, int speed) {
         super(id, health, x, y, scale, sprite, width, height, speed);
         this.setAlive(true);
+        this.setCollidable(true);
     }
 
     @Override
@@ -45,6 +46,7 @@ public class Bucket extends Entity {
     public boolean collidesWith(Entity other) {
         return false;
     }
+
 
     @Override
     public void collideWith(Entity other) {
