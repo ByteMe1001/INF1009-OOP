@@ -41,7 +41,7 @@ public abstract class Entity
         this.width = width;
         this.height = height;
         this.rect = new CollisionManager(x, y, width, height);
-        this.boundingBox = new Rectangle(x, y, width, height);
+        this.boundingBox = new Rectangle(getX(), getY(), width, height);
     }
     //Setters and Getters methods 
     public int getId() {
