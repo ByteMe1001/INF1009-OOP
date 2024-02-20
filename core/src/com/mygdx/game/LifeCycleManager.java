@@ -1,5 +1,8 @@
 package com.mygdx.game;
 
+import com.mygdx.game.scene.GameScreen;
+import com.mygdx.game.scene.SceneManager;
+
 public class LifeCycleManager {
     private Player player;
     private GameScreen gameScreen;
@@ -10,7 +13,7 @@ public class LifeCycleManager {
     }
 
     public void startGame() {
-        sceneManager.setScreen(startScreen);
+        //sceneManager.setScreen(startScreen);
     }
 
     public void pause() {
@@ -31,7 +34,7 @@ public class LifeCycleManager {
 //        if (gameScreen == null){
 //            throw new IllegalStateException("Unable to create screen");
 //        }
-        myGdxGame.setScreen(gameScreen);
+        //myGdxGame.setScreen(gameScreen);
 
 
     }

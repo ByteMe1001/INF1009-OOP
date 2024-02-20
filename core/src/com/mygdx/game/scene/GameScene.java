@@ -1,11 +1,11 @@
-package com.mygdx.game;
+package com.mygdx.game.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import java.util.Random;
+import com.mygdx.game.Entity;
+import com.mygdx.game.EntityManager;
 
 // an example of a scene that can be used in the game (test out main codes)
 public class ExampleScene extends Scene {

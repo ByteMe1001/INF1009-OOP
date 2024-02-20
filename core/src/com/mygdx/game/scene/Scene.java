@@ -1,8 +1,11 @@
-package com.mygdx.game;
+package com.mygdx.game.scene;
 
 import java.util.ArrayList;
 import java.util.List;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.Entity;
+import com.mygdx.game.EntityManager;
+import com.mygdx.game.scene.SceneManager;
 
 public abstract class Scene {
     protected SceneManager sceneManager;
