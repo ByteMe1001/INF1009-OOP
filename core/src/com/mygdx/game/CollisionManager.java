@@ -26,8 +26,19 @@ public class CollisionManager {
 
     }
 
+<<<<<<< Updated upstream
     public void checkCollision (EntityManager entityManager) {
+=======
+    public void detectCollision(EntityManager entityManager){
+        for (int i = 0; i < collidableList.size() - 1; i++){
+            for (int j = i + 1; j < collidableList.size(); j++){
+                if(collidableList.get(i).collidesWith(collidableList.get(j))){
+                    System.out.println("Collision Detected");
+>>>>>>> Stashed changes
 
+                }
+            }
+        }
     }
 }
 
