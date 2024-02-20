@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 
-public class CollisionManager implements iCollision {
+public class CollisionManager {
 
     float x, y;
     int width, height;
@@ -32,17 +32,35 @@ public class CollisionManager implements iCollision {
         for(Entity Droplet: entities){
             for (Entity Bucket: entities){
                 if(Droplet != Bucket && Bucket.getBoundingBox().overlaps(Droplet.getBoundingBox())){
-                    System.out.println("");
+                    Droplet.collideWith(Bucket);
+                    Bucket.collideWith(Droplet);
                 }
             }
         }
     }
 
-    @Override
-    public boolean collidesWith(CollisionManager rect) {
-        return false;
-    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

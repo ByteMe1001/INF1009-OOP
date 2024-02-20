@@ -19,6 +19,6 @@ public interface iCollision {
 
         }
         */
-    public boolean collidesWith(CollisionManager rect);
+    boolean collidesWith(Entity other);
 }
 
