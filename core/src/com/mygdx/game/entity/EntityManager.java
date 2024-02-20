@@ -24,7 +24,7 @@ public class EntityManager {
 
     //Default constructor
     public EntityManager() {
-
+    // do nothing dont touch
     }
 
     //Constructor with collisionManager as an instance variable
