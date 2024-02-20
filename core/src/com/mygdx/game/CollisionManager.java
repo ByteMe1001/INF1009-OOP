@@ -7,18 +7,19 @@ import java.util.ListIterator;
 
 
 public class CollisionManager {
+    private List<Entity> collidableList;
 
-    float x, y;
-    int width, height;
-    private List<Droplet> Droplet;
-    private List<Bucket> Bucket;
 
-    private List<Entity> entities;
+    public CollisionManager(List<Entity> entityList){
+        collidableList = new ArrayList<Entity>();
 
-    // Default constructor
-    public CollisionManager() {
+        for(Entity entity: entityList){
+            if(entity.isCollidable()) collidableList.add(entity);
+        }
+
     }
-
+}
+/*
     public CollisionManager(float x, float y, int width, int height) {
         super();
         this.x = x;
@@ -40,6 +41,8 @@ public class CollisionManager {
     }
 
 }
+
+ */
 
 
 

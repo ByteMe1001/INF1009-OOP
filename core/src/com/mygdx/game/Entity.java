@@ -29,7 +29,7 @@ public abstract class Entity
       this.sprite = null;       // left it as null for now until we insert some placeholder default sprite
       this.width = 30;
       this.height = 30;
-      this.rect = new CollisionManager(x, y, width, height);
+      //this.rect = new CollisionManager(x, y, width, height);
       this.boundingBox = new Rectangle(x, y, width, height);
     }
    // Parameterized constructor
@@ -42,7 +42,7 @@ public abstract class Entity
         this.sprite = sprite;
         this.width = width;
         this.height = height;
-        this.rect = new CollisionManager(x, y, width, height);
+        //this.rect = new CollisionManager(x, y, width, height);
         this.boundingBox = new Rectangle(getX(), getY(), width, height);
     }
     //Setters and Getters methods
