@@ -16,6 +16,8 @@ public abstract class Entity
     private boolean isAlive;
     private CollisionManager rect;
 
+    private boolean collidable;
+
     Rectangle boundingBox;
 
     // Default constructor
@@ -30,7 +32,6 @@ public abstract class Entity
       this.x = 0.0f;
       this.y = 0.0f;
       this.scale = 1.0f;        // *1.0 (no scaling)
-      this.speed = 1;           // Temp place
       this.sprite = null;       // left it as null for now until we insert some placeholder default sprite
       this.width = 30;
       this.height = 30;
@@ -48,7 +49,7 @@ public abstract class Entity
         this.width = width;
         this.height = height;
         this.speed = speed;
-        this.rect = new CollisionManager(x, y, width, height);
+        //this.rect = new CollisionManager(x, y, width, height);
         this.boundingBox = new Rectangle(getX(), getY(), width, height);
     }
     //Setters and Getters methods 
@@ -129,6 +130,14 @@ public abstract class Entity
     public abstract void render();
 
     public abstract void collideWith(Entity other);       //Can fine-tune what each entity class is able to collide with using this abstract method
+
+    public boolean isCollidable(){
+        return collidable;
+    };
+
+    public void setCollidable(boolean collidable){
+        this.collidable = collidable;
+    }
 
     public abstract void takeDamage(int damage);              //Not sure if we need these 2 damage/heal
 

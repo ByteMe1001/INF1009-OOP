@@ -3,21 +3,35 @@ package com.mygdx.game;
 import com.mygdx.game.entity.Entity;
 
 import java.util.List;
+import java.util.ArrayList;
+import java.util.ListIterator;
+
+import com.mygdx.game.Entity;
 
 
 public class CollisionManager {
+    private List<Entity> collidableList;
 
-    float x, y;
-    int width, height;
-    private List<com.mygdx.game.entity.Droplet> Droplet;
-    private List<com.mygdx.game.entity.Bucket> Bucket;
 
-    private List<Entity> entities;
+    public CollisionManager(List<Entity> entityList) {
+        collidableList = new ArrayList<Entity>();
 
-    // Default constructor
-    public CollisionManager() {
+        for (Entity entity : entityList) {
+            if (entity.isCollidable()) collidableList.add(entity);
+        }
     }
 
+        // Default constructor
+    public CollisionManager() {
+
+    }
+
+    public void checkCollision (EntityManager entityManager) {
+
+    }
+}
+
+/*
     public CollisionManager(float x, float y, int width, int height) {
         super();
         this.x = x;
