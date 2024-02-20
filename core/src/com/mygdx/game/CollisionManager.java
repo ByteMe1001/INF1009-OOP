@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import com.mygdx.game.Entity;
+
 
 public class CollisionManager {
     private List<Entity> collidableList;
@@ -16,6 +18,10 @@ public class CollisionManager {
         for(Entity entity: entityList){
             if(entity.isCollidable()) collidableList.add(entity);
         }
+
+    }
+
+    public void checkCollision(EntityManager entityManager){
 
     }
 }
