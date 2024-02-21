@@ -101,9 +101,12 @@ public class EntityManager {
 //            entity.render(spriteBatch, shapeRenderer);
 //        }
 //    }
-
+    // Updated dispose loop
     public void dispose() {
-        // for loop to dispose entities
+    for (Entity entity : entities) {
+        entity.dispose();
+    }
+    entities.clear(); // Clear the entity list after disposing them
     }
 }
 
