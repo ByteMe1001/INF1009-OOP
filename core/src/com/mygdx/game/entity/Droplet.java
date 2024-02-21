@@ -56,6 +56,7 @@ public class Droplet extends Entity {
         return getBoundingBox().overlaps(other.getBoundingBox());//if entity's bounding box overlaps another entities bounding box
     }
 
+    /*
     //@Override
     public void collideWith(Entity other) {
         // Collision logic for the droplet with another entity
@@ -63,6 +64,8 @@ public class Droplet extends Entity {
 
         //return false;
     }
+
+     */
 
     @Override
     public void takeDamage(int damage) {
