@@ -2,9 +2,10 @@ package com.mygdx.game.entity;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.CollisionManager;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.util.iCollision;
 
 //Not sure what else to import for now
-public abstract class Entity
+public abstract class Entity implements iCollision
   {
     private int id;
     private int health;
@@ -18,7 +19,7 @@ public abstract class Entity
 
     private boolean isCollidable;
 
-    public Rectangle boundingBox;
+    protected Rectangle boundingBox;
 
     // Default constructor
       public Entity() {
