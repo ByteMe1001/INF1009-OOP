@@ -140,9 +140,9 @@ public abstract class Entity
         isCollidable = collidable;
     };
 
-      public abstract void collideWith(Entity other);
+    public abstract void collideWith(Entity other);
 
-      public abstract void takeDamage(int damage);              //Not sure if we need these 2 damage/heal
+    public abstract void takeDamage(int damage);              //Not sure if we need these 2 damage/heal
 
     public abstract void heal(int amount);
 
@@ -162,12 +162,12 @@ public abstract class Entity
     public Rectangle getBoundingBox(){
         return boundingBox;
     };
-
-
-// Duplicate method
-//    public void setScale(float scale) {
-//      this.scale = scale;
-//    }                                                         //Mario mushroom
+    //added dispose method
+    public void dispose() {
+        if (sprite != null && sprite.getTexture() != null) {
+           sprite.getTexture().dispose();
+       }
+    }
 
     public String testString() {
       return "Entity{" +
