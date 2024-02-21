@@ -18,8 +18,9 @@ public class MyGdxGame extends Game {
 	public void create() {
 		player = new Player();
 		batch = new SpriteBatch();
-		lifeCycleManager = new LifeCycleManager(this, player);
+		lifeCycleManager = new LifeCycleManager(this, player, batch);
 		Gdx.app.log("MyGDXGame", player.getName()); //testing line
+		setScreen(lifeCycleManager.getGameScene());
 
 		//gameScreen = new GameScreen();
 		//setScreen(gameScreen);
@@ -41,10 +42,12 @@ public class MyGdxGame extends Game {
 	@Override
 	public void render() {
 		super.render();
-		do {
-			lifeCycleManager.run();
-		}
-		while (player.isPlaying());
+		lifeCycleManager.run();
+		setScreen(lifeCycleManager.getGameScene());
+//		do {
+//			lifeCycleManager.run();
+//		}
+//		while (player.isPlaying());
 	}
 
 	@Override

@@ -3,29 +3,32 @@ package com.mygdx.game.entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Droplet extends Entity {
 
     // Additional properties for Droplet class
     private static final float DROPLET_SPEED = 100.0f;
 
+    private SpriteBatch batch;
+
     // Default constructor
-    public void Droplet() {
+    public Droplet() {
         // do nothing don't touch
     }
     // Constructor with id parameter
-    public Droplet(int id) {
-        super(id);
+    public Droplet(int id, SpriteBatch batch) {
+        super(id, batch);
         this.setSprite(new Sprite(new Texture("droplet.png")));
         this.setAlive(true);
         this.setCollidable(true);
     }
 
     // Parameterized constructor
-    public Droplet(int id, int health, float x, float y, float scale, Sprite sprite, int width, int height, int speed) {
-        super(id, health, x, y, scale, sprite, width, height, speed);
+    public Droplet(int id, int health, float x, float y, float scale, int width, int height, int speed, SpriteBatch batch) {
+        super(id, health, x, y, scale, new Sprite(new Texture("droplet.png")), width, height, speed, batch);
         this.setAlive(true);
-        Droplet droplet = new Droplet(id, health, boundingBox.x, boundingBox.y, scale, sprite, width, height, speed);
+        //Droplet droplet = new Droplet(id, health, boundingBox.x, boundingBox.y, scale, sprite, width, height, speed);
         this.setCollidable(true);
     }
 

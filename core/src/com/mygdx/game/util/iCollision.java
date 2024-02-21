@@ -1,7 +1,6 @@
 package com.mygdx.game.util;
 
 import com.mygdx.game.entity.Entity;
-import com.mygdx.game.entity.EntityManager;
 
 public interface iCollision {
 
@@ -23,8 +22,8 @@ public interface iCollision {
         }
         */
     boolean collidesWith(Entity other);
-    public void detectCollisions(EntityManager entityManager);
+    public void checkCollision(EntityManager entityManager);
 
-    public void handleCollision(EntityManager entityManager, Entity x, EntityManager y);
+    public void handleCollision();
 }
 

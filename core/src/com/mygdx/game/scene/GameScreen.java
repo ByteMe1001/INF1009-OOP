@@ -1,5 +1,6 @@
 package com.mygdx.game.scene;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -33,6 +34,7 @@ public class GameScreen implements Screen {
         backgroundOffset = 0;
 
         batch = new SpriteBatch();
+        Gdx.app.log("MyGDXGame", "Gamescene constructor!");
     }
 
     @Override
@@ -45,15 +47,19 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         batch.begin();
 
-        //Scroll
-        backgroundOffset++;
+//        //Scroll
+//        backgroundOffset++;
+//
+//        if (backgroundOffset % WORLD_HEIGHT == 0){
+//            backgroundOffset = 0;
+//        }
+//
+//        batch.draw(background, 0, -backgroundOffset, WORLD_WIDTH, WORLD_HEIGHT);
+//        batch.draw(background, 0, -backgroundOffset+WORLD_HEIGHT, WORLD_WIDTH, WORLD_HEIGHT);
 
-        if (backgroundOffset % WORLD_HEIGHT == 0){
-            backgroundOffset = 0;
-        }
-
-        batch.draw(background, 0, -backgroundOffset, WORLD_WIDTH, WORLD_HEIGHT);
-        batch.draw(background, 0, -backgroundOffset+WORLD_HEIGHT, WORLD_WIDTH, WORLD_HEIGHT);
+        batch.draw(background, 0, backgroundOffset, WORLD_WIDTH, WORLD_HEIGHT);
+        batch.draw(background, 0, backgroundOffset, WORLD_WIDTH, WORLD_HEIGHT);
+        Gdx.app.log("MyGDXGame", "Gamescene render!");
 
         batch.end();
 

@@ -5,8 +5,8 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 
 public interface iIO {
-    void keyPressed(int keycode);
-    void keyReleased(int keycode);
+//    void keyPressed(int keycode);
+//    void keyReleased(int keycode);
 
     // Default method to detect W, A, S, D keys
     default String inputKey() {
