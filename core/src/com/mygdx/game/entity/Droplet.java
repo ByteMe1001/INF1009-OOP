@@ -56,7 +56,7 @@ public class Droplet extends Entity {
         return getBoundingBox().overlaps(other.getBoundingBox());//if entity's bounding box overlaps another entities bounding box
     }
 
-    @Override
+    //@Override
     public void collideWith(Entity other) {
         // Collision logic for the droplet with another entity
         System.out.println("Collision Detected");

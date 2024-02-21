@@ -22,7 +22,7 @@ public class CollisionManager {
         }
     }
 
-        // Default constructor
+    // Default constructor
     public CollisionManager() {
 
     }
@@ -50,9 +50,9 @@ public class CollisionManager {
 
     }
 
-    public void detectCollision(List<Entity> entities){
-        for(Entity Droplet: entities){
-            for (Entity Bucket: entities){
+    public void detectCollision(List<Entity> entityList){
+        for(Entity Droplet: entityList){
+            for (Entity Bucket: entityList){
                 if(Droplet != Bucket && Bucket.getBoundingBox().overlaps(Droplet.getBoundingBox())){
                     Droplet.collideWith(Bucket);
                     Bucket.collideWith(Droplet);

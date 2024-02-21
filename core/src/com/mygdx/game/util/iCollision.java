@@ -22,7 +22,7 @@ public interface iCollision {
         }
         */
     boolean collidesWith(Entity other);
-    public void checkCollision(EntityManager entityManager);
+    //public void checkCollision(EntityManager entityManager);
 
     public void handleCollision();
 }

@@ -25,7 +25,11 @@ public class Bucket extends Entity {
     public Bucket(int id, SpriteBatch batch) {
         super(id, batch);
         this.playerControlManager = new PlayerControlManager();
+
         this.setSprite(new Sprite(new Texture("bucket.png")));
+
+        this.setSprite(new Sprite(new Texture("bucket.png"))); 
+
         this.setAlive(true);
         this.setCollidable(true);
         this.setControl('P');
@@ -57,7 +61,7 @@ public class Bucket extends Entity {
     }
 
 
-    @Override
+    //@Override
     public void collideWith(Entity other) {
         System.out.println("Collision Detected");
         //return false;

@@ -1,11 +1,12 @@
 package com.mygdx.game.entity;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.CollisionManager;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.util.iCollision;
 
 //Not sure what else to import for now
-public abstract class Entity implements iCollision
+public abstract class Entity
   {
     private int id;
     private int health;
@@ -14,12 +15,15 @@ public abstract class Entity implements iCollision
     private float scale;
     private int speed;
     private Sprite sprite;
+    private SpriteBatch batch;
     private boolean isAlive;
     private CollisionManager rect;
 
     private boolean isCollidable;
 
     protected Rectangle boundingBox;
+    private Character control; // CAPITAL LETTER Char to designate who controls it. A for AI, P for Player, N for nil
+
 
     // Default constructor
       public Entity() {
@@ -27,7 +31,7 @@ public abstract class Entity implements iCollision
       }
 
       // prob wont use, how does the entity know what to create based on ID, unless you have a storage class, but that has to be inside entitymgr
-    public Entity(int id) {
+    public Entity(int id, SpriteBatch batch) {
       this.id = id;
       this.health = 100;        //Just sets default health can be adjusted if needed
       this.x = 0.0f;
@@ -37,10 +41,15 @@ public abstract class Entity implements iCollision
       this.width = 30;
       this.height = 30;
       //this.rect = new CollisionManager(x, y, width, height);
+
       boundingBox = new Rectangle(x, y, width, height);
+
+      this.boundingBox = new Rectangle(x, y, width, height);
+      this.batch = batch;
+
     }
    // Parameterized constructor
-    public Entity(int id, int health, float x, float y, float scale, Sprite sprite, int width, int height, int speed) {
+    public Entity(int id, int health, float x, float y, float scale, Sprite sprite, int width, int height, int speed, SpriteBatch batch) {
         this.id = id;
         this.health = health;
         this.x = x;
@@ -50,6 +59,7 @@ public abstract class Entity implements iCollision
         this.width = width;
         this.height = height;
         this.speed = speed;
+        this.batch = batch;
         //this.collidable = collidable;
         //this.rect = new CollisionManager(x, y, width, height);
         boundingBox = new Rectangle(getX(), getY(), width, height);
@@ -119,6 +129,14 @@ public abstract class Entity implements iCollision
         this.height = height;
     }
 
+    public Character getControl() {
+          return this.control;
+    }
+
+    public void setControl(Character control) {
+          this.control = control;
+    }
+
     public boolean isAlive() {
         return isAlive;
     }
@@ -141,7 +159,16 @@ public abstract class Entity implements iCollision
         isCollidable = collidable;
     };
 
-    public abstract void collideWith(Entity other);
+    //public abstract void collideWith(Entity other);
+
+    public int getSpeed() {
+          return speed;
+      }
+
+    public void setSpeed(int speed) {
+          this.speed = speed;
+      }
+     // public abstract void collideWith(Entity other);
 
     public abstract void takeDamage(int damage);              //Not sure if we need these 2 damage/heal
 
@@ -170,6 +197,10 @@ public abstract class Entity implements iCollision
        }
     }
 
+    // Draw function for manager to use
+    public void draw() {
+        batch.draw(sprite, this.x, this.y, sprite.getWidth(), sprite.getHeight());
+    }
     public String testString() {
       return "Entity{" +
              "id=" + id +
