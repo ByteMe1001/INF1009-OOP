@@ -20,6 +20,8 @@ public class EntityManager {
     //private AiManager aiManager;
     private SpriteBatch spriteBatch;
 
+    private EntityManager entityManager;
+
     // REMEMBER to dispose texture
 
     //Default constructor
@@ -30,13 +32,13 @@ public class EntityManager {
     //Constructor with collisionManager as an instance variable
     public EntityManager(CollisionManager collisionManager) {
         entities = new ArrayList<>();
-        this.collisionManager = collisionManager;
+        this.collisionManager = new CollisionManager(entities);
     }
 
      // Constructor with collisionManager and aiManager as instance variables
     public EntityManager(CollisionManager collisionManager, AiManager aiManager) {
         entities = new ArrayList<>();
-        this.collisionManager = collisionManager;
+        this.collisionManager = new CollisionManager(entities);
         this.aiManager = aiManager;  // Step 3: Initialize AiManager
     }
 
@@ -90,6 +92,8 @@ public class EntityManager {
                 iterator.remove();
             }
         }
+        collisionManager.detectCollisions(entityManager);
+        //new CollisionManager.detectCollisions(entityManager);
         //collisionManager.handleCollisions(entities);
     }
     //Rendering method

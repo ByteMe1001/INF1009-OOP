@@ -18,7 +18,7 @@ public abstract class Entity
 
     private boolean isCollidable;
 
-    Rectangle boundingBox;
+    public Rectangle boundingBox;
 
     // Default constructor
       public Entity() {
@@ -36,7 +36,7 @@ public abstract class Entity
       this.width = 30;
       this.height = 30;
       //this.rect = new CollisionManager(x, y, width, height);
-      this.boundingBox = new Rectangle(x, y, width, height);
+      boundingBox = new Rectangle(x, y, width, height);
     }
    // Parameterized constructor
     public Entity(int id, int health, float x, float y, float scale, Sprite sprite, int width, int height, int speed) {
@@ -51,7 +51,7 @@ public abstract class Entity
         this.speed = speed;
         //this.collidable = collidable;
         //this.rect = new CollisionManager(x, y, width, height);
-        this.boundingBox = new Rectangle(getX(), getY(), width, height);
+        boundingBox = new Rectangle(getX(), getY(), width, height);
     }
     //Setters and Getters methods 
     public int getId() {

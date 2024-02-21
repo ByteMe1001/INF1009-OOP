@@ -1,42 +1,61 @@
 package com.mygdx.game;
 
 import com.mygdx.game.entity.Entity;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.ListIterator;
-
-import com.mygdx.game.entity.Entity;
 import com.mygdx.game.entity.EntityManager;
+import com.mygdx.game.util.iCollision;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class CollisionManager {
     private List<Entity> collidableList;
 
-
     public CollisionManager(List<Entity> entityList) {
+
         collidableList = new ArrayList<Entity>();
 
         for (Entity entity : entityList) {
-            if (entity.isCollidable()) collidableList.add(entity); //add collidable objects into a entityList
+            if (entity.isCollidable()) {
+                collidableList.add(entity);
+                System.out.println(entity + "added to collide list");
+            }
+            //System.out.println(collidableList);
         }
     }
 
-        // Default constructor
-    public CollisionManager() {
+    public void detectCollisions(EntityManager entityManager) {
+        for (int i = 0; i < collidableList.size() - 1; i++) {
+            //System.out.println(collidableList.get(i));
+            for (int j = i + 1; j < collidableList.size(); j++) {
+                //System.out.println(collidableList.get(j));
 
-    }
 
-    public void detectCollision(EntityManager entityManager){
-        for (int i = 0; i < collidableList.size() - 1; i++){
-            for (int j = i + 1; j < collidableList.size(); j++){
-                if(collidableList.get(i).collidesWith(collidableList.get(j))){ //If entities overlaps with one another, print Collision Detected in console
+                if (collidableList.get(i).collidesWith(collidableList.get(j))) {
+//                  collidableList.get(i).onCollision(collidableList.get(j));
+//                  collidableList.get(j).onCollision(collidableList.get(i));
+                    //System.out.println(collidableList.get(i));
+                    System.out.println(collidableList.get(i) + " collides with " + collidableList.get(j));
+                    System.out.println(collidableList.get(i) + " " + collidableList.get(i).boundingBox);
+                    System.out.println(collidableList.get(j) + " " + collidableList.get(j).boundingBox);
                     System.out.println("Collision Detected");
-
+                    collisionHandler(entityManager, collidableList.get(i), collidableList.get(j));
 
                 }
+
+
             }
         }
+    }
+
+    public void collisionHandler(EntityManager entityManager, Entity x, Entity y){
+        //Player.score()
+        System.out.println("Score + 10");
+        collidableList.remove(x);
+        //entityManager.removeEntity(x);
+        collidableList.remove(y);
+        //entityManager.removeEntity(y);
+
+
     }
 }
 

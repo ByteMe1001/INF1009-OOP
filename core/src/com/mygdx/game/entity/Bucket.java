@@ -36,9 +36,11 @@ public class Bucket extends Entity {
         // Handle player input for moving the bucket
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             this.setX(this.getX() - Gdx.graphics.getDeltaTime() * BUCKET_SPEED);
+            this.boundingBox.setPosition(getX(), getY());
         }
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             this.setX(this.getX() + Gdx.graphics.getDeltaTime() * BUCKET_SPEED);
+            this.boundingBox.setPosition(getX(), getY());
         }
     }
 

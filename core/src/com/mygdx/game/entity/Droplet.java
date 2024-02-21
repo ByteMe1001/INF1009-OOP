@@ -33,10 +33,12 @@ public class Droplet extends Entity {
     public void update() {
         // Handle update logic for the droplet (AI-controlled movement)
         this.setY(this.getY() - Gdx.graphics.getDeltaTime() * DROPLET_SPEED);
+        this.boundingBox.setPosition(getX(), getY());
 
         // Reset droplet if it goes below the screen
         if (this.getY() + this.getHeight() < 0) {
             this.setY(Gdx.graphics.getHeight());
+            this.boundingBox.setPosition(getX(), getY());
         }
     }
 
