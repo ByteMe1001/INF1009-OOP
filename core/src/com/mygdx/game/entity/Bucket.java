@@ -4,49 +4,51 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.PlayerControlManager;
 
 
 public class Bucket extends Entity {
 
     // Additional properties for Bucket class
-    private static final float BUCKET_SPEED = 200.0f;
+    private static final float BUCKET_SPEED = 200.0f; // not used??
+    private final static Character control = 'P';
+
+    private PlayerControlManager playerControlManager;
 
     // Default constructor
     public Bucket() {
         //do nothing for now
     }
     // Constructor with ID
-    public Bucket(int id) {
-        super(id);
-        this.setSprite(new Sprite(new Texture("bucket.png"))); 
+    public Bucket(int id, SpriteBatch batch) {
+        super(id, batch);
+        this.playerControlManager = new PlayerControlManager();
+        this.setSprite(new Sprite(new Texture("bucket.png")));
         this.setAlive(true);
         this.setCollidable(true);
+        this.setControl('P');
     }
 
     // Parameterized constructor
-    public Bucket(int id, int health, float x, float y, float scale, Sprite sprite, int width ,int height, int speed) {
-        super(id, health, x, y, scale, sprite, width, height, speed);
+    public Bucket(int id, int health, float x, float y, float scale, int width ,int height, int speed, SpriteBatch batch) {
+        super(id, health, x, y, scale, new Sprite(new Texture("bucket.png")), width, height, speed, batch);
+        this.playerControlManager = new PlayerControlManager();
         this.setAlive(true);
         this.setCollidable(true);
+        this.setControl('P');
     }
 
     @Override
     public void update() {
-        // Handle player input for moving the bucket
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            this.setX(this.getX() - Gdx.graphics.getDeltaTime() * BUCKET_SPEED);
-            this.boundingBox.setPosition(getX(), getY());
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            this.setX(this.getX() + Gdx.graphics.getDeltaTime() * BUCKET_SPEED);
-            this.boundingBox.setPosition(getX(), getY());
-        }
+        movement();
     }
 
     @Override
     public void render() {
         // Rendering logic for the bucket
+
     }
 
     @Override
@@ -81,9 +83,18 @@ public class Bucket extends Entity {
         // Handle destruction logic for the bucket
     }
 
-    public void movement() {
-        playerControlManager.update();
-    }
 
+    public void movement() {
+
+        if (getControl() == 'P') {
+            float[] vector = playerControlManager.movement(this.getX(), this.getY(), this.getSpeed());
+            if (vector[0] == 0f) {
+                setX(vector[1]);        // Move horizontally
+            }
+            if (vector[0] == 1f) {
+                setY(vector[1]);        // Move vectically
+            }
+        }
     }
+}
 
