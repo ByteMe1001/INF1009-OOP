@@ -24,7 +24,7 @@ public class EntityManager {
     private SpriteBatch batch;
     private AiControlManager aiControlManager;
 
-    private EntityManager entityManager;
+    EntityManager entityManager;
 
     // REMEMBER to dispose texture
 
@@ -50,12 +50,12 @@ public class EntityManager {
 //    }
 
     public void createBucket() {
-        Bucket bucket = new Bucket(1, 100, 300f, 100f, 1.0f, 50, 50, 50, 3, batch);
+        Bucket bucket = new Bucket(1, 100, 50f, 100f, 1.0f, 64, 64, 50, 3, batch);
         addEntity(bucket);
     }
 
     public void createDroplet() {
-        Droplet droplet = new Droplet(1, 100, 300.0f, 100.0f, 1.0f, 50, 50, 300, 2, batch);
+        Droplet droplet = new Droplet(1, 100, 300.0f, 100.0f, 1.0f, 64, 64, 300, 2, batch);
         addAiEntity(droplet);
     }
 
@@ -77,7 +77,21 @@ public class EntityManager {
         }
     }
 
-
+    public void deleteEntity(Entity e) {
+        for (Entity entity: entityList) {
+            if (entity == e) {
+                entityList.remove(entity);
+                return;
+            }
+        }
+        for (Entity entity: aiEntityList) {
+            if (entity == e) {
+                aiEntityList.remove(entity);
+                return;
+            }
+        }
+        throw new IllegalArgumentException("Entity not found in the entity list");
+    }
 
     //Add
     public void addEntity(Entity entity) {
@@ -133,15 +147,17 @@ public class EntityManager {
 
             if (entity.getControl() == 'A') {
                 aiControlManager.movement(aiEntityList);
+
                 //entity.update();
             }
         }
 
         for (Entity entity : aiEntityList) {
             aiControlManager.movement(aiEntityList);
+            entity.update();
         }
         collisionManager.updateCollisionList(entityList, aiEntityList);
-        collisionManager.detectCollision(entityManager);
+        collisionManager.detectCollision(this);
 
     }
 

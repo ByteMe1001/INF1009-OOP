@@ -116,6 +116,7 @@ public class Droplet extends Entity {
         }
 
          */
+        boundingBox.setPosition(getX(), getY());
     }
 
 
