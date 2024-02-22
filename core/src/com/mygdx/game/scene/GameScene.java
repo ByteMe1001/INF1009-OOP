@@ -22,8 +22,7 @@ class GameScene extends Scene{
         //Gdx.app.log("MyGDXGame", "Gamescene constructor!");
     }
 
-    // Not needed
-
+    @Override
     public void show() {
         // Can put here or show()
         //super.setBackground(new Texture("Space.jpg"));

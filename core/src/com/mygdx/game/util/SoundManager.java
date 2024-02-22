@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SoundManager {
-    private List<Clip> clips;
+    private ArrayList<Clip> clips;
     private URL[] soundURL = new URL[2];
     private boolean isMusicPlaying = false;
 

@@ -41,60 +41,35 @@ public class Bucket extends Entity {
         this.setControl('P');
     }
 
-
     @Override
-    public void update() {
+    protected void update() {
         movement();
         boundingBox.setPosition(getX(), getY());
         //System.out.println(boundingBox);
     }
 
     @Override
-    public void render() {
+    protected void render() {
         // Rendering logic for the bucket
 
     }
 
-    /*
     @Override
-    public boolean collidesWith(Entity other) {
-        return getBoundingBox().overlaps(other.getBoundingBox());//if entity's bounding box overlaps another entities bounding box return true
-    }
-    */
-
-
-/*
-    //@Override
-    public void collideWith(Entity other) {
-        System.out.println("Collision Detected");
-        //return false;
-    }
-
-
-    public boolean collideWith(Rectangle other) {
-        // Collision logic for the bucket with another entity
-        return false;
-    }
-
-     */
-
-    @Override
-    public void takeDamage(int damage) {
+    protected void takeDamage(int damage) {
         // Handle damage logic for the bucket
     }
 
     @Override
-    public void heal(int amount) {
+    protected void heal(int amount) {
         // Handle healing logic for the bucket
     }
 
     @Override
-    public void destroy() {
+    protected void destroy() {
         // Handle destruction logic for the bucket
     }
 
-
-    public void movement() {
+    protected void movement() {
 
         if (getControl() == 'P') {
             float[] vector = playerControlManager.movement(this.getX(), this.getY(), this.getSpeed());

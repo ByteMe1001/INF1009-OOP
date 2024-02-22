@@ -15,7 +15,6 @@ public class Droplet extends Entity {
     private static final int DEFAULT_CHANGE_RATE = 30;
     private int changeRate;
     private AiControlManager aiControlManager;
-
     private SpriteBatch batch;
 
     // Default constructor
@@ -48,7 +47,7 @@ public class Droplet extends Entity {
     }
 
     @Override
-    public void update() {
+    protected void update() {
         movement();
         boundingBox.setPosition(this.getX(), this.getY());
         //System.out.println(boundingBox);
@@ -57,19 +56,19 @@ public class Droplet extends Entity {
 
     // not needed
     @Override
-    public void render() {
+    protected void render() {
         // Rendering logic for the droplet
     }
 
     /*
     @Override
-    public boolean collidesWith(Entity other) {
+    protected boolean collidesWith(Entity other) {
         return getBoundingBox().overlaps(other.getBoundingBox());//if entity's bounding box overlaps another entities bounding box
     }
 */
     /*
     //@Override
-    public void collideWith(Entity other) {
+    protected void collideWith(Entity other) {
         // Collision logic for the droplet with another entity
         System.out.println("Collision Detected");
 
@@ -79,38 +78,38 @@ public class Droplet extends Entity {
      */
 
     @Override
-    public int getChangeRate() {
+    protected int getChangeRate() {
         return changeRate;
     }
 
     @Override
-    public int getDefaultChangeRate() {
+    protected int getDefaultChangeRate() {
         return DEFAULT_CHANGE_RATE;
     }
 
     @Override
-    public void setChangeRate(int changeRate) {
+    protected void setChangeRate(int changeRate) {
         this.changeRate = changeRate;
     }
 
     @Override
-    public void takeDamage(int damage) {
+    protected void takeDamage(int damage) {
         // Handle damage logic for the droplet
     }
 
     @Override
-    public void heal(int amount) {
+    protected void heal(int amount) {
         // Handle healing logic for the droplet
     }
 
     @Override
-    public void destroy() {
+    protected void destroy() {
         // Handle destruction logic for the droplet
 
     }
 
     @Override
-    public void movement() {
+    protected void movement() {
         if (getControl() == 'A') {
             Random random = new Random();
             int randomNumber = random.nextInt(31);
