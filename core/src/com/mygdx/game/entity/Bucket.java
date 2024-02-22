@@ -14,7 +14,7 @@ public class Bucket extends Entity {
     // Additional properties for Bucket class
     private static final float BUCKET_SPEED = 200.0f; // not used??
 
-    private final static String TEXTURE_PATH = "shiba.png";
+    private final static String TEXTURE_PATH = "spaceship.png";
 
     private PlayerControlManager playerControlManager;
 

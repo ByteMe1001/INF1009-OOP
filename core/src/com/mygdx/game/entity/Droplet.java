@@ -12,7 +12,7 @@ public class Droplet extends Entity {
 
     // Additional properties for Droplet class
     private static final float DROPLET_SPEED = 100.0f;
-    private final static String TEXTURE_PATH = "fish.png";
+    private final static String TEXTURE_PATH = "asteroid.png";
     private static final int DEFAULT_CHANGE_RATE = 30;
     private int changeRate;
     private AiControlManager aiControlManager;

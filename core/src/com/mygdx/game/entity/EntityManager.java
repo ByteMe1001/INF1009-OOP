@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import com.mygdx.game.PlayerControlManager;
 import com.mygdx.game.entity.Bucket;
@@ -28,6 +29,8 @@ public class EntityManager {
     private AiControlManager aiControlManager;
 
     EntityManager entityManager;
+
+    Random random = new Random();
 
     // REMEMBER to dispose texture
 
@@ -64,6 +67,20 @@ public class EntityManager {
         addAiEntity(droplet);
     }
 
+    public void createDroplets (int player, int ai) {
+        for (int i = 0; i < player; i++){
+            Bucket bucket = new Bucket(playerControlManager, 1, 100, 300.0f, 100.0f, 1.0f, 50f, 50f, 10, 10, batch); //not sure
+        }
+
+        for (int i = 0; i < player; i++){
+            Droplet droplet = new Droplet(aiControlManager,1, 100, 300.0f, 100.0f, 1.0f, 64f, 64f, 300, 3, batch); //not sure
+        }
+    }
+
+
+
+
+
 
     // maybe to use enum?
     public void createEntities(int player, int ai, int entity) {
@@ -78,7 +95,7 @@ public class EntityManager {
         }
 
         for (int i = 0; i < player; i++){
-            Bucket bucket = new Bucket(); //not sure
+            Droplet droplet = new Droplet(aiControlManager,1, 100, 300.0f, 100.0f, 1.0f, 64f, 64f, 300, 3, batch); //not sure
         }
     }
 
