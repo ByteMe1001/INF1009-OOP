@@ -15,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 public class StartingScene extends Scene {
 
     private final static String TEXTURE_PATH = "playbutton.png";
-    private final static String BACKGROUND_TEXTURE_PATH = "Space.jpg";
+    private final static String BACKGROUND_TEXTURE_PATH = "StartingImage.png";
     private Stage stage;
     private SceneManager sceneManager;
 
