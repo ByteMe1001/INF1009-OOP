@@ -43,8 +43,6 @@ public class CollisionManager implements iCollision {
             for (int j = i + 1; j < collisionList.size(); j++){
                 if(collidesWith(collisionList.get(i), collisionList.get(j))){ //If entities overlaps with one another, print Collision Detected in console
                     System.out.println("Collision Detected");
-                    System.out.println("Entity Manager: " + entityManager);
-                    //System.out.println("Entity List: " + entityList);
                     //System.out.println(collidableList.get(i).getBoundingBox());
                     //System.out.println(collidableList.get(j).getBoundingBox());
                     //System.out.println("Bounding Box Values: ", collidableList.get(i).getBoundingBox());

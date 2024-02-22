@@ -40,6 +40,7 @@ public interface iCollision {
         //collisionList.remove(x); //update collidableList to remove entity
         //System.out.println(x + " has been removed from the collision list");
         //entityManager.removeEntity(x); //update entityManager to remove entity
+        System.out.println("Collision Detected between " + x + " and " + y);
 
         collisionList.remove(y); //update collidableList to remove entity
         System.out.println(y + " has been removed from the collision list");
