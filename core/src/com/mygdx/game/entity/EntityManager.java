@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.mygdx.game.PlayerControlManager;
 import com.mygdx.game.entity.Bucket;
 import com.mygdx.game.entity.Droplet;
 
@@ -22,6 +23,8 @@ public class EntityManager {
     private ArrayList<Entity> playerEntityList;
     //private AiManager aiManager;
     private SpriteBatch batch;
+
+    private PlayerControlManager playerControlManager;
     private AiControlManager aiControlManager;
 
     EntityManager entityManager;
@@ -38,6 +41,7 @@ public class EntityManager {
         entityList = new ArrayList<Entity>();
         aiEntityList = new ArrayList<Entity>();
         this.collisionManager = new CollisionManager(entityList, aiEntityList);
+        this.playerControlManager = new PlayerControlManager();
         this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);
         this.batch = batch;
     }
@@ -50,7 +54,7 @@ public class EntityManager {
 //    }
 
     public void createBucket() {
-        Bucket bucket = new Bucket(1, 100, 50f, 100f, 1.0f, 64f, 64f, 300, 3, batch);
+        Bucket bucket = new Bucket(playerControlManager,1, 100, 50f, 100f, 1.0f, 64f, 64f, 300, 3, batch);
         addEntity(bucket);
     }
 
@@ -63,13 +67,13 @@ public class EntityManager {
     // maybe to use enum?
     public void createEntities(int player, int ai, int entity) {
         for (int i = 0; i < player; i++){
-            Bucket bucket = new Bucket(1, 100, 300.0f, 100.0f, 1.0f, 50f, 50f, 10, 10, batch); //not sure
+            Bucket bucket = new Bucket(playerControlManager,1, 100, 300.0f, 100.0f, 1.0f, 50f, 50f, 10, 10, batch); //not sure
         }
     }
 
     public void createEntities (int player, int ai) {
         for (int i = 0; i < player; i++){
-            Bucket bucket = new Bucket(1, 100, 300.0f, 100.0f, 1.0f, 50f, 50f, 10, 10, batch); //not sure
+            Bucket bucket = new Bucket(playerControlManager, 1, 100, 300.0f, 100.0f, 1.0f, 50f, 50f, 10, 10, batch); //not sure
         }
 
         for (int i = 0; i < player; i++){

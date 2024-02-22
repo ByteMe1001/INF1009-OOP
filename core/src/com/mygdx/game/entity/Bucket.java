@@ -22,9 +22,8 @@ public class Bucket extends Entity {
         //do nothing for now
     }
     // Constructor with ID
-    public Bucket(int id, SpriteBatch batch) {
+    public Bucket(PlayerControlManager playerControlManager, int id, SpriteBatch batch) {
         super(id, batch);
-        this.playerControlManager = new PlayerControlManager();
 
         this.setSprite(new Sprite(new Texture("bucket.png")));
 
@@ -36,11 +35,11 @@ public class Bucket extends Entity {
     }
 
     // Parameterized constructor
-    public Bucket(int id, int health, float x, float y, float scale, float width ,float height, int speed, int direction, SpriteBatch batch) {
+    public Bucket(PlayerControlManager playerControlManager,int id, int health, float x, float y, float scale, float width ,float height, int speed, int direction, SpriteBatch batch) {
         super(id, health, x, y, scale, new Sprite(new Texture("bucket.png")), width, height, speed, direction, batch);
         setWidth(getSprite().getWidth());
         setHeight(getSprite().getHeight());
-        this.playerControlManager = new PlayerControlManager();
+        this.playerControlManager = playerControlManager;
         this.setAlive(true);
         this.setCollidable(true);
         this.setControl('P');
@@ -102,15 +101,9 @@ public class Bucket extends Entity {
 
         if (getControl() == 'P') {
             float[] vector = playerControlManager.movement(this.getX(), this.getY(), this.getSpeed());
-            if (vector[0] == -1f ) {
-                return;
-            }
-            if (vector[0] == 0f) {
-                setX(vector[1]);        // Move horizontally
-            }
-            if (vector[0] == 1f) {
-                setY(vector[1]);        // Move vectically
-            }
+
+            setX(vector[0]);    //Set X value
+            setY(vector[1]);    // Set Y value
         }
     }
 }

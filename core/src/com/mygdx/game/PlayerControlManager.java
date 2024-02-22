@@ -20,33 +20,30 @@ public class PlayerControlManager implements iIO {
     }
 
     public float[] movement(float x, float y, float speed) {
-        float [] vector = new float[2];
+        float [] vector = new float[2];     // [0] is X axis, [1] is Y axis
 
         switch(inputKey()) {
 
             case "FALSE":
-                vector[0] = -1f;
-                //System.out.println("No input");
+                vector[0] = x;
+                vector[1] = y;
                 break;
             case "UP":
-                vector[0] = 1f;
+                vector[0] = x;
                 vector[1] = (y + (speed * Gdx.graphics.getDeltaTime()));
-                //System.out.println("Up");
+
                 break;
             case "DOWN":
-                vector[0] = 1f;
+                vector[0] = x;
                 vector[1] = (y - (speed * Gdx.graphics.getDeltaTime()));
-                //System.out.println("Down");
                 break;
             case "LEFT" :
-                vector[0] = 0f;
-                vector[1] = (x - (speed * Gdx.graphics.getDeltaTime()));
-                //System.out.println(vector[1]);
+                vector[0] = (x - (speed * Gdx.graphics.getDeltaTime()));
+                vector[1] = y;
                 break;
             case "RIGHT" :
-                vector[0] = 0f;
-                vector[1] = (x + (speed * Gdx.graphics.getDeltaTime()));
-                //System.out.println(vector[1]);
+                vector[0] = (x + (speed * Gdx.graphics.getDeltaTime()));
+                vector[1] = (y);
             break;
             default:
                 break;
