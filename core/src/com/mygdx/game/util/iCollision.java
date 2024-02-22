@@ -37,7 +37,7 @@ public interface iCollision {
     default void handleCollision(EntityManager entityManager, List<Entity> collisionList, Entity x, Entity y){
         ;
 
-        collisionList.remove(x); //update collidableList to remove entity
+        //collisionList.remove(x); //update collidableList to remove entity
         //System.out.println(x + " has been removed from the collision list");
         //entityManager.removeEntity(x); //update entityManager to remove entity
 
