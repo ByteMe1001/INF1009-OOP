@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 public class StartingScene extends Scene {
 
     private final static String TEXTURE_PATH = "playbutton.png";
+    private final static String BACKGROUND_TEXTURE_PATH = "Space.jpg";
     private Stage stage;
     private SceneManager sceneManager;
 
@@ -27,6 +29,13 @@ public class StartingScene extends Scene {
     public void create() {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
+
+        // Load background image texture
+        Texture backgroundTexture = new Texture(BACKGROUND_TEXTURE_PATH);
+        Image backgroundImage = new Image(backgroundTexture);
+        backgroundImage.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        backgroundImage.setPosition(0, 0);
+        stage.addActor(backgroundImage);
 
         // Load play button texture
         Texture playButtonTexture = new Texture(TEXTURE_PATH);
