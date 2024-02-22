@@ -15,10 +15,14 @@ public class CollisionManager implements iCollision {
     private List<Entity> collidableList;
 
 
-    public CollisionManager(List<Entity> entityList) {
+    public CollisionManager(List<Entity> entityList, List<Entity> aiEntityList) {
         collidableList = new ArrayList<Entity>();
 
         for (Entity entity : entityList) {
+            if (entity.isCollidable()) collidableList.add(entity); //add collidable objects into a entityList
+        }
+
+        for (Entity entity : aiEntityList) {
             if (entity.isCollidable()) collidableList.add(entity); //add collidable objects into a entityList
         }
     }
@@ -37,7 +41,7 @@ public class CollisionManager implements iCollision {
                     //System.out.println(collidableList.get(i).getBoundingBox());
                     //System.out.println(collidableList.get(j).getBoundingBox());
                     //System.out.println("Bounding Box Values: ", collidableList.get(i).getBoundingBox());
-                    
+                    handleCollision(entityManager, collidableList, collidableList.get(i), collidableList.get(j));
 
 
 
@@ -46,14 +50,18 @@ public class CollisionManager implements iCollision {
         }
     }
 
-    public void updateCollisionList(List<Entity> entityList, List<Entity> aiEntityList){
+    public void updateCollisionList(List<Entity> entityList , List<Entity> aiEntityList){  //
         collidableList.clear();
         for (Entity entity : entityList) {
             if (entity.isCollidable()) collidableList.add(entity); //add collidable objects into a entityList
+
         }
         for (Entity entity : aiEntityList) {
             if (entity.isCollidable()) collidableList.add(entity); //add collidable objects into a entityList
+            
         }
+
+        System.out.println("Collision Entities: " + collidableList );
     }
 
 
