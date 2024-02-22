@@ -37,8 +37,8 @@ public class CollisionManager implements iCollision {
                     System.out.println(collidableList.get(i).getBoundingBox());
                     System.out.println(collidableList.get(j).getBoundingBox());
                     //System.out.println("Bounding Box Values: ", collidableList.get(i).getBoundingBox());
-
                     
+
 
 
                 }
