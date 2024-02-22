@@ -44,20 +44,27 @@ public class AiControlManager implements iAiMovement {
     }
 
     public void movement(ArrayList<Entity> aiEntityList) {
+
         Random random = new Random();
         int randomNumber = random.nextInt(2) + 1;
 
         for (Entity entity : aiEntityList) {
-            if (entityManager.getChangeRate(entity) <= 0 ){
+            //System.out.println(entityManager.getChangeRate(entity));
+            if (entityManager.getChangeRate(entity) >= 0 ){
                 switch(entityManager.getDirection(entity)) {
                     case 1:
-                        calculateUpDown(entityManager, entity);
+                        setUpDown(entityManager, entity);
+                        break;
                     case 2:
-                        calculateLeftRight(entityManager, entity);
+                        setLeftRight(entityManager, entity);
+                        break;
                     case 3:
-                        calculateAll(entityManager, entity);
+                        System.out.println("case 3");
+                        setAll(entityManager, entity);
+                        break;
                 }
             }
+            else entityManager.setChangeRate(entity, entityManager.getDefaultChangeRate(entity));
         }
 
     }

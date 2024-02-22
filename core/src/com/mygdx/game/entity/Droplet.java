@@ -10,6 +10,7 @@ public class Droplet extends Entity {
 
     // Additional properties for Droplet class
     private static final float DROPLET_SPEED = 100.0f;
+    private static final int DEFAULT_CHANGE_RATE = 30;
     private int changeRate;
     //private AiControlManager aiControlManager;
 
@@ -23,7 +24,7 @@ public class Droplet extends Entity {
     public Droplet(int id, SpriteBatch batch) {
         super(id, batch);
         //this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), getSpeed());
-        this.setChangeRate(30);
+        this.setChangeRate(DEFAULT_CHANGE_RATE);
         this.setSprite(new Sprite(new Texture("droplet.png")));
         this.setAlive(true);
         this.setCollidable(true);
@@ -35,7 +36,7 @@ public class Droplet extends Entity {
         super(id, health, x, y, scale, new Sprite(new Texture("droplet.png")), width, height, speed, direction, batch);
         //this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), getSpeed());
         this.setAlive(true);
-        this.setChangeRate(30);
+        this.setChangeRate(DEFAULT_CHANGE_RATE);
         //Droplet droplet = new Droplet(id, health, boundingBox.x, boundingBox.y, scale, sprite, width, height, speed);
         this.setCollidable(true);
         this.setControl('A');
@@ -73,6 +74,11 @@ public class Droplet extends Entity {
     @Override
     public int getChangeRate() {
         return changeRate;
+    }
+
+    @Override
+    public int getDefaultChangeRate() {
+        return DEFAULT_CHANGE_RATE;
     }
 
     @Override

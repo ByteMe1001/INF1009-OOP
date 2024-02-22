@@ -32,16 +32,14 @@ public interface iCollision {
     }
     //public void checkCollision(EntityManager entityManager);
 
-    default void handleCollision(EntityManager entityManager, List<Entity> collisionList, Entity x, Entity y){
+    default void handleCollision(EntityManager entityManager, List<Entity> collidableList, Entity x, Entity y){
         ;
-        collisionList.remove(y); //update collidableList to remove entity
-        System.out.println(y + " has been removed from the collision list");
-        //entityManager.removeEntity(y);
-        System.out.println(y + " has been removed from the entity list");
-        //entityManager.removeEntity(x); //update entityManager to remove entity from entity list
+        collidableList.remove(x); //update collidableList to remove entity
+        //System.out.println(x + " has been removed from the collision list");
+        //entityManager.removeEntity(x); //update entityManager to remove entity
 //            System.out.println("AI Entity Removed");
         //collidableList.remove(y); //update collidableList to remove entity
-        //entityManager.removeEntity(y); //update entityManager to remove entity from entity list
+        //entityManager.removeEntity(y); //update entityManager to remove entity
 //            System.out.println("AI Entity Removed");
 //        }
         System.out.println("Testing Collision Handler");

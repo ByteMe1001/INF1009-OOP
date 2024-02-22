@@ -6,8 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.util.iCollision;
 
 //Not sure what else to import for now
-public abstract class Entity
-  {
+public abstract class Entity {
     private int id;
     private int health;
     private float x,y;               //Position
@@ -15,6 +14,8 @@ public abstract class Entity
     private float scale;
     private int speed;
     private int direction;          // 1 for up down, 2 for left right, 3 for all
+
+    private String currentDirection = "";
     private Sprite sprite;
     private SpriteBatch batch;
     private boolean isAlive;
@@ -131,6 +132,14 @@ public abstract class Entity
         this.height = height;
     }
 
+    public float getSpriteWidth() {
+          return sprite.getWidth();
+    }
+
+    public float getSpriteHeight() {
+        return sprite.getHeight();
+    }
+
     public Character getControl() {
           return this.control;
     }
@@ -152,6 +161,10 @@ public abstract class Entity
        return 1;
     }
 
+    public int getDefaultChangeRate() {
+      return 1;
+    }
+
     public void setChangeRate(int changeRate) {
 
     }
@@ -162,6 +175,14 @@ public abstract class Entity
 
     public void setDirection(int direction) {
           this.direction = direction;
+    }
+
+    public String getCurrentDirection() {
+      return this.currentDirection;
+    }
+
+    public void setCurrentDirection(String currentDirection) {
+      this.currentDirection = currentDirection;
     }
     //Methods
     public abstract void update();
@@ -225,17 +246,6 @@ public abstract class Entity
         //System.out.println(this.x);
         //System.out.println(this.y);
     }
-    public String testString() {
-      return "Entity{" +
-             "id=" + id +
-             ", health=" + health +
-             ", x=" + x +
-             ", y=" + y +
-             ", scale=" + scale +
-             ", sprite=" + sprite +
-             "}";
-    }
 
-
-  }
+}
   

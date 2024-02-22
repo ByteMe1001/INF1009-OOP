@@ -55,8 +55,8 @@ public class EntityManager {
     }
 
     public void createDroplet() {
-        Droplet droplet = new Droplet(1, 100, 300.0f, 100.0f, 1.0f, 50, 50, 50, 3, batch);
-        addEntity(droplet);
+        Droplet droplet = new Droplet(1, 100, 300.0f, 100.0f, 1.0f, 50, 50, 300, 2, batch);
+        addAiEntity(droplet);
     }
 
 
@@ -86,6 +86,10 @@ public class EntityManager {
     //Remove
     public void removeEntity(Entity entity) {
         entityList.remove(entity);
+    }
+
+    public void addAiEntity(Entity entity) {
+        aiEntityList.add(entity);
     }
     //Iterates through entityList and calls their update method
     public void updateEntityList() {
@@ -129,7 +133,12 @@ public class EntityManager {
 
             if (entity.getControl() == 'A') {
                 aiControlManager.movement(aiEntityList);
+                //entity.update();
             }
+        }
+
+        for (Entity entity : aiEntityList) {
+            aiControlManager.movement(aiEntityList);
         }
         collisionManager.updateCollisionList(entityList, aiEntityList);
         collisionManager.detectCollision(entityManager);
@@ -145,7 +154,7 @@ public class EntityManager {
     }
 
     public float getSpeed(Entity e) {
-        for (Entity entity: entityList) {
+        for (Entity entity: aiEntityList) {
             if (entity == e) {
                 return entity.getSpeed();
             }
@@ -154,7 +163,7 @@ public class EntityManager {
     }
 
     public float getX(Entity e) {
-        for (Entity entity: entityList) {
+        for (Entity entity: aiEntityList) {
             if (entity == e) {
                 return entity.getX();
             }
@@ -163,7 +172,7 @@ public class EntityManager {
     }
 
     public float getY(Entity e) {
-        for (Entity entity: entityList) {
+        for (Entity entity: aiEntityList) {
             if (entity == e) {
                 return entity.getY();
             }
@@ -172,25 +181,27 @@ public class EntityManager {
     }
 
     public void setX(Entity e, float x) {
-        for (Entity entity: entityList) {
-            if (entity == e) {
+        for (Entity entity: aiEntityList) {
+            if (entity.equals(e)) {
                 entity.setX(x);
+                return;
             }
         }
         throw new IllegalArgumentException("Entity not found in the entity list");
     }
 
     public void setY(Entity e, float y) {
-        for (Entity entity: entityList) {
+        for (Entity entity: aiEntityList) {
             if (entity == e) {
                 entity.setY(y);
+                return;
             }
         }
         throw new IllegalArgumentException("Entity not found in the entity list");
     }
 
     public int getChangeRate(Entity e) {
-        for (Entity entity: entityList) {
+        for (Entity entity: aiEntityList) {
             if (entity == e) {
                 return e.getChangeRate();
             }
@@ -198,23 +209,65 @@ public class EntityManager {
         throw new IllegalArgumentException("Entity not found in the entity list");
     }
 
-    public void decrementChangeRate(Entity e) {
-        for (Entity entity: entityList) {
+    public int getDefaultChangeRate(Entity e) {
+        for (Entity entity: aiEntityList) {
             if (entity == e) {
-                entity.setChangeRate(entity.getChangeRate()-1);
+                return e.getDefaultChangeRate();
             }
         }
         throw new IllegalArgumentException("Entity not found in the entity list");
     }
 
+    public void setChangeRate(Entity e, int x) {
+        for (Entity entity: aiEntityList) {
+            if (entity == e) {
+                entity.setChangeRate(x);
+                return;
+            }
+        }
+        throw new IllegalArgumentException("Entity not found in the entity list");
+    }
+
+
+    public void decrementChangeRate(Entity e) {
+        for (Entity entity: aiEntityList) {
+            if (entity == e) {
+                entity.setChangeRate(entity.getChangeRate()-1);
+                return;
+            }
+        }
+        throw new IllegalArgumentException("Entity not found in the entity list");
+    }
+
+
     public int getDirection(Entity e) {
-        for (Entity entity: entityList) {
+        for (Entity entity: aiEntityList) {
             if (entity == e) {
                 return entity.getDirection();
             }
         }
         throw new IllegalArgumentException("Entity not found in the entity list");
+    }
 
+    public String getCurrentDirection(Entity e) {
+        for (Entity entity: aiEntityList) {
+            if (entity == e) {
+                return entity.getCurrentDirection();
+            }
+        }
+        throw new IllegalArgumentException("Entity not found in the entity list");
+    }
+
+
+
+    public void setCurrentDirection(Entity e, String s) {
+        for (Entity entity: aiEntityList) {
+            if (entity == e) {
+                entity.setCurrentDirection(s);
+                return;
+            }
+        }
+        throw new IllegalArgumentException("Entity not found in the entity list");
     }
 
 }

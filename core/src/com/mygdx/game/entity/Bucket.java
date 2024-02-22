@@ -102,8 +102,7 @@ public class Bucket extends Entity {
                 return;
             }
             if (vector[0] == 0f) {
-                setX(vector[1]);
-                System.out.println(vector[1]);// Move horizontally
+                setX(vector[1]);        // Move horizontally
             }
             if (vector[0] == 1f) {
                 setY(vector[1]);        // Move vectically
