@@ -49,7 +49,7 @@ public class LifeCycleManager {
 //        sceneManager.createGameScene();
 //        setGameScreen(spaceShooter);
 
-//        sceneManager.startGame();
+            sceneManager.run();
 //        sceneManager.gameScreen();
 //        sceneManager.endGame();
 //        player.setScore(1);

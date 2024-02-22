@@ -8,7 +8,7 @@ import com.mygdx.game.scene.GameScene;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SceneManager {
+public class SceneManager implements SceneChangeListener{
     private ArrayList<Scene> scenes;
     private Scene currentScene;
     private SpriteBatch batch;
@@ -45,12 +45,13 @@ public class SceneManager {
     }
 
     public void run() {
-
+        StartingScene startingScene = new StartingScene(this, batch);
+        setCurrentScene(startingScene);
     }
 
     public void setCurrentScene(Scene scene) {
         currentScene = scene;
-        //currentScene.create();
+        setScene(scene);
     }
 
     public Scene getCurrentScene() {
@@ -61,17 +62,17 @@ public class SceneManager {
 //        currentScene.update();
 //    }
 
+    public void swapScene(Scene newScene) { // to change between scenes (to be called by gameMaster)
+        disposeCurrentScene(); // Dispose of the current scene
+        setCurrentScene(newScene); // Set the new scene as the current scene
+    }
+
     public void renderCurrentScene(SpriteBatch batch) {
         //currentScene.render(batch);
     }
 
     public void disposeCurrentScene() { //remove current scene
         currentScene.dispose();
-    }
-
-    public void swapScene(Scene newScene) { // to change between scenes (to be called by gameMaster)
-        disposeCurrentScene();
-        setCurrentScene(newScene);
     }
 
     public Scene getStartingScene() {
@@ -87,5 +88,11 @@ public class SceneManager {
         } else {
             return null; // No GameScene found
         }
+    }
+
+    @Override
+    public void onSceneChange(Scene newScene) {
+        // Swap the scene
+        swapScene(newScene);
     }
 }

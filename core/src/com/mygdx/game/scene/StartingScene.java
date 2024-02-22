@@ -1,4 +1,5 @@
 package com.mygdx.game.scene;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -55,7 +56,7 @@ public class StartingScene extends Scene {
             public void clicked(InputEvent event, float x, float y) {
                 // Log statement to verify the click listener
                 Gdx.app.log("StartingScene", "Play button clicked");
-                // Swap to the game scene when the play button is clicked
+                // Notify the SceneManager to swap the scene when the play button is clicked
                 sceneManager.swapScene(new GameScene(sceneManager, getBatch()));
             }
         });
