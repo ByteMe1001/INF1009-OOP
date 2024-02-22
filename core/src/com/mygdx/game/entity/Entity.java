@@ -18,7 +18,7 @@ public abstract class Entity
     private Sprite sprite;
     private SpriteBatch batch;
     private boolean isAlive;
-    private CollisionManager rect;
+    //private CollisionManager rect;
 
     private boolean isCollidable;
 
