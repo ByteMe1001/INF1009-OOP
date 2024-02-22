@@ -110,7 +110,7 @@ public class Droplet extends Entity {
     @Override
     public void movement() {
         if (getControl() == 'A') {
-            //aiControlManager.movement(this, this.getX(), this.getY(), this.getWidth(), this.getHeight());
+            aiControlManager.movement(this, this.getX(), this.getY(), this.getWidth(), this.getHeight());
         }
     }
 }

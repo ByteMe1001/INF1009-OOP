@@ -37,10 +37,11 @@ public class EntityManager {
     }
 
     //Constructor with collisionManager as an instance variable
-    public EntityManager(CollisionManager collisionManager, SpriteBatch batch) {
-        entityList = new ArrayList<Entity>();
-        aiEntityList = new ArrayList<Entity>();
-        this.collisionManager = new CollisionManager(entityList, aiEntityList);
+    public EntityManager(SpriteBatch batch) {
+        this.entityList = new ArrayList<Entity>();
+        this.playerEntityList = new ArrayList<Entity>();
+        this.aiEntityList = new ArrayList<Entity>();
+        this.collisionManager = new CollisionManager(entityList, playerEntityList, aiEntityList);
         this.playerControlManager = new PlayerControlManager();
         this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);
         this.batch = batch;
@@ -55,7 +56,7 @@ public class EntityManager {
 
     public void createBucket() {
         Bucket bucket = new Bucket(playerControlManager,1, 100, 50f, 100f, 1.0f, 64f, 64f, 300, 3, batch);
-        addEntity(bucket);
+        addPlayerEntity(bucket);
     }
 
     public void createDroplet() {
@@ -82,33 +83,26 @@ public class EntityManager {
     }
 
     public void deleteEntity(Entity e) {
-        for (Entity entity: entityList) {
-            if (entity == e) {
-                entityList.remove(entity);
-                return;
-            }
+        if (!entityList.remove(e) && !playerEntityList.remove(e) && !aiEntityList.remove(e)) {
+            throw new IllegalArgumentException("Entity not found in any entity list");
         }
-        for (Entity entity: aiEntityList) {
-            if (entity == e) {
-                aiEntityList.remove(entity);
-                return;
-            }
-        }
-        throw new IllegalArgumentException("Entity not found in the entity list");
     }
 
     //Add
     public void addEntity(Entity entity) {
         entityList.add(entity);
     }
+    public void addAiEntity(Entity entity) {
+        aiEntityList.add(entity);
+    }
+    public void addPlayerEntity(Entity entity) {
+        playerEntityList.add(entity);
+    }
     //Remove
     public void removeEntity(Entity entity) {
         entityList.remove(entity);
     }
 
-    public void addAiEntity(Entity entity) {
-        aiEntityList.add(entity);
-    }
     //Iterates through entityList and calls their update method
     public void updateEntityList() {
         Iterator<Entity> iterator = entityList.iterator();
@@ -123,19 +117,13 @@ public class EntityManager {
         }
         //collisionManager.handleCollisions(entityList);
     }
-    //Rendering method
-//    public void renderentityList(SpriteBatch spriteBatch, ShapeRenderer shapeRenderer) {
-//        for (Entity entity : entityList) {
-//            entity.render(spriteBatch, shapeRenderer);
-//        }
-//    }
-//            entity.render(spriteBatch, shapeRenderer);
-//        }
-//    }
 
     // For loop to draw all entities
     public void draw() {
         for (Entity entity : entityList) {
+            entity.draw();
+        }
+        for (Entity entity : playerEntityList) {
             entity.draw();
         }
         for (Entity entity : aiEntityList) {
@@ -145,17 +133,18 @@ public class EntityManager {
 
     public void update() {
         for (Entity entity : entityList) {
-            if (entity instanceof Bucket){
                 entity.update();
-            }
+        }
+
+        for (Entity entity : playerEntityList) {
+            entity.update();
         }
 
         for (Entity entity : aiEntityList) {
             entity.update();
         }
-        collisionManager.updateCollisionList(entityList, aiEntityList);
+        collisionManager.updateCollisionList(entityList, playerEntityList, aiEntityList);
         collisionManager.detectCollision(this);
-
     }
 
     public void dispose() {
@@ -167,120 +156,52 @@ public class EntityManager {
     }
 
     public float getSpeed(Entity e) {
-        for (Entity entity: aiEntityList) {
-            if (entity == e) {
-                return entity.getSpeed();
-            }
-        }
-        throw new IllegalArgumentException("Entity not found in the entity list");
+        return findEntity(e).getSpeed();
     }
 
     public float getX(Entity e) {
-        for (Entity entity: aiEntityList) {
-            if (entity == e) {
-                return entity.getX();
-            }
-        }
-        throw new IllegalArgumentException("Entity not found in the entity list");
+        return findEntity(e).getX();
     }
 
     public float getY(Entity e) {
-        for (Entity entity: aiEntityList) {
-            if (entity == e) {
-                return entity.getY();
-            }
-        }
-        throw new IllegalArgumentException("Entity not found in the entity list");
+        return findEntity(e).getY();
     }
 
     public void setX(Entity e, float x) {
-        for (Entity entity: aiEntityList) {
-            if (entity.equals(e)) {
-                entity.setX(x);
-                return;
-            }
-        }
-        throw new IllegalArgumentException("Entity not found in the entity list");
+        findEntity(e).setX(x);
     }
 
     public void setY(Entity e, float y) {
-        for (Entity entity: aiEntityList) {
-            if (entity == e) {
-                entity.setY(y);
-                return;
-            }
-        }
-        throw new IllegalArgumentException("Entity not found in the entity list");
+        findEntity(e).setY(y);
     }
 
     public int getChangeRate(Entity e) {
-        for (Entity entity: aiEntityList) {
-            if (entity == e) {
-                return e.getChangeRate();
-            }
-        }
-        throw new IllegalArgumentException("Entity not found in the entity list");
+        return findEntity(e).getChangeRate();
     }
 
     public int getDefaultChangeRate(Entity e) {
-        for (Entity entity: aiEntityList) {
-            if (entity == e) {
-                return e.getDefaultChangeRate();
-            }
-        }
-        throw new IllegalArgumentException("Entity not found in the entity list");
+        return findEntity(e).getDefaultChangeRate();
     }
 
     public void setChangeRate(Entity e, int x) {
-        for (Entity entity: aiEntityList) {
-            if (entity == e) {
-                entity.setChangeRate(x);
-                return;
-            }
-        }
-        throw new IllegalArgumentException("Entity not found in the entity list");
+        findEntity(e).setChangeRate(x);
     }
-
 
     public void decrementChangeRate(Entity e) {
-        for (Entity entity: aiEntityList) {
-            if (entity == e) {
-                entity.setChangeRate(entity.getChangeRate()-1);
-                return;
-            }
-        }
-        throw new IllegalArgumentException("Entity not found in the entity list");
+        Entity entity = findEntity(e);
+        entity.setChangeRate(entity.getChangeRate() - 1);
     }
 
-
     public int getDirection(Entity e) {
-        for (Entity entity: aiEntityList) {
-            if (entity == e) {
-                return entity.getDirection();
-            }
-        }
-        throw new IllegalArgumentException("Entity not found in the entity list");
+        return findEntity(e).getDirection();
     }
 
     public String getCurrentDirection(Entity e) {
-        for (Entity entity: aiEntityList) {
-            if (entity == e) {
-                return entity.getCurrentDirection();
-            }
-        }
-        throw new IllegalArgumentException("Entity not found in the entity list");
+        return findEntity(e).getCurrentDirection();
     }
 
-
-
     public void setCurrentDirection(Entity e, String s) {
-        for (Entity entity: aiEntityList) {
-            if (entity == e) {
-                entity.setCurrentDirection(s);
-                return;
-            }
-        }
-        throw new IllegalArgumentException("Entity not found in the entity list");
+            findEntity(e).setCurrentDirection(s);
     }
 
     public float getSpriteWidth(Entity e) {
@@ -293,9 +214,23 @@ public class EntityManager {
     }
 
     public float getSpriteHeight(Entity e) {
-        for (Entity entity: aiEntityList) {
+        return findEntity(e).getSpriteWidth();
+    }
+
+    private Entity findEntity(Entity e) {
+        for (Entity entity : entityList) {
             if (entity == e) {
-                return entity.getSpriteWidth();
+                return entity;
+            }
+        }
+        for (Entity entity : playerEntityList) {
+            if (entity == e) {
+                return entity;
+            }
+        }
+        for (Entity entity : aiEntityList) {
+            if (entity == e) {
+                return entity;
             }
         }
         throw new IllegalArgumentException("Entity not found in the entity list");

@@ -16,7 +16,7 @@ public class GameScene extends Scene{
 
     public GameScene(SceneManager sceneManager, SpriteBatch batch) {
         super(sceneManager, batch);
-        this.entityManager = new EntityManager(new CollisionManager(), batch);        // Can put here or show()
+        this.entityManager = new EntityManager(batch);        // Can put here or show()
         super.setBackground(new Texture("Space.jpg"));
         //Gdx.app.log("MyGDXGame", "Gamescene constructor!");
 
