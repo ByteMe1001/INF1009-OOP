@@ -50,7 +50,7 @@ public class EntityManager {
 //    }
 
     public void createBucket() {
-        Bucket bucket = new Bucket(1, 100, 300.0f, 100.0f, 1.0f, 50, 50, 50, 10, batch);
+        Bucket bucket = new Bucket(1, 100, 300.0f, 149.0f, 1.0f, 50, 50, 50, 10, batch);
         addEntity(bucket);
     }
 
@@ -131,6 +131,7 @@ public class EntityManager {
                 aiControlManager.movement(aiEntityList);
             }
         }
+        collisionManager.updateCollisionList(entityList, aiEntityList);
         collisionManager.detectCollision(entityManager);
 
     }
