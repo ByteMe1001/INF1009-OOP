@@ -97,10 +97,6 @@ public class GameScene extends Scene{
     public void resize(int width, int height) {
     }
 
-//    public SpriteBatch getBatch() {
-//        return this.batch;
-//
-//    }
 
 
 }

@@ -36,8 +36,8 @@ public class Bucket extends Entity {
     }
 
     // Parameterized constructor
-    public Bucket(int id, int health, float x, float y, float scale, int width ,int height, int speed, SpriteBatch batch) {
-        super(id, health, x, y, scale, new Sprite(new Texture("bucket.png")), width, height, speed, batch);
+    public Bucket(int id, int health, float x, float y, float scale, int width ,int height, int speed, int direction, SpriteBatch batch) {
+        super(id, health, x, y, scale, new Sprite(new Texture("bucket.png")), width, height, speed, direction, batch);
         this.playerControlManager = new PlayerControlManager();
         this.setAlive(true);
         this.setCollidable(true);

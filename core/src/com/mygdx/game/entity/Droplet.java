@@ -4,11 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.AiControlManager;
 
 public class Droplet extends Entity {
 
     // Additional properties for Droplet class
     private static final float DROPLET_SPEED = 100.0f;
+    private int changeRate;
+    //private AiControlManager aiControlManager;
 
     private SpriteBatch batch;
 
@@ -19,33 +22,32 @@ public class Droplet extends Entity {
     // Constructor with id parameter
     public Droplet(int id, SpriteBatch batch) {
         super(id, batch);
+        //this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), getSpeed());
+        this.setChangeRate(30);
         this.setSprite(new Sprite(new Texture("droplet.png")));
         this.setAlive(true);
         this.setCollidable(true);
+        this.setControl('A');
     }
 
     // Parameterized constructor
-    public Droplet(int id, int health, float x, float y, float scale, int width, int height, int speed, SpriteBatch batch) {
-        super(id, health, x, y, scale, new Sprite(new Texture("droplet.png")), width, height, speed, batch);
+    public Droplet(int id, int health, float x, float y, float scale, int width, int height, int speed, int direction, SpriteBatch batch) {
+        super(id, health, x, y, scale, new Sprite(new Texture("droplet.png")), width, height, speed, direction, batch);
+        //this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), getSpeed());
         this.setAlive(true);
+        this.setChangeRate(30);
         //Droplet droplet = new Droplet(id, health, boundingBox.x, boundingBox.y, scale, sprite, width, height, speed);
         this.setCollidable(true);
+        this.setControl('A');
     }
 
     @Override
     public void update() {
-        // Handle update logic for the droplet (AI-controlled movement)
-        this.setY(this.getY() - Gdx.graphics.getDeltaTime() * DROPLET_SPEED);
-        this.boundingBox.setPosition(getX(), getY());
-
-        // Reset droplet if it goes below the screen
-        if (this.getY() + this.getHeight() < 0) {
-            this.setY(Gdx.graphics.getHeight());
-            this.boundingBox.setPosition(getX(), getY());
-        }
+        movement();
     }
 
 
+    // not needed
     @Override
     public void render() {
         // Rendering logic for the droplet
@@ -62,6 +64,16 @@ public class Droplet extends Entity {
         System.out.println("Collision Detected");
 
         //return false;
+    }
+
+    @Override
+    public int getChangeRate() {
+        return changeRate;
+    }
+
+    @Override
+    public void setChangeRate(int changeRate) {
+        this.changeRate = changeRate;
     }
 
     @Override
@@ -82,8 +94,18 @@ public class Droplet extends Entity {
 
     @Override
     public void movement() {
-
+        if (getControl() == 'A') {
+            float[] vector = playerControlManager.movement(this.getX(), this.getY(), this.getSpeed());
+            if (vector[0] == 0f) {
+                setX(vector[1]);        // Move horizontally
+            }
+            if (vector[0] == 1f) {
+                setY(vector[1]);        // Move vectically
+            }
+        }
     }
+
+
 }
 
 

@@ -14,6 +14,7 @@ public abstract class Entity
     private int width, height;
     private float scale;
     private int speed;
+    private int direction;          // 1 for up down, 2 for left right, 3 for all
     private Sprite sprite;
     private SpriteBatch batch;
     private boolean isAlive;
@@ -49,7 +50,7 @@ public abstract class Entity
 
     }
    // Parameterized constructor
-    public Entity(int id, int health, float x, float y, float scale, Sprite sprite, int width, int height, int speed, SpriteBatch batch) {
+    public Entity(int id, int health, float x, float y, float scale, Sprite sprite, int width, int height, int speed, int direction, SpriteBatch batch) {
         this.id = id;
         this.health = health;
         this.x = x;
@@ -59,6 +60,7 @@ public abstract class Entity
         this.width = width;
         this.height = height;
         this.speed = speed;
+        this.direction = direction;
         this.batch = batch;
         //this.collidable = collidable;
         //this.rect = new CollisionManager(x, y, width, height);
@@ -144,6 +146,23 @@ public abstract class Entity
     public void setAlive(boolean alive) {
         isAlive = alive;
     }
+
+    // for droplet use don't touch
+    public int getChangeRate() {
+       return 1;
+    }
+
+    public void setChangeRate(int changeRate) {
+
+    }
+
+    public int getDirection() {
+          return this.direction;
+    }
+
+    public void setDirection(int direction) {
+          this.direction = direction;
+    }
     //Methods
     public abstract void update();
 
@@ -168,6 +187,7 @@ public abstract class Entity
     public void setSpeed(int speed) {
           this.speed = speed;
       }
+
      // public abstract void collideWith(Entity other);
 
     public abstract void takeDamage(int damage);              //Not sure if we need these 2 damage/heal
