@@ -10,11 +10,9 @@ import com.mygdx.game.entity.Entity;
 import com.mygdx.game.entity.EntityManager;
 
 // Name your class file properly
+// an example of a scene that can be used in the game (test out main codes)
 public class GameScene extends Scene{
-    //private final int NUM_DROPS = 10;
-    //private Entity[] drops = new Entity[NUM_DROPS];
-    //Random random = new Random();
-    private EntityManager entityManager;;
+    private EntityManager entityManager;
 
     public GameScene(SceneManager sceneManager, SpriteBatch batch) {
         super(sceneManager, batch);
@@ -28,12 +26,12 @@ public class GameScene extends Scene{
     }
 
     // Not needed
-    // @Override
-    // public void create() {
-    //     entityManager = new EntityManager();
-    //     // Create entities for this scene
-    //     //addEntity(); // add in droplet and bucket accordingly idk
-    // }
+    @Override
+    public void create() {
+        entityManager = new EntityManager();
+        // Create entities for this scene
+        //addEntity(); // add in droplet and bucket accordingly idk
+    }
 
 
     @Override
