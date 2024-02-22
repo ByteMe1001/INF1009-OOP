@@ -1,22 +1,21 @@
 package com.mygdx.game;
 
 import com.mygdx.game.entity.Entity;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.ListIterator;
-
-import com.mygdx.game.entity.Entity;
 import com.mygdx.game.entity.EntityManager;
 import com.mygdx.game.util.iCollision;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class CollisionManager implements iCollision {
     private List<Entity> collisionList;
+    private EntityManager entityManager;
 
 
     public CollisionManager(List<Entity> entityList, List<Entity> aiEntityList) {
         collisionList = new ArrayList<Entity>();
+
 
         for (Entity entity : entityList) {
             if (entity.isCollidable()) collisionList.add(entity); //add collidable objects into a entityList
