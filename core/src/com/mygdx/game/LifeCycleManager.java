@@ -41,24 +41,28 @@ public class LifeCycleManager {
 //        }
         //myGdxGame.setScreen(gameScreen);
 
-
     }
 
     public void run() {
-        sceneManager.createGameScene();
-        setGameScreen(spaceShooter);
+        //sceneManager.createStartingScene();
+       // setStartingScreen(spaceShooter);
+//        sceneManager.createGameScene();
+//        setGameScreen(spaceShooter);
 
-        // can also use array
 //        sceneManager.startGame();
 //        sceneManager.gameScreen();
 //        sceneManager.endGame();
 //        player.setScore(1);
-//        playerStop(); // to stop the game
+//        playerStop();
+    }
+    public void setStartingScreen(SpaceShooter spaceShooter) {
+        spaceShooter.setScreen(getStartingScene());
     }
 
     public void setGameScreen(SpaceShooter spaceShooter) {
         spaceShooter.setScreen(getGameScene());
     }
+
 
     public void playerStop() {
         player.setPlaying(false);
@@ -71,7 +75,11 @@ public class LifeCycleManager {
     public void dispose() {
         //sceneManager.dispose();
     }
+    public Scene getStartingScene() {
+        return sceneManager.getStartingScene();
+    }
     public Scene getGameScene() {
         return sceneManager.getGameScene();
     }
+
 }

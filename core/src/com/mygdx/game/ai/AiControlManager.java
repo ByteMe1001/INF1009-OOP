@@ -32,40 +32,6 @@ public class AiControlManager implements iAiMovement {
         //this.speed = speed;
     }
 
-//    public void addAiEntities(ArrayList<Entity> entityList) {
-//        for (Entity entity : entityList) {
-//
-//        }
-//
-//    }
-
-    public void addAiEntity(Entity entity) {
-        // Initialize each entity's movement parameters as needed
-        this.aiEntityList.add(entity);
-    }
-
-//    public void movement(ArrayList<Entity> aiEntityList) {
-//
-//        for (Entity entity : aiEntityList) {
-//            //System.out.println(entityManager.getChangeRate(entity));
-//            if (entityManager.getChangeRate(entity) >= 0 ){
-//                switch(entityManager.getDirection(entity)) {
-//                    case 1:
-//                        setUpDown(entityManager, entity);
-//                        break;
-//                    case 2:
-//                        setLeftRight(entityManager, entity);
-//                        break;
-//                    case 3:
-//                        System.out.println("case 3");
-//                        setAll(entityManager, entity);
-//                        break;
-//                }
-//            }
-//            else entityManager.setChangeRate(entity, entityManager.getDefaultChangeRate(entity));
-//        }
-//    }
-
     public void movement(Entity entity, float x, float y, float width, float height, int defaultChangeRate) {
             //System.out.println(entityManager.getChangeRate(entity));
             if (entityManager.getChangeRate(entity) >= 0 ) {
@@ -84,46 +50,3 @@ public class AiControlManager implements iAiMovement {
             else entityManager.setChangeRate(entity, defaultChangeRate);
         }
     }
-
-
-
-
-
-    
-    
-
-//    public void updateaiEntityList() {
-//        for (Entity entity : aiEntityList) {
-//            int movementRulesetId = entity.getMovementRulesetId(); // NEED ENTITY TO HAVE getMovementRulesetId()
-//            switch (movementRulesetId) {
-//                case MOVE_LEFT_RIGHT:
-//                    calculateLeftRightMovement(entity);
-//                    break;
-//                case MOVE_UP_DOWN:
-//                    calculateUpDownMovement(entity);
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
-//    }
-
-
-    // The methods are all wrong refer to entity class
-//    private void calculateLeftRightMovement(Entity entity) {
-//        if (entity.getX() <= 0 || entity.getX() + entity.getWidth() >= screenWidth) {
-//            entity.setSpeedX(-entity.getSpeedX());
-//        }
-//        // This passes back to entity to move itself
-//        entity.setMovementDirection(Entity.MovementDirection.HORIZONTAL); //Need to make sure entity has a MovementDirection
-//    }
-//
-//    private void calculateUpDownMovement(Entity entity) {
-//        if (entity.getY() <= 0 || entity.getY() + entity.getHeight() >= screenHeight) {
-//            entity.setSpeedY(-entity.getSpeedY()); // Reverse direction
-//        }
-//        // Passes the calculated speed to the entity for it to move itself
-//        entity.setMovementDirection(Entity.MovementDirection.VERTICAL);
-//    }
-
-

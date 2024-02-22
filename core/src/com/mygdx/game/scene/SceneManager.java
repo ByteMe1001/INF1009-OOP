@@ -27,6 +27,10 @@ public class SceneManager {
         scenes = new ArrayList<Scene>();
     }
 
+    public void createStartingScene() {
+        scenes.add(new StartingScene(this, batch));
+    }
+
     public void createGameScene() {
         scenes.add(new GameScene(this, batch));
         //Gdx.app.log("MyGDXGame", "Gamescene created!");
@@ -36,12 +40,20 @@ public class SceneManager {
         scenes.add(scene);
     }
 
+    public void setScene(Scene scene) {
+        spaceShooter.setScreen(scene);
+    }
+
+    public void run() {
+
+    }
+
     public void setCurrentScene(Scene scene) {
         currentScene = scene;
         //currentScene.create();
     }
 
-  public Scene getCurrentScene() {
+    public Scene getCurrentScene() {
         return currentScene;
     }
 
@@ -61,9 +73,17 @@ public class SceneManager {
         disposeCurrentScene();
         setCurrentScene(newScene);
     }
-    public Scene getGameScene() {
+
+    public Scene getStartingScene() {
         if (!scenes.isEmpty()) {
             return scenes.get(0);
+        } else {
+            return null; // No GameScene found
+        }
+    }
+    public Scene getGameScene() {
+        if (!scenes.isEmpty()) {
+            return scenes.get(1);
         } else {
             return null; // No GameScene found
         }

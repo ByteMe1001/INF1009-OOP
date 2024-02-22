@@ -53,6 +53,7 @@ public abstract class Scene implements Screen {
     @Override
     public void dispose(){
         entityManager.dispose();
+        getBackground().dispose();
     }
 
     public void show() {

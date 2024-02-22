@@ -11,6 +11,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class StartingScene extends Scene {
+
+    private final static String TEXTURE_PATH = "playbutton.png";
     private Stage stage;
     private SceneManager sceneManager;
 
@@ -20,13 +22,13 @@ public class StartingScene extends Scene {
         create();
     }
 
-    @Override
+
     public void create() {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
         // Load play button texture
-        Texture playButtonTexture = new Texture("play_button.png");
+        Texture playButtonTexture = new Texture(TEXTURE_PATH);
         TextureRegion playButtonRegion = new TextureRegion(playButtonTexture);
         TextureRegionDrawable playButtonDrawable = new TextureRegionDrawable(playButtonRegion);
 
