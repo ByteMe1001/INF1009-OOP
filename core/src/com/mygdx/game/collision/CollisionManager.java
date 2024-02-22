@@ -13,8 +13,6 @@ import com.mygdx.game.util.iCollision;
 
 public class CollisionManager implements iCollision {
 
-    //private List<Entity> collidableList;
-
     private ArrayList<Entity> collisionList;
 
     private EntityManager entityManager;
@@ -45,9 +43,6 @@ public class CollisionManager implements iCollision {
             for (int j = i + 1; j < collisionList.size(); j++){
                 if(collidesWith(entityManager, collisionList.get(i), collisionList.get(j))){ //If entities overlaps with one another, print Collision Detected in console
                     System.out.println("Collision Detected");
-                    //System.out.println(collidableList.get(i).getBoundingBox());
-                    //System.out.println(collidableList.get(j).getBoundingBox());
-                    //System.out.println("Bounding Box Values: ", collidableList.get(i).getBoundingBox());
                     handleCollision(entityManager, collisionList, collisionList.get(i), collisionList.get(j));
                 }
             }
@@ -67,7 +62,6 @@ public class CollisionManager implements iCollision {
             if (entityManager.getIsCollidable(entity))
                 collisionList.add(entity); //add collidable objects into a entityList
         }
-        HAHAHA
         for (Entity entity : aiEntityList) {
             if (entityManager.getIsCollidable(entity))
                 collisionList.add(entity); //add collidable objects into a entityList
@@ -75,28 +69,6 @@ public class CollisionManager implements iCollision {
     }
 }
 
-/*
-    public CollisionManager(float x, float y, int width, int height) {
-        super();
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-
-    }
-
-    public void detectCollision(List<Entity> entityList){
-        for(Entity Droplet: entityList){
-            for (Entity Bucket: entityList){
-                if(Droplet != Bucket && Bucket.getBoundingBox().overlaps(Droplet.getBoundingBox())){
-                    Droplet.collideWith(Bucket);
-                    Bucket.collideWith(Droplet);
-                }
-            }
-        }
-    }
-
-}
 
 
 
