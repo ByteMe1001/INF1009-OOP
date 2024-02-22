@@ -34,8 +34,8 @@ public class GameScreen implements Screen {
         background = new Texture("Space.jpg");
         backgroundOffset = 0;
 
-        viewport.update(WORLD_WIDTH, WORLD_HEIGHT, true);
-        batch.setProjectionMatrix(camera.combined);
+        resize(WORLD_WIDTH, WORLD_HEIGHT);
+        viewport.apply();
 
 
         batch = new SpriteBatch();

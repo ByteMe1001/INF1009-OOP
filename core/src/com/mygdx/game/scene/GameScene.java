@@ -73,9 +73,7 @@ public class GameScene extends Scene{
 
     }
 
-    @Override
-    public void resize(int width, int height) {
-    }
+
 
 
 

@@ -52,6 +52,6 @@ public class MyGdxGame extends Game {
 
 	@Override
 	public void resize(int width, int height) {
-		//gameScreen.resize(width, height);
+		//gameScene.resize(width, height);
 	}
 }
