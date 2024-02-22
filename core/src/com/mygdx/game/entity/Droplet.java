@@ -53,11 +53,12 @@ public class Droplet extends Entity {
         // Rendering logic for the droplet
     }
 
+    /*
     @Override
     public boolean collidesWith(Entity other) {
         return getBoundingBox().overlaps(other.getBoundingBox());//if entity's bounding box overlaps another entities bounding box
     }
-
+*/
     /*
     //@Override
     public void collideWith(Entity other) {
@@ -97,6 +98,7 @@ public class Droplet extends Entity {
 
     @Override
     public void movement() {
+        /*
         if (getControl() == 'A') {
             float[] vector = playerControlManager.movement(this.getX(), this.getY(), this.getSpeed());
             if (vector[0] == 0f) {
@@ -106,6 +108,8 @@ public class Droplet extends Entity {
                 setY(vector[1]);        // Move vectically
             }
         }
+
+         */
     }
 
 

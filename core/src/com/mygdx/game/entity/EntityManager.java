@@ -24,6 +24,8 @@ public class EntityManager {
     private SpriteBatch batch;
     private AiControlManager aiControlManager;
 
+    private EntityManager entityManager;
+
     // REMEMBER to dispose texture
 
     //Default constructor
@@ -35,7 +37,7 @@ public class EntityManager {
     public EntityManager(CollisionManager collisionManager, SpriteBatch batch) {
         entityList = new ArrayList<Entity>();
         aiEntityList = new ArrayList<Entity>();
-        this.collisionManager = collisionManager;
+        this.collisionManager = new CollisionManager(entityList);
         this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);
         this.batch = batch;
     }
@@ -129,6 +131,8 @@ public class EntityManager {
                 aiControlManager.movement(aiEntityList);
             }
         }
+        collisionManager.detectCollision(entityManager);
+
     }
 
     public void dispose() {

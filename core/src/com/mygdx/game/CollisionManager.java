@@ -8,9 +8,10 @@ import java.util.ListIterator;
 
 import com.mygdx.game.entity.Entity;
 import com.mygdx.game.entity.EntityManager;
+import com.mygdx.game.util.iCollision;
 
 
-public class CollisionManager {
+public class CollisionManager implements iCollision {
     private List<Entity> collidableList;
 
 
@@ -30,7 +31,7 @@ public class CollisionManager {
     public void detectCollision(EntityManager entityManager){
         for (int i = 0; i < collidableList.size() - 1; i++){
             for (int j = i + 1; j < collidableList.size(); j++){
-                if(collidableList.get(i).collidesWith(collidableList.get(j))){ //If entities overlaps with one another, print Collision Detected in console
+                if(collidesWith(collidableList.get(i), collidableList.get(j))){ //If entities overlaps with one another, print Collision Detected in console
                     System.out.println("Collision Detected");
 
 
@@ -38,6 +39,10 @@ public class CollisionManager {
             }
         }
     }
+
+
+
+
 }
 
 /*

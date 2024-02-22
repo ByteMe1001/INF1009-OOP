@@ -168,7 +168,8 @@ public abstract class Entity
 
     public abstract void render();
 
-    public abstract boolean collidesWith(Entity other);       //Can fine-tune what each entity class is able to collide with using this abstract method
+
+    //public abstract boolean collidesWith(Entity other);       //Can fine-tune what each entity class is able to collide with using this abstract method
 
     public boolean isCollidable(){
         return isCollidable;
@@ -198,10 +199,11 @@ public abstract class Entity
 
     public abstract void movement();
 
+    /*
     public CollisionManager getRect(){ //get entity position?
       return rect;
     }         //might not be using this
-
+*/
     public void push(float deltaX, float deltaY) {  //Simple push method maybe can implement for collisions,pretty much just knockback
       this.x += deltaX;
       this.y += deltaY;

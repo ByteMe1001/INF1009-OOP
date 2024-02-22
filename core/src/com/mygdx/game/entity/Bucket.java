@@ -55,10 +55,13 @@ public class Bucket extends Entity {
 
     }
 
+    /*
     @Override
     public boolean collidesWith(Entity other) {
         return getBoundingBox().overlaps(other.getBoundingBox());//if entity's bounding box overlaps another entities bounding box return true
     }
+    */
+
 
 /*
     //@Override
