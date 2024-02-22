@@ -205,12 +205,7 @@ public class EntityManager {
     }
 
     public float getSpriteWidth(Entity e) {
-        for (Entity entity: aiEntityList) {
-            if (entity == e) {
-                return entity.getSpriteWidth();
-            }
-        }
-        throw new IllegalArgumentException("Entity not found in the entity list");
+        return findEntity(e).getSpriteHeight();
     }
 
     public float getSpriteHeight(Entity e) {

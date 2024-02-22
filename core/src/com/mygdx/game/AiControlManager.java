@@ -66,7 +66,7 @@ public class AiControlManager implements iAiMovement {
 //        }
 //    }
 
-    public void movement(Entity entity, float x, float y, float width, float height) {
+    public void movement(Entity entity, float x, float y, float width, float height, int defaultChangeRate) {
             //System.out.println(entityManager.getChangeRate(entity));
             if (entityManager.getChangeRate(entity) >= 0 ) {
                 switch (entityManager.getDirection(entity)) {
@@ -77,12 +77,11 @@ public class AiControlManager implements iAiMovement {
                         setLeftRight(entityManager, entity, x, width);
                         break;
                     case 3:
-                        System.out.println("case 3");
                         setAll(entityManager, entity, x, y, width, height);
                         break;
                 }
             }
-            else entityManager.setChangeRate(entity, entityManager.getDefaultChangeRate(entity));
+            else entityManager.setChangeRate(entity, defaultChangeRate);
         }
     }
 

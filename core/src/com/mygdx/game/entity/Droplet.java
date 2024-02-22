@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.AiControlManager;
 
+import java.util.Random;
+
 public class Droplet extends Entity {
 
     // Additional properties for Droplet class
@@ -110,7 +112,9 @@ public class Droplet extends Entity {
     @Override
     public void movement() {
         if (getControl() == 'A') {
-            aiControlManager.movement(this, this.getX(), this.getY(), this.getWidth(), this.getHeight());
+            Random random = new Random();
+            int randomNumber = random.nextInt(31);
+            aiControlManager.movement(this, this.getX(), this.getY(), this.getWidth(), this.getHeight(), randomNumber);
         }
     }
 }

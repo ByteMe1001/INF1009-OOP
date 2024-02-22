@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.CollisionManager;
+import com.mygdx.game.util.SoundManager;
 import com.mygdx.game.entity.Entity;
 import com.mygdx.game.entity.EntityManager;
 
@@ -13,22 +14,27 @@ import com.mygdx.game.entity.EntityManager;
 // an example of a scene that can be used in the game (test out main codes)
 public class GameScene extends Scene{
     private EntityManager entityManager;
+    private SoundManager soundManager;
 
     public GameScene(SceneManager sceneManager, SpriteBatch batch) {
         super(sceneManager, batch);
         this.entityManager = new EntityManager(batch);        // Can put here or show()
-        super.setBackground(new Texture("Space.jpg"));
-        //Gdx.app.log("MyGDXGame", "Gamescene constructor!");
+        this.soundManager = new SoundManager();
+        soundManager.playMusic(1);
 
-        // Create entities
+        super.setBackground(new Texture("Space.jpg"));
         entityManager.createBucket();
         entityManager.createDroplet();
+        //Gdx.app.log("MyGDXGame", "Gamescene constructor!");
     }
 
     // Not needed
     @Override
     public void create() {
-        entityManager = new EntityManager();
+        // Can put here or show()
+        super.setBackground(new Texture("Space.jpg"));
+        entityManager.createBucket();
+        entityManager.createDroplet();
         // Create entities for this scene
         //addEntity(); // add in droplet and bucket accordingly idk
     }
@@ -36,20 +42,13 @@ public class GameScene extends Scene{
 
     @Override
     public void render(float deltaTime) {
-        // Clear the screen
-        //ScreenUtils.clear(0, 0, 0, 1);
         super.getBatch().begin();
-
         // Background code
         super.getBatch().draw(super.getBackground(), 0, 0, 640,640);
+        // Entity Manager codes
         entityManager.update();
         entityManager.draw();
-        //Gdx.app.log("MyGDXGame", "Gamescene render!");
-
-        // EntityManager
-
         super.getBatch().end();
-
     }
 
     @Override

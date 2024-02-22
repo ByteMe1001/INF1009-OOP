@@ -1,13 +1,12 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.scene.GameScreen;
 import com.mygdx.game.scene.Scene;
 import com.mygdx.game.scene.SceneManager;
+import sun.jvm.hotspot.gc.shared.Space;
 
 public class LifeCycleManager {
     private Player player;
-    private GameScreen gameScreen;
     private SceneManager sceneManager;
     private SpriteBatch batch;
 
@@ -28,7 +27,7 @@ public class LifeCycleManager {
     }
 
 
-    public LifeCycleManager(MyGdxGame myGdxGame, Player player, SpriteBatch batch) {
+    public LifeCycleManager(SpaceShooter spaceShooter, Player player, SpriteBatch batch) {
         this.player = player;
         this.batch = batch;
         sceneManager = new SceneManager(batch);
