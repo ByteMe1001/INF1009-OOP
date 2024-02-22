@@ -1,78 +1,82 @@
-//SoundManager class
-
 package com.mygdx.game.util;
-import javax.sound.*;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-
 import java.io.FileNotFoundException;
 import java.net.URL;
-
-
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class SoundManager {
-    Clip clip;
-    URL[] soundURL = new URL[2];
-
+    private List<Clip> clips;
+    private URL[] soundURL = new URL[2];
     private boolean isMusicPlaying = false;
 
-    // Other fields and methods...
-
     public SoundManager() {
-        //Here can store the different sound in the soundURL array
+        clips = new ArrayList<>();
         soundURL[0] = getClass().getResource("/Ground_Theme.wav");
         soundURL[1] = getClass().getResource("/SkyFire.wav");
     }
 
-    public void setFile(int i) {
+    // Load track into clip array list
+    private void setFile(int i) {
         try {
-            // Attempt to open the audio file
             AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
-            clip = AudioSystem.getClip();
+            Clip clip = AudioSystem.getClip();
             clip.open(ais);
+            clips.add(clip);
         } catch (FileNotFoundException e) {
-            // Handle file not found exception
             System.out.println("File not found: " + e.getMessage());
         } catch (Exception e) {
-            // Handle other exceptions
             System.out.println("Error: " + e.getMessage());
         }
     }
 
-    //The play function to play the sound
-    public void play() {
-        clip.setFramePosition(0);
-        clip.setMicrosecondPosition(0);
-        clip.start();
-        isMusicPlaying = true;
+    // PLay according to index
+    public void play(int i) {
+        if (i >= 0 && i < clips.size()) {
+            Clip clip = clips.get(i);
+            clip.setFramePosition(0);
+            clip.setMicrosecondPosition(0);
+            clip.start();
+            isMusicPlaying = true;
+        } else {
+            System.out.println("Invalid index: " + i);
+        }
     }
 
-    //The loop function to constantly play sound like for background music
+    // Loop music
     public void loop() {
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
+        clips.forEach(clip -> clip.loop(Clip.LOOP_CONTINUOUSLY));
     }
 
-    //The stop function to stop the sound
+    // Stop according to index
+    public void stop(int i) {
+        if (i >= 0 && i < clips.size()) {
+            Clip clip = clips.get(i);
+            clip.stop();
+            isMusicPlaying = false;
+        } else {
+            System.out.println("Invalid index: " + i);
+        }
+    }
 
-    public void stop() {
-        clip.stop();
+    // stop all music
+    public void stopAll() {
+        clips.forEach(Clip::stop);
         isMusicPlaying = false;
     }
+
     public void playSE(int i) {
         setFile(i);
-        play();
+        play(i);
     }
 
     public void playMusic(int i) {
         setFile(i);
-        play();
+        play(i);
         loop();
-    }
-
-    public void stopMusic(int i) {
-       stop();
     }
 
     public boolean isMusicPlaying() {
@@ -80,11 +84,7 @@ public class SoundManager {
     }
 
     public void dispose() {
-        stop();
-        clip.close();
+        stopAll();
+        clips.forEach(Clip::close);
     }
 }
-
-
-//This function is to put in either screen manager or enitity manager for either sound effect e.g. wheh  there is collision
-
