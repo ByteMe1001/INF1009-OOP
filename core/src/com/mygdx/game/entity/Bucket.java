@@ -60,17 +60,20 @@ public class Bucket extends Entity {
         return getBoundingBox().overlaps(other.getBoundingBox());//if entity's bounding box overlaps another entities bounding box return true
     }
 
-
+/*
     //@Override
     public void collideWith(Entity other) {
         System.out.println("Collision Detected");
         //return false;
     }
 
+
     public boolean collideWith(Rectangle other) {
         // Collision logic for the bucket with another entity
         return false;
     }
+
+     */
 
     @Override
     public void takeDamage(int damage) {
