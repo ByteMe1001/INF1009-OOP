@@ -2,6 +2,7 @@ package com.mygdx.game.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.SpaceShooter;
 import com.mygdx.game.scene.GameScene;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ public class SceneManager {
     private ArrayList<Scene> scenes;
     private Scene currentScene;
     private SpriteBatch batch;
+    private SpaceShooter spaceShooter;
     private int sceneNumber; // to determine current scene
 
     // SceneManager to swap scenes, each scene should do all the world logic
@@ -19,7 +21,8 @@ public class SceneManager {
         scenes = new ArrayList<>();
     }
 
-    public SceneManager (SpriteBatch batch) {
+    public SceneManager (SpaceShooter spaceShooter, SpriteBatch batch) {
+        this.spaceShooter = spaceShooter;
         this.batch = batch;
         scenes = new ArrayList<Scene>();
     }

@@ -9,6 +9,7 @@ public class LifeCycleManager {
     private Player player;
     private SceneManager sceneManager;
     private SpriteBatch batch;
+    private SpaceShooter spaceShooter;
 
     public LifeCycleManager() {
     
@@ -28,9 +29,10 @@ public class LifeCycleManager {
 
 
     public LifeCycleManager(SpaceShooter spaceShooter, Player player, SpriteBatch batch) {
+        this.spaceShooter = spaceShooter;
         this.player = player;
         this.batch = batch;
-        sceneManager = new SceneManager(batch);
+        sceneManager = new SceneManager(spaceShooter, batch);
 
 //        sceneManager.startGame();
 //        sceneManager.endGame();
@@ -44,6 +46,7 @@ public class LifeCycleManager {
 
     public void run() {
         sceneManager.createGameScene();
+        setGameScreen(spaceShooter);
 
         // can also use array
 //        sceneManager.startGame();
@@ -51,6 +54,10 @@ public class LifeCycleManager {
 //        sceneManager.endGame();
 //        player.setScore(1);
 //        playerStop(); // to stop the game
+    }
+
+    public void setGameScreen(SpaceShooter spaceShooter) {
+        spaceShooter.setScreen(getGameScene());
     }
 
     public void playerStop() {

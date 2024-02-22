@@ -20,7 +20,10 @@ public class GameScene extends Scene{
         super(sceneManager, batch);
         this.entityManager = new EntityManager(batch);        // Can put here or show()
         this.soundManager = new SoundManager();
-        soundManager.playMusic(1);
+        if (!soundManager.isMusicPlaying()) {
+            soundManager.playMusic(1);
+        }
+
 
         super.setBackground(new Texture("Space.jpg"));
         entityManager.createBucket();
@@ -33,8 +36,7 @@ public class GameScene extends Scene{
     public void create() {
         // Can put here or show()
         super.setBackground(new Texture("Space.jpg"));
-        entityManager.createBucket();
-        entityManager.createDroplet();
+
         // Create entities for this scene
         //addEntity(); // add in droplet and bucket accordingly idk
     }

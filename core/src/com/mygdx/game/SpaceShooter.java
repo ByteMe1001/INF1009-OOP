@@ -5,13 +5,14 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.util.SoundManager;
 
 public class SpaceShooter extends Game {
 
-	Player player;
-	LifeCycleManager lifeCycleManager;
-	SpriteBatch batch;
-
+	private Player player;
+	private LifeCycleManager lifeCycleManager;
+	private SpriteBatch batch;
+	private SoundManager soundManager;
 
 	@Override
 	public void create() {
@@ -19,10 +20,10 @@ public class SpaceShooter extends Game {
 		batch = new SpriteBatch();
 		lifeCycleManager = new LifeCycleManager(this, player, batch);
 		Gdx.app.log("MyGDXGame", player.getName()); //testing line
-		setScreen(lifeCycleManager.getGameScene());
-
-		//gameScreen = new GameScreen();
-		//setScreen(gameScreen);
+		//setScreen(lifeCycleManager.getGameScene());
+//		this.soundManager = new SoundManager();d
+//		soundManager.playMusic(1);
+		lifeCycleManager.run();
 	}
 
 	@Override
@@ -41,8 +42,7 @@ public class SpaceShooter extends Game {
 	@Override
 	public void render() {
 		super.render();
-		lifeCycleManager.run();
-		setScreen(lifeCycleManager.getGameScene());
+		//lifeCycleManager.run();
 //		do {
 //			lifeCycleManager.run();
 //		}

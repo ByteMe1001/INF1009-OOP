@@ -16,6 +16,9 @@ public class SoundManager {
     Clip clip;
     URL[] soundURL = new URL[2];
 
+    private boolean isMusicPlaying = false;
+
+    // Other fields and methods...
 
     public SoundManager() {
         //Here can store the different sound in the soundURL array
@@ -43,6 +46,7 @@ public class SoundManager {
         clip.setFramePosition(0);
         clip.setMicrosecondPosition(0);
         clip.start();
+        isMusicPlaying = true;
     }
 
     //The loop function to constantly play sound like for background music
@@ -54,6 +58,7 @@ public class SoundManager {
 
     public void stop() {
         clip.stop();
+        isMusicPlaying = false;
     }
     public void playSE(int i) {
         setFile(i);
@@ -68,6 +73,10 @@ public class SoundManager {
 
     public void stopMusic(int i) {
        stop();
+    }
+
+    public boolean isMusicPlaying() {
+        return isMusicPlaying;
     }
 }
 
