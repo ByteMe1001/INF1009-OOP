@@ -37,7 +37,7 @@ public class EntityManager {
     public EntityManager(CollisionManager collisionManager, SpriteBatch batch) {
         entityList = new ArrayList<Entity>();
         aiEntityList = new ArrayList<Entity>();
-        this.collisionManager = new CollisionManager(entityList);
+        this.collisionManager = new CollisionManager(entityList, aiEntityList);
         this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);
         this.batch = batch;
     }
