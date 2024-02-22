@@ -109,7 +109,7 @@ public class Bucket extends Entity {
                 setY(vector[1]);        // Move vectically
             }
         }
-        boundingBox.setPosition(getX(), getY());
+        //boundingBox.setPosition(getX(), getY());
     }
 }
 
