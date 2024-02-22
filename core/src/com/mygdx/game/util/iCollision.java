@@ -36,7 +36,7 @@ public interface iCollision {
         ;
         collisionList.remove(y); //update collidableList to remove entity
         System.out.println(y + " has been removed from the collision list");
-        entityManager.removeEntity(y);
+        //entityManager.removeEntity(y);
         System.out.println(y + " has been removed from the entity list");
         //entityManager.removeEntity(x); //update entityManager to remove entity from entity list
 //            System.out.println("AI Entity Removed");
