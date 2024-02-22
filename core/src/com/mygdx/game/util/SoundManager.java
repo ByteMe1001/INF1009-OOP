@@ -6,17 +6,23 @@ import javax.sound.sampled.Clip;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+
+
 
 public class SoundManager {
+    private HashMap<String, Integer> sceneSoundMap;
     private ArrayList<Clip> clips;
     private URL[] soundURL = new URL[2];
     private boolean isMusicPlaying = false;
 
     public SoundManager() {
         clips = new ArrayList<>();
+        sceneSoundMap = new HashMap<>();
         soundURL[0] = getClass().getResource("/Ground_Theme.wav");
         soundURL[1] = getClass().getResource("/SkyFire.wav");
+        sceneSoundMap.put("StartingScene", 0);
+        sceneSoundMap.put("GameScene", 1);
     }
 
     // Load track into clip array list
@@ -33,7 +39,7 @@ public class SoundManager {
         }
     }
 
-    // PLay according to index
+    // Play according to index
     public void play(int i) {
         if (i >= 0 && i < clips.size()) {
             Clip clip = clips.get(i);
@@ -62,18 +68,22 @@ public class SoundManager {
         }
     }
 
-    // stop all music
+    // Stop all music
     public void stopAll() {
         clips.forEach(Clip::stop);
         isMusicPlaying = false;
     }
 
-    public void playSE(int i) {
+    // Play sound effect
+    public void playSE(String sceneName) {
+        Integer i = sceneSoundMap.get(sceneName);
         setFile(i);
         play(i);
     }
 
-    public void playMusic(int i) {
+    // Play music
+    public void playMusic(String sceneName) {
+        Integer i = sceneSoundMap.get(sceneName);
         setFile(i);
         play(i);
         loop();
@@ -83,6 +93,7 @@ public class SoundManager {
         return isMusicPlaying;
     }
 
+    // Dispose resources
     public void dispose() {
         stopAll();
         clips.forEach(Clip::close);

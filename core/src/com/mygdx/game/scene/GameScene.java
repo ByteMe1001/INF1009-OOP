@@ -28,7 +28,7 @@ class GameScene extends Scene{
         //super.setBackground(new Texture("Space.jpg"));
         System.out.println("Create");
         if (!soundManager.isMusicPlaying()) {
-            soundManager.playMusic(1);
+            soundManager.playMusic("GameScene");
         }
         // Create entities for this scene
         //addEntity(); // add in droplet and bucket accordingly idk
