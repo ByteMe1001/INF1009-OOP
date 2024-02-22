@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.entity.Entity;
@@ -34,8 +35,8 @@ public abstract class Scene implements Screen {
     private int backgroundOffset;
 
     //World
-    private int WORLD_WIDTH = 72;
-    private int WORLD_HEIGHT = 128;
+    private int WORLD_WIDTH = 640;
+    private int WORLD_HEIGHT = 640;
 
     public Scene(SceneManager sceneManager, SpriteBatch batch) {
         this.sceneManager = sceneManager;
@@ -44,7 +45,7 @@ public abstract class Scene implements Screen {
         this.batch = batch;
 
         camera = new OrthographicCamera();
-        viewport = new StretchViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
+        viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
         //background = new Texture("Space.jpg");
         backgroundOffset = 0;
     }
@@ -52,7 +53,7 @@ public abstract class Scene implements Screen {
     // Not inside scene interface
     // to be implemented by subclasses
     public abstract void create();
-    public abstract void update();
+    //public abstract void update();
     //public abstract void render(SpriteBatch batch);
 
     public void TextureObject(String t, float x, float y, float speed, boolean isAIControlled) {
@@ -92,6 +93,8 @@ public abstract class Scene implements Screen {
 
     @Override
     public void resize(int width, int height) {
+        viewport.update(width, height, true);
+        batch.setProjectionMatrix(camera.combined);
     }
 
     @Override

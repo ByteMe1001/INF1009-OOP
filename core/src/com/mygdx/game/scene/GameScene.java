@@ -36,23 +36,6 @@ public class GameScene extends Scene{
         //addEntity(); // add in droplet and bucket accordingly idk
     }
 
-    @Override
-    public void update() {
-        // Update scene logic ?? im assuming the bucket movement?
-        // might be wrong yes you are
-        for (Entity entity : entityList) {
-            entity.update();
-        }
-
-        // Handle user input for the bucket (not sure if this is needed)
-        float bucketSpeed = 5f;
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            entityList.get(1).setX(entityList.get(1).getX() - bucketSpeed);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            entityList.get(1).setX(entityList.get(1).getX() + bucketSpeed);
-        }
-    }
 
     @Override
     public void render(float deltaTime) {
@@ -61,7 +44,7 @@ public class GameScene extends Scene{
         super.getBatch().begin();
 
         // Background code
-        super.getBatch().draw(super.getBackground(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        super.getBatch().draw(super.getBackground(), 0, 0, 640,640);
         entityManager.update();
         entityManager.draw();
         //Gdx.app.log("MyGDXGame", "Gamescene render!");

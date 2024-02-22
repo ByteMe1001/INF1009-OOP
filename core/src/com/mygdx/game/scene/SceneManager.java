@@ -42,9 +42,9 @@ public class SceneManager {
         return currentScene;
     }
 
-    public void updateCurrentScene() {
-        currentScene.update();
-    }
+//    public void updateCurrentScene() {
+//        currentScene.update();
+//    }
 
     public void renderCurrentScene(SpriteBatch batch) {
         //currentScene.render(batch);

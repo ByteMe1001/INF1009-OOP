@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -23,15 +24,19 @@ public class GameScreen implements Screen {
     private int backgroundOffset;
 
     //World
-    private final int WORLD_WIDTH = 72;
-    private final int WORLD_HEIGHT = 128;
+    private final int WORLD_WIDTH = 640;
+    private final int WORLD_HEIGHT = 640;
 
     public GameScreen() {
         camera = new OrthographicCamera();
-        viewport = new StretchViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
+        viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
 
         background = new Texture("Space.jpg");
         backgroundOffset = 0;
+
+        viewport.update(WORLD_WIDTH, WORLD_HEIGHT, true);
+        batch.setProjectionMatrix(camera.combined);
+
 
         batch = new SpriteBatch();
         Gdx.app.log("MyGDXGame", "Gamescene constructor!");
@@ -57,8 +62,8 @@ public class GameScreen implements Screen {
 //        batch.draw(background, 0, -backgroundOffset, WORLD_WIDTH, WORLD_HEIGHT);
 //        batch.draw(background, 0, -backgroundOffset+WORLD_HEIGHT, WORLD_WIDTH, WORLD_HEIGHT);
 
-        batch.draw(background, 0, backgroundOffset, WORLD_WIDTH, WORLD_HEIGHT);
-        batch.draw(background, 0, backgroundOffset, WORLD_WIDTH, WORLD_HEIGHT);
+        batch.draw(background, 0, 0, WORLD_WIDTH, WORLD_HEIGHT);
+        //batch.draw(background, 0, backgroundOffset, WORLD_WIDTH, WORLD_HEIGHT);
         Gdx.app.log("MyGDXGame", "Gamescene render!");
 
         batch.end();

@@ -222,6 +222,8 @@ public abstract class Entity
     // Draw function for manager to use
     public void draw() {
         batch.draw(sprite, this.x, this.y, sprite.getWidth(), sprite.getHeight());
+        //System.out.println(this.x);
+        //System.out.println(this.y);
     }
     public String testString() {
       return "Entity{" +

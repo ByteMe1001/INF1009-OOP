@@ -9,7 +9,7 @@ public class DesktopLauncher {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
 		config.setTitle("INF1009Project");
-		config.setWindowSizeLimits(720,1280, 800, 1400);
+		config.setWindowSizeLimits(640,640, 1000, 1000);
 		new Lwjgl3Application(new MyGdxGame(), config);
 	}
 }

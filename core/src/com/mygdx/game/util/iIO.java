@@ -15,15 +15,15 @@ public interface iIO {
             return "UP";
         }
 
-        if (Gdx.input.isKeyPressed(Keys.S)) {
+        else if (Gdx.input.isKeyPressed(Keys.S)) {
             return "DOWN";
         }
 
-        if (Gdx.input.isKeyPressed(Keys.A)) {
+        else if (Gdx.input.isKeyPressed(Keys.A)) {
             return "LEFT";
         }
 
-        if (Gdx.input.isKeyPressed(Keys.D)) {
+        else if (Gdx.input.isKeyPressed(Keys.D)) {
             return "RIGHT";
         }
 

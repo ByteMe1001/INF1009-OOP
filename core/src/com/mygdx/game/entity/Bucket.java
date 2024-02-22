@@ -98,14 +98,18 @@ public class Bucket extends Entity {
 
         if (getControl() == 'P') {
             float[] vector = playerControlManager.movement(this.getX(), this.getY(), this.getSpeed());
+            if (vector[0] == -1f ) {
+                return;
+            }
             if (vector[0] == 0f) {
-                setX(vector[1]);        // Move horizontally
+                setX(vector[1]);
+                System.out.println(vector[1]);// Move horizontally
             }
             if (vector[0] == 1f) {
                 setY(vector[1]);        // Move vectically
             }
         }
-        boundingBox.setPosition(getX(), getY());
+        //boundingBox.setPosition(getX(), getY());
     }
 }
 
