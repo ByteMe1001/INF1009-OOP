@@ -26,7 +26,7 @@ public class GameScene extends Scene{
 
         super.setBackground(new Texture("Space.jpg"));
         entityManager.createBucket();
-        entityManager.createDroplet();
+        entityManager.createDroplets(5);
         //Gdx.app.log("MyGDXGame", "Gamescene constructor!");
     }
 

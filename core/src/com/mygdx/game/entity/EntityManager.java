@@ -59,28 +59,22 @@ public class EntityManager {
 
     public void createBucket() {
         Bucket bucket = new Bucket(playerControlManager,1, 100, 50f, 100f, 1.0f, 64f, 64f, 300, 3, batch);
-        addPlayerEntity(bucket);
+        addEntity(bucket);
     }
 
     public void createDroplet() {
         Droplet droplet = new Droplet(aiControlManager,1, 100, 300.0f, 100.0f, 1.0f, 64f, 64f, 300, 3, batch);
-        addAiEntity(droplet);
+        addEntity(droplet);
     }
 
-    public void createDroplets (int player, int ai) {
-        for (int i = 0; i < player; i++){
-            Bucket bucket = new Bucket(playerControlManager, 1, 100, 300.0f, 100.0f, 1.0f, 50f, 50f, 10, 10, batch); //not sure
-        }
-
-        for (int i = 0; i < player; i++){
-            Droplet droplet = new Droplet(aiControlManager,1, 100, 300.0f, 100.0f, 1.0f, 64f, 64f, 300, 3, batch); //not sure
+    public void createDroplets(int x) {
+        for (int i = 0; i < x; i++) {
+            float randomX = random.nextInt(640);
+            float randomY = random.nextInt(640);
+            Droplet droplet = new Droplet(aiControlManager, 1, 100, randomX, randomY, 1.0f, 64f, 64f, 300, 3, batch);
+            addEntity(droplet);
         }
     }
-
-
-
-
-
 
     // maybe to use enum?
     public void createEntities(int player, int ai, int entity) {
@@ -107,14 +101,17 @@ public class EntityManager {
 
     //Add
     public void addEntity(Entity entity) {
-        entityList.add(entity);
+        if (entity.getControl() == null) {
+            entityList.add(entity);
+        }
+        else if (entity.getControl() == 'A') {
+            aiEntityList.add(entity);
+        }
+        else if (entity.getControl() == 'P') {
+            playerEntityList.add(entity);
+        }
     }
-    public void addAiEntity(Entity entity) {
-        aiEntityList.add(entity);
-    }
-    public void addPlayerEntity(Entity entity) {
-        playerEntityList.add(entity);
-    }
+
     //Remove
     public void removeEntity(Entity entity) {
         entityList.remove(entity);
@@ -247,6 +244,8 @@ public class EntityManager {
         }
         throw new IllegalArgumentException("Entity not found in the entity list");
     }
+
+
 }
 
 
