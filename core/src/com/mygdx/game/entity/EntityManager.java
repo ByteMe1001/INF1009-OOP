@@ -50,7 +50,7 @@ public class EntityManager {
 //    }
 
     public void createBucket() {
-        Bucket bucket = new Bucket(1, 100, 500f, 500f, 1.0f, 50, 50, 50, 3, batch);
+        Bucket bucket = new Bucket(1, 100, 300f, 100f, 1.0f, 50, 50, 50, 3, batch);
         addEntity(bucket);
     }
 
