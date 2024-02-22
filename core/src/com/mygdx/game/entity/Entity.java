@@ -1,9 +1,7 @@
 package com.mygdx.game.entity;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.CollisionManager;
 import com.badlogic.gdx.math.Rectangle;
-import com.mygdx.game.util.iCollision;
 
 //Not sure what else to import for now
 public abstract class Entity {
@@ -33,7 +31,7 @@ public abstract class Entity {
       }
 
       // prob wont use, how does the entity know what to create based on ID, unless you have a storage class, but that has to be inside entitymgr
-    public Entity(int id, SpriteBatch batch) {
+    protected Entity(int id, SpriteBatch batch) {
       this.id = id;
       this.health = 100;        //Just sets default health can be adjusted if needed
       this.x = 0.0f;
@@ -51,7 +49,7 @@ public abstract class Entity {
 
     }
    // Parameterized constructor
-    public Entity(int id, int health, float x, float y, float scale, Sprite sprite, float width, float height, int speed, int direction, SpriteBatch batch) {
+    protected Entity(int id, int health, float x, float y, float scale, Sprite sprite, float width, float height, int speed, int direction, SpriteBatch batch) {
         this.id = id;
         this.health = health;
         this.x = x;
@@ -68,184 +66,186 @@ public abstract class Entity {
         boundingBox = new Rectangle(getX(), getY(), width, height);
     }
     //Setters and Getters methods 
-    public int getId() {
+    protected int getId() {
       return id;
     }
 
-    public void setId(int id) {
+    protected void setId(int id) {
       this.id = id;
     }
 
-    public int getHealth() {
+    protected int getHealth() {
       return health;
     }
 
-    public void setHealth(int health) {
+    protected void setHealth(int health) {
       this.health = health;
     }
 
-    public float getX() {
+    protected float getX() {
       return x;
     }
 
-    public void setX(float x) {
+    protected void setX(float x) {
       this.x = x;
     }
 
-    public float getY() {
+    protected float getY() {
       return y;
     }
 
-    public void setY(float y) {
+    protected void setY(float y) {
       this.y = y;
     }
 
-    public float getScale() {
+    protected float getScale() {
       return scale;
     }
 
-    public void setScale(float scale) {
+    protected void setScale(float scale) {
       this.scale = scale;
     }
 
-    public Sprite getSprite() {
+    protected Sprite getSprite() {
       return sprite;
     }
 
-    public void setSprite(Sprite sprite) {
+    protected void setSprite(Sprite sprite) {
       this.sprite = sprite;
     }
 
-    public float getWidth() {
+    protected float getWidth() {
         return width;
     }
 
-    public void setWidth(float width) {
+    protected void setWidth(float width) {
         this.width = width;
     }
 
-    public float getHeight() {
+    protected float getHeight() {
         return height;
     }
 
-    public void setHeight(float height) {
+    protected void setHeight(float height) {
         this.height = height;
     }
 
-    public float getSpriteWidth() {
+    protected float getSpriteWidth() {
           return sprite.getWidth();
     }
 
-    public float getSpriteHeight() {
+    protected float getSpriteHeight() {
         return sprite.getHeight();
     }
 
-    public Character getControl() {
+    protected Character getControl() {
           return this.control;
     }
 
-    public void setControl(Character control) {
+    protected void setControl(Character control) {
           this.control = control;
     }
 
-    public boolean isAlive() {
+    protected boolean isAlive() {
         return isAlive;
     }
 
-    public void setAlive(boolean alive) {
+    protected void setAlive(boolean alive) {
         isAlive = alive;
     }
 
     // for droplet use don't touch
-    public int getChangeRate() {
+    protected int getChangeRate() {
        return 1;
     }
 
-    public int getDefaultChangeRate() {
+    protected int getDefaultChangeRate() {
       return 1;
     }
 
-    public void setChangeRate(int changeRate) {
+    protected void setChangeRate(int changeRate) {
 
     }
 
-    public int getDirection() {
+    protected int getDirection() {
           return this.direction;
     }
 
-    public void setDirection(int direction) {
+    protected void setDirection(int direction) {
           this.direction = direction;
     }
 
-    public String getCurrentDirection() {
+    protected String getCurrentDirection() {
       return this.currentDirection;
     }
 
-    public void setCurrentDirection(String currentDirection) {
+    protected void setCurrentDirection(String currentDirection) {
       this.currentDirection = currentDirection;
     }
     //Methods
-    public abstract void update();
+    protected void update() {
+        boundingBox.setPosition(getX(), getY());
+    }
 
-    public abstract void render();
+    protected abstract void render();
 
 
-    //public abstract boolean collidesWith(Entity other);       //Can fine-tune what each entity class is able to collide with using this abstract method
+    //protected abstract boolean collidesWith(Entity other);       //Can fine-tune what each entity class is able to collide with using this abstract method
 
-    public boolean isCollidable(){
+    protected boolean isCollidable(){
         return isCollidable;
     };
 
-    public void setCollidable(boolean collidable){
+    protected void setCollidable(boolean collidable){
         isCollidable = collidable;
     };
 
-    //public abstract void collideWith(Entity other);
+    //protected abstract void collideWith(Entity other);
 
-    public int getSpeed() {
+    protected int getSpeed() {
           return speed;
       }
 
-    public void setSpeed(int speed) {
+    protected void setSpeed(int speed) {
           this.speed = speed;
       }
 
-     // public abstract void collideWith(Entity other);
+     // protected abstract void collideWith(Entity other);
 
-    public abstract void takeDamage(int damage);              //Not sure if we need these 2 damage/heal
+    protected abstract void takeDamage(int damage);              //Not sure if we need these 2 damage/heal
 
-    public abstract void heal(int amount);
+    protected abstract void heal(int amount);
 
-    public abstract void destroy();
+    protected abstract void destroy();
 
-    public abstract void movement();
+    protected abstract void movement();
 
     /*
-    public CollisionManager getRect(){ //get entity position?
+    protected CollisionManager getRect(){ //get entity position?
       return rect;
     }         //might not be using this
 */
-    public void push(float deltaX, float deltaY) {  //Simple push method maybe can implement for collisions,pretty much just knockback
+    protected void push(float deltaX, float deltaY) {  //Simple push method maybe can implement for collisions,pretty much just knockback
       this.x += deltaX;
       this.y += deltaY;
     }
 
-    public Rectangle getBoundingBox(){
+    protected Rectangle getBoundingBox(){
         return boundingBox;
-    };
+    }
+
     //added dispose method
-    public void dispose() {
+    protected void dispose() {
         if (sprite != null && sprite.getTexture() != null) {
-           sprite.getTexture().dispose();
-       }
+            sprite.getTexture().dispose();
+        }
     }
 
     // Draw function for manager to use
-    public void draw() {
+    protected void draw() {
         batch.draw(sprite, this.x, this.y, sprite.getWidth(), sprite.getHeight());
         //System.out.println(this.x);
         //System.out.println(this.y);
     }
-
 }
   

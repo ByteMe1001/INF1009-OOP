@@ -2,19 +2,15 @@ package com.mygdx.game.entity;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.AiControlManager;
-import com.mygdx.game.CollisionManager;
-
-import java.lang.reflect.Method;
+import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.ai.AiControlManager;
+import com.mygdx.game.collision.CollisionManager;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 
-import com.mygdx.game.PlayerControlManager;
-import com.mygdx.game.entity.Bucket;
-import com.mygdx.game.entity.Droplet;
+import com.mygdx.game.player.PlayerControlManager;
 
 public class EntityManager {
 
@@ -44,7 +40,7 @@ public class EntityManager {
         this.entityList = new ArrayList<Entity>();
         this.playerEntityList = new ArrayList<Entity>();
         this.aiEntityList = new ArrayList<Entity>();
-        this.collisionManager = new CollisionManager(entityList, playerEntityList, aiEntityList);
+        this.collisionManager = new CollisionManager(this, entityList, playerEntityList, aiEntityList);
         this.playerControlManager = new PlayerControlManager();
         this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);
         this.batch = batch;
@@ -112,11 +108,6 @@ public class EntityManager {
         }
     }
 
-    //Remove
-    public void removeEntity(Entity entity) {
-        entityList.remove(entity);
-    }
-
     //Iterates through entityList and calls their update method
     public void updateEntityList() {
         Iterator<Entity> iterator = entityList.iterator();
@@ -157,6 +148,7 @@ public class EntityManager {
         for (Entity entity : aiEntityList) {
             entity.update();
         }
+
         collisionManager.updateCollisionList(entityList, playerEntityList, aiEntityList);
         collisionManager.detectCollision(this);
     }
@@ -187,6 +179,14 @@ public class EntityManager {
 
     public void setY(Entity e, float y) {
         findEntity(e).setY(y);
+    }
+
+    public boolean getIsCollidable(Entity e) {
+        return findEntity(e).isCollidable();
+    }
+
+    public void setIsCollidable(Entity e, boolean b) {
+        findEntity(e).setCollidable(b);
     }
 
     public int getChangeRate(Entity e) {
@@ -226,6 +226,14 @@ public class EntityManager {
         return findEntity(e).getSpriteWidth();
     }
 
+    public Rectangle getBoundingBox(Entity e) {
+        return findEntity(e).getBoundingBox();
+    }
+
+    public Character getControl(Entity e) {
+        return findEntity(e).getControl();
+    }
+
     private Entity findEntity(Entity e) {
         for (Entity entity : entityList) {
             if (entity == e) {
@@ -244,8 +252,6 @@ public class EntityManager {
         }
         throw new IllegalArgumentException("Entity not found in the entity list");
     }
-
-
 }
 
 

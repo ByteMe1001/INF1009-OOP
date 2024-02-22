@@ -50,33 +50,20 @@ public abstract class Scene implements Screen {
         backgroundOffset = 0;
     }
 
-    // Not inside scene interface
-    // to be implemented by subclasses
-    public abstract void create();
-    //public abstract void update();
-    //public abstract void render(SpriteBatch batch);
-
-    public void TextureObject(String t, float x, float y, float speed, boolean isAIControlled) {
-    }
     @Override
     public void dispose(){
         entityManager.dispose();
     }
 
-//    public void addEntity(Entity entity) {
-//        entityList.add(entity);
-//    }
-
     public void show() {
-
 
     }
 
-    public Texture getBackground() {
+    protected Texture getBackground() {
         return background;
     }
 
-    public void setBackground (Texture background) {
+    protected void setBackground (Texture background) {
         this.background = background;
     }
 
@@ -112,63 +99,63 @@ public abstract class Scene implements Screen {
 
     }
 
-    public SceneManager getSceneManager() {
+    protected SceneManager getSceneManager() {
         return sceneManager;
     }
 
-    public void setSceneManager(SceneManager sceneManager) {
+    protected void setSceneManager(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
     }
 
-    public List<Entity> getentityList() {
+    protected List<Entity> getEntityList() {
         return entityList;
     }
 
-    public void setentityList(List<Entity> entityList) {
+    protected void setEntityList(List<Entity> entityList) {
         this.entityList = entityList;
     }
 
-    public EntityManager getEntityManager() {
+    protected EntityManager getEntityManager() {
         return entityManager;
     }
 
-    public void setEntityManager(EntityManager entityManager) {
+    protected void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    public Camera getCamera() {
+    protected Camera getCamera() {
         return camera;
     }
 
-    public void setCamera(Camera camera) {
+    protected void setCamera(Camera camera) {
         this.camera = camera;
     }
 
-    public int getBackgroundOffset() {
+    protected int getBackgroundOffset() {
         return backgroundOffset;
     }
 
-    public void setBackgroundOffset(int backgroundOffset) {
+    protected void setBackgroundOffset(int backgroundOffset) {
         this.backgroundOffset = backgroundOffset;
     }
 
-    public int getWORLD_WIDTH() {
+    protected int getWORLD_WIDTH() {
         return WORLD_WIDTH;
     }
 
-    public void setWORLD_WIDTH(int WORLD_WIDTH) {
+    protected void setWORLD_WIDTH(int WORLD_WIDTH) {
         this.WORLD_WIDTH = WORLD_WIDTH;
     }
 
-    public int getWORLD_HEIGHT() {
+    protected int getWORLD_HEIGHT() {
         return WORLD_HEIGHT;
     }
 
-    public void setWORLD_HEIGHT(int WORLD_HEIGHT) {
+    protected void setWORLD_HEIGHT(int WORLD_HEIGHT) {
         this.WORLD_HEIGHT = WORLD_HEIGHT;
     }
 
-    public SpriteBatch getBatch() {
+    protected SpriteBatch getBatch() {
         return this.batch;
     }
 

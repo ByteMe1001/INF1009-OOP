@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface iCollision {
 
-    EntityManager entityManager = new EntityManager();
 
     //public void enemyCollide();
     //public void playerCollide();
@@ -29,14 +28,14 @@ public interface iCollision {
         */
     //boolean collidesWith(Entity entity, Entity other);
 
-    default boolean collidesWith(Entity entity, Entity other) {
-        return entity.getBoundingBox().overlaps(other.getBoundingBox());//if entity's bounding box overlaps another entities bounding box
+    default boolean collidesWith(EntityManager entityManager, Entity entity, Entity other) {
+        return entityManager.getBoundingBox(entity).overlaps(entityManager.getBoundingBox(other));//if entity's bounding box overlaps another entities bounding box
     }
     //public void checkCollision(EntityManager entityManager);
 
     default void handleCollision(EntityManager entityManager, List<Entity> collisionList, Entity x, Entity y){
 
-        if(checkSameControl(x, y)){
+        if(checkSameControl(entityManager, x, y)){
             System.out.println("Boing Boing");
         }
         else {
@@ -60,9 +59,8 @@ public interface iCollision {
         System.out.println("Testing Collision Handler");
     };
 
-    default boolean checkSameControl(Entity entity, Entity other){
-        return entity.getControl() == other.getControl();
-
+    default boolean checkSameControl(EntityManager entityManager, Entity entity, Entity other){
+        return entityManager.getControl(entity) == entityManager.getControl(other);
     }
 }
 

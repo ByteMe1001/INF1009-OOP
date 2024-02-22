@@ -1,10 +1,9 @@
 package com.mygdx.game.entity;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.AiControlManager;
+import com.mygdx.game.ai.AiControlManager;
 
 import java.util.Random;
 

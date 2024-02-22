@@ -1,18 +1,13 @@
 package com.mygdx.game.scene;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.CollisionManager;
 import com.mygdx.game.util.SoundManager;
-import com.mygdx.game.entity.Entity;
 import com.mygdx.game.entity.EntityManager;
 
 // Name your class file properly
 // an example of a scene that can be used in the game (test out main codes)
-public class GameScene extends Scene{
+class GameScene extends Scene{
     private EntityManager entityManager;
     private SoundManager soundManager;
 
@@ -20,9 +15,6 @@ public class GameScene extends Scene{
         super(sceneManager, batch);
         this.entityManager = new EntityManager(batch);        // Can put here or show()
         this.soundManager = new SoundManager();
-        if (!soundManager.isMusicPlaying()) {
-            soundManager.playMusic(1);
-        }
 
         super.setBackground(new Texture("Space.jpg"));
         entityManager.createBucket();
@@ -31,11 +23,14 @@ public class GameScene extends Scene{
     }
 
     // Not needed
-    @Override
-    public void create() {
+
+    public void show() {
         // Can put here or show()
-        super.setBackground(new Texture("Space.jpg"));
+        //super.setBackground(new Texture("Space.jpg"));
         System.out.println("Create");
+        if (!soundManager.isMusicPlaying()) {
+            soundManager.playMusic(1);
+        }
         // Create entities for this scene
         //addEntity(); // add in droplet and bucket accordingly idk
     }

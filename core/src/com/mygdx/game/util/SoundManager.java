@@ -23,7 +23,7 @@ public class SoundManager {
     public SoundManager() {
         //Here can store the different sound in the soundURL array
         soundURL[0] = getClass().getResource("/Ground_Theme.wav");
-        soundURL[1] = getClass().getResource("/Who_Let_The_Dogs_Out.wav");
+        soundURL[1] = getClass().getResource("/SkyFire.wav");
     }
 
     public void setFile(int i) {

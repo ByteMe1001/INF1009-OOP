@@ -38,7 +38,7 @@ public class SceneManager {
 
     public void setCurrentScene(Scene scene) {
         currentScene = scene;
-        currentScene.create();
+        //currentScene.create();
     }
 
   public Scene getCurrentScene() {
