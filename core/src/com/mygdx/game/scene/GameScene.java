@@ -24,7 +24,6 @@ public class GameScene extends Scene{
             soundManager.playMusic(1);
         }
 
-
         super.setBackground(new Texture("Space.jpg"));
         entityManager.createBucket();
         entityManager.createDroplet();
@@ -36,7 +35,7 @@ public class GameScene extends Scene{
     public void create() {
         // Can put here or show()
         super.setBackground(new Texture("Space.jpg"));
-
+        System.out.println("Create");
         // Create entities for this scene
         //addEntity(); // add in droplet and bucket accordingly idk
     }
@@ -56,6 +55,8 @@ public class GameScene extends Scene{
     @Override
     public void dispose() {
         // Dispose of resources
+        entityManager.dispose();
+        soundManager.dispose();
     }
 
 

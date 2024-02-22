@@ -78,6 +78,11 @@ public class SoundManager {
     public boolean isMusicPlaying() {
         return isMusicPlaying;
     }
+
+    public void dispose() {
+        stop();
+        clip.close();
+    }
 }
 
 

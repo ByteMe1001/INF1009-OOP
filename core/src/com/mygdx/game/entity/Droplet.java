@@ -12,6 +12,7 @@ public class Droplet extends Entity {
 
     // Additional properties for Droplet class
     private static final float DROPLET_SPEED = 100.0f;
+    private final static String TEXTURE_PATH = "fish.png";
     private static final int DEFAULT_CHANGE_RATE = 30;
     private int changeRate;
     private AiControlManager aiControlManager;
@@ -27,7 +28,7 @@ public class Droplet extends Entity {
         super(id, batch);
         //this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), getSpeed());
         this.setChangeRate(DEFAULT_CHANGE_RATE);
-        this.setSprite(new Sprite(new Texture("droplet.png")));
+        this.setSprite(new Sprite(new Texture(TEXTURE_PATH)));
         this.setAlive(true);
         this.setCollidable(true);
         this.setControl('A');
@@ -35,7 +36,7 @@ public class Droplet extends Entity {
 
     // Parameterized constructor
     public Droplet(AiControlManager aiControlManager, int id, int health, float x, float y, float scale, float width, float height, int speed, int direction, SpriteBatch batch) {
-        super(id, health, x, y, scale, new Sprite(new Texture("droplet.png")), width, height, speed, direction, batch);
+        super(id, health, x, y, scale, new Sprite(new Texture(TEXTURE_PATH)), width, height, speed, direction, batch);
         setWidth(getSprite().getWidth());
         setHeight(getSprite().getHeight());
         this.aiControlManager = aiControlManager;

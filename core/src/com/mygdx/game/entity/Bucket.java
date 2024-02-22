@@ -13,7 +13,8 @@ public class Bucket extends Entity {
 
     // Additional properties for Bucket class
     private static final float BUCKET_SPEED = 200.0f; // not used??
-    private final static Character control = 'P';
+
+    private final static String TEXTURE_PATH = "shiba.png";
 
     private PlayerControlManager playerControlManager;
 
@@ -25,9 +26,7 @@ public class Bucket extends Entity {
     public Bucket(PlayerControlManager playerControlManager, int id, SpriteBatch batch) {
         super(id, batch);
 
-        this.setSprite(new Sprite(new Texture("bucket.png")));
-
-        this.setSprite(new Sprite(new Texture("bucket.png"))); 
+        this.setSprite(new Sprite(new Texture(TEXTURE_PATH)));
 
         this.setAlive(true);
         this.setCollidable(true);
@@ -36,7 +35,7 @@ public class Bucket extends Entity {
 
     // Parameterized constructor
     public Bucket(PlayerControlManager playerControlManager,int id, int health, float x, float y, float scale, float width ,float height, int speed, int direction, SpriteBatch batch) {
-        super(id, health, x, y, scale, new Sprite(new Texture("bucket.png")), width, height, speed, direction, batch);
+        super(id, health, x, y, scale, new Sprite(new Texture(TEXTURE_PATH)), width, height, speed, direction, batch);
         setWidth(getSprite().getWidth());
         setHeight(getSprite().getHeight());
         this.playerControlManager = playerControlManager;
@@ -44,6 +43,7 @@ public class Bucket extends Entity {
         this.setCollidable(true);
         this.setControl('P');
     }
+
 
     @Override
     public void update() {
