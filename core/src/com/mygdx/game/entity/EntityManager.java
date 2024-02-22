@@ -50,12 +50,12 @@ public class EntityManager {
 //    }
 
     public void createBucket() {
-        Bucket bucket = new Bucket(1, 100, 50f, 100f, 1.0f, 64, 64, 50, 3, batch);
+        Bucket bucket = new Bucket(1, 100, 50f, 100f, 1.0f, 64f, 64f, 300, 3, batch);
         addEntity(bucket);
     }
 
     public void createDroplet() {
-        Droplet droplet = new Droplet(1, 100, 300.0f, 100.0f, 1.0f, 64, 64, 300, 2, batch);
+        Droplet droplet = new Droplet(aiControlManager,1, 100, 300.0f, 100.0f, 1.0f, 64f, 64f, 300, 3, batch);
         addAiEntity(droplet);
     }
 
@@ -63,13 +63,13 @@ public class EntityManager {
     // maybe to use enum?
     public void createEntities(int player, int ai, int entity) {
         for (int i = 0; i < player; i++){
-            Bucket bucket = new Bucket(1, 100, 300.0f, 100.0f, 1.0f, 50, 50, 10, 10, batch); //not sure
+            Bucket bucket = new Bucket(1, 100, 300.0f, 100.0f, 1.0f, 50f, 50f, 10, 10, batch); //not sure
         }
     }
 
     public void createEntities (int player, int ai) {
         for (int i = 0; i < player; i++){
-            Bucket bucket = new Bucket(1, 100, 300.0f, 100.0f, 1.0f, 50, 50, 10, 10, batch); //not sure
+            Bucket bucket = new Bucket(1, 100, 300.0f, 100.0f, 1.0f, 50f, 50f, 10, 10, batch); //not sure
         }
 
         for (int i = 0; i < player; i++){
@@ -144,16 +144,9 @@ public class EntityManager {
             if (entity instanceof Bucket){
                 entity.update();
             }
-
-            if (entity.getControl() == 'A') {
-                aiControlManager.movement(aiEntityList);
-
-                //entity.update();
-            }
         }
 
         for (Entity entity : aiEntityList) {
-            aiControlManager.movement(aiEntityList);
             entity.update();
         }
         collisionManager.updateCollisionList(entityList, aiEntityList);
@@ -286,6 +279,23 @@ public class EntityManager {
         throw new IllegalArgumentException("Entity not found in the entity list");
     }
 
+    public float getSpriteWidth(Entity e) {
+        for (Entity entity: aiEntityList) {
+            if (entity == e) {
+                return entity.getSpriteWidth();
+            }
+        }
+        throw new IllegalArgumentException("Entity not found in the entity list");
+    }
+
+    public float getSpriteHeight(Entity e) {
+        for (Entity entity: aiEntityList) {
+            if (entity == e) {
+                return entity.getSpriteWidth();
+            }
+        }
+        throw new IllegalArgumentException("Entity not found in the entity list");
+    }
 }
 
 

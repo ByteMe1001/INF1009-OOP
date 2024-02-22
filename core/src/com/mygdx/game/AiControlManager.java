@@ -28,6 +28,7 @@ public class AiControlManager implements iAiMovement {
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
         this.entityManager = entityManager;
+        Random random = new Random();
         //this.speed = speed;
     }
 
@@ -43,30 +44,46 @@ public class AiControlManager implements iAiMovement {
         this.aiEntityList.add(entity);
     }
 
-    public void movement(ArrayList<Entity> aiEntityList) {
+//    public void movement(ArrayList<Entity> aiEntityList) {
+//
+//        for (Entity entity : aiEntityList) {
+//            //System.out.println(entityManager.getChangeRate(entity));
+//            if (entityManager.getChangeRate(entity) >= 0 ){
+//                switch(entityManager.getDirection(entity)) {
+//                    case 1:
+//                        setUpDown(entityManager, entity);
+//                        break;
+//                    case 2:
+//                        setLeftRight(entityManager, entity);
+//                        break;
+//                    case 3:
+//                        System.out.println("case 3");
+//                        setAll(entityManager, entity);
+//                        break;
+//                }
+//            }
+//            else entityManager.setChangeRate(entity, entityManager.getDefaultChangeRate(entity));
+//        }
+//    }
 
-        Random random = new Random();
-        int randomNumber = random.nextInt(2) + 1;
-
-        for (Entity entity : aiEntityList) {
+    public void movement(Entity entity, float x, float y, float width, float height) {
             //System.out.println(entityManager.getChangeRate(entity));
-            if (entityManager.getChangeRate(entity) >= 0 ){
-                switch(entityManager.getDirection(entity)) {
+            if (entityManager.getChangeRate(entity) >= 0 ) {
+                switch (entityManager.getDirection(entity)) {
                     case 1:
-                        setUpDown(entityManager, entity);
+                        setUpDown(entityManager, entity, y, height);
                         break;
                     case 2:
-                        setLeftRight(entityManager, entity);
+                        setLeftRight(entityManager, entity, x, width);
                         break;
                     case 3:
                         System.out.println("case 3");
-                        setAll(entityManager, entity);
+                        setAll(entityManager, entity, x, y, width, height);
                         break;
                 }
             }
             else entityManager.setChangeRate(entity, entityManager.getDefaultChangeRate(entity));
         }
-
     }
 
 
@@ -109,4 +126,5 @@ public class AiControlManager implements iAiMovement {
 //        // Passes the calculated speed to the entity for it to move itself
 //        entity.setMovementDirection(Entity.MovementDirection.VERTICAL);
 //    }
-}
+
+

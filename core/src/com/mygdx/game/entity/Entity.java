@@ -10,7 +10,7 @@ public abstract class Entity {
     private int id;
     private int health;
     private float x,y;               //Position
-    private int width, height;
+    private float width, height;
     private float scale;
     private int speed;
     private int direction;          // 1 for up down, 2 for left right, 3 for all
@@ -51,7 +51,7 @@ public abstract class Entity {
 
     }
    // Parameterized constructor
-    public Entity(int id, int health, float x, float y, float scale, Sprite sprite, int width, int height, int speed, int direction, SpriteBatch batch) {
+    public Entity(int id, int health, float x, float y, float scale, Sprite sprite, float width, float height, int speed, int direction, SpriteBatch batch) {
         this.id = id;
         this.health = health;
         this.x = x;
@@ -116,19 +116,19 @@ public abstract class Entity {
       this.sprite = sprite;
     }
 
-    public int getWidth() {
+    public float getWidth() {
         return width;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(float width) {
         this.width = width;
     }
 
-    public int getHeight() {
+    public float getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(float height) {
         this.height = height;
     }
 

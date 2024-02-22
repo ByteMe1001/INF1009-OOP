@@ -36,8 +36,10 @@ public class Bucket extends Entity {
     }
 
     // Parameterized constructor
-    public Bucket(int id, int health, float x, float y, float scale, int width ,int height, int speed, int direction, SpriteBatch batch) {
+    public Bucket(int id, int health, float x, float y, float scale, float width ,float height, int speed, int direction, SpriteBatch batch) {
         super(id, health, x, y, scale, new Sprite(new Texture("bucket.png")), width, height, speed, direction, batch);
+        setWidth(getSprite().getWidth());
+        setHeight(getSprite().getHeight());
         this.playerControlManager = new PlayerControlManager();
         this.setAlive(true);
         this.setCollidable(true);
@@ -47,6 +49,8 @@ public class Bucket extends Entity {
     @Override
     public void update() {
         movement();
+        boundingBox.setPosition(getX(), getY());
+        //System.out.println(boundingBox);
     }
 
     @Override
@@ -108,7 +112,6 @@ public class Bucket extends Entity {
                 setY(vector[1]);        // Move vectically
             }
         }
-        boundingBox.setPosition(getX(), getY());
     }
 }
 

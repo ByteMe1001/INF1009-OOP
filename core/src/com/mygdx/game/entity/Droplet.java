@@ -12,7 +12,7 @@ public class Droplet extends Entity {
     private static final float DROPLET_SPEED = 100.0f;
     private static final int DEFAULT_CHANGE_RATE = 30;
     private int changeRate;
-    //private AiControlManager aiControlManager;
+    private AiControlManager aiControlManager;
 
     private SpriteBatch batch;
 
@@ -32,8 +32,11 @@ public class Droplet extends Entity {
     }
 
     // Parameterized constructor
-    public Droplet(int id, int health, float x, float y, float scale, int width, int height, int speed, int direction, SpriteBatch batch) {
+    public Droplet(AiControlManager aiControlManager, int id, int health, float x, float y, float scale, float width, float height, int speed, int direction, SpriteBatch batch) {
         super(id, health, x, y, scale, new Sprite(new Texture("droplet.png")), width, height, speed, direction, batch);
+        setWidth(getSprite().getWidth());
+        setHeight(getSprite().getHeight());
+        this.aiControlManager = aiControlManager;
         //this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), getSpeed());
         this.setAlive(true);
         this.setChangeRate(DEFAULT_CHANGE_RATE);
@@ -45,6 +48,8 @@ public class Droplet extends Entity {
     @Override
     public void update() {
         movement();
+        boundingBox.setPosition(this.getX(), this.getY());
+        //System.out.println(boundingBox);
     }
 
 
@@ -104,22 +109,10 @@ public class Droplet extends Entity {
 
     @Override
     public void movement() {
-        /*
         if (getControl() == 'A') {
-            float[] vector = playerControlManager.movement(this.getX(), this.getY(), this.getSpeed());
-            if (vector[0] == 0f) {
-                setX(vector[1]);        // Move horizontally
-            }
-            if (vector[0] == 1f) {
-                setY(vector[1]);        // Move vectically
-            }
+            aiControlManager.movement(this, this.getX(), this.getY(), this.getWidth(), this.getHeight());
         }
-
-         */
-        boundingBox.setPosition(getX(), getY());
     }
-
-
 }
 
 
