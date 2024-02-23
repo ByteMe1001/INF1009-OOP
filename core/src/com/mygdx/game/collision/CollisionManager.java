@@ -46,21 +46,23 @@ public class CollisionManager implements iCollision {
 
     public void updateCollisionList(List<Entity> entityList , List<Entity> playerEntityList, List<Entity> aiEntityList) {
         //Clear list first
-        collisionList.clear();
+        //collisionList.clear();
 
         for (Entity entity : entityList) {
-            if (entityManager.getIsCollidable(entity))
+            if (entityManager.getIsCollidable(entity) != collisionList.contains(entity))
                 collisionList.add(entity); //add collidable objects into entityList
         }
 
         for (Entity entity : playerEntityList) {
-            if (entityManager.getIsCollidable(entity))
+            if (entityManager.getIsCollidable(entity) != collisionList.contains(entity))
                 collisionList.add(entity); //add collidable objects into a playerEntityList
         }
         for (Entity entity : aiEntityList) {
-            if (entityManager.getIsCollidable(entity))
+            if (entityManager.getIsCollidable(entity) != collisionList.contains(entity))
                 collisionList.add(entity); //add collidable objects into a aiEntityList
         }
+
+        System.out.println("Collision List contains: " + collisionList);
     }
 }
 
