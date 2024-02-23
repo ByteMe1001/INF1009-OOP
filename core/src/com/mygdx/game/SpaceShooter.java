@@ -19,19 +19,16 @@ public class SpaceShooter extends Game {
 		player = new Player();
 		batch = new SpriteBatch();
 		lifeCycleManager = new LifeCycleManager(this, player, batch);
-		Gdx.app.log("MyGDXGame", player.getName()); //testing line
-		//setScreen(lifeCycleManager.getGameScene());
-//		this.soundManager = new SoundManager();d
-//		soundManager.playMusic(1);
+		Gdx.app.log("MyGDXGame", player.getName());
 		lifeCycleManager.run();
 	}
 
 	@Override
 	public void dispose() {
 		super.dispose();
-		//gameScreen.dispose();
 		batch.dispose();
 		lifeCycleManager.dispose();
+		System.out.println(player.getName()+" score: " + player.getScore());
 	}
 
 	@Override

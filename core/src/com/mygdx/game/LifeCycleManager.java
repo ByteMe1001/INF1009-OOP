@@ -73,7 +73,8 @@ public class LifeCycleManager {
     }
 
     public void dispose() {
-        //sceneManager.dispose();
+        player.setScore(1);     // Demo purposes
+        sceneManager.dispose();
     }
     public Scene getStartingScene() {
         return sceneManager.getStartingScene();

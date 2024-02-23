@@ -97,4 +97,13 @@ public class SceneManager implements SceneChangeListener{
         // Swap the scene
         swapScene(newScene);
     }
+
+    // Clear all scene assets
+    public void dispose() {
+        for (Scene scene: scenes) {
+            scene.dispose();
+        }
+        scenes.clear();
+        soundManager.dispose();
+    }
 }

@@ -8,7 +8,7 @@ public class Player {
     // Default constructor
     public Player() {
         // do nothing
-        this.name = "Player";
+        this.name = "Player 1";
         this.score = 0;
         this.isPlaying = true;
     }

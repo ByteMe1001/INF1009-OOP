@@ -120,21 +120,6 @@ public class EntityManager {
         }
     }
 
-    //Iterates through entityList and calls their update method
-    public void updateEntityList() {
-        Iterator<Entity> iterator = entityList.iterator();
-        while (iterator.hasNext()) {
-            Entity entity = iterator.next();
-            entity.update();
-
-            if (!entity.isAlive()) {
-                entity = null;
-                iterator.remove();
-            }
-        }
-        //collisionManager.handleCollisions(entityList);
-    }
-
     // For loop to draw all entities
     public void draw() {
         for (Entity entity : entityList) {
@@ -149,28 +134,46 @@ public class EntityManager {
     }
 
     public void update() {
-        for (Entity entity : entityList) {
-                entity.update();
-        }
-
-        for (Entity entity : playerEntityList) {
-            entity.update();
-        }
-
-        for (Entity entity : aiEntityList) {
-            entity.update();
-        }
-
+        updateEntities(entityList);
+        updateEntities(playerEntityList);
+        updateEntities(aiEntityList);
         collisionManager.updateCollisionList(entityList, playerEntityList, aiEntityList);
         collisionManager.detectCollision(this);
     }
 
+    private void updateEntities(ArrayList<Entity> entities) {
+        Iterator<Entity> iterator = entities.iterator();
+        while (iterator.hasNext()) {
+            Entity entity = iterator.next();
+            if (!entity.isAlive()) {
+                iterator.remove(); // Remove the entity from the list
+                continue; // Skip to the next iteration if the entity is not alive
+            }
+            entity.update();
+        }
+    }
+
     public void dispose() {
-        // for loop to dispose entityList
+        // Dispose entities in entityList
         for (Entity entity : entityList) {
             entity.dispose();
         }
-        entityList.clear(); // Clear the entity list after disposing them
+        // Clear entityList
+        entityList.clear();
+
+        // Dispose entities in playerEntityList
+        for (Entity entity : playerEntityList) {
+            entity.dispose();
+        }
+        // Clear playerEntityList
+        playerEntityList.clear();
+
+        // Dispose entities in aiEntityList
+        for (Entity entity : aiEntityList) {
+            entity.dispose();
+        }
+        // Clear aiEntityList
+        aiEntityList.clear();
     }
 
     public float getSpeed(Entity e) {
@@ -191,6 +194,14 @@ public class EntityManager {
 
     public void setY(Entity e, float y) {
         findEntity(e).setY(y);
+    }
+
+    public boolean getIsAlive(Entity e) {
+        return findEntity(e).isAlive();
+    }
+
+    public void setIsALive(Entity e, boolean b) {
+        findEntity(e).setAlive(b);
     }
 
     public boolean getIsCollidable(Entity e) {

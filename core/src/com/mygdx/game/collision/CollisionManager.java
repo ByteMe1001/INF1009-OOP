@@ -43,11 +43,9 @@ public class CollisionManager implements iCollision {
     }
 
     public void detectCollision(EntityManager entityManager){
-        //System.out.println(collidableList);
         for (int i = 0; i < collisionList.size() - 1; i++){
             for (int j = i + 1; j < collisionList.size(); j++){
                 if(collidesWith(entityManager, collisionList.get(i), collisionList.get(j))){ //If entities overlaps with one another, print Collision Detected in console
-                    System.out.println("Collision Detected");
                     handleCollision(entityManager, soundManager, collisionList, collisionList.get(i), collisionList.get(j));
                 }
             }

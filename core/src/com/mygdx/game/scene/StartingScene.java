@@ -21,9 +21,7 @@ public class StartingScene extends Scene {
 
     public StartingScene(SceneManager sceneManager, SoundManager soundManager, SpriteBatch batch) {
         super(sceneManager, soundManager, batch);
-        //create();
     }
-
 
     @Override
     public void show() {
@@ -67,7 +65,6 @@ public class StartingScene extends Scene {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 // Log statement to verify the click listener
-                Gdx.app.log("StartingScene", "Play button clicked");
                 StartingScene.super.getSoundManager().stopAll();
                 // Notify the SceneManager to swap the scene when the play button is clicked
                 StartingScene.super.getSceneManager().swapScene(new GameScene(StartingScene.super.getSceneManager(), StartingScene.super.getSoundManager(), getBatch()));
