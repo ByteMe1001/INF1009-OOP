@@ -19,7 +19,7 @@ public class StartingScene extends Scene {
     private final static String BACKGROUND_TEXTURE_PATH = "StartingImage.png";
     private Stage stage;
 
-    public StartingScene(SceneManager sceneManager, SoundManager soundManager, SpriteBatch batch) {
+    protected StartingScene(SceneManager sceneManager, SoundManager soundManager, SpriteBatch batch) {
         super(sceneManager, soundManager, batch);
     }
 
@@ -35,7 +35,7 @@ public class StartingScene extends Scene {
         backgroundImage.setPosition(0, 0);
         stage.addActor(backgroundImage);
 
-        // Load play button texture
+        // Load playButton texture
         Texture playButtonTexture = new Texture(TEXTURE_PATH);
         TextureRegion playButtonRegion = new TextureRegion(playButtonTexture);
         TextureRegionDrawable playButtonDrawable = new TextureRegionDrawable(playButtonRegion);
@@ -64,8 +64,6 @@ public class StartingScene extends Scene {
         playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                // Log statement to verify the click listener
-                StartingScene.super.getSoundManager().stopAll();
                 // Notify the SceneManager to swap the scene when the play button is clicked
                 StartingScene.super.getSceneManager().swapScene(new GameScene(StartingScene.super.getSceneManager(), StartingScene.super.getSoundManager(), getBatch()));
             }
@@ -84,6 +82,7 @@ public class StartingScene extends Scene {
 
     @Override
     public void dispose() {
+        StartingScene.super.getSoundManager().stopAll();        // Stop music only, do not dispose sound manager
         stage.dispose(); // Dispose stage
     }
 }

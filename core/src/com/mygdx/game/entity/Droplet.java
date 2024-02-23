@@ -10,7 +10,6 @@ import java.util.Random;
 public class Droplet extends Entity {
 
     // Additional properties for Droplet class
-    private static final float DROPLET_SPEED = 100.0f;
     private final static String TEXTURE_PATH = "asteroid.png";
     private static final int DEFAULT_CHANGE_RATE = 30;
     private int changeRate;
@@ -18,11 +17,11 @@ public class Droplet extends Entity {
     private SpriteBatch batch;
 
     // Default constructor
-    public Droplet() {
+    protected Droplet() {
         // do nothing don't touch
     }
     // Constructor with id parameter
-    public Droplet(int id, SpriteBatch batch) {
+    protected Droplet(int id, SpriteBatch batch) {
         super(id, batch);
         this.setChangeRate(DropletType.DEFAULT.getChangeRate());
         this.setSprite(new Sprite(new Texture(DropletType.DEFAULT.getTexturePath())));
@@ -32,7 +31,7 @@ public class Droplet extends Entity {
     }
 
     // Parameterized constructor
-    public Droplet(AiControlManager aiControlManager, int id, int health, float x, float y, float scale, float width, float height, float speed, int direction, SpriteBatch batch) {
+    protected Droplet(AiControlManager aiControlManager, int id, int health, float x, float y, float scale, float width, float height, float speed, int direction, SpriteBatch batch) {
         super(id, health, x, y, scale, new Sprite(new Texture(DropletType.DEFAULT.getTexturePath())), width, height, speed, direction, batch);
         setWidth(getSprite().getWidth());
         setHeight(getSprite().getHeight());
@@ -43,10 +42,11 @@ public class Droplet extends Entity {
         this.setControl(DropletType.DEFAULT.getControl());
     }
 
+    // Getter and setter methods
     @Override
     protected void update() {
         movement();
-        boundingBox.setPosition(this.getX(), this.getY());
+        super.getBoundingBox().setPosition(getX(), getY());
     }
 
     @Override
@@ -64,6 +64,7 @@ public class Droplet extends Entity {
         this.changeRate = changeRate;
     }
 
+    // Game design logic
     @Override
     protected void takeDamage(int damage) {
         // Handle damage logic for the droplet
@@ -77,9 +78,9 @@ public class Droplet extends Entity {
     @Override
     protected void destroy() {
         // Handle destruction logic for the droplet
-
     }
 
+    // Movement code calling for AI
     @Override
     protected void movement() {
         if (getControl() == 'A') {

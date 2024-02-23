@@ -16,11 +16,11 @@ public interface iCollision {
     default void handleCollision(EntityManager entityManager, SoundManager soundManager, List<Entity> collisionList, Entity x, Entity y){
 
         if(checkSameControl(entityManager, x, y)){
-            System.out.println("Boing Boing"); //if entity control type is the same, print message on collide
+            System.out.println("Boing Boing"); // DEMO ONLY if entity control type is the same, print message on collide
         }
         else {
             soundManager.playSE("GameScene_Collision");     // Player collision sound
-            System.out.println("Asteroid Killed!");
+            System.out.println("Asteroid Killed!");     // DEMO ONLY
             // collisionList.remove(x); //update collidableList to remove entity
             // entityManager.deleteEntity(x); //update entityManager to remove entity
 

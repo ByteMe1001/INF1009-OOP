@@ -10,6 +10,7 @@ public interface iAiMovement {
     // Method to be implemented for moving an entity.
     Random random = new Random();
 
+    // For screen boundary calc
     int screenWidth = Gdx.graphics.getWidth();
     int screenHeight = Gdx.graphics.getHeight();
 

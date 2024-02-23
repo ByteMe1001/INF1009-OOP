@@ -30,6 +30,7 @@ public class SceneManager implements SceneChangeListener{
         scenes = new ArrayList<Scene>();
     }
 
+    // Example code for demo
     public void createStartingScene() {
         scenes.add(new StartingScene(this, soundManager, batch));
     }
@@ -38,6 +39,7 @@ public class SceneManager implements SceneChangeListener{
         scenes.add(new GameScene(this, soundManager, batch));
     }
 
+    // Scene Manager functions
     public void addScene(Scene scene) {
         scenes.add(scene);
     }
@@ -48,35 +50,44 @@ public class SceneManager implements SceneChangeListener{
 
     public void run() {
         StartingScene startingScene = new StartingScene(this, soundManager, batch);
-        setCurrentScene(startingScene);
+        if (startingScene == null) {
+            throw new IllegalStateException("StartingScene is null after creation");
+        } else {
+            setCurrentScene(startingScene);
+        }
     }
 
     public void setCurrentScene(Scene scene) {
-        currentScene = scene;
-        setScene(scene);
+        if (scene == null) {
+            throw new IllegalStateException("Scene is null");
+        } else {
+            currentScene = scene;
+            setScene(scene);
+        }
     }
 
     public Scene getCurrentScene() {
         return currentScene;
     }
 
-//    public void updateCurrentScene() {
-//        currentScene.update();
-//    }
-
     public void swapScene(Scene newScene) { // to change between scenes (to be called by gameMaster)
-        disposeCurrentScene(); // Dispose of the current scene
-        setCurrentScene(newScene); // Set the new scene as the current scene
+        if (newScene == null) {
+            throw new IllegalStateException("New Scene is null");
+        } else {
+            disposeCurrentScene(); // Dispose of the current scene
+            setCurrentScene(newScene); // Set the new scene as the current scene
+        }
     }
 
-    public void renderCurrentScene(SpriteBatch batch) {
-        //currentScene.render(batch);
+    public void renderCurrentScene() {
+        currentScene.render(Gdx.graphics.getDeltaTime());
     }
 
     public void disposeCurrentScene() { //remove current scene
         currentScene.dispose();
     }
 
+    // Hard code for demo
     public Scene getStartingScene() {
         if (!scenes.isEmpty()) {
             return scenes.get(0);
@@ -92,12 +103,6 @@ public class SceneManager implements SceneChangeListener{
         }
     }
 
-    @Override
-    public void onSceneChange(Scene newScene) {
-        // Swap the scene
-        swapScene(newScene);
-    }
-
     // Clear all scene assets
     public void dispose() {
         for (Scene scene: scenes) {
@@ -105,5 +110,10 @@ public class SceneManager implements SceneChangeListener{
         }
         scenes.clear();
         soundManager.dispose();
+    }
+    @Override
+    public void onSceneChange(Scene newScene) {
+        // Swap the scene
+        swapScene(newScene);
     }
 }

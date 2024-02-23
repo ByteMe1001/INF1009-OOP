@@ -21,8 +21,6 @@ public abstract class Scene implements Screen {
     //change to private
     private SceneManager sceneManager;
     private SoundManager soundManager;
-    private List<Entity> entityList;
-
 
     // Screen variables
     private Camera camera;
@@ -42,13 +40,11 @@ public abstract class Scene implements Screen {
     public Scene(SceneManager sceneManager, SoundManager soundManager, SpriteBatch batch) {
         this.sceneManager = sceneManager;
         this.soundManager = soundManager;
-        //this.entityManager = new EntityManager();
-        this.entityList = new ArrayList<>();
+
         this.batch = batch;
 
         camera = new OrthographicCamera();
         viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
-        //background = new Texture("Space.jpg");
         backgroundOffset = 0;
     }
 
@@ -58,7 +54,7 @@ public abstract class Scene implements Screen {
     }
 
     public void show() {
-
+        // Empty for override
     }
 
     protected Texture getBackground() {
@@ -72,11 +68,6 @@ public abstract class Scene implements Screen {
 
     @Override
     public void render(float delta) {
-
-    }
-
-
-    public void render(float delta, SpriteBatch batch) {
 
     }
 
@@ -100,7 +91,7 @@ public abstract class Scene implements Screen {
     public void hide() {
 
     }
-
+    // Getter Setter methods
     protected SceneManager getSceneManager() {
         return sceneManager;
     }
@@ -108,22 +99,6 @@ public abstract class Scene implements Screen {
     protected void setSceneManager(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
     }
-
-    protected List<Entity> getEntityList() {
-        return entityList;
-    }
-
-    protected void setEntityList(List<Entity> entityList) {
-        this.entityList = entityList;
-    }
-
-//    protected EntityManager getEntityManager() {
-//        return entityManager;
-//    }
-//
-//    protected void setEntityManager(EntityManager entityManager) {
-//        this.entityManager = entityManager;
-//    }
 
     protected Camera getCamera() {
         return camera;

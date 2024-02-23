@@ -84,7 +84,7 @@ public class EntityManager {
         }
     }
 
-    // maybe to use enum?
+    // To fix
     public void createEntities(int player, int ai, int entity) {
         for (int i = 0; i < player; i++){
             Bucket bucket = new Bucket(playerControlManager,1, 100, 300.0f, 100.0f, 1.0f, 50f, 50f, 10, 10, batch); //not sure
@@ -176,6 +176,7 @@ public class EntityManager {
         aiEntityList.clear();
     }
 
+    // Getter Setter methods
     public float getSpeed(Entity e) {
         return findEntity(e).getSpeed();
     }
@@ -257,6 +258,7 @@ public class EntityManager {
         return findEntity(e).getControl();
     }
 
+    // Method to find entity
     private Entity findEntity(Entity e) {
         for (Entity entity : entityList) {
             if (entity == e) {

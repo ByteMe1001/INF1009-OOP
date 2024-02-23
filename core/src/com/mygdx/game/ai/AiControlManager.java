@@ -13,7 +13,6 @@ import java.util.Random;
 public class AiControlManager implements iAiMovement {
     private ArrayList<Entity> aiEntityList; // Stores all AI-controlled entities
     private EntityManager entityManager;
-    private ArrayList<Entity> entityList;
     private float screenWidth; // The width of the screen to keep entities within bounds
     private float screenHeight; // The height of the screen for up and down movements
     private float speed; // Speed at which entities move

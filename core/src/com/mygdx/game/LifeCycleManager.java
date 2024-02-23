@@ -3,13 +3,16 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.scene.Scene;
 import com.mygdx.game.scene.SceneManager;
-import sun.jvm.hotspot.gc.shared.Space;
+import java.util.logging.*;
 
 public class LifeCycleManager {
     private Player player;
     private SceneManager sceneManager;
     private SpriteBatch batch;
     private SpaceShooter spaceShooter;
+
+    // Logger creation
+    private static final Logger logger = Logger.getLogger(LifeCycleManager.class.getName());
 
     public LifeCycleManager() {
     
@@ -33,28 +36,17 @@ public class LifeCycleManager {
         this.player = player;
         this.batch = batch;
         sceneManager = new SceneManager(spaceShooter, batch);
-
-//        sceneManager.startGame();
-//        sceneManager.endGame();
-//        if (gameScreen == null){
-//            throw new IllegalStateException("Unable to create screen");
-//        }
-        //myGdxGame.setScreen(gameScreen);
-
     }
+
 
     public void run() {
-        //sceneManager.createStartingScene();
-       // setStartingScreen(spaceShooter);
-//        sceneManager.createGameScene();
-//        setGameScreen(spaceShooter);
-
+        try {
             sceneManager.run();
-//        sceneManager.gameScreen();
-//        sceneManager.endGame();
-//        player.setScore(1);
-//        playerStop();
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error occurred during scene run", e);
+        }
     }
+
     public void setStartingScreen(SpaceShooter spaceShooter) {
         spaceShooter.setScreen(getStartingScene());
     }
@@ -62,7 +54,6 @@ public class LifeCycleManager {
     public void setGameScreen(SpaceShooter spaceShooter) {
         spaceShooter.setScreen(getGameScene());
     }
-
 
     public void playerStop() {
         player.setPlaying(false);

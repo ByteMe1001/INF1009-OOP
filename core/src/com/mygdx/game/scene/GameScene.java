@@ -13,7 +13,7 @@ class GameScene extends Scene{
 
     private final static String TEXTURE_PATH = "Space.jpg";
 
-    public GameScene(SceneManager sceneManager, SoundManager soundManager, SpriteBatch batch) {
+    protected GameScene(SceneManager sceneManager, SoundManager soundManager, SpriteBatch batch) {
         super(sceneManager, soundManager, batch);
         this.entityManager = new EntityManager(soundManager, batch);        // Can put here or show()
     }
@@ -49,7 +49,6 @@ class GameScene extends Scene{
         entityManager.dispose();
         super.getSoundManager().stopAll();
     }
-
 
     @Override
     public void pause() {

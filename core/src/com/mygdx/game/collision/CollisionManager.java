@@ -15,23 +15,21 @@ import com.mygdx.game.util.iCollision;
 public class CollisionManager implements iCollision {
 
     private ArrayList<Entity> collisionList;
-
-    private EntityManager entityManager;
-
-    private SoundManager soundManager;
+    private EntityManager entityManager;     // Entity Manager for entity control
+    private SoundManager soundManager;      // Sound manager for collision sounds
 
     public CollisionManager(EntityManager entityManager, SoundManager soundManager, List<Entity> entityList, List<Entity> playerEntityList, List<Entity> aiEntityList) {
         this.entityManager = entityManager;
         this.soundManager = new SoundManager();
-
         collisionList = new ArrayList<Entity>();
     }
 
     // Default constructor
     public CollisionManager() {
-
+        // Do nothing
     }
 
+    // Detect collision through n! loop within collidable list to find boundingBox overlap
     public void detectCollision(EntityManager entityManager){
         for (int i = 0; i < collisionList.size() - 1; i++){
             for (int j = i + 1; j < collisionList.size(); j++){
@@ -42,8 +40,9 @@ public class CollisionManager implements iCollision {
         }
     }
 
+    // Refresh collision list
     public void updateCollisionList(List<Entity> entityList , List<Entity> playerEntityList, List<Entity> aiEntityList) {
-        //Clear list first
+        // Clear list first
         //collisionList.clear();        // Alternative logic
 
         for (Entity entity : entityList) {
@@ -59,8 +58,6 @@ public class CollisionManager implements iCollision {
             if (entityManager.getIsCollidable(entity) != collisionList.contains(entity))
                 collisionList.add(entity); //add collidable objects into a aiEntityList
         }
-
-        System.out.println("Collision List contains: " + collisionList);
     }
 }
 

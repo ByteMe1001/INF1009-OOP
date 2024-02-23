@@ -21,7 +21,7 @@ public abstract class Entity {
 
     private boolean isCollidable;
 
-    protected Rectangle boundingBox;
+    private Rectangle boundingBox;
     private Character control; // CAPITAL LETTER Char to designate who controls it. A for AI, P for Player, N for nil
 
 
@@ -30,7 +30,6 @@ public abstract class Entity {
           // do nothing
       }
 
-      // prob wont use, how does the entity know what to create based on ID, unless you have a storage class, but that has to be inside entitymgr
     protected Entity(int id, SpriteBatch batch) {
       this.id = id;
       this.health = 100;        //Just sets default health can be adjusted if needed
@@ -40,14 +39,10 @@ public abstract class Entity {
       this.sprite = null;       // left it as null for now until we insert some placeholder default sprite
       this.width = 30;
       this.height = 30;
-      //this.rect = new CollisionManager(x, y, width, height);
-
-      boundingBox = new Rectangle(x, y, width, height);
-
       this.boundingBox = new Rectangle(x, y, width, height);
       this.batch = batch;
-
     }
+
    // Parameterized constructor
     protected Entity(int id, int health, float x, float y, float scale, Sprite sprite, float width, float height, float speed, int direction, SpriteBatch batch) {
         this.id = id;
@@ -61,10 +56,9 @@ public abstract class Entity {
         this.speed = speed;
         this.direction = direction;
         this.batch = batch;
-        //this.collidable = collidable;
-        //this.rect = new CollisionManager(x, y, width, height);
-        boundingBox = new Rectangle(getX(), getY(), width, height);
+        this.boundingBox = new Rectangle(getX(), getY(), width, height);
     }
+
     //Setters and Getters methods 
     protected int getId() {
       return id;
@@ -154,7 +148,6 @@ public abstract class Entity {
         isAlive = alive;
     }
 
-    // for droplet use don't touch
     protected int getChangeRate() {
        return 1;
     }
@@ -188,7 +181,6 @@ public abstract class Entity {
     }
 
 
-    //protected abstract boolean collidesWith(Entity other);       //Can fine-tune what each entity class is able to collide with using this abstract method
 
     protected boolean isCollidable(){
         return isCollidable;
@@ -198,8 +190,6 @@ public abstract class Entity {
         isCollidable = collidable;
     };
 
-    //protected abstract void collideWith(Entity other);
-
     protected float getSpeed() {
           return speed;
       }
@@ -208,9 +198,11 @@ public abstract class Entity {
           this.speed = speed;
       }
 
-     // protected abstract void collideWith(Entity other);
+    protected Rectangle getBoundingBox(){
+        return boundingBox;
+    }
 
-    protected abstract void takeDamage(int damage);              //Not sure if we need these 2 damage/heal
+    protected abstract void takeDamage(int damage);              // for game use
 
     protected abstract void heal(int amount);
 
@@ -218,21 +210,12 @@ public abstract class Entity {
 
     protected abstract void movement();
 
-    /*
-    protected CollisionManager getRect(){ //get entity position?
-      return rect;
-    }         //might not be using this
-*/
     protected void push(float deltaX, float deltaY) {  //Simple push method maybe can implement for collisions,pretty much just knockback
       this.x += deltaX;
       this.y += deltaY;
     }
 
-    protected Rectangle getBoundingBox(){
-        return boundingBox;
-    }
-
-    //added dispose method
+    //dispose method
     protected void dispose() {
         if (sprite != null && sprite.getTexture() != null) {
             sprite.getTexture().dispose();

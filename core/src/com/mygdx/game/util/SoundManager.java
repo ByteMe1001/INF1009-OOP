@@ -112,6 +112,8 @@ public class SoundManager {
         }
         clips.clear();
     }
+
+    // To prevent concurrent music playing
     public boolean isMusicPlaying() {
         return isMusicPlaying;
     }

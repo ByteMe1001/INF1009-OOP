@@ -5,7 +5,7 @@ import com.mygdx.game.Player;
 import com.mygdx.game.util.iIO;
 
 public class PlayerControlManager implements iIO {
-    private Player player;
+
     private float x, y, speed;
 
 
@@ -20,10 +20,11 @@ public class PlayerControlManager implements iIO {
         this.speed = speed;
     }
 
+    // Check for input keys to return movement vector, can user WASD (inputKey1()) or UDLR keys (inputKey2())
     public float[] movement(float x, float y, float speed) {
         float [] vector = new float[2];     // [0] is X axis, [1] is Y axis
 
-        switch(inputKey()) {
+        switch(inputKey1()) {       // inputKey1() or inputKey2()
 
             case "FALSE":
                 vector[0] = x;
@@ -49,18 +50,10 @@ public class PlayerControlManager implements iIO {
             default:
                 break;
         }
-
         return vector;
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
+    // Getter and setter methods
     public float getX() {
         return x;
     }

@@ -9,17 +9,16 @@ import com.mygdx.game.player.PlayerControlManager;
 public class Bucket extends Entity {
 
     // Additional properties for Bucket class
-
     private final static String TEXTURE_PATH = "spaceship.png";
 
     private PlayerControlManager playerControlManager;
 
     // Default constructor
-    public Bucket() {
+    protected Bucket() {
         //do nothing for now
     }
     // Constructor with ID
-    public Bucket(PlayerControlManager playerControlManager, int id, SpriteBatch batch) {
+    protected Bucket(PlayerControlManager playerControlManager, int id, SpriteBatch batch) {
         super(id, batch);
         // Bucket specific variables
         this.setSprite(new Sprite(new Texture(BucketType.DEFAULT.getTexturePath())));
@@ -29,7 +28,7 @@ public class Bucket extends Entity {
     }
 
     // Parameterized constructor
-    public Bucket(PlayerControlManager playerControlManager,int id, int health, float x, float y, float scale, float width ,float height, float speed, int direction, SpriteBatch batch) {
+    protected Bucket(PlayerControlManager playerControlManager,int id, int health, float x, float y, float scale, float width ,float height, float speed, int direction, SpriteBatch batch) {
         super(id, health, x, y, scale, new Sprite(new Texture(BucketType.DEFAULT.getTexturePath())), width, height, speed, direction, batch);
         // Reset width according to sprite
         setWidth(getSprite().getWidth());
@@ -44,8 +43,7 @@ public class Bucket extends Entity {
     @Override
     protected void update() {
         movement();
-        boundingBox.setPosition(getX(), getY());
-        //System.out.println(boundingBox);
+        super.getBoundingBox().setPosition(getX(), getY());
     }
 
     @Override
@@ -63,12 +61,20 @@ public class Bucket extends Entity {
         // Handle destruction logic for the bucket
     }
 
+    // Movement method for player with movement direction lock
     protected void movement() {
         if (getControl() == 'P') {
             float[] vector = playerControlManager.movement(this.getX(), this.getY(), this.getSpeed());
-
-            setX(vector[0]);    //Set X value
-            setY(vector[1]);    // Set Y value
+            switch (super.getDirection()) {         // 1 for up down, 2 for left right, 3 for all
+                case 1:
+                    setY(vector[1]);    // Set Y value
+                    break;
+                case 2:
+                    setX(vector[0]);    //Set X value
+                case 3:
+                    setX(vector[0]);    //Set X value
+                    setY(vector[1]);    // Set Y value
+            }
         }
     }
 }

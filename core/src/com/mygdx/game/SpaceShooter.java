@@ -28,7 +28,7 @@ public class SpaceShooter extends Game {
 		super.dispose();
 		batch.dispose();
 		lifeCycleManager.dispose();
-		System.out.println(player.getName()+" score: " + player.getScore());
+		System.out.println(player.getName()+" score: " + player.getScore());		// DEMO ONLY
 	}
 
 	@Override

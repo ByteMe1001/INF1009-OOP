@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public interface iIO {
     // Default method to detect W, A, S, D keys
-    default String inputKey() {
+    default String inputKey1() {
 
         if (Gdx.input.isKeyPressed(Keys.W)) {
             return "UP";
@@ -64,8 +64,6 @@ public interface iIO {
         font.draw(batch, text, x, y);
         font.getData().setScale(1, 1); // Reset scale to default
     }
-
-    // Default method to draw a shape using a ShapeRenderer
 
     // Default method to draw a shape using a ShapeRenderer
     default void drawShape(ShapeRenderer shapeRenderer, String shapeType, float x, float y, float width, float height, Color color) {
