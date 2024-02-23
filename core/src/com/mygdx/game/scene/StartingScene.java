@@ -2,6 +2,7 @@ package com.mygdx.game.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -12,6 +13,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.util.SoundManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 public class StartingScene extends Scene {
 
@@ -27,6 +30,7 @@ public class StartingScene extends Scene {
     public void show() {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
+        Music hoverMusic = Gdx.audio.newMusic(Gdx.files.internal("button_sound.wav"));
 
         // Load background image texture
         Texture backgroundTexture = new Texture(BACKGROUND_TEXTURE_PATH);
@@ -58,6 +62,19 @@ public class StartingScene extends Scene {
         stage.addActor(playButton);
 
         // Play sound
+        playButton.addListener(new InputListener() {
+            @Override
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                // Play music when cursor enters the play button area
+                hoverMusic.play();
+            }
+
+            @Override
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                // Stop music when cursor exits the play button area
+                hoverMusic.stop();
+            }
+        });
         super.getSoundManager().playMusic("StartingScene");
 
         // Add click listener to the play button
