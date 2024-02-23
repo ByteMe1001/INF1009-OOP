@@ -19,7 +19,7 @@ public class EntityManager {
     private ArrayList<Entity> entityList;
     private ArrayList<Entity> aiEntityList;
     private ArrayList<Entity> playerEntityList;
-    //private AiManager aiManager;
+
     private SpriteBatch batch;
 
     private PlayerControlManager playerControlManager;
@@ -31,7 +31,6 @@ public class EntityManager {
 
     private SoundManager soundManager;
 
-    // REMEMBER to dispose texture
 
     //Default constructor
     public EntityManager() {
