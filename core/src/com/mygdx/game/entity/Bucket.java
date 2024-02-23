@@ -21,23 +21,24 @@ public class Bucket extends Entity {
     // Constructor with ID
     public Bucket(PlayerControlManager playerControlManager, int id, SpriteBatch batch) {
         super(id, batch);
-
-        this.setSprite(new Sprite(new Texture(TEXTURE_PATH)));
-
-        this.setAlive(true);
-        this.setCollidable(true);
-        this.setControl('P');
+        // Bucket specific variables
+        this.setSprite(new Sprite(new Texture(BucketType.DEFAULT.getTexturePath())));
+        this.setAlive(BucketType.DEFAULT.isAlive());
+        this.setCollidable(BucketType.DEFAULT.isCollidable());
+        this.setControl(BucketType.DEFAULT.getControl());
     }
 
     // Parameterized constructor
-    public Bucket(PlayerControlManager playerControlManager,int id, int health, float x, float y, float scale, float width ,float height, int speed, int direction, SpriteBatch batch) {
-        super(id, health, x, y, scale, new Sprite(new Texture(TEXTURE_PATH)), width, height, speed, direction, batch);
+    public Bucket(PlayerControlManager playerControlManager,int id, int health, float x, float y, float scale, float width ,float height, float speed, int direction, SpriteBatch batch) {
+        super(id, health, x, y, scale, new Sprite(new Texture(BucketType.DEFAULT.getTexturePath())), width, height, speed, direction, batch);
+        // Reset width according to sprite
         setWidth(getSprite().getWidth());
         setHeight(getSprite().getHeight());
+        // Bucket specific variables
         this.playerControlManager = playerControlManager;
-        this.setAlive(true);
-        this.setCollidable(true);
-        this.setControl('P');
+        this.setAlive(BucketType.DEFAULT.isAlive());
+        this.setCollidable(BucketType.DEFAULT.isCollidable());
+        this.setControl(BucketType.DEFAULT.getControl());
     }
 
     @Override
@@ -45,12 +46,6 @@ public class Bucket extends Entity {
         movement();
         boundingBox.setPosition(getX(), getY());
         //System.out.println(boundingBox);
-    }
-
-    @Override
-    protected void render() {
-        // Rendering logic for the bucket
-
     }
 
     @Override
@@ -69,7 +64,6 @@ public class Bucket extends Entity {
     }
 
     protected void movement() {
-
         if (getControl() == 'P') {
             float[] vector = playerControlManager.movement(this.getX(), this.getY(), this.getSpeed());
 

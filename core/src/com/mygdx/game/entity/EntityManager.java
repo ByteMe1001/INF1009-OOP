@@ -57,12 +57,18 @@ public class EntityManager {
 //    }
 
     public void createBucket() {
-        Bucket bucket = new Bucket(playerControlManager,1, 100, 50f, 100f, 1.0f, 64f, 64f, 300, 3, batch);
+        Bucket bucket = new Bucket(playerControlManager,BucketType.DEFAULT.getId(), BucketType.DEFAULT.getHealth(),
+                BucketType.DEFAULT.getX(), BucketType.DEFAULT.getY(), BucketType.DEFAULT.getScale(),
+                BucketType.DEFAULT.getWidth(), BucketType.DEFAULT.getHeight(), BucketType.DEFAULT.getSpeed(),
+                BucketType.DEFAULT.getDirection(), batch);
         addEntity(bucket);
     }
 
     public void createDroplet() {
-        Droplet droplet = new Droplet(aiControlManager,1, 100, 300.0f, 100.0f, 1.0f, 64f, 64f, 300, 3, batch);
+        Droplet droplet = new Droplet(aiControlManager,DropletType.DEFAULT.getId(), DropletType.DEFAULT.getHealth(),
+                DropletType.DEFAULT.getX(), DropletType.DEFAULT.getY(), DropletType.DEFAULT.getScale(),
+                DropletType.DEFAULT.getWidth(), DropletType.DEFAULT.getHeight(), DropletType.DEFAULT.getSpeed(),
+                DropletType.DEFAULT.getDirection(), batch);
         addEntity(droplet);
     }
 
@@ -70,7 +76,10 @@ public class EntityManager {
         for (int i = 0; i < x; i++) {
             float randomX = random.nextInt(640);
             float randomY = random.nextInt(640);
-            Droplet droplet = new Droplet(aiControlManager, 1, 100, randomX, randomY, 1.0f, 64f, 64f, 300, 3, batch);
+            Droplet droplet = new Droplet(aiControlManager,DropletType.DEFAULT.getId(), DropletType.DEFAULT.getHealth(),
+                    randomX, randomY, DropletType.DEFAULT.getScale(),
+                    DropletType.DEFAULT.getWidth(), DropletType.DEFAULT.getHeight(), DropletType.DEFAULT.getSpeed(),
+                    DropletType.DEFAULT.getDirection(), batch);
             addEntity(droplet);
         }
     }

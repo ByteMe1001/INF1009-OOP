@@ -24,58 +24,30 @@ public class Droplet extends Entity {
     // Constructor with id parameter
     public Droplet(int id, SpriteBatch batch) {
         super(id, batch);
-        //this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), getSpeed());
-        this.setChangeRate(DEFAULT_CHANGE_RATE);
-        this.setSprite(new Sprite(new Texture(TEXTURE_PATH)));
-        this.setAlive(true);
-        this.setCollidable(true);
-        this.setControl('A');
+        this.setChangeRate(DropletType.DEFAULT.getChangeRate());
+        this.setSprite(new Sprite(new Texture(DropletType.DEFAULT.getTexturePath())));
+        this.setAlive(DropletType.DEFAULT.isAlive());
+        this.setCollidable(DropletType.DEFAULT.isCollidable());
+        this.setControl(DropletType.DEFAULT.getControl());
     }
 
     // Parameterized constructor
-    public Droplet(AiControlManager aiControlManager, int id, int health, float x, float y, float scale, float width, float height, int speed, int direction, SpriteBatch batch) {
-        super(id, health, x, y, scale, new Sprite(new Texture(TEXTURE_PATH)), width, height, speed, direction, batch);
+    public Droplet(AiControlManager aiControlManager, int id, int health, float x, float y, float scale, float width, float height, float speed, int direction, SpriteBatch batch) {
+        super(id, health, x, y, scale, new Sprite(new Texture(DropletType.DEFAULT.getTexturePath())), width, height, speed, direction, batch);
         setWidth(getSprite().getWidth());
         setHeight(getSprite().getHeight());
         this.aiControlManager = aiControlManager;
-        //this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), getSpeed());
-        this.setAlive(true);
-        this.setChangeRate(DEFAULT_CHANGE_RATE);
-        //Droplet droplet = new Droplet(id, health, boundingBox.x, boundingBox.y, scale, sprite, width, height, speed);
-        this.setCollidable(true);
-        this.setControl('A');
+        this.setChangeRate(DropletType.DEFAULT.getChangeRate());
+        this.setAlive(DropletType.DEFAULT.isAlive());
+        this.setCollidable(DropletType.DEFAULT.isCollidable());
+        this.setControl(DropletType.DEFAULT.getControl());
     }
 
     @Override
     protected void update() {
         movement();
         boundingBox.setPosition(this.getX(), this.getY());
-        //System.out.println(boundingBox);
     }
-
-
-    // not needed
-    @Override
-    protected void render() {
-        // Rendering logic for the droplet
-    }
-
-    /*
-    @Override
-    protected boolean collidesWith(Entity other) {
-        return getBoundingBox().overlaps(other.getBoundingBox());//if entity's bounding box overlaps another entities bounding box
-    }
-*/
-    /*
-    //@Override
-    protected void collideWith(Entity other) {
-        // Collision logic for the droplet with another entity
-        System.out.println("Collision Detected");
-
-        //return false;
-    }
-
-     */
 
     @Override
     protected int getChangeRate() {

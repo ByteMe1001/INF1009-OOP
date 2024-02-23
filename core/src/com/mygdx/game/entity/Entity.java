@@ -10,7 +10,7 @@ public abstract class Entity {
     private float x,y;               //Position
     private float width, height;
     private float scale;
-    private int speed;
+    private float speed;
     private int direction;          // 1 for up down, 2 for left right, 3 for all
 
     private String currentDirection = "";
@@ -49,7 +49,7 @@ public abstract class Entity {
 
     }
    // Parameterized constructor
-    protected Entity(int id, int health, float x, float y, float scale, Sprite sprite, float width, float height, int speed, int direction, SpriteBatch batch) {
+    protected Entity(int id, int health, float x, float y, float scale, Sprite sprite, float width, float height, float speed, int direction, SpriteBatch batch) {
         this.id = id;
         this.health = health;
         this.x = x;
@@ -187,8 +187,6 @@ public abstract class Entity {
         boundingBox.setPosition(getX(), getY());
     }
 
-    protected abstract void render();
-
 
     //protected abstract boolean collidesWith(Entity other);       //Can fine-tune what each entity class is able to collide with using this abstract method
 
@@ -202,7 +200,7 @@ public abstract class Entity {
 
     //protected abstract void collideWith(Entity other);
 
-    protected int getSpeed() {
+    protected float getSpeed() {
           return speed;
       }
 
@@ -244,8 +242,6 @@ public abstract class Entity {
     // Draw function for manager to use
     protected void draw() {
         batch.draw(sprite, this.x, this.y, sprite.getWidth(), sprite.getHeight());
-        //System.out.println(this.x);
-        //System.out.println(this.y);
     }
 }
   
