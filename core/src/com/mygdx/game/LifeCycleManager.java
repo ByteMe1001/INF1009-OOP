@@ -18,19 +18,6 @@ public class LifeCycleManager {
     
     }
 
-    public void startGame() {
-        //sceneManager.setScreen(startScreen);
-    }
-
-    public void pause() {
-
-    }
-
-    public void endGame() {
-
-    }
-
-
     public LifeCycleManager(SpaceShooter spaceShooter, Player player, SpriteBatch batch) {
         this.spaceShooter = spaceShooter;
         this.player = player;
