@@ -11,22 +11,22 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.mygdx.game.util.SoundManager;
 
 public class StartingScene extends Scene {
 
     private final static String TEXTURE_PATH = "playbutton.png";
     private final static String BACKGROUND_TEXTURE_PATH = "StartingImage.png";
     private Stage stage;
-    private SceneManager sceneManager;
 
-    public StartingScene(SceneManager sceneManager, SpriteBatch batch) {
-        super(sceneManager, batch);
-        this.sceneManager = sceneManager;
-        create();
+    public StartingScene(SceneManager sceneManager, SoundManager soundManager, SpriteBatch batch) {
+        super(sceneManager, soundManager, batch);
+        //create();
     }
 
 
-    public void create() {
+    @Override
+    public void show() {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
@@ -59,14 +59,18 @@ public class StartingScene extends Scene {
         // Add play button to the stage
         stage.addActor(playButton);
 
+        // Play sound
+        super.getSoundManager().playMusic("StartingScene");
+
         // Add click listener to the play button
         playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 // Log statement to verify the click listener
                 Gdx.app.log("StartingScene", "Play button clicked");
+                StartingScene.super.getSoundManager().stopAll();
                 // Notify the SceneManager to swap the scene when the play button is clicked
-                sceneManager.swapScene(new GameScene(sceneManager, getBatch()));
+                StartingScene.super.getSceneManager().swapScene(new GameScene(StartingScene.super.getSceneManager(), StartingScene.super.getSoundManager(), getBatch()));
             }
         });
     }

@@ -28,8 +28,6 @@ public class AiControlManager implements iAiMovement {
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
         this.entityManager = entityManager;
-        Random random = new Random();
-        //this.speed = speed;
     }
 
     public void movement(Entity entity, float x, float y, float width, float height, int defaultChangeRate) {

@@ -4,11 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.SpaceShooter;
 import com.mygdx.game.scene.GameScene;
+import com.mygdx.game.util.SoundManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SceneManager implements SceneChangeListener{
+    private SoundManager soundManager;
     private ArrayList<Scene> scenes;
     private Scene currentScene;
     private SpriteBatch batch;
@@ -22,18 +24,18 @@ public class SceneManager implements SceneChangeListener{
     }
 
     public SceneManager (SpaceShooter spaceShooter, SpriteBatch batch) {
+        this.soundManager = new SoundManager();
         this.spaceShooter = spaceShooter;
         this.batch = batch;
         scenes = new ArrayList<Scene>();
     }
 
     public void createStartingScene() {
-        scenes.add(new StartingScene(this, batch));
+        scenes.add(new StartingScene(this, soundManager, batch));
     }
 
     public void createGameScene() {
-        scenes.add(new GameScene(this, batch));
-        //Gdx.app.log("MyGDXGame", "Gamescene created!");
+        scenes.add(new GameScene(this, soundManager, batch));
     }
 
     public void addScene(Scene scene) {
@@ -45,7 +47,7 @@ public class SceneManager implements SceneChangeListener{
     }
 
     public void run() {
-        StartingScene startingScene = new StartingScene(this, batch);
+        StartingScene startingScene = new StartingScene(this, soundManager, batch);
         setCurrentScene(startingScene);
     }
 

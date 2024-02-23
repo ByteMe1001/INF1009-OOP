@@ -13,15 +13,16 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.entity.Entity;
 import com.mygdx.game.entity.EntityManager;
+import com.mygdx.game.util.SoundManager;
 
 // You need to implement scene!
 public abstract class Scene implements Screen {
 
     //change to private
-    protected SceneManager sceneManager;
-    protected List<Entity> entityList;
-    // protected SoundManager sm; // to create a sound manager
-    protected EntityManager entityManager;
+    private SceneManager sceneManager;
+    private SoundManager soundManager;
+    private List<Entity> entityList;
+
 
     // Screen variables
     private Camera camera;
@@ -38,8 +39,9 @@ public abstract class Scene implements Screen {
     private int WORLD_WIDTH = 640;
     private int WORLD_HEIGHT = 640;
 
-    public Scene(SceneManager sceneManager, SpriteBatch batch) {
+    public Scene(SceneManager sceneManager, SoundManager soundManager, SpriteBatch batch) {
         this.sceneManager = sceneManager;
+        this.soundManager = soundManager;
         //this.entityManager = new EntityManager();
         this.entityList = new ArrayList<>();
         this.batch = batch;
@@ -52,7 +54,6 @@ public abstract class Scene implements Screen {
 
     @Override
     public void dispose(){
-        entityManager.dispose();
         getBackground().dispose();
     }
 
@@ -116,13 +117,13 @@ public abstract class Scene implements Screen {
         this.entityList = entityList;
     }
 
-    protected EntityManager getEntityManager() {
-        return entityManager;
-    }
-
-    protected void setEntityManager(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
+//    protected EntityManager getEntityManager() {
+//        return entityManager;
+//    }
+//
+//    protected void setEntityManager(EntityManager entityManager) {
+//        this.entityManager = entityManager;
+//    }
 
     protected Camera getCamera() {
         return camera;
@@ -158,6 +159,14 @@ public abstract class Scene implements Screen {
 
     protected SpriteBatch getBatch() {
         return this.batch;
+    }
+
+    public SoundManager getSoundManager() {
+        return soundManager;
+    }
+
+    public void setSoundManager(SoundManager soundManager) {
+        this.soundManager = soundManager;
     }
 
 }

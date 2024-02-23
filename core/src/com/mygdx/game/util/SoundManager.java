@@ -3,99 +3,116 @@ package com.mygdx.game.util;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-
+import java.util.List;
+import java.util.Map;
 
 public class SoundManager {
-    private HashMap<String, Integer> sceneSoundMap;
-    private ArrayList<Clip> clips;
-    private URL[] soundURL = new URL[2];
+    private Map<String, URL> soundURLs;
+    private Map<String, List<Clip>> clips;
     private boolean isMusicPlaying = false;
 
     public SoundManager() {
-        clips = new ArrayList<>();
-        sceneSoundMap = new HashMap<>();
-        soundURL[0] = getClass().getResource("/Ground_Theme.wav");
-        soundURL[1] = getClass().getResource("/SkyFire.wav");
-        sceneSoundMap.put("StartingScene", 0);
-        sceneSoundMap.put("GameScene", 1);
+        soundURLs = new HashMap<>();
+        soundURLs.put("StartingScene", getClass().getResource("/Ground_Theme.wav"));
+        soundURLs.put("GameScene", getClass().getResource("/SkyFire.wav"));
+        soundURLs.put("GameScene_Collision", getClass().getResource("/explosion.wav"));
+
+        clips = new HashMap<>();
     }
 
-    // Load track into clip array list
-    private void setFile(int i) {
+    // Load track into clip map
+    private void loadClip(String sceneName) {
         try {
-            AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
+            AudioInputStream ais = AudioSystem.getAudioInputStream(soundURLs.get(sceneName));
             Clip clip = AudioSystem.getClip();
             clip.open(ais);
-            clips.add(clip);
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + e.getMessage());
+
+            List<Clip> clipList = clips.computeIfAbsent(sceneName, k -> new ArrayList<>());
+            clipList.add(clip);
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error loading sound for scene " + sceneName + ": " + e.getMessage());
         }
-    }
-
-    // Play according to index
-    public void play(int i) {
-        if (i >= 0 && i < clips.size()) {
-            Clip clip = clips.get(i);
-            clip.setFramePosition(0);
-            clip.setMicrosecondPosition(0);
-            clip.start();
-            isMusicPlaying = true;
-        } else {
-            System.out.println("Invalid index: " + i);
-        }
-    }
-
-    // Loop music
-    public void loop() {
-        clips.forEach(clip -> clip.loop(Clip.LOOP_CONTINUOUSLY));
-    }
-
-    // Stop according to index
-    public void stop(int i) {
-        if (i >= 0 && i < clips.size()) {
-            Clip clip = clips.get(i);
-            clip.stop();
-            isMusicPlaying = false;
-        } else {
-            System.out.println("Invalid index: " + i);
-        }
-    }
-
-    // Stop all music
-    public void stopAll() {
-        clips.forEach(Clip::stop);
-        isMusicPlaying = false;
     }
 
     // Play sound effect
     public void playSE(String sceneName) {
-        Integer i = sceneSoundMap.get(sceneName);
-        setFile(i);
-        play(i);
+        if (soundURLs.containsKey(sceneName)) {
+            try {
+                if (!clips.containsKey(sceneName)) {
+                    loadClip(sceneName);
+                }
+                List<Clip> clipList = clips.get(sceneName);
+                for (Clip clip : clipList) {
+                    clip.setFramePosition(0);
+                    clip.start();
+                }
+            } catch (Exception e) {
+                System.out.println("Error playing sound for scene " + sceneName + ": " + e.getMessage());
+            }
+        } else {
+            throw new IllegalArgumentException("Scene name not found in sound map: " + sceneName);
+        }
     }
 
     // Play music
     public void playMusic(String sceneName) {
-        Integer i = sceneSoundMap.get(sceneName);
-        setFile(i);
-        play(i);
-        loop();
+        if (soundURLs.containsKey(sceneName)) {
+            try {
+                if (!clips.containsKey(sceneName)) {
+                    loadClip(sceneName);
+                }
+                List<Clip> clipList = clips.get(sceneName);
+                for (Clip clip : clipList) {
+                    clip.loop(Clip.LOOP_CONTINUOUSLY);
+                }
+                isMusicPlaying = true;
+            } catch (Exception e) {
+                System.out.println("Error playing music for scene " + sceneName + ": " + e.getMessage());
+            }
+        } else {
+            throw new IllegalArgumentException("Scene name not found in sound map: " + sceneName);
+        }
     }
 
-    public boolean isMusicPlaying() {
-        return isMusicPlaying;
+    // Stop sound or music
+    public void stop(String sceneName) {
+        if (clips.containsKey(sceneName)) {
+            List<Clip> clipList = clips.get(sceneName);
+            for (Clip clip : clipList) {
+                clip.stop();
+            }
+            isMusicPlaying = false;
+        } else {
+            throw new IllegalArgumentException("No sound or music playing for scene: " + sceneName);
+        }
+    }
+
+    // Stop all sounds and music
+    public void stopAll() {
+        for (List<Clip> clipList : clips.values()) {
+            for (Clip clip : clipList) {
+                clip.stop();
+            }
+        }
+        isMusicPlaying = false;
     }
 
     // Dispose resources
     public void dispose() {
-        stopAll();
-        clips.forEach(Clip::close);
+        for (List<Clip> clipList : clips.values()) {
+            for (Clip clip : clipList) {
+                clip.close();
+            }
+        }
+        clips.clear();
+    }
+    public boolean isMusicPlaying() {
+        return isMusicPlaying;
     }
 }

@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 import com.mygdx.game.player.PlayerControlManager;
+import com.mygdx.game.util.SoundManager;
 
 public class EntityManager {
 
@@ -28,6 +29,8 @@ public class EntityManager {
 
     Random random = new Random();
 
+    private SoundManager soundManager;
+
     // REMEMBER to dispose texture
 
     //Default constructor
@@ -36,14 +39,15 @@ public class EntityManager {
     }
 
     //Constructor with collisionManager as an instance variable
-    public EntityManager(SpriteBatch batch) {
+    public EntityManager(SoundManager soundManager, SpriteBatch batch) {
+        this.soundManager = soundManager;
+        this.batch = batch;
         this.entityList = new ArrayList<Entity>();
         this.playerEntityList = new ArrayList<Entity>();
         this.aiEntityList = new ArrayList<Entity>();
-        this.collisionManager = new CollisionManager(this, entityList, playerEntityList, aiEntityList);
+        this.collisionManager = new CollisionManager(this, soundManager, entityList, playerEntityList, aiEntityList);
         this.playerControlManager = new PlayerControlManager();
         this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);
-        this.batch = batch;
     }
 
      // Constructor with collisionManager and aiManager as instance variables

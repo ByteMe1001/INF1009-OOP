@@ -33,7 +33,7 @@ public interface iCollision {
     }
     //public void checkCollision(EntityManager entityManager);
 
-    default void handleCollision(EntityManager entityManager, List<Entity> collisionList, Entity x, Entity y){
+    default void handleCollision(EntityManager entityManager, SoundManager soundManager, List<Entity> collisionList, Entity x, Entity y){
 
         if(checkSameControl(entityManager, x, y)){
             System.out.println("Boing Boing");
@@ -43,6 +43,7 @@ public interface iCollision {
             //System.out.println(x + " has been removed from the collision list");
             //entityManager.removeEntity(x); //update entityManager to remove entity
             System.out.println("Collision Detected between " + x + " and " + y);
+            soundManager.playSE("GameScene_Collision");
 
             collisionList.remove(y); //update collidableList to remove entity
             System.out.println(y + " has been removed from the collision list");

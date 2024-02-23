@@ -9,14 +9,14 @@ import com.mygdx.game.entity.EntityManager;
 // an example of a scene that can be used in the game (test out main codes)
 class GameScene extends Scene{
     private EntityManager entityManager;
-    private SoundManager soundManager;
 
-    public GameScene(SceneManager sceneManager, SpriteBatch batch) {
-        super(sceneManager, batch);
-        this.entityManager = new EntityManager(batch);        // Can put here or show()
-        this.soundManager = new SoundManager();
+    private final static String TEXTURE_PATH = "Space.jpg";
 
-        super.setBackground(new Texture("Space.jpg"));
+    public GameScene(SceneManager sceneManager, SoundManager soundManager, SpriteBatch batch) {
+        super(sceneManager, soundManager, batch);
+        this.entityManager = new EntityManager(soundManager, batch);        // Can put here or show()
+
+        super.setBackground(new Texture(TEXTURE_PATH));
         entityManager.createBucket();
         entityManager.createDroplets(5);
         //Gdx.app.log("MyGDXGame", "Gamescene constructor!");
@@ -27,8 +27,8 @@ class GameScene extends Scene{
         // Can put here or show()
         //super.setBackground(new Texture("Space.jpg"));
         System.out.println("Create");
-        if (!soundManager.isMusicPlaying()) {
-            soundManager.playMusic("GameScene");
+        if (!super.getSoundManager().isMusicPlaying()) {
+            super.getSoundManager().playMusic("GameScene");
         }
         // Create entities for this scene
         //addEntity(); // add in droplet and bucket accordingly idk
@@ -50,7 +50,7 @@ class GameScene extends Scene{
     public void dispose() {
         // Dispose of resources
         entityManager.dispose();
-        soundManager.dispose();
+        super.getSoundManager().dispose();
     }
 
 

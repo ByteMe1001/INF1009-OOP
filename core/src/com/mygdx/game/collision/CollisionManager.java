@@ -8,6 +8,7 @@ import java.util.ListIterator;
 
 import com.mygdx.game.entity.Entity;
 import com.mygdx.game.entity.EntityManager;
+import com.mygdx.game.util.SoundManager;
 import com.mygdx.game.util.iCollision;
 
 
@@ -17,8 +18,12 @@ public class CollisionManager implements iCollision {
 
     private EntityManager entityManager;
 
-    public CollisionManager(EntityManager entityManager,List<Entity> entityList, List<Entity> playerEntityList, List<Entity> aiEntityList) {
+    private SoundManager soundManager;
+
+    public CollisionManager(EntityManager entityManager, SoundManager soundManager, List<Entity> entityList, List<Entity> playerEntityList, List<Entity> aiEntityList) {
         this.entityManager = entityManager;
+        this.soundManager = new SoundManager();
+
         collisionList = new ArrayList<Entity>();
 
         for (Entity entity : entityList) {
@@ -43,7 +48,7 @@ public class CollisionManager implements iCollision {
             for (int j = i + 1; j < collisionList.size(); j++){
                 if(collidesWith(entityManager, collisionList.get(i), collisionList.get(j))){ //If entities overlaps with one another, print Collision Detected in console
                     System.out.println("Collision Detected");
-                    handleCollision(entityManager, collisionList, collisionList.get(i), collisionList.get(j));
+                    handleCollision(entityManager, soundManager, collisionList, collisionList.get(i), collisionList.get(j));
                 }
             }
         }
