@@ -20,6 +20,8 @@ public class StartingScene extends Scene {
 
     private final static String TEXTURE_PATH = "playbutton.png";
     private final static String BACKGROUND_TEXTURE_PATH = "StartingImage.png";
+
+    private final static float BUTTON_SCALE = 0.2f;         // Scale to set button
     private Stage stage;
 
     protected StartingScene(SceneManager sceneManager, SoundManager soundManager, SpriteBatch batch) {
@@ -30,7 +32,6 @@ public class StartingScene extends Scene {
     public void show() {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-        Music hoverMusic = Gdx.audio.newMusic(Gdx.files.internal("button_sound.wav"));
 
         // Load background image texture
         Texture backgroundTexture = new Texture(BACKGROUND_TEXTURE_PATH);
@@ -48,8 +49,8 @@ public class StartingScene extends Scene {
         ImageButton playButton = new ImageButton(playButtonDrawable);
 
         // Set the size of the play button
-        float buttonWidth = 200;
-        float buttonHeight = 100;
+        float buttonWidth = playButtonTexture.getWidth() * BUTTON_SCALE;
+        float buttonHeight = playButtonTexture.getHeight() * BUTTON_SCALE;
 
         // Calculate button position to center it on the screen
         float buttonX = (Gdx.graphics.getWidth() - buttonWidth) / 2;
@@ -66,13 +67,7 @@ public class StartingScene extends Scene {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                 // Play music when cursor enters the play button area
-                hoverMusic.play();
-            }
-
-            @Override
-            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                // Stop music when cursor exits the play button area
-                hoverMusic.stop();
+                StartingScene.super.getSoundManager().playMusic("StartingScene_Button");
             }
         });
         super.getSoundManager().playMusic("StartingScene");

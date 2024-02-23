@@ -20,6 +20,7 @@ public class SoundManager {
     public SoundManager() {
         soundURLs = new HashMap<>();
         soundURLs.put("StartingScene", getClass().getResource("/Ground_Theme.wav"));
+        soundURLs.put("StartingScene_Button", getClass().getResource("/button_sound.wav"));
         soundURLs.put("GameScene", getClass().getResource("/SkyFire.wav"));
         soundURLs.put("GameScene_Collision", getClass().getResource("/explosion.wav"));
 
