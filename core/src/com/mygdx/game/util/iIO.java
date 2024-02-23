@@ -63,7 +63,7 @@ public interface iIO {
         actor.addListener(new InputListener() {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                soundManager.playMusic(musicKey);
+                soundManager.playSE(musicKey);
             }
         });
     }

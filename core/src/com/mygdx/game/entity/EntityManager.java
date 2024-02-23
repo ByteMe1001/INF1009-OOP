@@ -98,7 +98,9 @@ public class EntityManager {
     public void createEntities(int player, int ai, int entity) {
        createBuckets(player);
        createDroplets(ai);
-       createDroplets(entity);
+        for (int i = 0; i < entity; i++){
+            Bucket bucket = new Bucket(playerControlManager,1, 100, 300.0f, 100.0f, 1.0f, 50f, 50f, 10, 0, batch);
+        }
     }
 
 

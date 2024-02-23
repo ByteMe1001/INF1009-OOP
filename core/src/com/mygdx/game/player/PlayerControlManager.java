@@ -14,7 +14,6 @@ public class PlayerControlManager implements iIO {
     }
 
     public PlayerControlManager(float x, float y, float speed) {
-
         this.x = x;
         this.y = y;
         this.speed = speed;
