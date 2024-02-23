@@ -26,15 +26,7 @@ public class CollisionManager implements iCollision {
 
         collisionList = new ArrayList<Entity>();
 
-        for (Entity entity : entityList) {
-            if (entityManager.getIsCollidable(entity)) collisionList.add(entity); //add collidable objects into a entityList
-        }
-        for (Entity entity : playerEntityList) {
-            if (entityManager.getIsCollidable(entity)) collisionList.add(entity); //add collidable objects into a entityList
-        }
-        for (Entity entity : aiEntityList) {
-            if (entityManager.getIsCollidable(entity)) collisionList.add(entity); //add collidable objects into a entityList
-        }
+
     }
 
     // Default constructor
@@ -46,7 +38,7 @@ public class CollisionManager implements iCollision {
         for (int i = 0; i < collisionList.size() - 1; i++){
             for (int j = i + 1; j < collisionList.size(); j++){
                 if(collidesWith(entityManager, collisionList.get(i), collisionList.get(j))){ //If entities overlaps with one another, print Collision Detected in console
-                    handleCollision(entityManager, soundManager, collisionList, collisionList.get(i), collisionList.get(j));
+                    handleCollision(entityManager, soundManager, collisionList, collisionList.get(i), collisionList.get(j)); //handles collision logic when entity collide
                 }
             }
         }
@@ -58,16 +50,16 @@ public class CollisionManager implements iCollision {
 
         for (Entity entity : entityList) {
             if (entityManager.getIsCollidable(entity))
-                collisionList.add(entity); //add collidable objects into a entityList
+                collisionList.add(entity); //add collidable objects into entityList
         }
 
         for (Entity entity : playerEntityList) {
             if (entityManager.getIsCollidable(entity))
-                collisionList.add(entity); //add collidable objects into a entityList
+                collisionList.add(entity); //add collidable objects into a playerEntityList
         }
         for (Entity entity : aiEntityList) {
             if (entityManager.getIsCollidable(entity))
-                collisionList.add(entity); //add collidable objects into a entityList
+                collisionList.add(entity); //add collidable objects into a aiEntityList
         }
     }
 }
