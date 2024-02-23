@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+
+// To store player state and variables throughout the whole application, even through multiple gamecycle rounds
 public class Player {
     private String name;
     private int score;
