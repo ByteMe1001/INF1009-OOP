@@ -60,7 +60,7 @@ public class CollisionManager implements iCollision {
                 collisionList.add(entity); //add collidable objects into a aiEntityList
         }
 
-        System.out.println("Collision List contains: " + collisionList);
+        
     }
 }
 
