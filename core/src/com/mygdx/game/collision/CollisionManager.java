@@ -25,8 +25,6 @@ public class CollisionManager implements iCollision {
         this.soundManager = new SoundManager();
 
         collisionList = new ArrayList<Entity>();
-
-
     }
 
     // Default constructor
@@ -46,7 +44,7 @@ public class CollisionManager implements iCollision {
 
     public void updateCollisionList(List<Entity> entityList , List<Entity> playerEntityList, List<Entity> aiEntityList) {
         //Clear list first
-        //collisionList.clear();
+        //collisionList.clear();        // Alternative logic
 
         for (Entity entity : entityList) {
             if (entityManager.getIsCollidable(entity) != collisionList.contains(entity))
