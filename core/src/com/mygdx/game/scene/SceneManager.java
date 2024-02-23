@@ -15,7 +15,6 @@ public class SceneManager implements SceneChangeListener{
     private Scene currentScene;
     private SpriteBatch batch;
     private SpaceShooter spaceShooter;
-    private int sceneNumber; // to determine current scene
 
     // SceneManager to swap scenes, each scene should do all the world logic
 

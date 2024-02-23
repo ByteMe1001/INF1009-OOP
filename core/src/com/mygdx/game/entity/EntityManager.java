@@ -31,10 +31,9 @@ public class EntityManager {
 
     private SoundManager soundManager;
 
-
     //Default constructor
     public EntityManager() {
-    // do nothing dont touch
+    // do nothing
     }
 
     //Constructor with collisionManager as an instance variable
@@ -49,6 +48,7 @@ public class EntityManager {
         this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);
     }
 
+    // Entity creations
     public void createBucket() {
         Bucket bucket = new Bucket(playerControlManager,BucketType.DEFAULT.getId(), BucketType.DEFAULT.getHealth(),
                 BucketType.DEFAULT.getX(), BucketType.DEFAULT.getY(), BucketType.DEFAULT.getScale(),
@@ -69,7 +69,7 @@ public class EntityManager {
         }
     }
 
-    public void createDroplet() {
+    public void createDroplet(){
         Droplet droplet = new Droplet(aiControlManager,DropletType.DEFAULT.getId(), DropletType.DEFAULT.getHealth(),
                 DropletType.DEFAULT.getX(), DropletType.DEFAULT.getY(), DropletType.DEFAULT.getScale(),
                 DropletType.DEFAULT.getWidth(), DropletType.DEFAULT.getHeight(), DropletType.DEFAULT.getSpeed(),
@@ -79,8 +79,8 @@ public class EntityManager {
 
     public void createDroplets(int x) {
         for (int i = 0; i < x; i++) {
-            float randomX = random.nextInt(640);
-            float randomY = random.nextInt(640);
+            float randomX = random.nextInt(Gdx.graphics.getHeight());
+            float randomY = random.nextInt(Gdx.graphics.getWidth());
             Droplet droplet = new Droplet(aiControlManager,DropletType.DEFAULT.getId(), DropletType.DEFAULT.getHealth(),
                     randomX, randomY, DropletType.DEFAULT.getScale(),
                     DropletType.DEFAULT.getWidth(), DropletType.DEFAULT.getHeight(), DropletType.DEFAULT.getSpeed(),
@@ -98,8 +98,10 @@ public class EntityManager {
     public void createEntities(int player, int ai, int entity) {
        createBuckets(player);
        createDroplets(ai);
+       //Create not moving droplet
         for (int i = 0; i < entity; i++){
-            Bucket bucket = new Bucket(playerControlManager,1, 100, 300.0f, 100.0f, 1.0f, 50f, 50f, 10, 0, batch);
+            Droplet droplet = new Droplet(aiControlManager, i, 100, 300.0f, 200.0f, 1.0f, 50f, 50f, 10, 0, batch);
+            addEntity(droplet);
         }
     }
 

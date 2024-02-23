@@ -6,8 +6,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.util.SoundManager;
 import com.mygdx.game.entity.EntityManager;
 
-// Name your class file properly
-// an example of a scene that can be used in the game (test out main codes)
 class GameScene extends Scene{
     private EntityManager entityManager;
 
@@ -27,7 +25,6 @@ class GameScene extends Scene{
         entityManager.createBucket();
         entityManager.createDroplets(5);
     }
-
 
     @Override
     public void render(float deltaTime) {

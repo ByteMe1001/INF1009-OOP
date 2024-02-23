@@ -17,7 +17,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.mygdx.game.util.iIO;
 
-public class StartingScene extends Scene implements iIO {
+class StartingScene extends Scene implements iIO {
 
     private final static String TEXTURE_PATH = "playbutton.png";
     private final static String BACKGROUND_TEXTURE_PATH = "StartingImage.png";
@@ -62,6 +62,9 @@ public class StartingScene extends Scene implements iIO {
 
         // Add play button to the stage
         stage.addActor(playButton);
+
+        // Play Screen sound
+        super.getSoundManager().playMusic("StartingScene");
 
         // Play sound on hover
         addCursorEnterListener(playButton, super.getSoundManager(), "StartingScene_Button");

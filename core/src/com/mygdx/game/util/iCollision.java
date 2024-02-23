@@ -17,6 +17,8 @@ public interface iCollision {
 
         if(checkSameControl(entityManager, x, y)){
             System.out.println("Boing Boing"); // DEMO ONLY if entity control type is the same, print message on collide
+//            collisionList.remove(y); //update collidable List to remove entity
+//            entityManager.setIsALive(y, false); //set entity is alive to false
         }
         else {
             soundManager.playSE("GameScene_Collision");     // Player collision sound

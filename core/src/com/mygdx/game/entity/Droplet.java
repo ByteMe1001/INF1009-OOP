@@ -7,7 +7,7 @@ import com.mygdx.game.ai.AiControlManager;
 
 import java.util.Random;
 
-public class Droplet extends Entity {
+class Droplet extends Entity {
 
     // Additional properties for Droplet class
     private final static String TEXTURE_PATH = "asteroid.png";
@@ -85,7 +85,7 @@ public class Droplet extends Entity {
     protected void movement() {
         if (getControl() == 'A') {
             Random random = new Random();
-            int randomNumber = random.nextInt(31);
+            int randomNumber = random.nextInt(DEFAULT_CHANGE_RATE);      // 0 to 30 inclusive
             aiControlManager.movement(this, this.getX(), this.getY(), this.getWidth(), this.getHeight(), randomNumber);
         }
     }

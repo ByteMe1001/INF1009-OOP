@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.player.PlayerControlManager;
 
 
-public class Bucket extends Entity {
+class Bucket extends Entity {
 
     // Additional properties for Bucket class
     private final static String TEXTURE_PATH = "spaceship.png";
@@ -61,6 +61,7 @@ public class Bucket extends Entity {
         // Handle destruction logic for the bucket
     }
 
+    @Override
     // Movement method for player with movement direction lock
     protected void movement() {
         if (getControl() == 'P') {
@@ -71,9 +72,11 @@ public class Bucket extends Entity {
                     break;
                 case 2:
                     setX(vector[0]);    //Set X value
+                    break;
                 case 3:
                     setX(vector[0]);    //Set X value
                     setY(vector[1]);    // Set Y value
+                    break;
             }
         }
     }

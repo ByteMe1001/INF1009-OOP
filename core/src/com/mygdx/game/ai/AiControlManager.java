@@ -33,13 +33,13 @@ public class AiControlManager implements iAiMovement {
             //System.out.println(entityManager.getChangeRate(entity));
             if (entityManager.getChangeRate(entity) >= 0 ) {
                 switch (entityManager.getDirection(entity)) {
-                    case 1:
+                    case MOVE_UP_DOWN:
                         setUpDown(entityManager, entity, y, height);
                         break;
-                    case 2:
+                    case MOVE_LEFT_RIGHT:
                         setLeftRight(entityManager, entity, x, width);
                         break;
-                    case 3:
+                    case MOVE_ALL:
                         setAll(entityManager, entity, x, y, width, height);
                         break;
                 }

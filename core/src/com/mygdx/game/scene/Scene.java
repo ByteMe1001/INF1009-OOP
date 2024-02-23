@@ -15,10 +15,9 @@ import com.mygdx.game.entity.Entity;
 import com.mygdx.game.entity.EntityManager;
 import com.mygdx.game.util.SoundManager;
 
-// You need to implement scene!
 public abstract class Scene implements Screen {
 
-    //change to private
+    // Manager Variables
     private SceneManager sceneManager;
     private SoundManager soundManager;
 

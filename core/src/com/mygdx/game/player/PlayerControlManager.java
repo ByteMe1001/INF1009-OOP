@@ -32,7 +32,6 @@ public class PlayerControlManager implements iIO {
             case "UP":
                 vector[0] = x;
                 vector[1] = (y + (speed * Gdx.graphics.getDeltaTime()));
-
                 break;
             case "DOWN":
                 vector[0] = x;
@@ -44,7 +43,7 @@ public class PlayerControlManager implements iIO {
                 break;
             case "RIGHT" :
                 vector[0] = (x + (speed * Gdx.graphics.getDeltaTime()));
-                vector[1] = (y);
+                vector[1] = y;
             break;
             default:
                 break;

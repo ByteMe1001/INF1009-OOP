@@ -3,7 +3,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
-//Not sure what else to import for now
 public abstract class Entity {
     private int id;
     private int health;
