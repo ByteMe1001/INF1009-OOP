@@ -49,19 +49,24 @@ public class EntityManager {
         this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);
     }
 
-     // Constructor with collisionManager and aiManager as instance variables
-//    public EntityManager(CollisionManager collisionManager, AiControlManager aiControlManager) {
-//        entityList = new ArrayList<>();
-//        this.collisionManager = collisionManager;
-//        this.aiControlManager = aiControlManager;  // Step 3: Initialize AiManager
-//    }
-
     public void createBucket() {
         Bucket bucket = new Bucket(playerControlManager,BucketType.DEFAULT.getId(), BucketType.DEFAULT.getHealth(),
                 BucketType.DEFAULT.getX(), BucketType.DEFAULT.getY(), BucketType.DEFAULT.getScale(),
                 BucketType.DEFAULT.getWidth(), BucketType.DEFAULT.getHeight(), BucketType.DEFAULT.getSpeed(),
                 BucketType.DEFAULT.getDirection(), batch);
         addEntity(bucket);
+    }
+
+    public void createBuckets(int x) {
+        for (int i = 0; i < x; i++) {
+            float randomX = random.nextInt(640);
+            float randomY = random.nextInt(640);
+            Bucket bucket = new Bucket(playerControlManager, BucketType.DEFAULT.getId(), BucketType.DEFAULT.getHealth(),
+                    BucketType.DEFAULT.getX(), BucketType.DEFAULT.getY(), BucketType.DEFAULT.getScale(),
+                    BucketType.DEFAULT.getWidth(), BucketType.DEFAULT.getHeight(), BucketType.DEFAULT.getSpeed(),
+                    BucketType.DEFAULT.getDirection(), batch);
+            addEntity(bucket);
+        }
     }
 
     public void createDroplet() {
@@ -84,22 +89,18 @@ public class EntityManager {
         }
     }
 
-    // To fix
-    public void createEntities(int player, int ai, int entity) {
-        for (int i = 0; i < player; i++){
-            Bucket bucket = new Bucket(playerControlManager,1, 100, 300.0f, 100.0f, 1.0f, 50f, 50f, 10, 10, batch); //not sure
-        }
-    }
-
+    // Create entity loops
     public void createEntities (int player, int ai) {
-        for (int i = 0; i < player; i++){
-            Bucket bucket = new Bucket(playerControlManager, 1, 100, 300.0f, 100.0f, 1.0f, 50f, 50f, 10, 10, batch); //not sure
-        }
-
-        for (int i = 0; i < player; i++){
-            Droplet droplet = new Droplet(aiControlManager,1, 100, 300.0f, 100.0f, 1.0f, 64f, 64f, 300, 3, batch); //not sure
-        }
+        createBuckets(player);
+        createDroplets(ai);
     }
+
+    public void createEntities(int player, int ai, int entity) {
+       createBuckets(player);
+       createDroplets(ai);
+       createDroplets(entity);
+    }
+
 
     public void deleteEntity(Entity e) {
         if (!entityList.remove(e) && !playerEntityList.remove(e) && !aiEntityList.remove(e)) {

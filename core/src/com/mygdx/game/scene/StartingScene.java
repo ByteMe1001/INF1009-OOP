@@ -15,8 +15,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.util.SoundManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.mygdx.game.util.iIO;
 
-public class StartingScene extends Scene {
+public class StartingScene extends Scene implements iIO {
 
     private final static String TEXTURE_PATH = "playbutton.png";
     private final static String BACKGROUND_TEXTURE_PATH = "StartingImage.png";
@@ -62,23 +63,13 @@ public class StartingScene extends Scene {
         // Add play button to the stage
         stage.addActor(playButton);
 
-        // Play sound
-        playButton.addListener(new InputListener() {
-            @Override
-            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                // Play music when cursor enters the play button area
-                StartingScene.super.getSoundManager().playMusic("StartingScene_Button");
-            }
-        });
-        super.getSoundManager().playMusic("StartingScene");
+        // Play sound on hover
+        addCursorEnterListener(playButton, super.getSoundManager(), "StartingScene_Button");
 
-        // Add click listener to the play button
-        playButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                // Notify the SceneManager to swap the scene when the play button is clicked
-                StartingScene.super.getSceneManager().swapScene(new GameScene(StartingScene.super.getSceneManager(), StartingScene.super.getSoundManager(), getBatch()));
-            }
+        // Swap scene when clicked
+        addButtonClickListener(playButton, () -> {
+            // Logic to execute when the play button is clicked
+            super.getSceneManager().swapScene(new GameScene(StartingScene.super.getSceneManager(), StartingScene.super.getSoundManager(), getBatch()));
         });
     }
 

@@ -7,6 +7,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+
 
 public interface iIO {
     // Default method to detect W, A, S, D keys
@@ -52,6 +57,28 @@ public interface iIO {
 
         else return "FALSE";
     }
+
+    // Method to handle button hover events
+    default void addCursorEnterListener(Actor actor, SoundManager soundManager, String musicKey) {
+        actor.addListener(new InputListener() {
+            @Override
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                soundManager.playMusic(musicKey);
+            }
+        });
+    }
+
+    // Method to handle button click events
+    default void addButtonClickListener(Actor button, Runnable onClick) {
+        button.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                onClick.run(); // Execute the logic when the button is clicked
+            }
+        });
+    }
+
+    // Output
 
     // Default method to draw text on a SpriteBatch using a BitmapFont
     default void drawText(SpriteBatch batch, BitmapFont font, String text, float x, float y) {
