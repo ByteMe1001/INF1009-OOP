@@ -2,6 +2,7 @@ package com.mygdx.game.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.LifeCycleManager;
 import com.mygdx.game.SpaceShooter;
 import com.mygdx.game.scene.GameScene;
 import com.mygdx.game.util.SoundManager;
@@ -14,7 +15,7 @@ public class SceneManager implements SceneChangeListener{
     private ArrayList<Scene> scenes;
     private Scene currentScene;
     private SpriteBatch batch;
-    private SpaceShooter spaceShooter;
+    private LifeCycleManager lifeCycleManager;
 
     // SceneManager to swap scenes, each scene should do all the world logic
 
@@ -22,9 +23,9 @@ public class SceneManager implements SceneChangeListener{
         scenes = new ArrayList<>();
     }
 
-    public SceneManager (SpaceShooter spaceShooter, SpriteBatch batch) {
+    public SceneManager (LifeCycleManager lifeCycleManager, SpriteBatch batch) {
         this.soundManager = new SoundManager();
-        this.spaceShooter = spaceShooter;
+        this.lifeCycleManager = lifeCycleManager;
         this.batch = batch;
         scenes = new ArrayList<Scene>();
     }
@@ -44,7 +45,7 @@ public class SceneManager implements SceneChangeListener{
     }
 
     public void setScene(Scene scene) {
-        spaceShooter.setScreen(scene);
+        lifeCycleManager.setScreen(scene);
     }
 
     public void run() {

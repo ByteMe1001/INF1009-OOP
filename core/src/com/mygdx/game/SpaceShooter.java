@@ -18,7 +18,7 @@ public class SpaceShooter extends Game {
 	public void create() {
 		player = new Player();
 		batch = new SpriteBatch();
-		lifeCycleManager = new LifeCycleManager(this, player, batch);
+		//lifeCycleManager = new LifeCycleManager(this, player, batch);
 		Gdx.app.log("MyGDXGame", player.getName());
 		lifeCycleManager.run();
 	}

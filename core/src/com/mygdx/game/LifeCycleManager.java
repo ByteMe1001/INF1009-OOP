@@ -5,11 +5,17 @@ import com.mygdx.game.scene.Scene;
 import com.mygdx.game.scene.SceneManager;
 import java.util.logging.*;
 
-public class LifeCycleManager {
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.util.SoundManager;
+
+public class LifeCycleManager extends Game {
     private Player player;
     private SceneManager sceneManager;
     private SpriteBatch batch;
-    private SpaceShooter spaceShooter;
+    private SoundManager soundManager;
 
     // Logger creation
     private static final Logger logger = Logger.getLogger(LifeCycleManager.class.getName());
@@ -18,13 +24,50 @@ public class LifeCycleManager {
     
     }
 
-    public LifeCycleManager(SpaceShooter spaceShooter, Player player, SpriteBatch batch) {
-        this.spaceShooter = spaceShooter;
-        this.player = player;
-        this.batch = batch;
-        sceneManager = new SceneManager(spaceShooter, batch);
+//    public LifeCycleManager(SpaceShooter spaceShooter, Player player, SpriteBatch batch) {
+//        this.spaceShooter = spaceShooter;
+//        this.player = player;
+//        this.batch = batch;
+//        sceneManager = new SceneManager(spaceShooter, batch);
+//    }
+
+    @Override
+    public void create() {
+        player = new Player();
+        batch = new SpriteBatch();
+        sceneManager = new SceneManager(this, batch);
+        Gdx.app.log("MyGDXGame", player.getName());
+        run();
     }
 
+    @Override
+    public void dispose() {
+        super.dispose();
+        batch.dispose();
+        player.setScore(1);     // Demo purposes
+        sceneManager.dispose();
+        System.out.println(player.getName()+" score: " + player.getScore());		// DEMO ONLY
+    }
+
+    @Override
+    public void pause() {
+        super.pause();
+    }
+
+    @Override
+    public void render() {
+        super.render();
+        //lifeCycleManager.run();
+//		do {
+//			lifeCycleManager.run();
+//		}
+//		while (player.isPlaying());
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        //gameScene.resize(width, height);
+    }
 
     public void run() {
         try {
@@ -34,12 +77,12 @@ public class LifeCycleManager {
         }
     }
 
-    public void setStartingScreen(SpaceShooter spaceShooter) {
-        spaceShooter.setScreen(getStartingScene());
+    public void setStartingScreen() {
+        setScreen(getStartingScene());
     }
 
-    public void setGameScreen(SpaceShooter spaceShooter) {
-        spaceShooter.setScreen(getGameScene());
+    public void setGameScreen() {
+        setScreen(getGameScene());
     }
 
     public void playerStop() {
@@ -50,10 +93,6 @@ public class LifeCycleManager {
         player.setPlaying(true);
     }
 
-    public void dispose() {
-        player.setScore(1);     // Demo purposes
-        sceneManager.dispose();
-    }
     public Scene getStartingScene() {
         return sceneManager.getStartingScene();
     }

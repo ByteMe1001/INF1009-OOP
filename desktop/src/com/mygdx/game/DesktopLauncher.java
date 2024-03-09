@@ -10,6 +10,6 @@ public class DesktopLauncher {
 		config.setForegroundFPS(60);
 		config.setTitle("SpaceShooter");
 		config.setWindowSizeLimits(640,640, 1000, 1000);
-		new Lwjgl3Application(new SpaceShooter(), config);
+		new Lwjgl3Application(new LifeCycleManager(), config);
 	}
 }
