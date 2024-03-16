@@ -76,19 +76,19 @@ public abstract class Entity implements iCollision {
       this.health = health;
     }
 
-    protected float getX() {
+    public float getX() {
       return x;
     }
 
-    protected void setX(float x) {
+    public void setX(float x) {
       this.x = x;
     }
 
-    protected float getY() {
+    public float getY() {
       return y;
     }
 
-    protected void setY(float y) {
+    public void setY(float y) {
       this.y = y;
     }
 
@@ -108,7 +108,7 @@ public abstract class Entity implements iCollision {
       this.sprite = sprite;
     }
 
-    protected float getWidth() {
+    public float getWidth() {
         return width;
     }
 
@@ -116,7 +116,7 @@ public abstract class Entity implements iCollision {
         this.width = width;
     }
 
-    protected float getHeight() {
+    public float getHeight() {
         return height;
     }
 
