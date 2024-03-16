@@ -4,10 +4,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.ai.AiControlManager;
+import com.mygdx.game.util.iAiMovement;
 
 import java.util.Random;
 
-class Droplet extends Entity {
+class Droplet extends Entity implements iAiMovement {
 
     // Additional properties for Droplet class
     private final static String TEXTURE_PATH = "asteroid.png";
@@ -79,18 +80,39 @@ class Droplet extends Entity {
     protected void destroy() {
         // Handle destruction logic for the droplet
     }
+    
+    @Override
+    public void setLeftRight() {
+        aiControlManager.setLeftRight(this);
+    }
 
-    // Movement code calling for AI
+    @Override
+    public void setUpDown() {
+        aiControlManager.setUpDown(this);
+    }
+
+    @Override
+    public void setAll() {
+        aiControlManager.setAll(this);
+    }
+
+ // Movement logic
     @Override
     protected void movement() {
         if (getControl() == 'A') {
             Random random = new Random();
-            int randomNumber = random.nextInt(DEFAULT_CHANGE_RATE);      // 0 to 30 inclusive
-            aiControlManager.movement(this, this.getX(), this.getY(), this.getWidth(), this.getHeight(), randomNumber);
+            int decision = random.nextInt(3); // Randomly choose a movement method
+            switch (decision) {
+                case 0:
+                    setLeftRight();
+                    break;
+                case 1:
+                    setUpDown();
+                    break;
+                case 2:
+                    setAll();
+                    break;
+            }
         }
     }
 }
-
-
-
-
