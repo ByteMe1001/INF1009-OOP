@@ -45,7 +45,7 @@ public class EntityManager {
         this.aiEntityList = new ArrayList<Entity>();
         this.collisionManager = new CollisionManager(this, soundManager, entityList, playerEntityList, aiEntityList);
         this.playerControlManager = new PlayerControlManager();
-        this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);
+        this.aiControlManager = new AiControlManager(this);
     }
 
     // Entity creations
@@ -283,6 +283,3 @@ public class EntityManager {
         throw new IllegalArgumentException("Entity not found in the entity list");
     }
 }
-
-
-
