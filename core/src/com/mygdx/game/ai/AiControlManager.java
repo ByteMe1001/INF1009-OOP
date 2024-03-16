@@ -5,45 +5,123 @@ import com.mygdx.game.entity.Entity;
 import com.mygdx.game.entity.EntityManager;
 import com.mygdx.game.util.iAiMovement;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
-// Name your class file properly
-public class AiControlManager implements iAiMovement {
-    private ArrayList<Entity> aiEntityList; // Stores all AI-controlled entities
+public class AiControlManager {
     private EntityManager entityManager;
-    private float screenWidth; // The width of the screen to keep entities within bounds
-    private float screenHeight; // The height of the screen for up and down movements
-    private float speed; // Speed at which entities move
+    private Random random = new Random();
 
-    // Constants for movement rule set IDs
-    public static final int MOVE_UP_DOWN = 1;
-    public static final int MOVE_LEFT_RIGHT = 2;
-    public static final int MOVE_ALL = 3;
-
-    public AiControlManager(float screenWidth, float screenHeight, EntityManager entityManager, ArrayList<Entity> aiEntityList) {
-        this.aiEntityList = aiEntityList;
-        this.screenWidth = screenWidth;
-        this.screenHeight = screenHeight;
+    public AiControlManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    public void movement(Entity entity, float x, float y, float width, float height, int defaultChangeRate) {
-            //System.out.println(entityManager.getChangeRate(entity));
-            if (entityManager.getChangeRate(entity) >= 0 ) {
-                switch (entityManager.getDirection(entity)) {
-                    case MOVE_UP_DOWN:
-                        setUpDown(entityManager, entity, y, height);
-                        break;
-                    case MOVE_LEFT_RIGHT:
-                        setLeftRight(entityManager, entity, x, width);
-                        break;
-                    case MOVE_ALL:
-                        setAll(entityManager, entity, x, y, width, height);
-                        break;
-                }
+    public void setLeftRight(Entity entity) {
+        float x = entity.getX();
+        float width = entity.getWidth();
+        if (entityManager.getChangeRate(entity) <= 0) {
+            int randomNumber = random.nextInt(2);
+            if (randomNumber == 0) {
+                moveLeft(entity);
+            } else {
+                moveRight(entity, width);
             }
-            else entityManager.setChangeRate(entity, defaultChangeRate);
+        } else {
+            if ("LEFT".equals(entityManager.getCurrentDirection(entity))) {
+                moveLeft(entity);
+            } else {
+                moveRight(entity, width);
+            }
         }
+        entityManager.decrementChangeRate(entity);
     }
+
+    public void setUpDown(Entity entity) {
+        float y = entity.getY();
+        float height = entity.getHeight();
+        if (entityManager.getChangeRate(entity) <= 0) {
+            int randomNumber = random.nextInt(2);
+            if (randomNumber == 0) {
+                moveUp(entity, height);
+            } else {
+                moveDown(entity);
+            }
+        } else {
+            if ("UP".equals(entityManager.getCurrentDirection(entity))) {
+                moveUp(entity, height);
+            } else {
+                moveDown(entity);
+            }
+        }
+        entityManager.decrementChangeRate(entity);
+    }
+
+    public void setAll(Entity entity) {
+        float x = entity.getX();
+        float y = entity.getY();
+        float width = entity.getWidth();
+        float height = entity.getHeight();
+        if (entityManager.getChangeRate(entity) <= 0) {
+            int randomNumber = random.nextInt(4);
+            switch (randomNumber) {
+                case 0:
+                    moveLeft(entity);
+                    break;
+                case 1:
+                    moveRight(entity, width);
+                    break;
+                case 2:
+                    moveUp(entity, height);
+                    break;
+                case 3:
+                    moveDown(entity);
+                    break;
+            }
+        } else {
+            switch (entityManager.getCurrentDirection(entity)) {
+                case "LEFT":
+                    moveLeft(entity);
+                    break;
+                case "RIGHT":
+                    moveRight(entity, width);
+                    break;
+                case "UP":
+                    moveUp(entity, height);
+                    break;
+                case "DOWN":
+                    moveDown(entity);
+                    break;
+            }
+        }
+        entityManager.decrementChangeRate(entity);
+    }
+
+    private void moveLeft(Entity entity) {
+        float x = entity.getX();
+        float speed = entityManager.getSpeed(entity);
+        float newX = x - speed * Gdx.graphics.getDeltaTime();
+        entity.setX(Math.max(newX, 0)); // Ensure the new X is not out of bounds
+    }
+
+    private void moveRight(Entity entity, float width) {
+        float x = entity.getX();
+        float speed = entityManager.getSpeed(entity);
+        float newX = x + speed * Gdx.graphics.getDeltaTime();
+        float rightBoundary = Gdx.graphics.getWidth() - width;
+        entity.setX(Math.min(newX, rightBoundary)); // Ensure the new X is not out of bounds
+    }
+
+    private void moveUp(Entity entity, float height) {
+        float y = entity.getY();
+        float speed = entityManager.getSpeed(entity);
+        float newY = y + speed * Gdx.graphics.getDeltaTime();
+        float topBoundary = Gdx.graphics.getHeight() - height;
+        entity.setY(Math.min(newY, topBoundary)); // Ensure the new Y is not out of bounds
+    }
+
+    private void moveDown(Entity entity) {
+        float y = entity.getY();
+        float speed = entityManager.getSpeed(entity);
+        float newY = y - speed * Gdx.graphics.getDeltaTime();
+        entity.setY(Math.max(newY, 0)); // Ensure the new Y is not out of bounds
+    }
+}
