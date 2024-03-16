@@ -12,7 +12,7 @@ import com.mygdx.game.util.SoundManager;
 import com.mygdx.game.util.iCollision;
 
 
-public class CollisionManager implements iCollision {
+public class CollisionManager {
 
     private ArrayList<Entity> collisionList;
     private EntityManager entityManager;     // Entity Manager for entity control
@@ -33,7 +33,7 @@ public class CollisionManager implements iCollision {
     public void detectCollision(EntityManager entityManager){
         for (int i = 0; i < collisionList.size() - 1; i++){
             for (int j = i + 1; j < collisionList.size(); j++){
-                if(collidesWith(entityManager, collisionList.get(i), collisionList.get(j))){ //If entities overlaps with one another, print Collision Detected in console
+                if(collisionList.get(i).collidesWith(collisionList.get(j))){ //If entities overlaps with one another, print Collision Detected in console
                     handleCollision(entityManager, soundManager, collisionList, collisionList.get(i), collisionList.get(j)); //handles collision logic when entity collide
                 }
             }
@@ -58,6 +58,30 @@ public class CollisionManager implements iCollision {
             if (entityManager.getIsCollidable(entity) != collisionList.contains(entity))
                 collisionList.add(entity); //add collidable objects into a aiEntityList
         }
+    }
+
+    protected void handleCollision(EntityManager entityManager, SoundManager soundManager, List<Entity> collisionList, Entity x, Entity y){
+
+        if(checkSameControl(entityManager, x, y)){
+            System.out.println("Boing Boing"); // DEMO ONLY if entity control type is the same, print message on collide
+//            collisionList.remove(y); //update collidable List to remove entity
+//            entityManager.setIsALive(y, false); //set entity is alive to false
+        }
+        else {
+            soundManager.playSE("GameScene_Collision");     // Player collision sound
+            System.out.println("Asteroid Killed!");     // DEMO ONLY
+            // collisionList.remove(x); //update collidableList to remove entity
+            // entityManager.deleteEntity(x); //update entityManager to remove entity
+
+            collisionList.remove(y); //update collidable List to remove entity
+            entityManager.setIsALive(y, false); //set entity is alive to false
+            // entityManager.deleteEntity(y); alternative logic to delete entity instead
+            // entityManager.removeEntity(x); //update entityManager to remove entity from entity list
+        }
+    };
+
+    protected boolean checkSameControl(EntityManager entityManager, Entity entity, Entity other){
+        return entityManager.getControl(entity) == entityManager.getControl(other); //if same entity control type is the same
     }
 }
 

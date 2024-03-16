@@ -2,8 +2,9 @@ package com.mygdx.game.entity;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.util.iCollision;
 
-public abstract class Entity {
+public abstract class Entity implements iCollision {
     private int id;
     private int health;
     private float x,y;               //Position
@@ -196,12 +197,9 @@ public abstract class Entity {
     protected void setSpeed(int speed) {
           this.speed = speed;
       }
-
-    protected Rectangle getBoundingBox(){
-        return boundingBox;
-    }
-
     protected abstract void takeDamage(int damage);              // for game use
+
+
 
     protected abstract void heal(int amount);
 
@@ -224,6 +222,16 @@ public abstract class Entity {
     // Draw function for manager to use
     protected void draw() {
         batch.draw(sprite, this.x, this.y, sprite.getWidth(), sprite.getHeight());
+    }
+
+    @Override
+    public Rectangle getBoundingBox(){
+        return boundingBox;
+    }
+
+    @Override
+    public boolean collidesWith(Entity other){
+        return boundingBox.overlaps(other.getBoundingBox());
     }
 }
   
