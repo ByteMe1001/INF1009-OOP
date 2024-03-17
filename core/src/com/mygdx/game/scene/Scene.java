@@ -81,14 +81,12 @@ public abstract class Scene implements Screen {
     public void pause() {
         isPaused = true;
         // to add in other thing like stop animation, stop music etc
-
     }
 
     @Override
     public void resume() {
         isPaused = false;
         // too add in stuff like resume animations, resume music
-
     }
 
     @Override
