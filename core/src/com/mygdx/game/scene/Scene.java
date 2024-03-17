@@ -11,8 +11,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.entity.Entity;
-import com.mygdx.game.entity.EntityManager;
 import com.mygdx.game.util.SoundManager;
 
 public abstract class Scene implements Screen {
@@ -36,9 +34,12 @@ public abstract class Scene implements Screen {
     private int WORLD_WIDTH = 640;
     private int WORLD_HEIGHT = 640;
 
+    private boolean isPaused;
+
     public Scene(SceneManager sceneManager, SoundManager soundManager, SpriteBatch batch) {
         this.sceneManager = sceneManager;
         this.soundManager = soundManager;
+        isPaused = false;
 
         this.batch = batch;
 
@@ -78,11 +79,15 @@ public abstract class Scene implements Screen {
 
     @Override
     public void pause() {
+        isPaused = true;
+        // to add in other thing like stop animation, stop music etc
 
     }
 
     @Override
     public void resume() {
+        isPaused = false;
+        // too add in stuff like resume animations, resume music
 
     }
 
@@ -90,6 +95,7 @@ public abstract class Scene implements Screen {
     public void hide() {
 
     }
+
     // Getter Setter methods
     protected SceneManager getSceneManager() {
         return sceneManager;
