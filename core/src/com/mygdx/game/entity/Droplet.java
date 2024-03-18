@@ -102,6 +102,7 @@ class Droplet extends Entity implements iAiMovement {
         if (getControl() == 'A') {
             Random random = new Random();
             int decision = random.nextInt(3); // Randomly choose a movement method
+
             switch (decision) {
                 case 0:
                     setLeftRight();
