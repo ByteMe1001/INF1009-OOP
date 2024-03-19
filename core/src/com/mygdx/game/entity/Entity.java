@@ -59,9 +59,6 @@ public abstract class Entity implements iCollision {
         this.boundingBox = new Rectangle(getX(), getY(), width, height);
     }
 
-    public Entity(int id, float x, float y, SpriteBatch batch) {
-    }
-
     //Setters and Getters methods 
     protected int getId() {
       return id;
