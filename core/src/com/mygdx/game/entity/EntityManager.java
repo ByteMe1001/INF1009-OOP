@@ -230,6 +230,10 @@ public class EntityManager {
         findEntity(e).setChangeRate(x);
     }
 
+    public void setDirection(Entity entity, int direction) {
+        entity.setDirection(direction);
+    }
+
     public void decrementChangeRate(Entity e) {
         Entity entity = findEntity(e);
         entity.setChangeRate(entity.getChangeRate() - 1);
