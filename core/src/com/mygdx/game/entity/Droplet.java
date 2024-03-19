@@ -95,15 +95,23 @@ class Droplet extends Entity implements iAiMovement {
     public void setAll() {
         aiControlManager.setAll(this);
     }
+    
+    private Random random = new Random();
 
  // Movement logic
     @Override
     protected void movement() {
         if (getControl() == 'A') {
-            Random random = new Random();
-            int decision = random.nextInt(3); // Randomly choose a movement method
+            EntityManager manager = aiControlManager.getEntityManager();
 
-            switch (decision) {
+            if (manager.getChangeRate(this) <= 0) {
+            	//int decision = 1;
+                int decision = random.nextInt(3); // random number
+                manager.setDirection(this, decision);
+                manager.setChangeRate(this, DEFAULT_CHANGE_RATE);
+            }
+
+            switch (manager.getDirection(this)) {
                 case 0:
                     setLeftRight();
                     break;
@@ -114,6 +122,9 @@ class Droplet extends Entity implements iAiMovement {
                     setAll();
                     break;
             }
+
+            manager.decrementChangeRate(this);
         }
     }
+
 }
