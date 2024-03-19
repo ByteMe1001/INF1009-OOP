@@ -90,22 +90,6 @@ public class SceneManager implements SceneChangeListener{
         currentScene.dispose();
     }
 
-    // Hard code for demo
-    public Scene getStartingScene() {
-        if (!scenes.isEmpty()) {
-            return scenes.get(0);
-        } else {
-            return null; // No GameScene found
-        }
-    }
-    public Scene getGameScene() {
-        if (!scenes.isEmpty()) {
-            return scenes.get(1);
-        } else {
-            return null; // No GameScene found
-        }
-    }
-
     // Clear all scene assets
     public void dispose() {
         for (Scene scene: scenes) {
