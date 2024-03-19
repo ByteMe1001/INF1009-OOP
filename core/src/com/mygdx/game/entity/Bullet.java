@@ -77,7 +77,7 @@ public class Bullet extends Entity implements iAiMovement {
     //Movement Logic
 
     @Override
-    protected void movement() {
+    public void movement() {
         // Move the bullet upwards
         float newY = getY() + getSpeed(); // Adjust speed as needed
         setY(newY);

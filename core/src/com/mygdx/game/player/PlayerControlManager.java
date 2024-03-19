@@ -5,28 +5,28 @@ import com.mygdx.game.Player;
 import com.mygdx.game.entity.Entity;
 import com.mygdx.game.entity.EntityManager;
 import com.mygdx.game.util.iIO;
+import com.mygdx.game.util.iPlayerMovement;
 
 import java.util.ArrayList;
 
 public class PlayerControlManager implements iIO {
 
-    private float x, y, speed;
-    private ArrayList<Entity> playerEntityList;
+   // private float x, y, speed;
+    private ArrayList<iPlayerMovement> playerEntityList;
 
 
     public PlayerControlManager() {
 
     }
 
-    public PlayerControlManager(float x, float y, float speed) {
-        this.x = x;
-        this.y = y;
-        this.speed = speed;
+    public PlayerControlManager(ArrayList<iPlayerMovement> playerEntityList) {
+        this.playerEntityList = playerEntityList;
     }
 
     public void update(EntityManager entityManager) {
-        for(Entity e: playerEntityList) {
-            entityManager.findEntity(e).movement();
+        for(iPlayerMovement e: playerEntityList) {
+
+            e.movement(movement(e.getX(), e.getY(), e.getSpeed()));
         }
     }
 
@@ -63,27 +63,27 @@ public class PlayerControlManager implements iIO {
     }
 
     // Getter and setter methods
-    public float getX() {
-        return x;
-    }
+//    public float getX() {
+//        return x;
+//    }
+//
+//    public void setX(float x) {
+//        this.x = x;
+//    }
+//
+//    public float getY() {
+//        return y;
+//    }
+//
+//    public void setY(float y) {
+//        this.y = y;
+//    }
+//
+//    public float getSpeed() {
+//        return speed;
+//    }
 
-    public void setX(float x) {
-        this.x = x;
-    }
-
-    public float getY() {
-        return y;
-    }
-
-    public void setY(float y) {
-        this.y = y;
-    }
-
-    public float getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(float speed) {
-        this.speed = speed;
-    }
+//    public void setSpeed(float speed) {
+//        this.speed = speed;
+//    }
 }

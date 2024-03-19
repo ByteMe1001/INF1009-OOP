@@ -190,7 +190,7 @@ public abstract class Entity implements iCollision {
         isCollidable = collidable;
     };
 
-    protected float getSpeed() {
+    public float getSpeed() {
           return speed;
       }
 

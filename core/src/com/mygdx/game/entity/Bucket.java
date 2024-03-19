@@ -4,9 +4,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.player.PlayerControlManager;
+import com.mygdx.game.util.iPlayerMovement;
 
 
-class Bucket extends Entity {
+class Bucket extends Entity implements iPlayerMovement {
 
     // Additional properties for Bucket class
     private final static String TEXTURE_PATH = "spaceship.png";
@@ -66,6 +67,23 @@ class Bucket extends Entity {
     public void movement() {
         if (getControl() == 'P') {
             float[] vector = playerControlManager.movement(this.getX(), this.getY(), this.getSpeed());
+            switch (super.getDirection()) {         // 1 for up down, 2 for left right, 3 for all
+                case 1:
+                    setY(vector[1]);    // Set Y value
+                    break;
+                case 2:
+                    setX(vector[0]);    //Set X value
+                    break;
+                case 3:
+                    setX(vector[0]);    //Set X value
+                    setY(vector[1]);    // Set Y value
+                    break;
+            }
+        }
+    }
+
+    public void movement(float[] vector) {
+        if (getControl() == 'P') {
             switch (super.getDirection()) {         // 1 for up down, 2 for left right, 3 for all
                 case 1:
                     setY(vector[1]);    // Set Y value
