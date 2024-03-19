@@ -63,7 +63,7 @@ class Bucket extends Entity {
 
     @Override
     // Movement method for player with movement direction lock
-    protected void movement() {
+    public void movement() {
         if (getControl() == 'P') {
             float[] vector = playerControlManager.movement(this.getX(), this.getY(), this.getSpeed());
             switch (super.getDirection()) {         // 1 for up down, 2 for left right, 3 for all

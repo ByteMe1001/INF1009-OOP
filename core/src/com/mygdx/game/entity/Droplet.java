@@ -98,7 +98,7 @@ class Droplet extends Entity implements iAiMovement {
 
  // Movement logic
     @Override
-    protected void movement() {
+    public void movement() {
         if (getControl() == 'A') {
             Random random = new Random();
             int decision = random.nextInt(3); // Randomly choose a movement method

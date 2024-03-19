@@ -3,6 +3,7 @@ package com.mygdx.game.scene;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.LifeCycleManager;
+import com.mygdx.game.Player;
 import com.mygdx.game.PlayerManager;
 import com.mygdx.game.SpaceShooter;
 import com.mygdx.game.scene.GameScene;
@@ -29,6 +30,7 @@ public class SceneManager implements SceneChangeListener{
     public SceneManager (LifeCycleManager lifeCycleManager, SpriteBatch batch) {
         this.soundManager = new SoundManager();
         this.lifeCycleManager = lifeCycleManager;
+        PlayerManager playerManager = new PlayerManager();      // Later change to after starting scene ends
         this.batch = batch;
         scenes = new ArrayList<Scene>();
     }
@@ -104,6 +106,10 @@ public class SceneManager implements SceneChangeListener{
         } else {
             return null; // No GameScene found
         }
+    }
+
+    public void setPlayerScore(Player p, int score) {
+        playerManager.setScore(p, score);
     }
 
     // Clear all scene assets

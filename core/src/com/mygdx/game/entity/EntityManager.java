@@ -264,7 +264,7 @@ public class EntityManager {
     }
 
     // Method to find entity
-    private Entity findEntity(Entity e) {
+    public Entity findEntity(Entity e) {
         for (Entity entity : entityList) {
             if (entity == e) {
                 return entity;

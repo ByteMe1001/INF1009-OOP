@@ -7,8 +7,8 @@ import java.util.ArrayList;
 public class PlayerManager {
     private ArrayList<Player> playerList;
 
-    public PlayerManager(ArrayList<Player> playerList) {
-        this.playerList = playerList;
+    public PlayerManager() {
+        ArrayList<Player> playerList = new ArrayList<>();
     }
 
     public void createPlayer(String name) {

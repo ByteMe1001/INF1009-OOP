@@ -2,11 +2,16 @@ package com.mygdx.game.player;
 
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.Player;
+import com.mygdx.game.entity.Entity;
+import com.mygdx.game.entity.EntityManager;
 import com.mygdx.game.util.iIO;
+
+import java.util.ArrayList;
 
 public class PlayerControlManager implements iIO {
 
     private float x, y, speed;
+    private ArrayList<Entity> playerEntityList;
 
 
     public PlayerControlManager() {
@@ -17,6 +22,12 @@ public class PlayerControlManager implements iIO {
         this.x = x;
         this.y = y;
         this.speed = speed;
+    }
+
+    public void update(EntityManager entityManager) {
+        for(Entity e: playerEntityList) {
+            entityManager.findEntity(e).movement();
+        }
     }
 
     // Check for input keys to return movement vector, can user WASD (inputKey1()) or UDLR keys (inputKey2())

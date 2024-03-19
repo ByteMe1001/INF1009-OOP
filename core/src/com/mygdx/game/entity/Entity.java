@@ -205,7 +205,7 @@ public abstract class Entity implements iCollision {
 
     protected abstract void destroy();
 
-    protected abstract void movement();
+    public abstract void movement();
 
     protected void push(float deltaX, float deltaY) {  //Simple push method maybe can implement for collisions,pretty much just knockback
       this.x += deltaX;
