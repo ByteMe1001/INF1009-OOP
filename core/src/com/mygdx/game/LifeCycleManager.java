@@ -77,13 +77,13 @@ public class LifeCycleManager extends Game {
         }
     }
 
-    public void setStartingScreen() {
-        setScreen(getStartingScene());
-    }
-
-    public void setGameScreen() {
-        setScreen(getGameScene());
-    }
+//    public void setStartingScreen() {
+//        setScreen(getStartingScene());
+//    }
+//
+//    public void setGameScreen() {
+//        setScreen(getGameScene());
+//    }
 
     public void playerStop() {
         player.setPlaying(false);
@@ -93,11 +93,11 @@ public class LifeCycleManager extends Game {
         player.setPlaying(true);
     }
 
-    public Scene getStartingScene() {
-        return sceneManager.getStartingScene();
-    }
-    public Scene getGameScene() {
-        return sceneManager.getGameScene();
-    }
+//    public Scene getStartingScene() {
+//        return sceneManager.getStartingScene();
+//    }
+//    public Scene getGameScene() {
+//        return sceneManager.getGameScene();
+//    }
 
 }
