@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.player.PlayerControlManager;
 import com.mygdx.game.util.iPlayerMovement;
 
-public class Bucket extends CollidableEntities implements iPlayerMovement {
+class Bucket extends CollidableEntities implements iPlayerMovement {
 
     // Additional properties for Bucket class
     private final static String TEXTURE_PATH = "spaceship.png";
