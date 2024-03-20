@@ -1,9 +1,11 @@
 package com.mygdx.game.ai;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.entity.Droplet;
 import com.mygdx.game.entity.Entity;
 import com.mygdx.game.entity.EntityManager;
 import com.mygdx.game.util.iAiMovement;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,21 +31,25 @@ public class AiControlManager implements iAiMovement {
         this.entityManager = entityManager;
     }
 
-    public void movement(Entity entity, float x, float y, float width, float height, int defaultChangeRate) {
-            //System.out.println(entityManager.getChangeRate(entity));
-            if (entityManager.getChangeRate(entity) >= 0 ) {
-                switch (entityManager.getDirection(entity)) {
-                    case 1:
-                        setUpDown(entityManager, entity, y, height);
-                        break;
-                    case 2:
-                        setLeftRight(entityManager, entity, x, width);
-                        break;
-                    case 3:
-                        setAll(entityManager, entity, x, y, width, height);
-                        break;
+    public void movement(Entity entity, float x, float y, float width, float height, int movementPreference) {
+    	if (entity instanceof Droplet) {
+            Droplet droplet = (Droplet) entity;
+            switch (movementPreference) {
+            case MOVE_UP_DOWN:
+                if ("UP".equals(droplet.getCurrentDirection())) {
+                    droplet.up(entityManager, entity, y, height);
+                } else {
+                    droplet.down(entityManager, entity, y);
                 }
-            }
-            else entityManager.setChangeRate(entity, defaultChangeRate);
-        }
+                break;
+            case MOVE_LEFT_RIGHT:
+                if ("LEFT".equals(droplet.getCurrentDirection())) {
+                    droplet.left(entityManager, entity, x);
+                } else {
+                    droplet.right(entityManager, entity, x, width);
+                }
+                break;
+    		}
+    	}
     }
+}
