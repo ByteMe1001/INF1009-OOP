@@ -60,20 +60,6 @@ public class Bullet extends CollidableEntities implements iAiMovement {
 
     }
 
-    @Override
-    public void setLeftRight() {
-
-    }
-
-    @Override
-    public void setUpDown() {
-
-    }
-
-    @Override
-    public void setAll() {
-
-    }
     //Movement Logic
 
     @Override
