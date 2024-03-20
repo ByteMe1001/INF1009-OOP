@@ -3,16 +3,20 @@ package com.mygdx.game.ai;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.entity.Entity;
 import com.mygdx.game.entity.EntityManager;
-import com.mygdx.game.util.iAiMovement;
 
 import java.util.Random;
 
 public class AiControlManager {
     private EntityManager entityManager;
     private Random random = new Random();
+    private static final int DEFAULT_CHANGE_RATE = 30;
 
     public AiControlManager(EntityManager entityManager) {
         this.entityManager = entityManager;
+    }
+    
+    public EntityManager getEntityManager() {
+        return entityManager;
     }
 
     public void setLeftRight(Entity entity) {
@@ -20,17 +24,14 @@ public class AiControlManager {
         float width = entity.getWidth();
         if (entityManager.getChangeRate(entity) <= 0) {
             int randomNumber = random.nextInt(2);
-            if (randomNumber == 0) {
-                moveLeft(entity);
-            } else {
-                moveRight(entity, width);
-            }
+            entityManager.setCurrentDirection(entity, randomNumber == 0 ? "LEFT" : "RIGHT");
+            entityManager.setChangeRate(entity, DEFAULT_CHANGE_RATE);
+        }
+
+        if ("LEFT".equals(entityManager.getCurrentDirection(entity))) {
+            moveLeft(entity, x);
         } else {
-            if ("LEFT".equals(entityManager.getCurrentDirection(entity))) {
-                moveLeft(entity);
-            } else {
-                moveRight(entity, width);
-            }
+            moveRight(entity, x, width);
         }
         entityManager.decrementChangeRate(entity);
     }
@@ -40,88 +41,108 @@ public class AiControlManager {
         float height = entity.getHeight();
         if (entityManager.getChangeRate(entity) <= 0) {
             int randomNumber = random.nextInt(2);
-            if (randomNumber == 0) {
-                moveUp(entity, height);
-            } else {
-                moveDown(entity);
-            }
+            entityManager.setCurrentDirection(entity, randomNumber == 0 ? "UP" : "DOWN");
+            entityManager.setChangeRate(entity, DEFAULT_CHANGE_RATE);
+        }
+
+        if ("UP".equals(entityManager.getCurrentDirection(entity))) {
+            moveUp(entity, y, height);
         } else {
-            if ("UP".equals(entityManager.getCurrentDirection(entity))) {
-                moveUp(entity, height);
-            } else {
-                moveDown(entity);
-            }
+            moveDown(entity, y);
         }
         entityManager.decrementChangeRate(entity);
     }
+
 
     public void setAll(Entity entity) {
         float x = entity.getX();
         float y = entity.getY();
         float width = entity.getWidth();
         float height = entity.getHeight();
+
         if (entityManager.getChangeRate(entity) <= 0) {
             int randomNumber = random.nextInt(4);
             switch (randomNumber) {
                 case 0:
-                    moveLeft(entity);
+                    entityManager.setCurrentDirection(entity, "LEFT");
                     break;
                 case 1:
-                    moveRight(entity, width);
+                    entityManager.setCurrentDirection(entity, "RIGHT");
                     break;
                 case 2:
-                    moveUp(entity, height);
+                    entityManager.setCurrentDirection(entity, "UP");
                     break;
                 case 3:
-                    moveDown(entity);
+                    entityManager.setCurrentDirection(entity, "DOWN");
                     break;
             }
-        } else {
-            switch (entityManager.getCurrentDirection(entity)) {
-                case "LEFT":
-                    moveLeft(entity);
-                    break;
-                case "RIGHT":
-                    moveRight(entity, width);
-                    break;
-                case "UP":
-                    moveUp(entity, height);
-                    break;
-                case "DOWN":
-                    moveDown(entity);
-                    break;
-            }
+            entityManager.setChangeRate(entity, DEFAULT_CHANGE_RATE);
+          //  System.out.println("Entity " + entity.getId() + " New Direction: " + entityManager.getCurrentDirection(entity));
+        } 
+
+        // Apply movement based on the current direction
+        switch (entityManager.getCurrentDirection(entity)) {
+            case "LEFT":
+                moveLeft(entity, x);
+                break;
+            case "RIGHT":
+                moveRight(entity, x, width);
+                break;
+            case "UP":
+                moveUp(entity, y, height);
+                break;
+            case "DOWN":
+                moveDown(entity, y);
+                break;
         }
+
         entityManager.decrementChangeRate(entity);
     }
 
-    private void moveLeft(Entity entity) {
-        float x = entity.getX();
+    private void moveLeft(Entity entity, float x) {
         float speed = entityManager.getSpeed(entity);
         float newX = x - speed * Gdx.graphics.getDeltaTime();
-        entity.setX(Math.max(newX, 0)); // Ensure the new X is not out of bounds
+        newX = Math.max(newX, 0);
+        if (newX == 0) {
+            entityManager.setCurrentDirection(entity, "RIGHT"); // Change direction if it hits the left boundary
+        }
+       // System.out.println("Entity " + entity.getId() + " Moving Left to X: " + newX);
+        entity.setX(newX);
     }
 
-    private void moveRight(Entity entity, float width) {
-        float x = entity.getX();
+    private void moveRight(Entity entity, float x, float width) {
         float speed = entityManager.getSpeed(entity);
         float newX = x + speed * Gdx.graphics.getDeltaTime();
         float rightBoundary = Gdx.graphics.getWidth() - width;
-        entity.setX(Math.min(newX, rightBoundary)); // Ensure the new X is not out of bounds
+        newX = Math.min(newX, rightBoundary);
+        if (newX == rightBoundary) {
+            entityManager.setCurrentDirection(entity, "LEFT"); // Change direction if it hits the right boundary
+        }
+      //  System.out.println("Entity " + entity.getId() + " Moving Right to X: " + newX);
+        entity.setX(newX);
     }
 
-    private void moveUp(Entity entity, float height) {
-        float y = entity.getY();
+    private void moveUp(Entity entity, float y, float height) {
         float speed = entityManager.getSpeed(entity);
         float newY = y + speed * Gdx.graphics.getDeltaTime();
         float topBoundary = Gdx.graphics.getHeight() - height;
-        entity.setY(Math.min(newY, topBoundary)); // Ensure the new Y is not out of bounds
+        newY = Math.min(newY, topBoundary);
+        if (newY == topBoundary) {
+            entityManager.setCurrentDirection(entity, "DOWN"); // Change direction if it hits the top boundary
+        }
+      //  System.out.println("Entity " + entity.getId() + " Moving Up to Y: " + newY);
+        entity.setY(newY);
     }
 
-    private void moveDown(Entity entity) {
-        float y = entity.getY();
+    private void moveDown(Entity entity, float y) {
         float speed = entityManager.getSpeed(entity);
         float newY = y - speed * Gdx.graphics.getDeltaTime();
-        entity.setY(Math.max(newY, 0)); // Ensure the new Y is not out of bounds
+        newY = Math.max(newY, 0);
+        if (newY == 0) {
+            entityManager.setCurrentDirection(entity, "UP"); // Change direction if it hits the bottom boundary
+        }
+       // System.out.println("Entity " + entity.getId() + " Moving Down to Y: " + newY);
+        entity.setY(newY);
     }
+
 }

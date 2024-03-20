@@ -12,6 +12,7 @@ import java.util.Random;
 
 import com.mygdx.game.player.PlayerControlManager;
 import com.mygdx.game.util.SoundManager;
+import com.mygdx.game.util.iCollision;
 
 public class EntityManager {
 
@@ -43,7 +44,8 @@ public class EntityManager {
         this.entityList = new ArrayList<Entity>();
         this.playerEntityList = new ArrayList<Entity>();
         this.aiEntityList = new ArrayList<Entity>();
-        this.collisionManager = new CollisionManager(this, soundManager, entityList, playerEntityList, aiEntityList);
+        ArrayList<iCollision> collisionList = new ArrayList<iCollision>();
+        this.collisionManager = new CollisionManager(this, soundManager, entityList, playerEntityList, aiEntityList, collisionList);
         this.playerControlManager = new PlayerControlManager();
         this.aiControlManager = new AiControlManager(this);
     }
@@ -228,6 +230,10 @@ public class EntityManager {
 
     public void setChangeRate(Entity e, int x) {
         findEntity(e).setChangeRate(x);
+    }
+
+    public void setDirection(Entity entity, int direction) {
+        entity.setDirection(direction);
     }
 
     public void decrementChangeRate(Entity e) {

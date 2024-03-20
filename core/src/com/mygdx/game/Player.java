@@ -15,6 +15,13 @@ public class Player {
         this.isPlaying = true;
     }
 
+    public Player(String name) {
+        // do nothing
+        this.name = name;
+        this.score = 0;
+        this.isPlaying = true;
+    }
+
     // Constructor without isPlaying set
     public Player(String name, int score) {
         this.name = name;

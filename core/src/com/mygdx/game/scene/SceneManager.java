@@ -3,6 +3,7 @@ package com.mygdx.game.scene;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.LifeCycleManager;
+import com.mygdx.game.PlayerManager;
 import com.mygdx.game.SpaceShooter;
 import com.mygdx.game.scene.GameScene;
 import com.mygdx.game.util.SoundManager;
@@ -12,6 +13,8 @@ import java.util.List;
 
 public class SceneManager implements SceneChangeListener{
     private SoundManager soundManager;
+
+    private PlayerManager playerManager;
     private ArrayList<Scene> scenes;
     private Scene currentScene;
     private SpriteBatch batch;
@@ -86,22 +89,6 @@ public class SceneManager implements SceneChangeListener{
     public void disposeCurrentScene() { //remove current scene
 
         currentScene.dispose();
-    }
-
-    // Hard code for demo
-    public Scene getStartingScene() {
-        if (!scenes.isEmpty()) {
-            return scenes.get(0);
-        } else {
-            return null; // No GameScene found
-        }
-    }
-    public Scene getGameScene() {
-        if (!scenes.isEmpty()) {
-            return scenes.get(1);
-        } else {
-            return null; // No GameScene found
-        }
     }
 
     // Clear all scene assets
