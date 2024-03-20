@@ -8,7 +8,7 @@ import java.util.Random;
 
 public interface iAiMovement {
     // Method to be implemented for moving an entity.
-    Random random = new Random();
+ /*   Random random = new Random();
 
     // For screen boundary calc
     int screenWidth = Gdx.graphics.getWidth();
@@ -166,5 +166,5 @@ public interface iAiMovement {
             // If the new position is outside the bottom boundary, set the position to the boundary
             entityManager.setY(entity, 0);
         }
-    }
+    } */
 }
