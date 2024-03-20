@@ -10,18 +10,19 @@ import com.mygdx.game.entity.Entity;
 import com.mygdx.game.entity.EntityManager;
 import com.mygdx.game.util.SoundManager;
 import com.mygdx.game.util.iCollision;
+import com.mygdx.game.util.iPlayerMovement;
 
 
 public class CollisionManager {
 
-    private ArrayList<Entity> collisionList;
+    private ArrayList<iCollision> collisionList;
     private EntityManager entityManager;     // Entity Manager for entity control
     private SoundManager soundManager;      // Sound manager for collision sounds
 
-    public CollisionManager(EntityManager entityManager, SoundManager soundManager, List<Entity> entityList, List<Entity> playerEntityList, List<Entity> aiEntityList) {
+    public CollisionManager(EntityManager entityManager, SoundManager soundManager, List<Entity> entityList, ArrayList<iPlayerMovement> playerEntityList, List<Entity> aiEntityList, ArrayList<iCollision> collisionList) {
         this.entityManager = entityManager;
         this.soundManager = new SoundManager();
-        collisionList = new ArrayList<Entity>();
+        this.collisionList = collisionList;
     }
 
     // Default constructor
@@ -33,7 +34,7 @@ public class CollisionManager {
     public void detectCollision(EntityManager entityManager){
         for (int i = 0; i < collisionList.size() - 1; i++){
             for (int j = i + 1; j < collisionList.size(); j++){
-                if(collisionList.get(i).collidesWith(collisionList.get(j))){ //If entities overlaps with one another, print Collision Detected in console
+                if(collisionList.get(i).collidesWith((Entity) collisionList.get(j))){ //If entities overlaps with one another, print Collision Detected in console
                     handleCollision(entityManager, soundManager, collisionList, collisionList.get(i), collisionList.get(j)); //handles collision logic when entity collide
                 }
             }
@@ -60,7 +61,7 @@ public class CollisionManager {
         }
     }
 
-    protected void handleCollision(EntityManager entityManager, SoundManager soundManager, List<Entity> collisionList, Entity x, Entity y){
+    protected void handleCollision(EntityManager entityManager, SoundManager soundManager, List<iCollision> collisionList, iCollision x, iCollision y){
 
         if(checkSameControl(entityManager, x, y)){
             System.out.println("Boing Boing"); // DEMO ONLY if entity control type is the same, print message on collide
@@ -74,14 +75,14 @@ public class CollisionManager {
             // entityManager.deleteEntity(x); //update entityManager to remove entity
 
             collisionList.remove(y); //update collidable List to remove entity
-            entityManager.setIsALive(y, false); //set entity is alive to false
+            entityManager.setIsALive((Entity) y, false); //set entity is alive to false
             // entityManager.deleteEntity(y); alternative logic to delete entity instead
             // entityManager.removeEntity(x); //update entityManager to remove entity from entity list
         }
     };
 
-    protected boolean checkSameControl(EntityManager entityManager, Entity entity, Entity other){
-        return entityManager.getControl(entity) == entityManager.getControl(other); //if same entity control type is the same
+    protected boolean checkSameControl(EntityManager entityManager, iCollision entity, iCollision other){
+        return entityManager.getControl((Entity) entity) == entityManager.getControl((Entity) other); //if same entity control type is the same
     }
 }
 

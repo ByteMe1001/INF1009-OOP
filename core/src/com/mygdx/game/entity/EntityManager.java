@@ -12,6 +12,7 @@ import java.util.Random;
 
 import com.mygdx.game.player.PlayerControlManager;
 import com.mygdx.game.util.SoundManager;
+import com.mygdx.game.util.iCollision;
 import com.mygdx.game.util.iPlayerMovement;
 
 public class EntityManager {
@@ -20,6 +21,8 @@ public class EntityManager {
     private ArrayList<Entity> entityList;
     private ArrayList<Entity> aiEntityList;
     private ArrayList<iPlayerMovement> playerEntityList;
+
+    private ArrayList<iCollision> collisionList;
 
     private SpriteBatch batch;
 
@@ -44,8 +47,9 @@ public class EntityManager {
         this.entityList = new ArrayList<Entity>();
         this.playerEntityList = new ArrayList<iPlayerMovement>();
         this.aiEntityList = new ArrayList<Entity>();
-        this.collisionManager = new CollisionManager(this, soundManager, entityList, playerEntityList, aiEntityList);
-        this.playerControlManager = new PlayerControlManager(playerEntityList);
+        this.collisionList = new ArrayList<iCollision>();
+        this.collisionManager = new CollisionManager(this, soundManager, entityList, playerEntityList, aiEntityList, collisionList);
+        this.playerControlManager = new PlayerControlManager();
         this.aiControlManager = new AiControlManager(this);
     }
 
@@ -56,7 +60,8 @@ public class EntityManager {
                 BucketType.DEFAULT.getWidth(), BucketType.DEFAULT.getHeight(), BucketType.DEFAULT.getSpeed(),
                 BucketType.DEFAULT.getDirection(), batch);
         addEntity(bucket);
-
+        collisionList.add(bucket);
+        playerEntityList.add(bucket);
     }
 
     public void createBuckets(int x) {
@@ -88,6 +93,7 @@ public class EntityManager {
                     DropletType.DEFAULT.getWidth(), DropletType.DEFAULT.getHeight(), DropletType.DEFAULT.getSpeed(),
                     DropletType.DEFAULT.getDirection(), batch);
             addEntity(droplet);
+            collisionList.add(droplet);
         }
     }
 
@@ -101,10 +107,10 @@ public class EntityManager {
        createBuckets(player);
        createDroplets(ai);
        //Create not moving droplet
-//        for (int i = 0; i < entity; i++){
-//            Droplet droplet = new Droplet(aiControlManager, i, 100, 300.0f, 200.0f, 1.0f, 50f, 50f, 10, 0, batch);
-//            addEntity(droplet);
-//        }
+        for (int i = 0; i < entity; i++){
+            Droplet droplet = new Droplet(aiControlManager, i, 100, 300.0f, 200.0f, 1.0f, 50f, 50f, 10, 0, batch);
+            addEntity(droplet);
+        }
     }
 
 
@@ -131,21 +137,21 @@ public class EntityManager {
     public void draw() {
         for (Entity entity : entityList) {
             entity.draw();
-       }
-//        for (iPlayerMovement entity : playerEntityList) {
+        }
+//        for (Entity entity : playerEntityList) {
 //            entity.draw();
 //        }
-//        for (Entity entity : aiEntityList) {
-//            entity.draw();
-//        }
+        for (Entity entity : aiEntityList) {
+            entity.draw();
+        }
     }
 
     public void update() {
         updateEntities(entityList);
 //        updateEntities(playerEntityList);
-//        updateEntities(aiEntityList);
-        //collisionManager.updateCollisionList(entityList, playerEntityList, aiEntityList);
-        //collisionManager.detectCollision(this);
+        updateEntities(aiEntityList);
+//        collisionManager.updateCollisionList(entityList, playerEntityList, aiEntityList);
+        collisionManager.detectCollision(this);
     }
 
     private void updateEntities(ArrayList<Entity> entities) {
@@ -167,20 +173,20 @@ public class EntityManager {
         }
         // Clear entityList
         entityList.clear();
-//
-//        // Dispose entities in playerEntityList
+
+        // Dispose entities in playerEntityList
 //        for (Entity entity : playerEntityList) {
 //            entity.dispose();
 //        }
-//        // Clear playerEntityList
-//        playerEntityList.clear();
-//
-//        // Dispose entities in aiEntityList
+        // Clear playerEntityList
+        playerEntityList.clear();
+
+        // Dispose entities in aiEntityList
 //        for (Entity entity : aiEntityList) {
 //            entity.dispose();
 //        }
-//        // Clear aiEntityList
-//        aiEntityList.clear();
+        // Clear aiEntityList
+        aiEntityList.clear();
     }
 
     // Getter Setter methods
@@ -270,17 +276,17 @@ public class EntityManager {
     }
 
     // Method to find entity
-    public Entity findEntity(Entity e) {
+    private Entity findEntity(Entity e) {
         for (Entity entity : entityList) {
             if (entity == e) {
                 return entity;
             }
         }
-        for (Entity entity : playerEntityList) {
-            if (entity == e) {
-                return entity;
-            }
-        }
+//        for (Entity entity : playerEntityList) {
+//            if (entity == e) {
+//                return entity;
+//            }
+//        }
         for (Entity entity : aiEntityList) {
             if (entity == e) {
                 return entity;
