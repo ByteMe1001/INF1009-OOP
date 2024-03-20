@@ -80,50 +80,17 @@ class Droplet extends CollidableEntities implements iAiMovement {
     protected void destroy() {
         // Handle destruction logic for the droplet
     }
-    
-    @Override
-    public void setLeftRight() {
-        aiControlManager.setLeftRight(this);
-    }
-
-    @Override
-    public void setUpDown() {
-        aiControlManager.setUpDown(this);
-    }
-
-    @Override
-    public void setAll() {
-        aiControlManager.setAll(this);
-    }
+   
     
     private Random random = new Random();
 
- // Movement logic
+    // Movement logic
     @Override
-    public void movement() {
+	public void movement() {
         if (getControl() == 'A') {
-            EntityManager manager = aiControlManager.getEntityManager();
-
-            if (manager.getChangeRate(this) <= 0) {
-            	//int decision = 1;
-                int decision = random.nextInt(3); // random number
-                manager.setDirection(this, decision);
-                manager.setChangeRate(this, DEFAULT_CHANGE_RATE);
-            }
-
-            switch (manager.getDirection(this)) {
-                case 0:
-                    setLeftRight();
-                    break;
-                case 1:
-                    setUpDown();
-                    break;
-                case 2:
-                    setAll();
-                    break;
-            }
-
-            manager.decrementChangeRate(this);
+            Random random = new Random();
+            int randomNumber = random.nextInt(31);
+            aiControlManager.movement(this, this.getX(), this.getY(), this.getWidth(), this.getHeight(), randomNumber);
         }
     }
 
