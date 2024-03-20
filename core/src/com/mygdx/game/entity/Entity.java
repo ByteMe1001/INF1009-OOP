@@ -1,10 +1,11 @@
 package com.mygdx.game.entity;
+
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.util.iCollision;
 
-public abstract class Entity implements iCollision {
+public abstract class Entity {
     private int id;
     private int health;
     private float x,y;               //Position
@@ -21,7 +22,7 @@ public abstract class Entity implements iCollision {
 
     private boolean isCollidable;
 
-    private Rectangle boundingBox;
+    protected Rectangle boundingBox;
     private Character control; // CAPITAL LETTER Char to designate who controls it. A for AI, P for Player, N for nil
 
 
@@ -224,14 +225,6 @@ public abstract class Entity implements iCollision {
         batch.draw(sprite, this.x, this.y, sprite.getWidth(), sprite.getHeight());
     }
 
-    @Override
-    public Rectangle getBoundingBox(){
-        return boundingBox;
-    }
-
-    @Override
-    public boolean collidesWith(Entity other){
-        return boundingBox.overlaps(other.getBoundingBox());
-    }
+    public abstract Rectangle getBoundingBox();
 }
-  
+

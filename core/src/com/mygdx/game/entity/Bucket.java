@@ -6,8 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.player.PlayerControlManager;
 import com.mygdx.game.util.iPlayerMovement;
 
-
-class Bucket extends Entity implements iPlayerMovement {
+public class Bucket extends CollidableEntities implements iPlayerMovement {
 
     // Additional properties for Bucket class
     private final static String TEXTURE_PATH = "spaceship.png";
@@ -18,24 +17,23 @@ class Bucket extends Entity implements iPlayerMovement {
     protected Bucket() {
         //do nothing for now
     }
+
     // Constructor with ID
     protected Bucket(PlayerControlManager playerControlManager, int id, SpriteBatch batch) {
         super(id, batch);
-        // Bucket specific variables
-        this.setSprite(new Sprite(new Texture(BucketType.DEFAULT.getTexturePath())));
-        this.setAlive(BucketType.DEFAULT.isAlive());
-        this.setCollidable(BucketType.DEFAULT.isCollidable());
-        this.setControl(BucketType.DEFAULT.getControl());
+        initializeBucket(playerControlManager);
     }
 
     // Parameterized constructor
-    protected Bucket(PlayerControlManager playerControlManager,int id, int health, float x, float y, float scale, float width ,float height, float speed, int direction, SpriteBatch batch) {
+    protected Bucket(PlayerControlManager playerControlManager, int id, int health, float x, float y, float scale, float width, float height, float speed, int direction, SpriteBatch batch) {
         super(id, health, x, y, scale, new Sprite(new Texture(BucketType.DEFAULT.getTexturePath())), width, height, speed, direction, batch);
-        // Reset width according to sprite
-        setWidth(getSprite().getWidth());
-        setHeight(getSprite().getHeight());
-        // Bucket specific variables
+        initializeBucket(playerControlManager);
+    }
+
+    // Initialize bucket properties
+    private void initializeBucket(PlayerControlManager playerControlManager) {
         this.playerControlManager = playerControlManager;
+        this.setSprite(new Sprite(new Texture(BucketType.DEFAULT.getTexturePath())));
         this.setAlive(BucketType.DEFAULT.isAlive());
         this.setCollidable(BucketType.DEFAULT.isCollidable());
         this.setControl(BucketType.DEFAULT.getControl());
@@ -44,7 +42,7 @@ class Bucket extends Entity implements iPlayerMovement {
     @Override
     protected void update() {
         movement();
-        super.getBoundingBox().setPosition(getX(), getY());
+        super.update();
     }
 
     @Override

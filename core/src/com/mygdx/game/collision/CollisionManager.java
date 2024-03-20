@@ -48,16 +48,16 @@ public class CollisionManager {
 
         for (Entity entity : entityList) {
             if (entityManager.getIsCollidable(entity) != collisionList.contains(entity))
-                collisionList.add(entity); //add collidable objects into entityList
+                collisionList.add((iCollision) entity); //add collidable objects into entityList
         }
 
         for (Entity entity : playerEntityList) {
             if (entityManager.getIsCollidable(entity) != collisionList.contains(entity))
-                collisionList.add(entity); //add collidable objects into a playerEntityList
+                collisionList.add((iCollision) entity); //add collidable objects into a playerEntityList
         }
         for (Entity entity : aiEntityList) {
             if (entityManager.getIsCollidable(entity) != collisionList.contains(entity))
-                collisionList.add(entity); //add collidable objects into a aiEntityList
+                collisionList.add((iCollision) entity); //add collidable objects into a aiEntityList
         }
     }
 

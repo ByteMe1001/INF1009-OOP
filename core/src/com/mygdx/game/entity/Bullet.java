@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.ai.AiControlManager;
 import com.mygdx.game.util.iAiMovement;
 
-public class Bullet extends Entity implements iAiMovement {
+public class Bullet extends CollidableEntities implements iAiMovement {
 
     // Texture path for the bullet
     private static final String TEXTURE_PATH = "bullet1.png";

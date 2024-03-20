@@ -8,7 +8,7 @@ import com.mygdx.game.util.iAiMovement;
 
 import java.util.Random;
 
-class Droplet extends Entity implements iAiMovement {
+class Droplet extends CollidableEntities implements iAiMovement {
 
     // Additional properties for Droplet class
     private final static String TEXTURE_PATH = "asteroid.png";
