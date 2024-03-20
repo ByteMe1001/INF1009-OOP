@@ -96,6 +96,7 @@ public class SceneManager implements SceneChangeListener{
             return null; // No GameScene found
         }
     }
+
     public Scene getGameScene() {
         if (!scenes.isEmpty()) {
             return scenes.get(1);
