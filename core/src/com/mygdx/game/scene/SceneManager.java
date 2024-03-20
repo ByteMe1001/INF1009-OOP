@@ -6,7 +6,7 @@ import com.mygdx.game.LifeCycleManager;
 import com.mygdx.game.SpaceShooter;
 import com.mygdx.game.scene.GameScene;
 import com.mygdx.game.util.SoundManager;
-//import com.mygdx.game.util.PlayerManager;
+import com.mygdx.game.util.PlayerManager;
 
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class SceneManager implements SceneChangeListener{
     private SoundManager soundManager;
-    //private PlayerManager PlayerManager;
+    private PlayerManager PlayerManager;
     private ArrayList<Scene> scenes;
     private Scene currentScene;
     private SpriteBatch batch;
