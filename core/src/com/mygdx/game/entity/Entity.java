@@ -169,7 +169,7 @@ public abstract class Entity {
           this.direction = direction;
     }
 
-    protected String getCurrentDirection() {
+    public String getCurrentDirection() {
       return this.currentDirection;
     }
 
