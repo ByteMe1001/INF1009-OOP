@@ -227,4 +227,3 @@ public abstract class Entity {
 
     public abstract Rectangle getBoundingBox();
 }
-
