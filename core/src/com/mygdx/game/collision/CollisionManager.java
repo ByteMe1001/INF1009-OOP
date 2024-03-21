@@ -9,6 +9,7 @@ import java.util.ListIterator;
 import com.mygdx.game.entity.Entity;
 import com.mygdx.game.entity.EntityManager;
 import com.mygdx.game.util.SoundManager;
+import com.mygdx.game.util.iAiMovement;
 import com.mygdx.game.util.iCollision;
 import com.mygdx.game.util.iPlayerMovement;
 
@@ -19,7 +20,7 @@ public class CollisionManager {
     private EntityManager entityManager;     // Entity Manager for entity control
     private SoundManager soundManager;      // Sound manager for collision sounds
 
-    public CollisionManager(EntityManager entityManager, SoundManager soundManager, List<Entity> entityList, ArrayList<iPlayerMovement> playerEntityList, List<Entity> aiEntityList, ArrayList<iCollision> collisionList) {
+    public CollisionManager(EntityManager entityManager, SoundManager soundManager, ArrayList<iCollision> collisionList ) {
         this.entityManager = entityManager;
         this.soundManager = new SoundManager();
         this.collisionList = collisionList;

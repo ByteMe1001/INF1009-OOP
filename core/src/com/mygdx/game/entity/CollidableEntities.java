@@ -9,7 +9,7 @@ import com.mygdx.game.util.iCollision;
 public abstract class CollidableEntities extends Entity implements iCollision {
 
     // Constructors
-    protected CollidableEntities() {
+    public CollidableEntities() {
         // No-arg constructor
     }
 
@@ -18,17 +18,17 @@ public abstract class CollidableEntities extends Entity implements iCollision {
         setCollidable(true); // Marking as collidable
     }
 
-    protected CollidableEntities(int id, int health, float x, float y, float scale, Sprite sprite, float width, float height, float speed, int direction, SpriteBatch batch) {
+    public CollidableEntities(int id, int health, float x, float y, float scale, Sprite sprite, float width, float height, float speed, int direction, SpriteBatch batch) {
         super(id, health, x, y, scale, sprite, width, height, speed, direction, batch);
         setCollidable(true); // Marking as collidable
     }
 
     // Abstract Methods
-    protected abstract void takeDamage(int damage);
+    public abstract void takeDamage(int damage);
 
-    protected abstract void heal(int amount);
+    public abstract void heal(int amount);
 
-    protected abstract void destroy();
+    public abstract void destroy();
 
     // Override movement method with public access
     @Override
@@ -36,22 +36,22 @@ public abstract class CollidableEntities extends Entity implements iCollision {
 
     // Method Overrides
     @Override
-    protected void update() {
+    public void update() {
         super.update();
     }
 
     @Override
-    protected void push(float deltaX, float deltaY) {
+    public void push(float deltaX, float deltaY) {
         super.push(deltaX, deltaY);
     }
 
     @Override
-    protected void dispose() {
+    public void dispose() {
         super.dispose();
     }
 
     @Override
-    protected void draw() {
+    public void draw() {
         super.draw();
     }
 

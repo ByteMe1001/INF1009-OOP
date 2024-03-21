@@ -12,6 +12,7 @@ import java.util.Random;
 
 import com.mygdx.game.player.PlayerControlManager;
 import com.mygdx.game.util.SoundManager;
+import com.mygdx.game.util.iAiMovement;
 import com.mygdx.game.util.iCollision;
 import com.mygdx.game.util.iPlayerMovement;
 
@@ -19,17 +20,14 @@ public class EntityManager {
 
     private CollisionManager collisionManager;
     private ArrayList<Entity> entityList;
-    private ArrayList<Entity> aiEntityList;
+    private ArrayList<iAiMovement> aiEntityList;
     private ArrayList<iPlayerMovement> playerEntityList;
-
     private ArrayList<iCollision> collisionList;
 
     private SpriteBatch batch;
 
     private PlayerControlManager playerControlManager;
     private AiControlManager aiControlManager;
-
-    EntityManager entityManager;
 
     Random random = new Random();
 
@@ -46,13 +44,14 @@ public class EntityManager {
         this.batch = batch;
         this.entityList = new ArrayList<Entity>();
         this.playerEntityList = new ArrayList<iPlayerMovement>();
-        this.aiEntityList = new ArrayList<Entity>();
+        this.aiEntityList = new ArrayList<iAiMovement>();
         this.collisionList = new ArrayList<iCollision>();
-        this.collisionManager = new CollisionManager(this, soundManager, entityList, playerEntityList, aiEntityList, collisionList);
-        this.playerControlManager = new PlayerControlManager();
+        this.collisionManager = new CollisionManager(this, soundManager, collisionList);
+        this.playerControlManager = new PlayerControlManager(playerEntityList);
         this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);;
     }
 
+    // Main testing creation
     // Entity creations
     public void createBucket() {
         Bucket bucket = new Bucket(playerControlManager,BucketType.DEFAULT.getId(), BucketType.DEFAULT.getHealth(),
@@ -63,6 +62,7 @@ public class EntityManager {
         collisionList.add(bucket);
         playerEntityList.add(bucket);
     }
+
 
     public void createBuckets(int x) {
         for (int i = 0; i < x; i++) {
@@ -82,8 +82,11 @@ public class EntityManager {
                 DropletType.DEFAULT.getWidth(), DropletType.DEFAULT.getHeight(), DropletType.DEFAULT.getSpeed(),
                 DropletType.DEFAULT.getDirection(), batch);
         addEntity(droplet);
+        collisionList.add(droplet);
+        aiEntityList.add(droplet);
     }
 
+    // Main testing creation
     public void createDroplets(int x) {
         for (int i = 0; i < x; i++) {
             float randomX = random.nextInt(Gdx.graphics.getHeight());
@@ -94,6 +97,7 @@ public class EntityManager {
                     DropletType.DEFAULT.getDirection(), batch);
             addEntity(droplet);
             collisionList.add(droplet);
+            aiEntityList.add(droplet);
         }
     }
 
@@ -114,6 +118,7 @@ public class EntityManager {
     }
 
 
+    // Maybe can use this function to clear all list?
     public void deleteEntity(Entity e) {
         if (!entityList.remove(e) && !playerEntityList.remove(e) && !aiEntityList.remove(e)) {
             throw new IllegalArgumentException("Entity not found in any entity list");
@@ -141,16 +146,18 @@ public class EntityManager {
 //        for (Entity entity : playerEntityList) {
 //            entity.draw();
 //        }
-        for (Entity entity : aiEntityList) {
-            entity.draw();
-        }
+//        for (Entity entity : aiEntityList) {
+//            entity.draw();
+//        }
     }
 
     public void update() {
         updateEntities(entityList);
 //        updateEntities(playerEntityList);
-        updateEntities(aiEntityList);
+//        updateEntities(aiEntityList);
 //        collisionManager.updateCollisionList(entityList, playerEntityList, aiEntityList);
+        playerControlManager.update(this);
+        aiControlManager.update();
         collisionManager.detectCollision(this);
     }
 
@@ -226,30 +233,30 @@ public class EntityManager {
         findEntity(e).setCollidable(b);
     }
 
-    public int getChangeRate(Entity e) {
-        return findEntity(e).getChangeRate();
-    }
-
-    public int getDefaultChangeRate(Entity e) {
-        return findEntity(e).getDefaultChangeRate();
-    }
+//    public int getChangeRate(Entity e) {
+//        return findEntity(e).getChangeRate();
+//    }
+//
+//    public int getDefaultChangeRate(Entity e) {
+//        return findEntity(e).getDefaultChangeRate();
+//    }
 
     public void setChangeRate(Entity e, int x) {
         findEntity(e).setChangeRate(x);
     }
 
-    public void setDirection(Entity entity, int direction) {
-        entity.setDirection(direction);
-    }
+//    public void setDirection(Entity entity, int direction) {
+//        entity.setDirection(direction);
+//    }
 
-    public void decrementChangeRate(Entity e) {
-        Entity entity = findEntity(e);
-        entity.setChangeRate(entity.getChangeRate() - 1);
-    }
+//    public void decrementChangeRate(Entity e) {
+//        Entity entity = findEntity(e);
+//        entity.setChangeRate(entity.getChangeRate() - 1);
+//    }
 
-    public int getDirection(Entity e) {
-        return findEntity(e).getDirection();
-    }
+//    public int getDirection(Entity e) {
+//        return findEntity(e).getDirection();
+//    }
 
     public String getCurrentDirection(Entity e) {
         return findEntity(e).getCurrentDirection();
@@ -287,11 +294,11 @@ public class EntityManager {
 //                return entity;
 //            }
 //        }
-        for (Entity entity : aiEntityList) {
-            if (entity == e) {
-                return entity;
-            }
-        }
+//        for (Entity entity : aiEntityList) {
+//            if (entity == e) {
+//                return entity;
+//            }
+//        }
         throw new IllegalArgumentException("Entity not found in the entity list");
     }
 }

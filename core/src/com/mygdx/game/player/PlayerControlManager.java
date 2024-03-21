@@ -23,9 +23,10 @@ public class PlayerControlManager implements iIO {
         this.playerEntityList = playerEntityList;
     }
 
+
+    // PLease fix remove args
     public void update(EntityManager entityManager) {
         for(iPlayerMovement e: playerEntityList) {
-
             e.movement(movement(e.getX(), e.getY(), e.getSpeed()));
         }
     }
@@ -34,9 +35,9 @@ public class PlayerControlManager implements iIO {
     public float[] movement(float x, float y, float speed) {
         float [] vector = new float[2];     // [0] is X axis, [1] is Y axis
 
-        switch(inputKey1()) {       // inputKey1() or inputKey2()
+        switch(inputKey1()) {               // inputKey1() or inputKey2()
 
-            case "FALSE":
+            case "FALSE":                   // Default case if no input
                 vector[0] = x;
                 vector[1] = y;
                 break;

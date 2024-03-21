@@ -3,7 +3,7 @@ package com.mygdx.game.entity;
 // Enum class to store specific entity values
 // EDIT values here to change entity blueprint
 public enum DropletType {
-    DEFAULT(2, 100, 500f, 500f, 1f, 64f, 64f, 300f,3, 30, true, 'A', true, "asteroid.png");
+    DEFAULT(2, 100, 500f, 500f, 1f, 64f, 64f, 300f,3, 0, true, 'A', true, "asteroid.png");
     private final int id;
     private final int health;
 

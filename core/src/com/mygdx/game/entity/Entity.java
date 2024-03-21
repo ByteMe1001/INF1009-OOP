@@ -12,7 +12,7 @@ public abstract class Entity {
     private float width, height;
     private float scale;
     private float speed;
-    private int direction;          // 1 for up down, 2 for left right, 3 for all
+    private int movementSetID;          // 1 for up down, 2 for left right, 3 for all
 
     private String currentDirection = "";
     private Sprite sprite;
@@ -45,7 +45,7 @@ public abstract class Entity {
     }
 
    // Parameterized constructor
-    protected Entity(int id, int health, float x, float y, float scale, Sprite sprite, float width, float height, float speed, int direction, SpriteBatch batch) {
+    protected Entity(int id, int health, float x, float y, float scale, Sprite sprite, float width, float height, float speed, int movementSetID, SpriteBatch batch) {
         this.id = id;
         this.health = health;
         this.x = x;
@@ -55,25 +55,25 @@ public abstract class Entity {
         this.width = width;
         this.height = height;
         this.speed = speed;
-        this.direction = direction;
+        this.movementSetID = movementSetID;
         this.batch = batch;
         this.boundingBox = new Rectangle(getX(), getY(), width, height);
     }
 
     //Setters and Getters methods 
-    protected int getId() {
+    public int getId() {
       return id;
     }
 
-    protected void setId(int id) {
+    public void setId(int id) {
       this.id = id;
     }
 
-    protected int getHealth() {
+    public int getHealth() {
       return health;
     }
 
-    protected void setHealth(int health) {
+    public void setHealth(int health) {
       this.health = health;
     }
 
@@ -93,19 +93,19 @@ public abstract class Entity {
       this.y = y;
     }
 
-    protected float getScale() {
+    public float getScale() {
       return scale;
     }
 
-    protected void setScale(float scale) {
+    public void setScale(float scale) {
       this.scale = scale;
     }
 
-    protected Sprite getSprite() {
+    public Sprite getSprite() {
       return sprite;
     }
 
-    protected void setSprite(Sprite sprite) {
+    public void setSprite(Sprite sprite) {
       this.sprite = sprite;
     }
 
@@ -113,7 +113,7 @@ public abstract class Entity {
         return width;
     }
 
-    protected void setWidth(float width) {
+    public void setWidth(float width) {
         this.width = width;
     }
 
@@ -121,73 +121,69 @@ public abstract class Entity {
         return height;
     }
 
-    protected void setHeight(float height) {
+    public void setHeight(float height) {
         this.height = height;
     }
 
-    protected float getSpriteWidth() {
+    public float getSpriteWidth() {
           return sprite.getWidth();
     }
 
-    protected float getSpriteHeight() {
+    public float getSpriteHeight() {
         return sprite.getHeight();
     }
 
-    protected Character getControl() {
+    public Character getControl() {
           return this.control;
     }
 
-    protected void setControl(Character control) {
+    public void setControl(Character control) {
           this.control = control;
     }
 
-    protected boolean isAlive() {
+    public boolean isAlive() {
         return isAlive;
     }
 
-    protected void setAlive(boolean alive) {
+    public void setAlive(boolean alive) {
         isAlive = alive;
     }
 
-    protected int getChangeRate() {
-       return 1;
-    }
 
-    protected int getDefaultChangeRate() {
-      return 1;
-    }
 
-    protected void setChangeRate(int changeRate) {
+    public void setChangeRate(int changeRate) {
 
     }
 
-    protected int getDirection() {
-          return this.direction;
+    public int getMovementSetID() {
+          return this.movementSetID;
     }
 
-    protected void setDirection(int direction) {
-          this.direction = direction;
+    public void setMovementSetID(int movementSetID) {
+          this.movementSetID = movementSetID;
     }
 
     public String getCurrentDirection() {
       return this.currentDirection;
     }
 
-    protected void setCurrentDirection(String currentDirection) {
+    public void setCurrentDirection(String currentDirection) {
       this.currentDirection = currentDirection;
     }
     //Methods
-    protected void update() {
+
+    // Shift bounding box logic to collision manage maybe?
+    public void update() {
         boundingBox.setPosition(getX(), getY());
     }
 
 
 
-    protected boolean isCollidable(){
+    public boolean isCollidable(){
         return isCollidable;
     };
 
-    protected void setCollidable(boolean collidable){
+    public void setCollidable(boolean collidable){
         isCollidable = collidable;
     };
 
@@ -195,35 +191,35 @@ public abstract class Entity {
           return speed;
       }
 
-    protected void setSpeed(int speed) {
+    public void setSpeed(int speed) {
           this.speed = speed;
       }
-    protected abstract void takeDamage(int damage);              // for game use
+    public abstract void takeDamage(int damage);              // for game use
 
+    public abstract void heal(int amount);
 
-
-    protected abstract void heal(int amount);
-
-    protected abstract void destroy();
+    public abstract void destroy();
 
     public abstract void movement();
 
-    protected void push(float deltaX, float deltaY) {  //Simple push method maybe can implement for collisions,pretty much just knockback
+    public void push(float deltaX, float deltaY) {  //Simple push method maybe can implement for collisions,pretty much just knockback
       this.x += deltaX;
       this.y += deltaY;
     }
 
     //dispose method
-    protected void dispose() {
+    public void dispose() {
         if (sprite != null && sprite.getTexture() != null) {
             sprite.getTexture().dispose();
         }
     }
 
     // Draw function for manager to use
-    protected void draw() {
+    public void draw() {
         batch.draw(sprite, this.x, this.y, sprite.getWidth(), sprite.getHeight());
     }
 
     public abstract Rectangle getBoundingBox();
+
+
 }
