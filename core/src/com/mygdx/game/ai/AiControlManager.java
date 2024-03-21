@@ -31,25 +31,4 @@ public class AiControlManager implements iAiMovement {
         this.entityManager = entityManager;
     }
 
-    public void movement(Entity entity, float x, float y, float width, float height, int movementPreference) {
-    	if (entity instanceof Droplet) {
-            Droplet droplet = (Droplet) entity;
-            switch (movementPreference) {
-            case MOVE_UP_DOWN:
-                if ("UP".equals(droplet.getCurrentDirection())) {
-                    droplet.up(entityManager, entity, y, height);
-                } else {
-                    droplet.down(entityManager, entity, y);
-                }
-                break;
-            case MOVE_LEFT_RIGHT:
-                if ("LEFT".equals(droplet.getCurrentDirection())) {
-                    droplet.left(entityManager, entity, x);
-                } else {
-                    droplet.right(entityManager, entity, x, width);
-                }
-                break;
-    		}
-    	}
-    }
 }

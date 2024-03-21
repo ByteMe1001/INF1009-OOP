@@ -18,6 +18,10 @@ public class Droplet extends CollidableEntities {
     private AiControlManager aiControlManager;
     private SpriteBatch batch;
 
+    // For screen boundary calc
+    int screenWidth = Gdx.graphics.getWidth();
+    int screenHeight = Gdx.graphics.getHeight();
+
     // Default constructor
     protected Droplet() {
         // do nothing don't touch
@@ -25,7 +29,7 @@ public class Droplet extends CollidableEntities {
     // Constructor with id parameter
     protected Droplet(int id, SpriteBatch batch) {
         super(id, batch);
-       // this.setChangeRate(DropletType.DEFAULT.getChangeRate());
+        this.setChangeRate(DropletType.DEFAULT.getChangeRate());
         this.setSprite(new Sprite(new Texture(DropletType.DEFAULT.getTexturePath())));
         this.setAlive(DropletType.DEFAULT.isAlive());
         this.setCollidable(DropletType.DEFAULT.isCollidable());
@@ -38,13 +42,10 @@ public class Droplet extends CollidableEntities {
         setWidth(getSprite().getWidth());
         setHeight(getSprite().getHeight());
         this.aiControlManager = aiControlManager;
-       // this.setChangeRate(DropletType.DEFAULT.getChangeRate());
+        this.setChangeRate(DropletType.DEFAULT.getChangeRate());
         this.setAlive(DropletType.DEFAULT.isAlive());
         this.setCollidable(DropletType.DEFAULT.isCollidable());
         this.setControl(DropletType.DEFAULT.getControl());
-        Random random = new Random();
-        String initialDirection = random.nextBoolean() ? "UP" : "DOWN";
-        this.setCurrentDirection(initialDirection);
     }
 
     // Getter and setter methods
@@ -84,23 +85,11 @@ public class Droplet extends CollidableEntities {
     protected void destroy() {
         // Handle destruction logic for the droplet
     }
-   
-    
-    private Random random = new Random();
-    
-    
-    private int movementPreference = AiControlManager.MOVE_UP_DOWN;
-    
-    public int getMovementPreference() {
-        return movementPreference;
-    }
 
     // Movement logic
     @Override
     public void movement() {
-        if (getControl() == 'A') {
-            aiControlManager.movement(this, this.getX(), this.getY(), this.getWidth(), this.getHeight(), this.getMovementPreference());
-        }
+
     }
     
     
@@ -126,12 +115,7 @@ public class Droplet extends CollidableEntities {
     
     
     
-    
-    
 
-    // For screen boundary calc
-    int screenWidth = Gdx.graphics.getWidth();
-    int screenHeight = Gdx.graphics.getHeight();
 
     public void setLeftRight(EntityManager entityManager, Entity entity, float x, float width) {
         if (entityManager.getChangeRate(entity) <= 0) {
