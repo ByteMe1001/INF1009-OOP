@@ -34,8 +34,9 @@ public class AiControlManager{
         }
     }
 
+    // Decides which movement style to use based on entity movementSetID
     public void movement(iAiMovement entity) {
-        //System.out.println(entityManager.getChangeRate(entity));
+
         if (entity.getChangeRate() >= 0 ) {
             switch (entity.getMovementSetID()) {
                 case MOVE_UP_DOWN:
@@ -49,6 +50,10 @@ public class AiControlManager{
                     break;
             }
         }
-        else entity.setChangeRate(random.nextInt(entity.getDefaultChangeRate() + 1));
+        else {
+            entity.setChangeRate(random.nextInt(entity.getDefaultChangeRate() + 1));
+        }
+        entity.getMovementStrategy().move(entity);
     }
+
 }

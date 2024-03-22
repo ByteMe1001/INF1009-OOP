@@ -7,6 +7,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.gameEngine.entity.CollidableEntities;
 import com.mygdx.game.gameEngine.ai.AiControlManager;
 import com.mygdx.game.gameEngine.util.iAiMovement;
+import com.mygdx.game.gameLayer.movement.*;
+
+import java.util.ArrayList;
 
 public class Droplet extends CollidableEntities implements iAiMovement{
 
@@ -17,9 +20,14 @@ public class Droplet extends CollidableEntities implements iAiMovement{
     private AiControlManager aiControlManager;
     private SpriteBatch batch;
 
-    // For screen boundary calc
-    private int screenWidth = Gdx.graphics.getWidth();
-    private int screenHeight = Gdx.graphics.getHeight();
+    private ArrayList<AIMovementStrategy> movementStrategyList;
+
+//    // For screen boundary calc
+//    private int screenWidth = Gdx.graphics.getWidth();
+//    private int screenHeight = Gdx.graphics.getHeight();
+
+    private AIMovementStrategy movementStrategy;
+
 
     // Default constructor
     public Droplet() {
@@ -33,6 +41,8 @@ public class Droplet extends CollidableEntities implements iAiMovement{
         this.setAlive(DropletType.DEFAULT.isAlive());
         this.setCollidable(DropletType.DEFAULT.isCollidable());
         this.setControl(DropletType.DEFAULT.getControl());
+        this.movementStrategyList = new ArrayList<AIMovementStrategy>();
+        intializeMovementStrategy();
     }
 
     // Parameterized constructor
@@ -45,23 +55,51 @@ public class Droplet extends CollidableEntities implements iAiMovement{
         this.setAlive(DropletType.DEFAULT.isAlive());
         this.setCollidable(DropletType.DEFAULT.isCollidable());
         this.setControl(DropletType.DEFAULT.getControl());
+        this.movementStrategyList = new ArrayList<AIMovementStrategy>();
+        intializeMovementStrategy();
     }
 
     // Getter and setter methods
     @Override
     public void update() {
-        movement();
+        //movementStrategy.move(this);
         super.getBoundingBox().setPosition(getX(), getY());
     }
 
+    public void intializeMovementStrategy() {
+        movementStrategyList.add(new LeftMovement());
+        movementStrategyList.add(new RightMovement());
+        movementStrategyList.add(new UpMovement());
+        movementStrategyList.add(new DownMovement());
+    }
+
+    public void setMovementStrategy(AIMovementStrategy movementStrategy) {
+        this.movementStrategy = movementStrategy;
+    }
+
+    // Get AI Movement strat
+    public AIMovementStrategy getMovementStrategy() {
+        return this.movementStrategy;
+    }
+
+    // Overloaded method
+    public AIMovementStrategy getMovementStrategy(String name) {
+        for (AIMovementStrategy strategy : movementStrategyList) {
+            if (strategy.getClass().getSimpleName().equals(name)) {
+                return strategy;
+            }
+        }
+        // Return null if no strategy with the given name is found
+        throw new IllegalArgumentException("Movement Strategy not found in the list");
+    }
     public int getChangeRate() {
         return changeRate;
-    } 
+    }
 
 
 	public int getDefaultChangeRate() {
         return DEFAULT_CHANGE_RATE;
-    } 
+    }
 
     @Override
     public void setChangeRate(int changeRate) {
@@ -74,7 +112,7 @@ public class Droplet extends CollidableEntities implements iAiMovement{
 
 
     // Game design logic
-    
+
     public void takeDamage(int damage) {
         // Handle damage logic for the droplet
     }
@@ -89,12 +127,14 @@ public class Droplet extends CollidableEntities implements iAiMovement{
         // Handle destruction logic for the droplet
     }
 
+    // Dunnid probably
     // Movement logic
     @Override
     public void movement() {
 
     }
 
+    // Dunnid probably
     public void movement(float[] vector) {
         if (getControl() == 'A') {
             switch (super.getMovementSetID()) {         // 1 for up down, 2 for left right, 3 for all
@@ -118,25 +158,10 @@ public class Droplet extends CollidableEntities implements iAiMovement{
             int randomNumber = random.nextInt(2);
             switch (randomNumber) {
                 case 0:
-                    left();
-                    setCurrentDirection("LEFT");
+                    setMovementStrategy(getMovementStrategy("LeftMovement"));
                     break;
                 case 1:
-                    right();
-                    setCurrentDirection("RIGHT");
-                    break;
-                default:
-                    break;
-            }
-        }
-        // If still moving, continue on
-        else {
-            switch(getCurrentDirection()) {
-                case "LEFT":
-                    left();
-                    break;
-                case "RIGHT":
-                    right();
+                    setMovementStrategy(getMovementStrategy("RightMovement"));
                     break;
                 default:
                     break;
@@ -151,24 +176,10 @@ public class Droplet extends CollidableEntities implements iAiMovement{
             int randomNumber = random.nextInt(2);
             switch (randomNumber) {
                 case 0:
-                    up();
-                    setCurrentDirection("UP");
+                    setMovementStrategy(getMovementStrategy("UpMovement"));
                     break;
                 case 1:
-                    down();
-                    setCurrentDirection("DOWN");
-                    break;
-                default:
-                    break;
-            }
-        // If still moving, continue on
-        } else {
-            switch (getCurrentDirection()) {
-                case "UP":
-                    up();
-                    break;
-                case "DOWN":
-                    down();
+                    setMovementStrategy(getMovementStrategy("DownMovement"));
                     break;
                 default:
                     break;
@@ -183,38 +194,16 @@ public class Droplet extends CollidableEntities implements iAiMovement{
             int randomNumber = random.nextInt(4); // Random number between 0 and 3 for four directions
             switch (randomNumber) {
                 case 0:
-                    left();
-                    setCurrentDirection("LEFT");
+                    setMovementStrategy(getMovementStrategy("LeftMovement"));
                     break;
                 case 1:
-                    right();
-                    setCurrentDirection("RIGHT");
+                    setMovementStrategy(getMovementStrategy("RightMovement"));
                     break;
                 case 2:
-                    up();
-                    setCurrentDirection("UP");
+                    setMovementStrategy(getMovementStrategy("UpMovement"));
                     break;
                 case 3:
-                    down();
-                    setCurrentDirection("DOWN");
-                    break;
-                default:
-                    break;
-            }
-        // If still moving, continue on
-        } else {
-            switch(getCurrentDirection()) {
-                case "LEFT":
-                    left();
-                    break;
-                case "RIGHT":
-                    right();
-                    break;
-                case "UP":
-                    up();
-                    break;
-                case "DOWN":
-                    down();
+                    setMovementStrategy(getMovementStrategy("DownMovement"));
                     break;
                 default:
                     break;
@@ -223,49 +212,4 @@ public class Droplet extends CollidableEntities implements iAiMovement{
         decrementChangeRate();
     }
 
-    public void left() {
-        float newX = getX() - getSpeed() * Gdx.graphics.getDeltaTime();
-        if (newX > 0) { // Check if the new position is within the left screen boundary
-            setX(newX);
-        } else {
-            // If the new position is outside the left boundary, set the position to the boundary
-            setX(0);
-        }
-    }
-
-    public void right() {
-        // Calculate the new x-coordinate based on the entity's speed and delta time
-        float newX = getX() + getSpeed() * Gdx.graphics.getDeltaTime();
-
-        // Calculate the right boundary as the screen width minus the entity's width
-        float rightBoundary = Gdx.graphics.getWidth() - getWidth();
-
-        if (newX <= rightBoundary) { // Check if the new position is within the right screen boundary
-            setX(newX);
-        } else {
-            // If the new position is outside the right boundary, set the position to the boundary
-            setX(rightBoundary);
-        }
-    }
-
-    public void up() {
-        float newY = getY() + getSpeed() * Gdx.graphics.getDeltaTime();
-        float topBoundary = Gdx.graphics.getWidth() - getHeight(); // Calculate the top boundary
-        if (newY < topBoundary) { // Check if the new position is within the top screen boundary
-            setY(newY);
-        } else {
-            // If the new position is outside the top boundary, set the position to the boundary
-            setY(topBoundary);
-        }
-    }
-
-    public void down() {
-        float newY = getY() - getSpeed() * Gdx.graphics.getDeltaTime();
-        if (newY > 0) { // Check if the new position is greater than 0 (bottom screen boundary)
-            setY(newY);
-        } else {
-            // If the new position is outside the bottom boundary, set the position to the boundary
-            setY(0);
-        }
-    }
 }

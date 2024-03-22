@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.gameEngine.entity.CollidableEntities;
 import com.mygdx.game.gameEngine.ai.AiControlManager;
 import com.mygdx.game.gameEngine.util.iAiMovement;
+import com.mygdx.game.gameLayer.movement.AIMovementStrategy;
 
 public class Bullet extends CollidableEntities implements iAiMovement {
 
@@ -16,6 +17,7 @@ public class Bullet extends CollidableEntities implements iAiMovement {
     private int changeRate;
 
     private AiControlManager aiControlManager;
+    private AIMovementStrategy movementStrategy;
 
     // Default constructor
     public Bullet() {
@@ -69,6 +71,10 @@ public class Bullet extends CollidableEntities implements iAiMovement {
 
     public int getDefaultChangeRate() {
         return DEFAULT_CHANGE_RATE;
+    }
+
+    public AIMovementStrategy getMovementStrategy() {
+        return this.movementStrategy;
     }
 
     //Movement Logic
