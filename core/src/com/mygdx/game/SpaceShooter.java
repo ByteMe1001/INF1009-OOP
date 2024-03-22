@@ -5,7 +5,9 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.util.SoundManager;
+import com.mygdx.game.GameEngine.LifeCycleManager;
+import com.mygdx.game.GameEngine.Player.Player;
+import com.mygdx.game.GameEngine.Util.SoundManager;
 
 public class SpaceShooter extends Game {
 
