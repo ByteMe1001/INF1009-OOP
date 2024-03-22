@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.mygdx.game.entity.EntityManager;
 import com.mygdx.game.util.SoundManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -25,8 +26,8 @@ class StartingScene extends Scene implements iIO {
     private final static float BUTTON_SCALE = 0.2f;         // Scale to set button
     private Stage stage;
 
-    protected StartingScene(SceneManager sceneManager, SoundManager soundManager, SpriteBatch batch) {
-        super(sceneManager, soundManager, batch);
+    protected StartingScene(SceneManager sceneManager, EntityManager entityManager, SoundManager soundManager, SpriteBatch batch) {
+        super(sceneManager, entityManager, soundManager, batch);
     }
 
     @Override
@@ -72,7 +73,7 @@ class StartingScene extends Scene implements iIO {
         // Swap scene when clicked
         addButtonClickListener(playButton, () -> {
             // Logic to execute when the play button is clicked
-            super.getSceneManager().swapScene(new GameScene(StartingScene.super.getSceneManager(), StartingScene.super.getSoundManager(), getBatch()));
+            super.getSceneManager().swapScene(new GameScene(StartingScene.super.getSceneManager(), StartingScene.super.getEntityManager(), StartingScene.super.getSoundManager(), getBatch()));
         });
     }
 

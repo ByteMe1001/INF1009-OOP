@@ -58,6 +58,13 @@ public interface iIO {
         else return "FALSE";
     }
 
+    default String inputKey3() {
+        if (Gdx.input.isKeyPressed(Keys.SPACE)) {
+            return "SPACE";
+        }
+        else return "FALSE";
+    }
+
     // Method to handle button hover events
     default void addCursorEnterListener(Actor actor, SoundManager soundManager, String musicKey) {
         actor.addListener(new InputListener() {

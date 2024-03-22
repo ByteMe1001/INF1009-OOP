@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.LifeCycleManager;
 import com.mygdx.game.SpaceShooter;
+import com.mygdx.game.entity.EntityManager;
 import com.mygdx.game.scene.GameScene;
 import com.mygdx.game.util.SoundManager;
 import com.mygdx.game.PlayerManager;
@@ -15,6 +16,7 @@ import java.util.List;
 public class SceneManager implements SceneChangeListener{
     private SoundManager soundManager;
     private PlayerManager playerManager;
+    private EntityManager entityManager;
     private ArrayList<Scene> scenes;
     private Scene currentScene;
     private SpriteBatch batch;
@@ -28,6 +30,7 @@ public class SceneManager implements SceneChangeListener{
 
     public SceneManager (LifeCycleManager lifeCycleManager, SpriteBatch batch) {
         this.soundManager = new SoundManager();
+        this.entityManager = new EntityManager(soundManager, batch);
         this.lifeCycleManager = lifeCycleManager;
         PlayerManager playerManager = new PlayerManager();      // Later change to after starting scene ends
         this.batch = batch;
@@ -36,11 +39,11 @@ public class SceneManager implements SceneChangeListener{
 
     // Example code for demo
     public void createStartingScene() {
-        scenes.add(new StartingScene(this, soundManager, batch));
+        scenes.add(new StartingScene(this, entityManager, soundManager, batch));
     }
 
     public void createGameScene() {
-        scenes.add(new GameScene(this, soundManager, batch));
+        scenes.add(new GameScene(this, entityManager, soundManager, batch));
     }
 
     // Scene Manager functions
@@ -53,7 +56,7 @@ public class SceneManager implements SceneChangeListener{
     }
 
     public void run() {
-        StartingScene startingScene = new StartingScene(this, soundManager, batch);
+        StartingScene startingScene = new StartingScene(this, entityManager, soundManager, batch);
         if (startingScene == null) {
             throw new IllegalStateException("StartingScene is null after creation");
         } else {

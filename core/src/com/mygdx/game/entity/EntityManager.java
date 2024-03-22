@@ -47,7 +47,7 @@ public class EntityManager {
         this.aiEntityList = new ArrayList<iAiMovement>();
         this.collisionList = new ArrayList<iCollision>();
         this.collisionManager = new CollisionManager(this, soundManager, collisionList);
-        this.playerControlManager = new PlayerControlManager(playerEntityList);
+        this.playerControlManager = new PlayerControlManager(this, playerEntityList);
         this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);;
     }
 

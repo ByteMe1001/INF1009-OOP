@@ -11,12 +11,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.entity.EntityManager;
 import com.mygdx.game.util.SoundManager;
 
 public abstract class Scene implements Screen {
 
     // Manager Variables
     private SceneManager sceneManager;
+    private EntityManager entityManager;
     private SoundManager soundManager;
 
     // Screen variables
@@ -36,8 +38,9 @@ public abstract class Scene implements Screen {
 
     private boolean isPaused;
 
-    public Scene(SceneManager sceneManager, SoundManager soundManager, SpriteBatch batch) {
+    public Scene(SceneManager sceneManager, EntityManager entityManager, SoundManager soundManager, SpriteBatch batch) {
         this.sceneManager = sceneManager;
+        this.entityManager = entityManager;
         this.soundManager = soundManager;
         isPaused = false;
 
@@ -103,6 +106,14 @@ public abstract class Scene implements Screen {
 
     protected void setSceneManager(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
+    }
+
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     protected Camera getCamera() {

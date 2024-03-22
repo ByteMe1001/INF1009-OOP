@@ -13,13 +13,15 @@ public class PlayerControlManager implements iIO {
 
    // private float x, y, speed;
     private ArrayList<iPlayerMovement> playerEntityList;
+    private  EntityManager entityManager;
 
 
     public PlayerControlManager() {
 
     }
 
-    public PlayerControlManager(ArrayList<iPlayerMovement> playerEntityList) {
+    public PlayerControlManager(EntityManager entityManager, ArrayList <iPlayerMovement> playerEntityList) {
+        this.entityManager = entityManager;
         this.playerEntityList = playerEntityList;
     }
 
@@ -61,6 +63,18 @@ public class PlayerControlManager implements iIO {
                 break;
         }
         return vector;
+    }
+
+    public void shoot(float x, float y){
+        switch(inputKey3()) {
+            case "FALSE":
+                break;
+            case "SHOOT":
+                //entityManager.create("BULLET", x , y);
+                break;
+            default:
+                break;
+        }
     }
 
     // Getter and setter methods

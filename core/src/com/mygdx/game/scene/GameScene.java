@@ -7,13 +7,13 @@ import com.mygdx.game.util.SoundManager;
 import com.mygdx.game.entity.EntityManager;
 
 class GameScene extends Scene{
-    private EntityManager entityManager;
+
 
     private final static String TEXTURE_PATH = "Space.jpg";
 
-    protected GameScene(SceneManager sceneManager, SoundManager soundManager, SpriteBatch batch) {
-        super(sceneManager, soundManager, batch);
-        this.entityManager = new EntityManager(soundManager, batch);        // Can put here or show()
+    protected GameScene(SceneManager sceneManager, EntityManager entityManager, SoundManager soundManager, SpriteBatch batch) {
+        super(sceneManager,entityManager, soundManager, batch);
+        //this.entityManager = new EntityManager(soundManager, batch);        // Can put here or show()
     }
 
     @Override
@@ -22,8 +22,8 @@ class GameScene extends Scene{
         if (!super.getSoundManager().isMusicPlaying()) {
             super.getSoundManager().playMusic("GameScene");
         }
-        entityManager.createBucket();
-        entityManager.createDroplets(5);
+        super.getEntityManager().createBucket();
+        super.getEntityManager().createDroplets(5);
     }
 
     @Override
@@ -35,15 +35,15 @@ class GameScene extends Scene{
         // Background code
         super.getBatch().draw(super.getBackground(), 0, 0, 640,640);
         // Entity Manager codes
-        entityManager.update();
-        entityManager.draw();
+        super.getEntityManager().update();
+        super.getEntityManager().draw();
         super.getBatch().end();
     }
 
     @Override
     public void dispose() {
         // Dispose of resources
-        entityManager.dispose();
+        super.getEntityManager().dispose();
         super.getSoundManager().stopAll();
     }
 
