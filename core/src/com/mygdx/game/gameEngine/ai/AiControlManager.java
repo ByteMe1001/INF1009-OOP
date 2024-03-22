@@ -30,6 +30,7 @@ public class AiControlManager{
 
     public void update() {
         for (iAiMovement e : aiEntityList) {
+            e.movement();
             movement(e);
         }
     }
@@ -37,23 +38,12 @@ public class AiControlManager{
     // Decides which movement style to use based on entity movementSetID
     public void movement(iAiMovement entity) {
 
-        if (entity.getChangeRate() >= 0 ) {
-            switch (entity.getMovementSetID()) {
-                case MOVE_UP_DOWN:
-                    entity.setUpDown();
-                    break;
-                case MOVE_LEFT_RIGHT:
-                    entity.setLeftRight();
-                    break;
-                case MOVE_ALL:
-                    entity.setAll();
-                    break;
-            }
-        }
-        else {
+        if (entity.getChangeRate() < 0 ) {
+
             entity.setChangeRate(random.nextInt(entity.getDefaultChangeRate() + 1));
         }
         entity.getMovementStrategy().move(entity);
+
     }
 
 }

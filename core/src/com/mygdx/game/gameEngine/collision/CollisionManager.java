@@ -16,6 +16,8 @@ public class CollisionManager {
     private EntityManager entityManager;     // Entity Manager for entity control
     private SoundManager soundManager;      // Sound manager for collision sounds
 
+    // private CollisionStrategy collisionStrategy;
+
     public CollisionManager(EntityManager entityManager, SoundManager soundManager, ArrayList<iCollision> collisionList ) {
         this.entityManager = entityManager;
         this.soundManager = new SoundManager();
@@ -38,25 +40,25 @@ public class CollisionManager {
         }
     }
 
-    // Refresh collision list
-    public void updateCollisionList(List<Entity> entityList , List<Entity> playerEntityList, List<Entity> aiEntityList) {
-        // Clear list first
-        //collisionList.clear();        // Alternative logic
-
-        for (Entity entity : entityList) {
-            if (entityManager.getIsCollidable(entity) != collisionList.contains(entity))
-                collisionList.add((iCollision) entity); //add collidable objects into entityList
-        }
-
-        for (Entity entity : playerEntityList) {
-            if (entityManager.getIsCollidable(entity) != collisionList.contains(entity))
-                collisionList.add((iCollision) entity); //add collidable objects into a playerEntityList
-        }
-        for (Entity entity : aiEntityList) {
-            if (entityManager.getIsCollidable(entity) != collisionList.contains(entity))
-                collisionList.add((iCollision) entity); //add collidable objects into a aiEntityList
-        }
-    }
+//    // Refresh collision list
+//    public void updateCollisionList(List<Entity> entityList , List<Entity> playerEntityList, List<Entity> aiEntityList) {
+//        // Clear list first
+//        //collisionList.clear();        // Alternative logic
+//
+//        for (Entity entity : entityList) {
+//            if (entityManager.getIsCollidable(entity) != collisionList.contains(entity))
+//                collisionList.add((iCollision) entity); //add collidable objects into entityList
+//        }
+//
+//        for (Entity entity : playerEntityList) {
+//            if (entityManager.getIsCollidable(entity) != collisionList.contains(entity))
+//                collisionList.add((iCollision) entity); //add collidable objects into a playerEntityList
+//        }
+//        for (Entity entity : aiEntityList) {
+//            if (entityManager.getIsCollidable(entity) != collisionList.contains(entity))
+//                collisionList.add((iCollision) entity); //add collidable objects into a aiEntityList
+//        }
+//    }
 
     protected void handleCollision(EntityManager entityManager, SoundManager soundManager, List<iCollision> collisionList, iCollision x, iCollision y){
 

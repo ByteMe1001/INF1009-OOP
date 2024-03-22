@@ -93,7 +93,7 @@ public class Droplet extends CollidableEntities implements iAiMovement{
         throw new IllegalArgumentException("Movement Strategy not found in the list");
     }
     public int getChangeRate() {
-        return changeRate;
+        return this.changeRate;
     }
 
 
@@ -107,7 +107,7 @@ public class Droplet extends CollidableEntities implements iAiMovement{
     }
 
     public void decrementChangeRate() {
-        this.changeRate--;
+        --this.changeRate;
     }
 
 
@@ -131,7 +131,7 @@ public class Droplet extends CollidableEntities implements iAiMovement{
     // Movement logic
     @Override
     public void movement() {
-
+        setAll();
     }
 
     // Dunnid probably
@@ -154,42 +154,42 @@ public class Droplet extends CollidableEntities implements iAiMovement{
 
     public void setLeftRight() {
         // Check if entity has finished moving
-        if (getChangeRate() <= 0) {
-            int randomNumber = random.nextInt(2);
-            switch (randomNumber) {
-                case 0:
-                    setMovementStrategy(getMovementStrategy("LeftMovement"));
-                    break;
-                case 1:
-                    setMovementStrategy(getMovementStrategy("RightMovement"));
-                    break;
-                default:
-                    break;
-            }
-        }
-        decrementChangeRate();
+//        if (getChangeRate() <= 0) {
+//            int randomNumber = random.nextInt(2);
+//            switch (randomNumber) {
+//                case 0:
+//                    setMovementStrategy(getMovementStrategy("LeftMovement"));
+//                    break;
+//                case 1:
+//                    setMovementStrategy(getMovementStrategy("RightMovement"));
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+//        decrementChangeRate();
     }
 
     public void setUpDown() {
-        // Check if entity has finished moving
-        if (getChangeRate() <= 0) {
-            int randomNumber = random.nextInt(2);
-            switch (randomNumber) {
-                case 0:
-                    setMovementStrategy(getMovementStrategy("UpMovement"));
-                    break;
-                case 1:
-                    setMovementStrategy(getMovementStrategy("DownMovement"));
-                    break;
-                default:
-                    break;
-            }
-        }
-        decrementChangeRate();
+//        // Check if entity has finished moving
+//        if (getChangeRate() <= 0) {
+//            int randomNumber = random.nextInt(2);
+//            switch (randomNumber) {
+//                case 0:
+//                    setMovementStrategy(getMovementStrategy("UpMovement"));
+//                    break;
+//                case 1:
+//                    setMovementStrategy(getMovementStrategy("DownMovement"));
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+//        decrementChangeRate();
     }
 
     public void setAll() {
-        // Check if entity has finished moving
+        // Check if entity has finished moving if so change direction
         if (getChangeRate() <= 0) {
             int randomNumber = random.nextInt(4); // Random number between 0 and 3 for four directions
             switch (randomNumber) {
