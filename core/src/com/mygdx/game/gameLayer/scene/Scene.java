@@ -11,6 +11,7 @@ import com.mygdx.game.gameEngine.entity.EntityManager;
 import com.mygdx.game.gameEngine.scene.SceneManager;
 import com.mygdx.game.gameEngine.util.SoundManager;
 
+
 public abstract class Scene implements Screen {
 
     // Manager Variables

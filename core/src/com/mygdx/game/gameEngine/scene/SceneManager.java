@@ -124,4 +124,9 @@ public class SceneManager implements SceneChangeListener{
         // Swap the scene
         swapScene(newScene);
     }
+
+    public void pause(){
+
+    }
+
 }
