@@ -8,6 +8,8 @@ import com.mygdx.game.gameLayer.entity.Boss;
 import com.mygdx.game.gameLayer.entity.EntityType;
 
 public class EntityFactory implements GameFactory {
+
+    // TODO: HARDCODE REMOVE
     private EntityType entityType = EntityType.BOY;
 
     private SpriteBatch batch;
