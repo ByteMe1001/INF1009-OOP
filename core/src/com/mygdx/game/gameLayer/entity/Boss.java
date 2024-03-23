@@ -1,6 +1,5 @@
 package com.mygdx.game.gameLayer.entity;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -11,7 +10,7 @@ import com.mygdx.game.gameLayer.movement.*;
 
 import java.util.ArrayList;
 
-public class Droplet extends CollidableEntities implements iAiMovement{
+public class Boss extends CollidableEntities implements iAiMovement{
 
     // Additional properties for Droplet class
     private final static String TEXTURE_PATH = "asteroid.png";
@@ -30,32 +29,30 @@ public class Droplet extends CollidableEntities implements iAiMovement{
 
 
     // Default constructor
-    public Droplet() {
+    public Boss() {
         // do nothing don't touch
     }
-    // Constructor with id parameter
-    public Droplet(int id, SpriteBatch batch) {
-        super(id, batch);
-        this.setChangeRate(DropletType.DEFAULT.getChangeRate());
-        this.setSprite(new Sprite(new Texture(DropletType.DEFAULT.getTexturePath())));
-        this.setAlive(DropletType.DEFAULT.isAlive());
-        this.setCollidable(DropletType.DEFAULT.isCollidable());
-        this.setControl(DropletType.DEFAULT.getControl());
-        this.movementStrategyList = new ArrayList<AIMovementStrategy>();
+    public Boss(int id, int health, float x, float y, float scale, Sprite sprite,
+                float width, float height, float speed, int direction,
+                AiControlManager aiControlManager, boolean isAlive,
+                boolean isCollidable) {
+        super(id, health, x, y, scale, sprite, width, height, speed, direction, null);
+        this.aiControlManager = aiControlManager;
+        this.setAlive(isAlive);
+        this.setCollidable(isCollidable);
+    }
+
+    // Additional constructor if needed
+    public Boss(int id, AiControlManager aiControlManager, SpriteBatch batch) {
+        super(id, 100, 0, 0, 1f, new Sprite(new Texture(TEXTURE_PATH)), 64f, 64f, 300f, 3, batch);
+        this.aiControlManager = aiControlManager;
         intializeMovementStrategy();
     }
 
-    // Parameterized constructor
-    public Droplet(AiControlManager aiControlManager, int id, int health, float x, float y, float scale, float width, float height, float speed, int direction, SpriteBatch batch) {
-        super(id, health, x, y, scale, new Sprite(new Texture(DropletType.DEFAULT.getTexturePath())), width, height, speed, direction, batch);
-        setWidth(getSprite().getWidth());
-        setHeight(getSprite().getHeight());
+    // Additional constructor if needed
+    public Boss(int id, AiControlManager aiControlManager, SpriteBatch batch, float x, float y) {
+        super(id, 100, x, y, 1f, new Sprite(new Texture(TEXTURE_PATH)), 64f, 64f, 300f, 3, batch);
         this.aiControlManager = aiControlManager;
-        this.setChangeRate(DropletType.DEFAULT.getChangeRate());
-        this.setAlive(DropletType.DEFAULT.isAlive());
-        this.setCollidable(DropletType.DEFAULT.isCollidable());
-        this.setControl(DropletType.DEFAULT.getControl());
-        this.movementStrategyList = new ArrayList<AIMovementStrategy>();
         intializeMovementStrategy();
     }
 

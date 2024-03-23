@@ -2,7 +2,7 @@ package com.mygdx.game.gameLayer.entity;
 
 // Enum class to store specific entity values
 // EDIT values here to change entity blueprint
-public enum DropletType {
+public enum BossType {
     DEFAULT(2, 100, 500f, 500f, 1f, 64f, 64f, 300f,3, 0, true, 'A', true, "asteroid.png");
     private final int id;
     private final int health;
@@ -20,7 +20,7 @@ public enum DropletType {
     private final boolean isCollidable;
     private final String texturePath;
 
-    DropletType(int id, int health, float x, float y, float scale, float width, float height, float speed, int direction, int changeRate, boolean isAlive, Character control, boolean isCollidable, String texturePath) {
+    BossType(int id, int health, float x, float y, float scale, float width, float height, float speed, int direction, int changeRate, boolean isAlive, Character control, boolean isCollidable, String texturePath) {
         this.id = id;
         this.health = health;
         this.x = x;

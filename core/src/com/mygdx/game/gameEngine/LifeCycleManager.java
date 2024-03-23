@@ -7,6 +7,7 @@ import java.util.logging.*;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
+import com.mygdx.game.gameEngine.entity.EntityManager;
 import com.mygdx.game.gameEngine.player.Player;
 import com.mygdx.game.gameEngine.scene.SceneManager;
 import com.mygdx.game.gameEngine.util.SoundManager;
@@ -16,6 +17,7 @@ public class LifeCycleManager extends Game {
     private SceneManager sceneManager;
     private SpriteBatch batch;
     private SoundManager soundManager;
+    private EntityManager entityManager;
 
     // Logger creation
     private static final Logger logger = Logger.getLogger(LifeCycleManager.class.getName());

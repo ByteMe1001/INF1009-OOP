@@ -2,7 +2,7 @@ package com.mygdx.game.gameLayer.entity;
 
 // Enum class to store specific entity values
 // EDIT values here to change entity blueprint
-public enum BucketType {
+public enum CharacterType {
     DEFAULT(1, 100, 100f, 100f, 1f, 64f, 64f, 300f,3, true, 'P', true, "spaceship.png");
     private final int id;
     private final int health;
@@ -19,7 +19,7 @@ public enum BucketType {
     private final boolean isCollidable;
     private final String texturePath;
 
-    BucketType(int id, int health, float x, float y, float scale, float width, float height, float speed, int direction, boolean isAlive, Character control, boolean isCollidable, String texturePath) {
+    CharacterType(int id, int health, float x, float y, float scale, float width, float height, float speed, int direction, boolean isAlive, Character control, boolean isCollidable, String texturePath) {
         this.id = id;
         this.health = health;
         this.x = x;

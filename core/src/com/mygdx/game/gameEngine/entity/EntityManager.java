@@ -10,10 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-import com.mygdx.game.gameLayer.entity.Bucket;
-import com.mygdx.game.gameLayer.entity.BucketType;
-import com.mygdx.game.gameLayer.entity.Droplet;
-import com.mygdx.game.gameLayer.entity.DropletType;
+import com.mygdx.game.gameLayer.entity.Character;
 import com.mygdx.game.gameEngine.player.PlayerControlManager;
 import com.mygdx.game.gameEngine.util.SoundManager;
 import com.mygdx.game.gameEngine.util.iAiMovement;
@@ -27,6 +24,7 @@ public class EntityManager {
     private ArrayList<iAiMovement> aiEntityList;
     private ArrayList<iPlayerMovement> playerEntityList;
     private ArrayList<iCollision> collisionList;
+    private EntityFactory entityFactory;
 
     private SpriteBatch batch;
 
@@ -53,55 +51,51 @@ public class EntityManager {
         this.collisionManager = new CollisionManager(this, soundManager, collisionList);
         this.playerControlManager = new PlayerControlManager(this, playerEntityList);
         this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);;
+        this.entityFactory = new EntityFactory(batch);
+    }
+
+    // Constructor with EntityFactory
+    public EntityManager(EntityFactory entityFactory, SoundManager soundManager, SpriteBatch batch) {
+        this.entityFactory = entityFactory; // Initialize EntityFactory
+        this.soundManager = soundManager;
+        this.batch = batch;
+        this.entityList = new ArrayList<Entity>();
+        this.playerEntityList = new ArrayList<iPlayerMovement>();
+        this.aiEntityList = new ArrayList<iAiMovement>();
+        this.collisionList = new ArrayList<iCollision>();
+        this.collisionManager = new CollisionManager(this, soundManager, collisionList);
+        this.playerControlManager = new PlayerControlManager(this, playerEntityList);
+        this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);
+        this.entityFactory = new EntityFactory(batch);
     }
 
     // Main testing creation
     // Entity creations
     public void createBucket() {
-        Bucket bucket = new Bucket(playerControlManager, BucketType.DEFAULT.getId(), BucketType.DEFAULT.getHealth(),
-                BucketType.DEFAULT.getX(), BucketType.DEFAULT.getY(), BucketType.DEFAULT.getScale(),
-                BucketType.DEFAULT.getWidth(), BucketType.DEFAULT.getHeight(), BucketType.DEFAULT.getSpeed(),
-                BucketType.DEFAULT.getDirection(), batch);
+        Entity bucket = entityFactory.createEntity(); // Use factory to create bucket entity
         addEntity(bucket);
-        collisionList.add(bucket);
-        playerEntityList.add(bucket);
     }
 
 
     public void createBuckets(int x) {
         for (int i = 0; i < x; i++) {
-            float randomX = random.nextInt(640);
-            float randomY = random.nextInt(640);
-            Bucket bucket = new Bucket(playerControlManager, BucketType.DEFAULT.getId(), BucketType.DEFAULT.getHealth(),
-                    BucketType.DEFAULT.getX(), BucketType.DEFAULT.getY(), BucketType.DEFAULT.getScale(),
-                    BucketType.DEFAULT.getWidth(), BucketType.DEFAULT.getHeight(), BucketType.DEFAULT.getSpeed(),
-                    BucketType.DEFAULT.getDirection(), batch);
+            Entity bucket = entityFactory.createEntity(); // Use EntityFactory to create bucket entity
             addEntity(bucket);
         }
     }
 
-    public void createDroplet(){
-        Droplet droplet = new Droplet(aiControlManager, DropletType.DEFAULT.getId(), DropletType.DEFAULT.getHealth(),
-                DropletType.DEFAULT.getX(), DropletType.DEFAULT.getY(), DropletType.DEFAULT.getScale(),
-                DropletType.DEFAULT.getWidth(), DropletType.DEFAULT.getHeight(), DropletType.DEFAULT.getSpeed(),
-                DropletType.DEFAULT.getDirection(), batch);
+    public void createDroplet() {
+        Entity droplet = entityFactory.createEntity(); // Use factory to create droplet entity
         addEntity(droplet);
-        collisionList.add(droplet);
-        aiEntityList.add(droplet);
     }
 
     // Main testing creation
     public void createDroplets(int x) {
         for (int i = 0; i < x; i++) {
-            float randomX = random.nextInt(Gdx.graphics.getHeight());
-            float randomY = random.nextInt(Gdx.graphics.getWidth());
-            Droplet droplet = new Droplet(aiControlManager,DropletType.DEFAULT.getId(), DropletType.DEFAULT.getHealth(),
-                    randomX, randomY, DropletType.DEFAULT.getScale(),
-                    DropletType.DEFAULT.getWidth(), DropletType.DEFAULT.getHeight(), DropletType.DEFAULT.getSpeed(),
-                    DropletType.DEFAULT.getDirection(), batch);
+            Entity droplet = entityFactory.createEntity(); // Use EntityFactory to create droplet entity
             addEntity(droplet);
-            collisionList.add(droplet);
-            aiEntityList.add(droplet);
+            collisionList.add((iCollision) droplet);
+            aiEntityList.add((iAiMovement) droplet);
         }
     }
 
@@ -110,17 +104,6 @@ public class EntityManager {
         createBuckets(player);
         createDroplets(ai);
     }
-
-    public void createEntities(int player, int ai, int entity) {
-       createBuckets(player);
-       createDroplets(ai);
-       //Create not moving droplet
-        for (int i = 0; i < entity; i++){
-            Droplet droplet = new Droplet(aiControlManager, i, 100, 300.0f, 200.0f, 1.0f, 50f, 50f, 10, 0, batch);
-            addEntity(droplet);
-        }
-    }
-
 
     // Maybe can use this function to clear all list?
     public void deleteEntity(Entity e) {

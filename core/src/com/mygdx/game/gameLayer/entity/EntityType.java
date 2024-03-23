@@ -8,21 +8,21 @@ public enum EntityType {
             64f, 300f, 3, 0,
             true, 'A', true, "asteroid.png");
 
-    private final int id;
-    private final int health;
+    public final int id;
+    public final int health;
 
-    private final float x;
-    private final float y;
-    private final float scale;
-    private final float width;
-    private final float height;
-    private final float speed;
-    private final int direction;
+    public final float x;
+    public final float y;
+    public final float scale;
+    public final float width;
+    public final float height;
+    public final float speed;
+    public final int direction;
     private final int changeRate;
-    private final boolean isAlive;
-    private final Character control;
-    private final boolean isCollidable;
-    private final String texturePath;
+    public final boolean isAlive;
+    public final Character control;
+    public final boolean isCollidable;
+    public final String texturePath;
 
     EntityType(int id, int health, float x, float y, float scale, float width, float height,
                float speed, int direction, int changeRate, boolean isAlive, Character control,
