@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.gameEngine.scene.Scene;
 import com.mygdx.game.gameEngine.scene.SceneManager;
 import com.mygdx.game.gameEngine.util.SoundManager;
 import com.mygdx.game.gameEngine.entity.EntityManager;
@@ -77,6 +78,7 @@ public class GameScene extends Scene implements iIO {
     }
 
     private void resumeGame() {
+
     }
 
     private ImageButton createPauseButton() {
@@ -146,9 +148,15 @@ public class GameScene extends Scene implements iIO {
 
         super.getBatch().begin();
         super.getBatch().draw(super.getBackground(), 0, 0, 640, 640);
-        super.getEntityManager().update();
+
+        // Game Loop
+        // PATCH FIX
+        if (!isPaused) {
+            super.getEntityManager().update();
+        }
         super.getEntityManager().draw();
         super.getBatch().end();
+
 
         // Draw stage
         stage.act(deltaTime);

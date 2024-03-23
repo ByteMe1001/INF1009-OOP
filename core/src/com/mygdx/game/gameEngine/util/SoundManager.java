@@ -102,8 +102,8 @@ public class SoundManager {
         isMusicPlaying = false;
     }
 
-    //pause logic
-    // Pause sound or music (NOT USES,,YET)
+//    pause logic
+//     Pause sound or music (NOT USES,,YET)
 //    public void pause(String sceneName) {
 //        if (clips.containsKey(sceneName)) {
 //            List<Clip> clipList = clips.get(sceneName);

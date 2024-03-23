@@ -188,6 +188,10 @@ public class Droplet extends CollidableEntities implements iAiMovement{
 //        decrementChangeRate();
     }
 
+//    public void setUp() {
+//        setMovementStrategy(getMovementStrategy("UpMovement"));
+//    }
+
     public void setAll() {
         // Check if entity has finished moving if so change direction
         if (getChangeRate() <= 0) {

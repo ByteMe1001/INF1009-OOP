@@ -13,7 +13,6 @@ import com.mygdx.game.gameEngine.entity.EntityManager;
 import com.mygdx.game.gameEngine.util.SoundManager;
 import com.mygdx.game.gameEngine.util.iIO;
 import com.mygdx.game.gameLayer.scene.GameScene;
-import com.mygdx.game.gameLayer.scene.Scene;
 
 public class StartingScene extends Scene implements iIO {
 

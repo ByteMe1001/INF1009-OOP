@@ -7,7 +7,6 @@ import com.mygdx.game.gameEngine.entity.EntityManager;
 import com.mygdx.game.gameEngine.player.PlayerManager;
 import com.mygdx.game.gameEngine.util.SoundManager;
 import com.mygdx.game.gameLayer.scene.GameScene;
-import com.mygdx.game.gameLayer.scene.Scene;
 
 
 import java.util.ArrayList;
