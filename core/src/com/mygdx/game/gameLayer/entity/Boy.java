@@ -4,53 +4,60 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.gameEngine.entity.CollidableEntities;
+import com.mygdx.game.gameEngine.entity.PlayableEntity;
 import com.mygdx.game.gameEngine.player.PlayerControlManager;
+import com.mygdx.game.gameEngine.player.PlayerMovement;
 import com.mygdx.game.gameEngine.util.iPlayerMovement;
+import com.mygdx.game.gameLayer.movement.Player1MovementStrategy;
 
-public class Boy extends CollidableEntities implements iPlayerMovement {
+public class Bucket extends CollidableEntities implements iPlayerMovement {
 
     // Additional properties for Bucket class
     private final static String TEXTURE_PATH = "spaceship.png";
 
     private PlayerControlManager playerControlManager;
-
+    private PlayerMovement playerMovementStrategy;
 
     // Default constructor
-    public Boy() {
+    public Bucket() {
         //do nothing for now
     }
 
     // Constructor with ID
-    public Boy(int id, int health, float x, float y, float scale, Sprite sprite,
-               float width, float height, float speed, int direction,
-               PlayerControlManager playerControlManager, boolean isAlive,
-               boolean isCollidable, SpriteBatch batch) {
-        super(id, health, x, y, scale, sprite, width, height, speed, direction, batch);
-        this.playerControlManager = playerControlManager;
-        this.setAlive(isAlive);
-        this.setCollidable(isCollidable);
-    }
-
-    // Another constructor if needed
-    public Boy(int id, PlayerControlManager playerControlManager, SpriteBatch batch) {
-        super(id, 100, 0, 0, 1f, new Sprite(new Texture(TEXTURE_PATH)), 64f, 64f, 300f, 3, batch);
+    public Bucket(PlayerControlManager playerControlManager, int id, SpriteBatch batch) {
+        super(id, batch);
         initializeBucket(playerControlManager);
     }
 
-    // Additional constructor if needed
-    public Boy(int id, PlayerControlManager playerControlManager, SpriteBatch batch, float x, float y) {
-        super(id, 100, x, y, 1f, new Sprite(new Texture(TEXTURE_PATH)), 64f, 64f, 300f, 3, batch);
+    // Parameterized constructor
+    public Bucket(PlayerControlManager playerControlManager, int id, int health, float x, float y, float scale, float width, float height, float speed, int direction, SpriteBatch batch) {
+        super(id, health, x, y, scale, new Sprite(new Texture(BucketType.DEFAULT.getTexturePath())), width, height, speed, direction, batch);
         initializeBucket(playerControlManager);
+        // TODO: upgrade to dynamic assignment of strat?
+        this.playerMovementStrategy = new Player1MovementStrategy();
     }
 
     // Initialize bucket properties
     private void initializeBucket(PlayerControlManager playerControlManager) {
         this.playerControlManager = playerControlManager;
-        this.setSprite(new Sprite(new Texture(BoyType.DEFAULT.getTexturePath())));
-        this.setAlive(BoyType.DEFAULT.isAlive());
-        this.setCollidable(BoyType.DEFAULT.isCollidable());
-        this.setControl(BoyType.DEFAULT.getControl());
+        this.setSprite(new Sprite(new Texture(BucketType.DEFAULT.getTexturePath())));
+        this.setAlive(BucketType.DEFAULT.isAlive());
+        this.setCollidable(BucketType.DEFAULT.isCollidable());
+        this.setControl(BucketType.DEFAULT.getControl());
     }
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~GETTER AND SETTER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    @Override
+    public PlayerMovement getPlayerMovementStrategy() {
+        return playerMovementStrategy;
+    }
+
+    public void setPlayerMovementStrategy(PlayerMovement playerMovementStrategy) {
+        this.playerMovementStrategy = playerMovementStrategy;
+    }
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~GAME LOGIC~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     @Override
     public void update() {
@@ -76,6 +83,16 @@ public class Boy extends CollidableEntities implements iPlayerMovement {
     @Override
     // Movement method for player with movement direction lock
     public void movement() {
+
+    }
+
+    // TO USE
+    public void movement(String direction) {
+        float [] vector = playerMovementStrategy.calculateMovement(this, direction);
+        super.movement(vector);
+    }
+
+//    public void movement(float[] vector) {
 //        if (getControl() == 'P') {
 //            float[] vector = playerControlManager.movement(this.getX(), this.getY(), this.getSpeed());
 //            switch (super.getMovementSetID()) {         // 1 for up down, 2 for left right, 3 for all

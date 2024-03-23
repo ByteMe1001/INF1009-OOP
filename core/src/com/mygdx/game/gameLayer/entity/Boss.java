@@ -126,7 +126,7 @@ public class Boss extends CollidableEntities implements iAiMovement{
 
     // Dunnid probably
     // Movement logic
-    @Override
+
     public void movement() {
         setAll();
     }

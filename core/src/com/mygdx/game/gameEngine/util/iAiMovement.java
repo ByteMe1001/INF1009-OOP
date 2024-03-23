@@ -27,6 +27,8 @@ public interface iAiMovement {
     public float getHeight();
     public int getMovementSetID();
     public void movement(float[] vector);
+
+    //~~~~~~~~~~~~~~~~~~NEEDED~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public void movement();
     public int getChangeRate();
     public void setChangeRate(int i);
