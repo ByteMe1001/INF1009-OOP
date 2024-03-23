@@ -19,7 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 
 public class GameScene extends Scene implements iIO {
-    private final static String TEXTURE_PATH = "Space.jpg";
+    private final static String TEXTURE_PATH = "scrolling_Background.png";
     private final static String PAUSE_BUTTON_PATH = "pause_button.png";
     private final static String RESUME_BUTTON_PATH = "resume_button.png";
     private Stage stage; // Stage for buttons
@@ -27,6 +27,11 @@ public class GameScene extends Scene implements iIO {
     private Texture resumeButtonTexture;
     private boolean isPaused = false;
     private SoundManager soundManager;
+    private float backgroundY = 0;
+    private float backgroundVelocity = 4;
+
+
+
 
     public GameScene(SceneManager sceneManager, EntityManager entityManager, SoundManager soundManager, SpriteBatch batch) {
         super(sceneManager, entityManager, soundManager, batch);
@@ -147,12 +152,21 @@ public class GameScene extends Scene implements iIO {
         ScreenUtils.clear(0, 0, 0, 1); // Clear screen
 
         super.getBatch().begin();
-        super.getBatch().draw(super.getBackground(), 0, 0, 640, 640);
+        //For moving scene
+        super.getBatch().draw(super.getBackground(), 0, backgroundY, 640, 640);
+        super.getBatch().draw(super.getBackground(), 0, backgroundY + 640, 640, 640);
 
         // Game Loop
         // PATCH FIX
         if (!isPaused) {
             super.getEntityManager().update();
+
+            //Below here is the logic for the moving scene when not paused
+            backgroundY -= backgroundVelocity;
+
+            if (backgroundY +640 ==0){
+                backgroundY = 0;
+            }
         }
         super.getEntityManager().draw();
         super.getBatch().end();
