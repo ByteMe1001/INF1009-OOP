@@ -8,7 +8,7 @@ import com.mygdx.game.gameLayer.entity.Boss;
 import com.mygdx.game.gameLayer.entity.EntityType;
 
 public class EntityFactory implements GameFactory {
-    private EntityType entityType = EntityType.CHARACTER;
+    private EntityType entityType = EntityType.BOY;
 
     private SpriteBatch batch;
 
@@ -17,7 +17,7 @@ public class EntityFactory implements GameFactory {
     }
 
     public EntityFactory(SpriteBatch batch) {
-        EntityType entityType = EntityType.CHARACTER;
+        EntityType entityType = EntityType.BOY;
         this.batch = batch;
     }
 
@@ -30,7 +30,7 @@ public class EntityFactory implements GameFactory {
     @Override
     public Entity createEntity() {
         switch (entityType) {
-            case CHARACTER:
+            case BOY:
                 return createCharacterEntity();
             case BOSS:
                 return createBossEntity();
@@ -40,7 +40,7 @@ public class EntityFactory implements GameFactory {
         }
     }
 
-    private Entity createCharacterEntity() {
+    public Entity createCharacterEntity() {
         return new Boy(
                 entityType.id, entityType.health, entityType.x, entityType.y, entityType.scale,
                 new Sprite(new Texture(entityType.texturePath)), entityType.width, entityType.height,
@@ -49,7 +49,8 @@ public class EntityFactory implements GameFactory {
         );
     }
 
-    private Entity createBossEntity() {
+
+    public Entity createBossEntity() {
         return new Boss(
                 entityType.id, entityType.health, entityType.x, entityType.y, entityType.scale,
                 new Sprite(new Texture(entityType.texturePath)), entityType.width, entityType.height,

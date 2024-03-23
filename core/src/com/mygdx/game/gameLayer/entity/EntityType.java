@@ -1,7 +1,7 @@
 package com.mygdx.game.gameLayer.entity;
 
 public enum EntityType {
-    CHARACTER(1, 100, 100f, 100f, 1f, 64f,
+    BOY(1, 100, 100f, 100f, 1f, 64f,
             64f, 300f,3, true, 'P',
             true, "spaceship.png"),
     BOSS(2, 100, 500f, 500f, 1f, 64f,

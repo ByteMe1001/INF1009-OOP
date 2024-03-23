@@ -58,10 +58,12 @@ public class EntityManager {
         this.entityFactory = entityFactory; // Initialize EntityFactory
         this.soundManager = soundManager;
         this.batch = batch;
+        //~~~~~~~~~~~LIST CREATION~~~~~~~~~~~~~~~~~~~~~~~~~~
         this.entityList = new ArrayList<Entity>();
         this.playerEntityList = new ArrayList<iPlayerMovement>();
         this.aiEntityList = new ArrayList<iAiMovement>();
         this.collisionList = new ArrayList<iCollision>();
+        //~~~~~~~~~~~MANAGER CREATION~~~~~~~~~~~~~~~~~~~~~~~~
         this.collisionManager = new CollisionManager(this, soundManager, collisionList);
         this.playerControlManager = new PlayerControlManager(this, playerEntityList);
         this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);
@@ -113,15 +115,19 @@ public class EntityManager {
 
     //Add
     public void addEntity(Entity entity) {
-//        if (entity.getControl() == null) {
-            entityList.add(entity);
-//        }
-//        else if (entity.getControl() == 'A') {
-//            aiEntityList.add(entity);
-//        }
-//        else if (entity.getControl() == 'P') {
-//            playerEntityList.add(entity);
-//        }
+
+        entityList.add(entity);
+        if (entity instanceof iCollision) {
+            collisionList.add((iCollision) entity); // Adding to the AI-controlled list
+        }
+
+        if (entity instanceof iAiMovement) {
+            aiEntityList.add((iAiMovement) entity); // Adding to the AI-controlled list
+        }
+
+        if (entity instanceof iPlayerMovement) {
+            playerEntityList.add((iPlayerMovement) entity); // Adding to the player-controlled list
+        }
     }
 
     // For loop to draw all entities
