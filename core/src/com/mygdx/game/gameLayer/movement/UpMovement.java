@@ -6,7 +6,7 @@ import com.mygdx.game.gameEngine.util.iAiMovement;
 public class UpMovement implements AIMovementStrategy{
     public void move(iAiMovement entity) {
         float newY = entity.getY() + entity.getSpeed() * Gdx.graphics.getDeltaTime();
-        float topBoundary = Gdx.graphics.getHeight() - entity.getHeight(); // Calculate the top boundary
+        float topBoundary = Gdx.graphics.getHeight() - entity.getSpriteHeight(); // Calculate the top boundary
         if (newY < topBoundary) { // Check if the new position is within the top screen boundary
             entity.setY(newY);
         } else {

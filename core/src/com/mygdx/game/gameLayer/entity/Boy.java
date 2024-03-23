@@ -10,12 +10,11 @@ import com.mygdx.game.gameEngine.player.PlayerMovement;
 import com.mygdx.game.gameEngine.util.iPlayerMovement;
 import com.mygdx.game.gameLayer.movement.Player1MovementStrategy;
 
-public class Boy extends PlayableEntity implements iPlayerMovement {
+public class Boy extends PlayableEntity {
 
     // Additional properties for Boy class
     private final static String TEXTURE_PATH = "spaceship.png";
 
-    private PlayerControlManager playerControlManager;
     private PlayerMovement playerMovementStrategy;
 
     // Default constructor
@@ -24,41 +23,18 @@ public class Boy extends PlayableEntity implements iPlayerMovement {
     }
 
     // Constructor with ID
-    public Boy(PlayerControlManager playerControlManager, int id, SpriteBatch batch) {
-        super(id, batch);
-        initializeBucket(playerControlManager);
+    public Boy(SpriteBatch batch) {
+        super(batch);
     }
 
     // Constructor with ID
-    public Boy(int id, int health, float x, float y, float scale, Sprite sprite,
-               float width, float height, float speed, int direction,
-               PlayerControlManager playerControlManager, boolean isAlive,
-               boolean isCollidable, SpriteBatch batch) {
-        super(id, health, x, y, scale, sprite, width, height, speed, direction, batch);
-        this.playerControlManager = playerControlManager;
-        this.setAlive(isAlive);
-        this.setCollidable(isCollidable);
-        this.playerMovementStrategy = new Player1MovementStrategy();
-    }
-
-    // Parameterized constructor
-    public Boy(PlayerControlManager playerControlManager, int id, int health, float x,
-               float y, float scale, float width, float height, float speed, int direction,
-               SpriteBatch batch) {
-        super(id, health, x, y, scale, new Sprite(new Texture(BoyType.DEFAULT.getTexturePath())), width, height, speed, direction, batch);
-        initializeBucket(playerControlManager);
+    public Boy(int health, float x, float y, float scale, Sprite sprite,
+              float speed, PlayerMovement playerMovement, SpriteBatch batch) {
+        super(health, x, y, scale, sprite ,speed, playerMovement, batch);
         // TODO: upgrade to dynamic assignment of strat?
         this.playerMovementStrategy = new Player1MovementStrategy();
     }
 
-    // Initialize Boy properties
-    private void initializeBucket(PlayerControlManager playerControlManager) {
-        this.playerControlManager = playerControlManager;
-        this.setSprite(new Sprite(new Texture(BoyType.DEFAULT.getTexturePath())));
-        this.setAlive(BoyType.DEFAULT.isAlive());
-        this.setCollidable(BoyType.DEFAULT.isCollidable());
-        this.setControl(BoyType.DEFAULT.getControl());
-    }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~GETTER AND SETTER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -105,6 +81,8 @@ public class Boy extends PlayableEntity implements iPlayerMovement {
         float [] vector = playerMovementStrategy.calculateMovement(this, direction);
         super.movement(vector);
     }
+}
+
 
 //    public void movement(float[] vector) {
 //        if (getControl() == 'P') {
@@ -122,7 +100,13 @@ public class Boy extends PlayableEntity implements iPlayerMovement {
 //                    break;
 //            }
 //        }
-}
 
 
-
+    // Initialize Boy properties
+//    private void initializeBucket(PlayerControlManager playerControlManager) {
+//        this.playerControlManager = playerControlManager;
+//        this.setSprite(new Sprite(new Texture(BoyType.DEFAULT.getTexturePath())));
+//        this.setAlive(BoyType.DEFAULT.isAlive());
+//        this.setCollidable(BoyType.DEFAULT.isCollidable());
+//        this.setControl(BoyType.DEFAULT.getControl());
+//    }

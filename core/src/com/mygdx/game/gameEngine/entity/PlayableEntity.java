@@ -4,8 +4,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.gameEngine.player.PlayerMovement;
+import com.mygdx.game.gameEngine.util.iPlayerMovement;
 
-public abstract class PlayableEntity extends CollidableEntities {
+public abstract class PlayableEntity extends CollidableEntities implements iPlayerMovement {
 
     private PlayerMovement playerMovement;
 
@@ -14,12 +15,14 @@ public abstract class PlayableEntity extends CollidableEntities {
         // No-arg constructor
     }
 
-    public PlayableEntity(int id, SpriteBatch batch) {
-        super(id, batch);
+    public PlayableEntity(SpriteBatch batch) {
+        super(batch);
     }
 
-    public PlayableEntity(int id, int health, float x, float y, float scale, Sprite sprite, float width, float height, float speed, int direction, SpriteBatch batch) {
-        super(id, health, x, y, scale, sprite, width, height, speed, direction, batch);
+    public PlayableEntity(int health, float x, float y, float scale,
+                          Sprite sprite, float speed, PlayerMovement playerMovement, SpriteBatch batch) {
+        super(health, x, y, scale, sprite, speed, batch);
+        this.playerMovement = playerMovement;
     }
 
     public void movement() {
@@ -34,8 +37,6 @@ public abstract class PlayableEntity extends CollidableEntities {
         this.setX(vector[0]);
         this.setY(vector[1]);
     }
-
-
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GETTER AND SETTER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public PlayerMovement getPlayerMovement() {

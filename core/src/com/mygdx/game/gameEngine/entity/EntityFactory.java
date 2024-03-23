@@ -42,20 +42,18 @@ public class EntityFactory implements GameFactory {
 
     public Entity createCharacterEntity() {
         return new Boy(
-                entityType.id, entityType.health, entityType.x, entityType.y, entityType.scale,
-                new Sprite(new Texture(entityType.texturePath)), entityType.width, entityType.height,
-                entityType.speed, entityType.direction, null, entityType.isAlive,
-                entityType.isCollidable, batch
+                entityType.health, entityType.x, entityType.y, entityType.scale,
+                new Sprite(new Texture(entityType.texturePath)),
+                entityType.speed, entityType.playerMovement, batch
         );
     }
 
 
     public Entity createBossEntity() {
         return new Boss(
-                entityType.id, entityType.health, entityType.x, entityType.y, entityType.scale,
-                new Sprite(new Texture(entityType.texturePath)), entityType.width, entityType.height,
-                entityType.speed, entityType.direction, null, entityType.isAlive,
-                entityType.isCollidable
+                entityType.health, entityType.x, entityType.y, entityType.scale,
+                new Sprite(new Texture(entityType.texturePath)),
+                entityType.speed, batch
         );
     }
 

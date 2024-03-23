@@ -3,6 +3,8 @@ package com.mygdx.game.gameEngine.entity;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+
+// TODO: I dont think we need it sorry
 public abstract class NonCollidableEntities extends Entity {
 
     // Constructors
@@ -10,24 +12,15 @@ public abstract class NonCollidableEntities extends Entity {
         // No-arg constructor
     }
 
-    public NonCollidableEntities(int id, SpriteBatch batch) {
-        super(id, batch);
-        setCollidable(false); // Marking as non-collidable
+    public NonCollidableEntities(SpriteBatch batch) {
+        super(batch);
     }
 
-    public NonCollidableEntities(int id, int health, float x, float y, float scale, Sprite sprite, float width, float height, float speed, int direction, SpriteBatch batch) {
-        super(id, health, x, y, scale, sprite, width, height, speed, direction, batch);
-        setCollidable(false); // Marking as non-collidable
+    public NonCollidableEntities(float x, float y, float scale, Sprite sprite, SpriteBatch batch) {
+        super(x, y, scale, sprite, batch);
     }
 
     // Abstract Methods
-    public abstract void takeDamage(int damage);
-
-    public abstract void heal(int amount);
-
-    public abstract void destroy();
-
-    public abstract void movement();
 
     // Method Overrides
     @Override

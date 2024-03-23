@@ -15,55 +15,56 @@ public class Boss extends CollidableEntities implements iAiMovement{
     // Additional properties for Droplet class
     private final static String TEXTURE_PATH = "asteroid.png";
     private static final int DEFAULT_CHANGE_RATE = 30;
+
+    // FOR AI MOVEMENT
     private int changeRate;
-    private AiControlManager aiControlManager;
     private SpriteBatch batch;
 
-    private ArrayList<AIMovementStrategy> movementStrategyList;
 
 //    // For screen boundary calc
 //    private int screenWidth = Gdx.graphics.getWidth();
 //    private int screenHeight = Gdx.graphics.getHeight();
 
     private AIMovementStrategy movementStrategy;
+    private ArrayList<AIMovementStrategy> movementStrategyList;
+
 
 
     // Default constructor
     public Boss() {
         // do nothing don't touch
     }
-    public Boss(int id, int health, float x, float y, float scale, Sprite sprite,
-                float width, float height, float speed, int direction,
-                AiControlManager aiControlManager, boolean isAlive,
-                boolean isCollidable) {
-        super(id, health, x, y, scale, sprite, width, height, speed, direction, null);
-        this.aiControlManager = aiControlManager;
-        this.setAlive(isAlive);
-        this.setCollidable(isCollidable);
-    }
+//    public Boss(int health, float x, float y, float scale, Sprite sprite,
+//                float width, float height, float speed, int direction,
+//                SpriteBatch batch) {
+//        super(health, x, y, scale, sprite, speed, batch);
+//        initializeMovementStrategy();
+//    }
+//
+//    // Additional constructor if needed
+//    public Boss(int id, AiControlManager aiControlManager, SpriteBatch batch) {
+//        super(id, 100, 0, 0, 1f, new Sprite(new Texture(TEXTURE_PATH)), 64f, 64f, 300f, 3, batch);
+//        this.aiControlManager = aiControlManager;
+//        initializeMovementStrategy();
+//    }
 
     // Additional constructor if needed
-    public Boss(int id, AiControlManager aiControlManager, SpriteBatch batch) {
-        super(id, 100, 0, 0, 1f, new Sprite(new Texture(TEXTURE_PATH)), 64f, 64f, 300f, 3, batch);
-        this.aiControlManager = aiControlManager;
-        intializeMovementStrategy();
-    }
-
-    // Additional constructor if needed
-    public Boss(int id, AiControlManager aiControlManager, SpriteBatch batch, float x, float y) {
-        super(id, 100, x, y, 1f, new Sprite(new Texture(TEXTURE_PATH)), 64f, 64f, 300f, 3, batch);
-        this.aiControlManager = aiControlManager;
-        intializeMovementStrategy();
+    public Boss(int health, float x, float y, float scale, Sprite sprite,
+                float speed,
+                SpriteBatch batch) {
+        super(health, x, y, scale, sprite, speed, batch);
+        this.movementStrategyList = new ArrayList<AIMovementStrategy>();
+        initializeMovementStrategy();
     }
 
     // Getter and setter methods
     @Override
     public void update() {
         //movementStrategy.move(this);
-        super.getBoundingBox().setPosition(getX(), getY());
+        super.update();
     }
 
-    public void intializeMovementStrategy() {
+    public void initializeMovementStrategy() {
         movementStrategyList.add(new LeftMovement());
         movementStrategyList.add(new RightMovement());
         movementStrategyList.add(new UpMovement());
@@ -89,10 +90,11 @@ public class Boss extends CollidableEntities implements iAiMovement{
         // Return null if no strategy with the given name is found
         throw new IllegalArgumentException("Movement Strategy not found in the list");
     }
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~AI CODE BLOCK~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public int getChangeRate() {
         return this.changeRate;
     }
-
 
 	public int getDefaultChangeRate() {
         return DEFAULT_CHANGE_RATE;
@@ -106,6 +108,7 @@ public class Boss extends CollidableEntities implements iAiMovement{
     public void decrementChangeRate() {
         --this.changeRate;
     }
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~AI CODE BLOCK ENDS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
     // Game design logic
@@ -133,61 +136,22 @@ public class Boss extends CollidableEntities implements iAiMovement{
 
     // Dunnid probably
     public void movement(float[] vector) {
-        if (getControl() == 'A') {
-            switch (super.getMovementSetID()) {         // 1 for up down, 2 for left right, 3 for all
-                case 1:
-                    setY(vector[1]);    // Set Y value
-                    break;
-                case 2:
-                    setX(vector[0]);    //Set X value
-                    break;
-                case 3:
-                    setX(vector[0]);    //Set X value
-                    setY(vector[1]);    // Set Y value
-                    break;
-            }
-        }
-    }
-
-    public void setLeftRight() {
-        // Check if entity has finished moving
-//        if (getChangeRate() <= 0) {
-//            int randomNumber = random.nextInt(2);
-//            switch (randomNumber) {
-//                case 0:
-//                    setMovementStrategy(getMovementStrategy("LeftMovement"));
-//                    break;
+//        if (getControl() == 'A') {
+//            switch (super.getMovementSetID()) {         // 1 for up down, 2 for left right, 3 for all
 //                case 1:
-//                    setMovementStrategy(getMovementStrategy("RightMovement"));
+//                    setY(vector[1]);    // Set Y value
 //                    break;
-//                default:
+//                case 2:
+//                    setX(vector[0]);    //Set X value
+//                    break;
+//                case 3:
+//                    setX(vector[0]);    //Set X value
+//                    setY(vector[1]);    // Set Y value
 //                    break;
 //            }
 //        }
-//        decrementChangeRate();
     }
 
-    public void setUpDown() {
-//        // Check if entity has finished moving
-//        if (getChangeRate() <= 0) {
-//            int randomNumber = random.nextInt(2);
-//            switch (randomNumber) {
-//                case 0:
-//                    setMovementStrategy(getMovementStrategy("UpMovement"));
-//                    break;
-//                case 1:
-//                    setMovementStrategy(getMovementStrategy("DownMovement"));
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
-//        decrementChangeRate();
-    }
-
-//    public void setUp() {
-//        setMovementStrategy(getMovementStrategy("UpMovement"));
-//    }
 
     public void setAll() {
         // Check if entity has finished moving if so change direction
@@ -213,4 +177,58 @@ public class Boss extends CollidableEntities implements iAiMovement{
         decrementChangeRate();
     }
 
+    public void setLeftRight() {
+        if (getChangeRate() <= 0) {
+            int randomNumber = random.nextInt(2);
+            switch (randomNumber) {
+                case 0:
+                    setMovementStrategy(getMovementStrategy("LeftMovement"));
+                    break;
+                case 1:
+                    setMovementStrategy(getMovementStrategy("RightMovement"));
+                    break;
+                default:
+                    break;
+            }
+        }
+        decrementChangeRate();
+    }
+
+    public void setUpDown() {
+        // Check if entity has finished moving
+        if (getChangeRate() <= 0) {
+            int randomNumber = random.nextInt(2);
+            switch (randomNumber) {
+                case 0:
+                    setMovementStrategy(getMovementStrategy("UpMovement"));
+                    break;
+                case 1:
+                    setMovementStrategy(getMovementStrategy("DownMovement"));
+                    break;
+                default:
+                    break;
+            }
+        }
+        decrementChangeRate();
+    }
+
+    public void setUp() {
+        setMovementStrategy(getMovementStrategy("UpMovement"));
+    }
+
+    public void setDown() {
+
+    }
+    public void setLeft() {
+
+    }
+    public void setRight(){
+
+    }
 }
+
+
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SPARE CODE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+

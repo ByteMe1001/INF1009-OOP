@@ -9,6 +9,7 @@ public interface iPlayerMovement {
     public float getX();
     public float getY();
     public float getSpeed();
-    public float getWidth();
-    public float getHeight();
+    public float getSpriteWidth();
+    public float getSpriteHeight();
+
 }

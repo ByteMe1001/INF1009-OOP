@@ -5,12 +5,10 @@ import com.badlogic.gdx.math.Rectangle;
 
 public interface iCollision {
 
-    boolean collidesWith(Entity other) ;
+    public boolean collidesWith(iCollision entity) ;
 
 
-    Rectangle getBoundingBox();
-    //public void checkCollision(EntityManager entityManager);
-
+    public Rectangle getBoundingBox();
 
 }
 

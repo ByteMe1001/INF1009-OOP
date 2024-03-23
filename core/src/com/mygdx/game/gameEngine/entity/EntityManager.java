@@ -135,12 +135,6 @@ public class EntityManager {
         for (Entity entity : entityList) {
             entity.draw();
         }
-//        for (Entity entity : playerEntityList) {
-//            entity.draw();
-//        }
-//        for (Entity entity : aiEntityList) {
-//            entity.draw();
-//        }
     }
 
     public void update() {
@@ -157,10 +151,12 @@ public class EntityManager {
         Iterator<Entity> iterator = entities.iterator();
         while (iterator.hasNext()) {
             Entity entity = iterator.next();
-            if (!entity.isAlive()) {
-                iterator.remove(); // Remove the entity from the list
-                continue; // Skip to the next iteration if the entity is not alive
-            }
+
+            // TODO: See if we need this logic in the end
+//            if (!entity.isAlive()) {
+//                iterator.remove(); // Remove the entity from the list
+//                continue; // Skip to the next iteration if the entity is not alive
+//            }
             entity.update();
         }
     }
@@ -178,9 +174,6 @@ public class EntityManager {
     }
 
     // Getter Setter methods
-    public float getSpeed(Entity e) {
-        return findEntity(e).getSpeed();
-    }
 
     public float getX(Entity e) {
         return findEntity(e).getX();
@@ -206,13 +199,17 @@ public class EntityManager {
         findEntity(e).setAlive(b);
     }
 
-    public boolean getIsCollidable(Entity e) {
-        return findEntity(e).isCollidable();
-    }
-
-    public void setIsCollidable(Entity e, boolean b) {
-        findEntity(e).setCollidable(b);
-    }
+//    public boolean getIsCollidable(Entity e) {
+//        return findEntity(e).isCollidable();
+//    }
+//
+//    public void setIsCollidable(Entity e, boolean b) {
+//        findEntity(e).setCollidable(b);
+//    }
+//
+//    public float getSpeed(Entity e) {
+//        return findEntity(e).getSpeed();
+//    }
 
 //    public int getChangeRate(Entity e) {
 //        return findEntity(e).getChangeRate();
@@ -222,9 +219,9 @@ public class EntityManager {
 //        return findEntity(e).getDefaultChangeRate();
 //    }
 
-    public void setChangeRate(Entity e, int x) {
-        findEntity(e).setChangeRate(x);
-    }
+//    public void setChangeRate(Entity e, int x) {
+//        findEntity(e).setChangeRate(x);
+//    }
 
 //    public void setDirection(Entity entity, int direction) {
 //        entity.setDirection(direction);
@@ -238,14 +235,14 @@ public class EntityManager {
 //    public int getDirection(Entity e) {
 //        return findEntity(e).getDirection();
 //    }
-
-    public String getCurrentDirection(Entity e) {
-        return findEntity(e).getCurrentDirection();
-    }
-
-    public void setCurrentDirection(Entity e, String s) {
-            findEntity(e).setCurrentDirection(s);
-    }
+//
+//    public String getCurrentDirection(Entity e) {
+//        return findEntity(e).getCurrentDirection();
+//    }
+//
+//    public void setCurrentDirection(Entity e, String s) {
+//            findEntity(e).setCurrentDirection(s);
+//    }
 
     public float getSpriteWidth(Entity e) {
         return findEntity(e).getSpriteHeight();
@@ -255,13 +252,13 @@ public class EntityManager {
         return findEntity(e).getSpriteWidth();
     }
 
-    public Rectangle getBoundingBox(Entity e) {
-        return findEntity(e).getBoundingBox();
-    }
-
-    public Character getControl(Entity e) {
-        return findEntity(e).getControl();
-    }
+//    public Rectangle getBoundingBox(iCollision e) {
+//        return findEntity(e).getBoundingBox();
+//    }
+//
+//    public Character getControl(Entity e) {
+//        return findEntity(e).getControl();
+//    }
 
     // Method to find entity
     private Entity findEntity(Entity e) {

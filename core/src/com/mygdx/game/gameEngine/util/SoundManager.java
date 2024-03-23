@@ -13,8 +13,12 @@ public class SoundManager {
     private Map<String, URL> soundURLs;
     private Map<String, List<Clip>> clips;
     private boolean isMusicPlaying = false;
+
+    // TODO: weird position
     private Map<Clip, Long> clipPositions = new HashMap<>();
 
+
+    // TODO: THIS IS HARDCODE NEED CHANGE
     public SoundManager() {
         soundURLs = new HashMap<>();
         soundURLs.put("StartingScene", getClass().getResource("/Ground_Theme.wav"));
@@ -116,6 +120,7 @@ public class SoundManager {
 //        }
 //    }
 
+    // TODO: change to pause logic
     // Pause all sounds and music
     public void pauseAll() {
         for (List<Clip> clipList : clips.values()) {
@@ -130,6 +135,7 @@ public class SoundManager {
         isMusicPlaying = false;
     }
 
+    // TODO: Change to resume logic
     public void resumeAll() {
         for (Map.Entry<Clip, Long> entry : clipPositions.entrySet()) {
             Clip clip = entry.getKey();

@@ -16,9 +16,9 @@ public class AiControlManager{
     private Random random;
 
     // Constants for movement rule set IDs
-    public static final int MOVE_UP_DOWN = 1;
-    public static final int MOVE_LEFT_RIGHT = 2;
-    public static final int MOVE_ALL = 3;
+//    public static final int MOVE_UP_DOWN = 1;
+//    public static final int MOVE_LEFT_RIGHT = 2;
+//    public static final int MOVE_ALL = 3;
 
     public AiControlManager(float screenWidth, float screenHeight, EntityManager entityManager, ArrayList<iAiMovement> aiEntityList) {
         this.aiEntityList = aiEntityList;

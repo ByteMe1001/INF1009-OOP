@@ -8,20 +8,57 @@ import com.mygdx.game.gameEngine.util.iCollision;
 
 public abstract class CollidableEntities extends Entity implements iCollision {
 
+    private int health;
+    private float speed;
+    protected Rectangle boundingBox;
+
     // Constructors
     public CollidableEntities() {
         // No-arg constructor
     }
 
-    public CollidableEntities(int id, SpriteBatch batch) {
-        super(id, batch);
-        setCollidable(true); // Marking as collidable
+    // TODO: TESTING CODE ONLY
+    public CollidableEntities(SpriteBatch batch) {
+        super(batch);
+        this.health = 100;
+        this.speed = 30;
     }
 
-    public CollidableEntities(int id, int health, float x, float y, float scale, Sprite sprite, float width, float height, float speed, int direction, SpriteBatch batch) {
-        super(id, health, x, y, scale, sprite, width, height, speed, direction, batch);
-        setCollidable(true); // Marking as collidable
+    // MAIN CONSTRUCTOR
+    public CollidableEntities(int health, float x, float y, float scale, Sprite sprite,
+                              float speed, SpriteBatch batch) {
+        super(x, y, scale, sprite, batch);
+        this.health = health;
+        this.speed = speed;
+        this.boundingBox =  new Rectangle(getX(), getY(), getSpriteWidth(), getSpriteHeight());
     }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public float getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
+    }
+
+    // Shift bounding box logic to collision manage maybe?
+    public void setBoundingBox() {
+        this.boundingBox.setSize(getSpriteWidth(), getSpriteHeight());
+        this.boundingBox.setPosition(getX(), getY());
+    }
+
+    public Rectangle getBoundingBox() {
+        return boundingBox;
+    }
+
 
     // Abstract Methods
     public abstract void takeDamage(int damage);
@@ -30,21 +67,7 @@ public abstract class CollidableEntities extends Entity implements iCollision {
 
     public abstract void destroy();
 
-    // Override movement method with public access
-
-    // public abstract void movement();  dunnid dun scared
-
-    // Method Overrides
-    @Override
-    public void update() {
-        super.update();
-    }
-
-    @Override
-    public void push(float deltaX, float deltaY) {
-        super.push(deltaX, deltaY);
-    }
-
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~MAYBE DELETE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     @Override
     public void dispose() {
         super.dispose();
@@ -55,13 +78,20 @@ public abstract class CollidableEntities extends Entity implements iCollision {
         super.draw();
     }
 
+    // Maybe dunnid override
     @Override
-    public Rectangle getBoundingBox(){
-        return boundingBox;
+    public void update() {
+        setBoundingBox();
     }
 
-    @Override
-    public boolean collidesWith(Entity other){
+    public boolean collidesWith(iCollision other){
         return boundingBox.overlaps(other.getBoundingBox());
     }
 }
+
+
+    // Shift bounding box logic to collision manage maybe?
+    // Method Overrides
+//    public void push(float deltaX, float deltaY) {
+//        super.push(deltaX, deltaY);
+//    }

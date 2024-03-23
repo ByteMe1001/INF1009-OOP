@@ -9,7 +9,7 @@ public class RightMovement implements AIMovementStrategy{
         float newX = entity.getX() + entity.getSpeed() * Gdx.graphics.getDeltaTime();
 
         // Calculate the right boundary as the screen width minus the entity's width
-        float rightBoundary = Gdx.graphics.getWidth() - entity.getWidth();
+        float rightBoundary = Gdx.graphics.getWidth() - entity.getSpriteWidth();
 
         if (newX <= rightBoundary) { // Check if the new position is within the right screen boundary
             entity.setX(newX);

@@ -29,7 +29,7 @@ public class Player1MovementStrategy extends PlayerMovement {
         float [] vector = new float[2];
         vector[0] = entity.getX();
         float newY = entity.getY() + entity.getSpeed() * Gdx.graphics.getDeltaTime();
-        float topBoundary = Gdx.graphics.getHeight() - entity.getHeight();
+        float topBoundary = Gdx.graphics.getHeight() - entity.getSpriteHeight();
         if (newY < topBoundary) { // Check if the new position is within the top screen boundary
             vector[1] = (newY);
         } else {
@@ -73,7 +73,7 @@ public class Player1MovementStrategy extends PlayerMovement {
         float[] vector = new float[2];
         vector[1] = entity.getY();
         float newX = entity.getX() + entity.getSpeed() * Gdx.graphics.getDeltaTime();
-        float rightBoundary = Gdx.graphics.getWidth() - entity.getWidth(); // Calculate the right boundary
+        float rightBoundary = Gdx.graphics.getWidth() - entity.getSpriteWidth(); // Calculate the right boundary
 
         if (newX < rightBoundary) { // Check if the new position is within the right screen boundary
             vector[0] = newX;
