@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-import com.mygdx.game.gameLayer.entity.Character;
 import com.mygdx.game.gameEngine.player.PlayerControlManager;
 import com.mygdx.game.gameEngine.util.SoundManager;
 import com.mygdx.game.gameEngine.util.iAiMovement;

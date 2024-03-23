@@ -7,23 +7,24 @@ import com.mygdx.game.gameEngine.entity.CollidableEntities;
 import com.mygdx.game.gameEngine.player.PlayerControlManager;
 import com.mygdx.game.gameEngine.util.iPlayerMovement;
 
-public class Character extends CollidableEntities implements iPlayerMovement {
+public class Boy extends CollidableEntities implements iPlayerMovement {
 
     // Additional properties for Bucket class
     private final static String TEXTURE_PATH = "spaceship.png";
 
     private PlayerControlManager playerControlManager;
 
+
     // Default constructor
-    public Character() {
+    public Boy() {
         //do nothing for now
     }
 
     // Constructor with ID
-    public Character(int id, int health, float x, float y, float scale, Sprite sprite,
-                     float width, float height, float speed, int direction,
-                     PlayerControlManager playerControlManager, boolean isAlive,
-                     boolean isCollidable , SpriteBatch batch) {
+    public Boy(int id, int health, float x, float y, float scale, Sprite sprite,
+               float width, float height, float speed, int direction,
+               PlayerControlManager playerControlManager, boolean isAlive,
+               boolean isCollidable, SpriteBatch batch) {
         super(id, health, x, y, scale, sprite, width, height, speed, direction, batch);
         this.playerControlManager = playerControlManager;
         this.setAlive(isAlive);
@@ -31,13 +32,13 @@ public class Character extends CollidableEntities implements iPlayerMovement {
     }
 
     // Another constructor if needed
-    public Character(int id, PlayerControlManager playerControlManager, SpriteBatch batch) {
+    public Boy(int id, PlayerControlManager playerControlManager, SpriteBatch batch) {
         super(id, 100, 0, 0, 1f, new Sprite(new Texture(TEXTURE_PATH)), 64f, 64f, 300f, 3, batch);
         initializeBucket(playerControlManager);
     }
 
     // Additional constructor if needed
-    public Character(int id, PlayerControlManager playerControlManager, SpriteBatch batch, float x, float y) {
+    public Boy(int id, PlayerControlManager playerControlManager, SpriteBatch batch, float x, float y) {
         super(id, 100, x, y, 1f, new Sprite(new Texture(TEXTURE_PATH)), 64f, 64f, 300f, 3, batch);
         initializeBucket(playerControlManager);
     }
@@ -45,10 +46,10 @@ public class Character extends CollidableEntities implements iPlayerMovement {
     // Initialize bucket properties
     private void initializeBucket(PlayerControlManager playerControlManager) {
         this.playerControlManager = playerControlManager;
-        this.setSprite(new Sprite(new Texture(CharacterType.DEFAULT.getTexturePath())));
-        this.setAlive(CharacterType.DEFAULT.isAlive());
-        this.setCollidable(CharacterType.DEFAULT.isCollidable());
-        this.setControl(CharacterType.DEFAULT.getControl());
+        this.setSprite(new Sprite(new Texture(BoyType.DEFAULT.getTexturePath())));
+        this.setAlive(BoyType.DEFAULT.isAlive());
+        this.setCollidable(BoyType.DEFAULT.isCollidable());
+        this.setControl(BoyType.DEFAULT.getControl());
     }
 
     @Override
