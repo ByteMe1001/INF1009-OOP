@@ -27,7 +27,7 @@ public class PlayerControlManager implements iIO {
     // PLease fix remove args
     public void update(EntityManager entityManager) {
         for(iPlayerMovement e: playerEntityList) {
-            e.movement(movement(e.getX(), e.getY(), e.getSpeed()));
+            e.movement(movement(e));
         }
     }
 
@@ -61,6 +61,22 @@ public class PlayerControlManager implements iIO {
                 break;
         }
         return vector;
+    }
+
+    // TODO: Add input key map according to string and inputkey function
+    public String movement(iPlayerMovement entity) {
+        switch(inputKey1()) {               // inputKey1() or inputKey2()
+            case "UP":
+                return "UP";
+            case "DOWN":
+                return "DOWN";
+            case "LEFT" :
+                return "LEFT";
+            case "RIGHT" :
+                return "RIGHT";
+            default:
+                return "FALSE";
+        }
     }
 
     public void shoot(float x, float y){

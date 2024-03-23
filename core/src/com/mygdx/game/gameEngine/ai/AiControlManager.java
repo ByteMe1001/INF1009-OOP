@@ -37,7 +37,6 @@ public class AiControlManager{
 
     // Decides which movement style to use based on entity movementSetID
     public void movement(iAiMovement entity) {
-
         // If change rate is negative reset it back to random +ve
         if (entity.getChangeRate() < 0 ) {
             entity.setChangeRate(random.nextInt(entity.getDefaultChangeRate() + 1));

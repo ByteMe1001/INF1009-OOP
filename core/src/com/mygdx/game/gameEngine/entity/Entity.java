@@ -199,7 +199,7 @@ public abstract class Entity {
 
     public abstract void destroy();
 
-    public abstract void movement();
+    // public abstract void movement(); Dont need dun scared
 
     public void push(float deltaX, float deltaY) {  //Simple push method maybe can implement for collisions,pretty much just knockback
       this.x += deltaX;

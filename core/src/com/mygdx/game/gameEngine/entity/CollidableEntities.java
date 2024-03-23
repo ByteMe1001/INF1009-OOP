@@ -31,8 +31,8 @@ public abstract class CollidableEntities extends Entity implements iCollision {
     public abstract void destroy();
 
     // Override movement method with public access
-    @Override
-    public abstract void movement();
+
+    // public abstract void movement();  dunnid dun scared
 
     // Method Overrides
     @Override

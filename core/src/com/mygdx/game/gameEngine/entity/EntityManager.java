@@ -178,25 +178,14 @@ public class EntityManager {
     }
 
     public void dispose() {
-        // Dispose entities in entityList
+        // Dispose entities in entityList FOR SPRITE
         for (Entity entity : entityList) {
             entity.dispose();
         }
-        // Clear entityList
+
+        // Clear Lists
         entityList.clear();
-
-        // Dispose entities in playerEntityList
-//        for (Entity entity : playerEntityList) {
-//            entity.dispose();
-//        }
-        // Clear playerEntityList
         playerEntityList.clear();
-
-        // Dispose entities in aiEntityList
-//        for (Entity entity : aiEntityList) {
-//            entity.dispose();
-//        }
-        // Clear aiEntityList
         aiEntityList.clear();
     }
 
