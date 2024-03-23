@@ -1,0 +1,33 @@
+
+Buttons.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+True_Press_Background
+  rotate: false
+  xy: 1, 73
+  size: 334, 160
+  orig: 334, 160
+  offset: 0, 0
+  index: -1
+False_Press_Background
+  rotate: false
+  xy: 337, 81
+  size: 335, 152
+  orig: 335, 152
+  offset: 0, 0
+  index: -1
+False_Background
+  rotate: false
+  xy: 674, 118
+  size: 315, 115
+  orig: 315, 115
+  offset: 0, 0
+  index: -1
+True_Background
+  rotate: false
+  xy: 674, 1
+  size: 315, 115
+  orig: 315, 115
+  offset: 0, 0
+  index: -1
