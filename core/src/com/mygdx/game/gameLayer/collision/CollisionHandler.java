@@ -22,7 +22,7 @@ public class CollisionHandler {
             // Handle collision
             ((Boy) x).takeDamage(10);
             ((Boss) y).takeDamage(10);
-            timeSeconds += Gdx.graphics.getRawDeltaTime();
+            timeSeconds += Gdx.graphics.getDeltaTime();
             if(timeSeconds > period){
                 timeSeconds -= period;
                 //System.out.println("Cooldown on Collision");
