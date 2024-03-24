@@ -28,7 +28,8 @@ public class GameScene extends Scene implements iIO {
     private boolean isPaused = false;
     private SoundManager soundManager;
     private float backgroundY = 0;
-    private final float backgroundVelocity = 4;
+    private float backgroundVelocity = 4;
+
 
 
 
@@ -75,8 +76,8 @@ public class GameScene extends Scene implements iIO {
 
         // Create entities
         super.getEntityManager().createBucket();
-        //super.getEntityManager().createDroplets(5);
-
+        super.getEntityManager().createDroplets(5);
+        super.getEntityManager().createBullets(1);
         //pause button logic
 
     }

@@ -5,12 +5,11 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.gameLayer.entity.Boy;
 import com.mygdx.game.gameLayer.entity.Boss;
+import com.mygdx.game.gameLayer.entity.Bullet;
 import com.mygdx.game.gameLayer.entity.EntityType;
 
 public class EntityFactory implements GameFactory {
-
-    // TODO: HARDCODE REMOVE
-    private EntityType entityType = EntityType.BOY;
+    private EntityType entityType;
 
     private SpriteBatch batch;
 
@@ -36,6 +35,8 @@ public class EntityFactory implements GameFactory {
                 return createCharacterEntity();
             case BOSS:
                 return createBossEntity();
+            case BULLET:
+                return createBulletEntity();
             // Add cases for other entity types as needed
             default:
                 throw new IllegalArgumentException("Invalid entity type: " + entityType);
@@ -43,6 +44,7 @@ public class EntityFactory implements GameFactory {
     }
 
     public Entity createCharacterEntity() {
+        EntityType entityType = EntityType.BOY;
         return new Boy(
                 entityType.health, entityType.x, entityType.y, entityType.scale,
                 new Sprite(new Texture(entityType.texturePath)),
@@ -52,7 +54,17 @@ public class EntityFactory implements GameFactory {
 
 
     public Entity createBossEntity() {
+        EntityType entityType = EntityType.BOSS;
         return new Boss(
+                entityType.health, entityType.x, entityType.y, entityType.scale,
+                new Sprite(new Texture(entityType.texturePath)),
+                entityType.speed, batch
+        );
+    }
+
+    public Entity createBulletEntity() {
+        EntityType entityType = EntityType.BULLET;
+        return new Bullet(
                 entityType.health, entityType.x, entityType.y, entityType.scale,
                 new Sprite(new Texture(entityType.texturePath)),
                 entityType.speed, batch

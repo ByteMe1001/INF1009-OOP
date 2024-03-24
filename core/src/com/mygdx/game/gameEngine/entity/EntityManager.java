@@ -15,6 +15,8 @@ import com.mygdx.game.gameEngine.util.SoundManager;
 import com.mygdx.game.gameEngine.util.iAiMovement;
 import com.mygdx.game.gameEngine.util.iCollision;
 import com.mygdx.game.gameEngine.util.iPlayerMovement;
+import com.mygdx.game.gameLayer.collision.CollisionHandler;
+import com.mygdx.game.gameLayer.entity.EntityType;
 
 public class EntityManager {
 
@@ -29,6 +31,7 @@ public class EntityManager {
 
     private PlayerControlManager playerControlManager;
     private AiControlManager aiControlManager;
+    private CollisionHandler collisionHandler;
 
     Random random = new Random();
 
@@ -47,7 +50,7 @@ public class EntityManager {
         this.playerEntityList = new ArrayList<iPlayerMovement>();
         this.aiEntityList = new ArrayList<iAiMovement>();
         this.collisionList = new ArrayList<iCollision>();
-        this.collisionManager = new CollisionManager(this, soundManager, collisionList);
+        this.collisionManager = new CollisionManager(this, soundManager, collisionList, collisionHandler);
         this.playerControlManager = new PlayerControlManager(this, playerEntityList);
         this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);;
         this.entityFactory = new EntityFactory(batch);
@@ -64,7 +67,7 @@ public class EntityManager {
         this.aiEntityList = new ArrayList<iAiMovement>();
         this.collisionList = new ArrayList<iCollision>();
         //~~~~~~~~~~~MANAGER CREATION~~~~~~~~~~~~~~~~~~~~~~~~
-        this.collisionManager = new CollisionManager(this, soundManager, collisionList);
+        this.collisionManager = new CollisionManager(this, soundManager, collisionList, collisionHandler);
         this.playerControlManager = new PlayerControlManager(this, playerEntityList);
         this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);
         this.entityFactory = new EntityFactory(batch);
@@ -73,30 +76,41 @@ public class EntityManager {
     // Main testing creation
     // Entity creations
     public void createBucket() {
-        Entity bucket = entityFactory.createEntity(); // Use factory to create bucket entity
+        Entity bucket = entityFactory.createEntity(EntityType.BOY); // Use factory to create bucket entity
         addEntity(bucket);
+        collisionList.add((iCollision) bucket);
+        System.out.println(collisionList.size());
     }
 
 
     public void createBuckets(int x) {
         for (int i = 0; i < x; i++) {
-            Entity bucket = entityFactory.createEntity(); // Use EntityFactory to create bucket entity
+            Entity bucket = entityFactory.createEntity(EntityType.BOY); // Use EntityFactory to create bucket entity
             addEntity(bucket);
+            collisionList.add((iCollision) bucket);
         }
     }
 
     public void createDroplet() {
-        Entity droplet = entityFactory.createEntity(); // Use factory to create droplet entity
+        Entity droplet = entityFactory.createEntity(EntityType.BOSS); // Use factory to create droplet entity
         addEntity(droplet);
     }
 
     // Main testing creation
     public void createDroplets(int x) {
         for (int i = 0; i < x; i++) {
-            Entity droplet = entityFactory.createEntity(); // Use EntityFactory to create droplet entity
+            Entity droplet = entityFactory.createEntity(EntityType.BOSS); // Use EntityFactory to create droplet entity
             addEntity(droplet);
             collisionList.add((iCollision) droplet);
             aiEntityList.add((iAiMovement) droplet);
+        }
+    }
+
+    public void createBullets(int x) {
+        for (int i = 0; i < x; i++) {
+            Entity bullet = entityFactory.createEntity(EntityType.BULLET); // Use EntityFactory to create bullet entity
+            addEntity(bullet);
+            collisionList.add((iCollision) bullet);
         }
     }
 

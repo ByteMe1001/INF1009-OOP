@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Bullet extends CollidableEntities implements iAiMovement {
 
     // Texture path for the bullet
-    private static final String TEXTURE_PATH = "bullet1.png";
+    private static final String TEXTURE_PATH = "bullet.png";
     private static final int DEFAULT_CHANGE_RATE = 0;
     private int changeRate;
     private AIMovementStrategy movementStrategy;
