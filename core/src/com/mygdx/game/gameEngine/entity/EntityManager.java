@@ -141,22 +141,35 @@ public class EntityManager {
     //Add
     public void addEntity(Entity entity) {
 
+        // Error handling
+        if (entity == null) {
+            throw new IllegalArgumentException("Entity cannot be null");
+        }
+
         entityList.add(entity);
-        System.out.println(entity);
+
+        boolean addedToList = false;
 
         if (entity instanceof iCollision && collisionList != null) {
             collisionList.add((iCollision) entity); // Adding to the collision list
             System.out.println("Added to collision list");
+            addedToList = true;
         }
 
         if (entity instanceof iAiMovement && aiEntityList != null) {
             aiEntityList.add((iAiMovement) entity); // Adding to the AI movement list
             System.out.println("Added to AI movement list");
+            addedToList = true;
         }
 
         if (entity instanceof iPlayerMovement && playerEntityList != null) {
             playerEntityList.add((iPlayerMovement) entity); // Adding to the player movement list
             System.out.println("Added to player movement list");
+            addedToList = true;
+        }
+
+        if (!addedToList) {
+            throw new IllegalArgumentException("Entity does not implement any supported interfaces");
         }
     }
 
