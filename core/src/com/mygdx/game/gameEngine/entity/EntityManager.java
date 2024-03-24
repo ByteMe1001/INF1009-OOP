@@ -79,7 +79,6 @@ public class EntityManager {
     public void createBucket() {
         Entity bucket = entityFactory.createEntity(EntityType.BOY); // Use factory to create bucket entity
         addEntity(bucket);
-        collisionList.add((iCollision) bucket);
         System.out.println(collisionList.size());
     }
 
@@ -88,7 +87,6 @@ public class EntityManager {
         for (int i = 0; i < x; i++) {
             Entity bucket = entityFactory.createEntity(EntityType.BOY); // Use EntityFactory to create bucket entity
             addEntity(bucket);
-            collisionList.add((iCollision) bucket);
         }
     }
 
@@ -102,8 +100,6 @@ public class EntityManager {
         for (int i = 0; i < x; i++) {
             Entity droplet = entityFactory.createEntity(EntityType.BOSS); // Use EntityFactory to create droplet entity
             addEntity(droplet);
-            collisionList.add((iCollision) droplet);
-            aiEntityList.add((iAiMovement) droplet);
         }
     }
 
@@ -111,8 +107,6 @@ public class EntityManager {
         for (int i = 0; i < x; i++) {
             Entity bullet = entityFactory.createEntity(EntityType.BULLET); // Use EntityFactory to create bullet entity
             addEntity(bullet);
-            collisionList.add((iCollision) bullet);
-            aiEntityList.add((iAiMovement) bullet);
         }
     }
 
@@ -120,15 +114,7 @@ public class EntityManager {
         for (int i = 0; i < x; i++) {
             Entity bullet = entityFactory.createEntity(EntityType.ENEMYBULLET); // Use EntityFactory to create bullet entity
             addEntity(bullet);
-            collisionList.add((iCollision) bullet);
-            aiEntityList.add((iAiMovement) bullet);
         }
-    }
-
-    // Create entity loops
-    public void createEntities (int player, int ai) {
-        createBuckets(player);
-        createDroplets(ai);
     }
 
     // Maybe can use this function to clear all list?
