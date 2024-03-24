@@ -12,20 +12,16 @@ public class CollisionHandler {
 
     private ArrayList<iCollision> collisionList;
     public void handleCollision(iCollision x, iCollision y){
-        if(x.getClass().equals(Boy.class) && y.getClass().equals(Boss.class) || y.getClass().equals(Boy.class) && x.getClass().equals(Boss.class)){
+        if(x.getClass().equals(Boy.class) && y.getClass().equals(Boss.class)
+            || y.getClass().equals(Boy.class) && x.getClass().equals(Boss.class)){
+            // Handle collision
             ((Boy) x).takeDamage(10);
             ((Boss) y).takeDamage(10);
             System.out.println(x + "has collided with " + y);
             if(((Boss) y).getHealth() == 0){
                 collisionList.remove(y);
-
             }
         }
-        else if (x.getClass().equals(Bullet.class) && y.getClass().equals(Boss.class) || y.getClass().equals(Bullet.class) && x.getClass().equals(Boss.class)){
-            System.out.println(x + "has collided with " + y);
-        }
-
-
     }
 
 

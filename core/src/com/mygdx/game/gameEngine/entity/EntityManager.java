@@ -111,6 +111,7 @@ public class EntityManager {
             Entity bullet = entityFactory.createEntity(EntityType.BULLET); // Use EntityFactory to create bullet entity
             addEntity(bullet);
             collisionList.add((iCollision) bullet);
+            aiEntityList.add((iAiMovement) bullet);
         }
     }
 

@@ -15,8 +15,9 @@ public class Bullet extends CollidableEntities implements iAiMovement {
 
     // Texture path for the bullet
     private static final String TEXTURE_PATH = "bullet.png";
-    private static final int DEFAULT_CHANGE_RATE = 0;
+    //private static final int DEFAULT_CHANGE_RATE = 0;
     private int changeRate;
+    private int defaultChangeRate;
     private AIMovementStrategy movementStrategy;
     private ArrayList<AIMovementStrategy> movementStrategyList;
     // Default constructor
@@ -30,9 +31,13 @@ public class Bullet extends CollidableEntities implements iAiMovement {
     }
 
     // Parameterized constructor
-    public Bullet(int health, float x, float y, float scale, Sprite sprite, float speed, SpriteBatch batch) {
+    public Bullet(int health, float x, float y, float scale,
+                  Sprite sprite, float speed, int defaultChangeRate, SpriteBatch batch) {
         super(health, x, y, scale, sprite, speed, batch);
+        this.changeRate = 0;
+        this.defaultChangeRate = defaultChangeRate;
         this.movementStrategyList = new ArrayList<AIMovementStrategy>();
+        setMovementStrategy(new UpMovement());
         initializeMovementStrategy();
     }
 
@@ -48,7 +53,7 @@ public class Bullet extends CollidableEntities implements iAiMovement {
     }
 
     public int getDefaultChangeRate() {
-        return DEFAULT_CHANGE_RATE;
+        return defaultChangeRate;
     }
 
     @Override

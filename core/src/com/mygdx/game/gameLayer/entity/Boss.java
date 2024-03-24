@@ -14,16 +14,10 @@ public class Boss extends CollidableEntities implements iAiMovement{
 
     // Additional properties for Droplet class
     private final static String TEXTURE_PATH = "asteroid.png";
-    private static final int DEFAULT_CHANGE_RATE = 30;
-
-    // FOR AI MOVEMENT
-    private int changeRate;
+    //private static final int DEFAULT_CHANGE_RATE = 30;
+    private int changeRate;      // FOR AI MOVEMENT
+    private int defaultChangeRate;
     private SpriteBatch batch;
-
-
-//    // For screen boundary calc
-//    private int screenWidth = Gdx.graphics.getWidth();
-//    private int screenHeight = Gdx.graphics.getHeight();
 
     private AIMovementStrategy movementStrategy;
     private ArrayList<AIMovementStrategy> movementStrategyList;
@@ -50,9 +44,11 @@ public class Boss extends CollidableEntities implements iAiMovement{
 
     // Additional constructor if needed
     public Boss(int health, float x, float y, float scale, Sprite sprite,
-                float speed,
+                float speed, int defaultChangeRate,
                 SpriteBatch batch) {
         super(health, x, y, scale, sprite, speed, batch);
+        this.changeRate = 0;
+        this.defaultChangeRate = defaultChangeRate;
         this.movementStrategyList = new ArrayList<AIMovementStrategy>();
         initializeMovementStrategy();
     }
@@ -97,7 +93,7 @@ public class Boss extends CollidableEntities implements iAiMovement{
     }
 
 	public int getDefaultChangeRate() {
-        return DEFAULT_CHANGE_RATE;
+        return defaultChangeRate;
     }
 
     @Override
