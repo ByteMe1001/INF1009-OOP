@@ -40,7 +40,7 @@ public class CollisionHandler {
             //System.out.println(x + "has collided with " + y);
         }
         else if (x.getClass().equals(Boss.class) && y.getClass().equals(Boss.class)){
-            timeSeconds += Gdx.graphics.getRawDeltaTime();
+            timeSeconds += Gdx.graphics.getDeltaTime();
             if(timeSeconds > period){
                 timeSeconds -= period;
                 //System.out.println("Cooldown on Collision");

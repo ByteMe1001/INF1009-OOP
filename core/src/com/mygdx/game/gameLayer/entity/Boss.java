@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Boss extends CollidableEntities implements iAiMovement{
 
     // Additional properties for Droplet class
-    private final static String TEXTURE_PATH = "asteroid.png";
+    private final static String TEXTURE_PATH = "Boss.png";
     //private static final int DEFAULT_CHANGE_RATE = 30;
     private int changeRate;      // FOR AI MOVEMENT
     private int defaultChangeRate;

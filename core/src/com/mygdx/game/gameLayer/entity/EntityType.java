@@ -8,11 +8,14 @@ public enum EntityType {
             300f, new Player1MovementStrategy(),
             "spaceship.png"),
     BOSS(100, 500f, 500f, 1f,
-            200f, 30, "asteroid.png"),
+            200f, 30, "Boss.png"),
 
     // Leaving playermovement as null for now
     BULLET(10, 0, 0, 1f,
-            200f, 0, "bullet.png");
+            200f, 0, "bullet.png"),
+
+    ENEMYBULLET(10, 0, 0, 1f,
+                   200f, 0, "81_pizza.png");
 
     public final int health;
 

@@ -3,10 +3,7 @@ package com.mygdx.game.gameEngine.entity;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.gameLayer.entity.Boy;
-import com.mygdx.game.gameLayer.entity.Boss;
-import com.mygdx.game.gameLayer.entity.Bullet;
-import com.mygdx.game.gameLayer.entity.EntityType;
+import com.mygdx.game.gameLayer.entity.*;
 
 public class EntityFactory implements GameFactory {
     private EntityType entityType;
@@ -37,6 +34,8 @@ public class EntityFactory implements GameFactory {
             case BULLET:
                 return createBulletEntity();
             // Add cases for other entity types as needed
+            case ENEMYBULLET:
+                return createEnemyBullet();
             default:
                 throw new IllegalArgumentException("Invalid entity type: " + entityType);
         }
@@ -64,6 +63,15 @@ public class EntityFactory implements GameFactory {
     public Entity createBulletEntity() {
         EntityType entityType = EntityType.BULLET;
         return new Bullet(
+                entityType.health, entityType.x, entityType.y, entityType.scale,
+                new Sprite(new Texture(entityType.texturePath)),
+                entityType.speed, entityType.defaultChangeRate, batch
+        );
+    }
+
+    public Entity createEnemyBullet() {
+        EntityType entityType = EntityType.ENEMYBULLET;
+        return new EnemyBullet(
                 entityType.health, entityType.x, entityType.y, entityType.scale,
                 new Sprite(new Texture(entityType.texturePath)),
                 entityType.speed, entityType.defaultChangeRate, batch

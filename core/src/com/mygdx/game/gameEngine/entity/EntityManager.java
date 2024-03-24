@@ -106,9 +106,18 @@ public class EntityManager {
         }
     }
 
-    public void createBullets(int x) {
+    public void createPlayerBullets(int x) {
         for (int i = 0; i < x; i++) {
             Entity bullet = entityFactory.createEntity(EntityType.BULLET); // Use EntityFactory to create bullet entity
+            addEntity(bullet);
+            collisionList.add((iCollision) bullet);
+            aiEntityList.add((iAiMovement) bullet);
+        }
+    }
+
+    public void createEnemyBullets(int x){
+        for (int i = 0; i < x; i++) {
+            Entity bullet = entityFactory.createEntity(EntityType.ENEMYBULLET); // Use EntityFactory to create bullet entity
             addEntity(bullet);
             collisionList.add((iCollision) bullet);
             aiEntityList.add((iAiMovement) bullet);
