@@ -28,7 +28,7 @@ public class EntityFactory implements GameFactory {
     }
 
     @Override
-    public Entity createEntity() {
+    public Entity createEntity(EntityType entityType) {
         switch (entityType) {
             case BOY:
                 return createCharacterEntity();
