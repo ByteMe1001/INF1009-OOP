@@ -49,6 +49,10 @@ public abstract class Scene implements Screen {
         backgroundOffset = 0;
     }
 
+    public Scene(SceneManager sceneManager, SoundManager soundManager, SpriteBatch batch) {
+    }
+
+
     @Override
     public void dispose(){
         getBackground().dispose();
@@ -80,15 +84,12 @@ public abstract class Scene implements Screen {
 
     @Override
     public void pause() {
-        isPaused = true;
-        // to add in other thing like stop animation, stop music etc
-
+        sceneManager.pause();
     }
 
     @Override
     public void resume() {
-        isPaused = false;
-        // too add in stuff like resume animations, resume music
+        sceneManager.resume();
 
     }
 

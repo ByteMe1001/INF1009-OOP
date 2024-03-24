@@ -19,6 +19,7 @@ public class SceneManager implements SceneChangeListener{
     private Scene currentScene;
     private SpriteBatch batch;
     private LifeCycleManager lifeCycleManager;
+    private boolean isPaused;
 
     // SceneManager to swap scenes, each scene should do all the world logic
 
@@ -110,6 +111,7 @@ public class SceneManager implements SceneChangeListener{
         }
     }
 
+
     // Clear all scene assets
     public void dispose() {
         for (Scene scene: scenes) {
@@ -124,7 +126,31 @@ public class SceneManager implements SceneChangeListener{
         swapScene(newScene);
     }
 
+    public boolean isPaused() {
+        return isPaused;
+    }
+
     public void pause(){
+        // Pause the game
+        isPaused = true; // Set the isPaused flag to true
+        System.out.println("Game Paused"); // Print a message indicating that the game is paused
+
+        // Pause sound effects and music
+        soundManager.pauseAll();
+
+        // Stop entity movements
+        //super.getEntityManager().stopAllMovements(); // Implement this method in your EntityManager class
+
+
+    }
+
+    public void resume(){
+        isPaused = false; // Set the isPaused flag to false
+        System.out.println("Game Resumed"); // Print a message indicating that the game is resumed
+
+        // Resume sound effects and music
+        soundManager.resumeAll();
+
 
     }
 

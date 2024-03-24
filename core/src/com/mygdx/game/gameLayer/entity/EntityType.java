@@ -9,33 +9,40 @@ public enum EntityType {
             300f, new Player1MovementStrategy(),
             "spaceship.png"),
     BOSS(100, 500f, 500f, 1f,
-            300f, 30, "asteroid.png"),
-// Leaving playermovement as null for now
-    BULLET(10, 100f, 0f, 1f, 3000f, null, "bullet.png");
+            200f, 30, "Boss.png"),
+
+    // Leaving playermovement as null for now
+    BULLET(10, 0, 0, 1f,
+            200f, 0, "bullet.png"),
+
+    ENEMYBULLET(10, 0, 0, 1f,
+                   200f, 0, "81_pizza.png");
 
     public final int health;
     public final float x;
     public final float y;
     public final float scale;
     public final float speed;
-    public final int changeRate;
+    public final int defaultChangeRate;
     public final String texturePath;
     public final PlayerMovement playerMovement;
 
-    // Constructor with PlayerMovement parameter
+    // FOR ALL ARGUMENTS, AS TEMPLATE
+    // Constructor with PlayerMovement parameter & change rate
     EntityType(int health, float x, float y, float scale,
-               float speed, int changeRate, PlayerMovement playerMovement,
+               float speed, int defaultChangeRate, PlayerMovement playerMovement,
                String texturePath) {
         this.health = health;
         this.x = x;
         this.y = y;
         this.scale = scale;
         this.speed = speed;
-        this.changeRate = changeRate;
+        this.defaultChangeRate = defaultChangeRate;
         this.playerMovement = playerMovement;
         this.texturePath = texturePath;
     }
 
+    // FOR PLAYABLE ENTITY
     // Constructor without changeRate parameter (defaults to 0)
     EntityType(int health, float x, float y, float scale,
                float speed, PlayerMovement playerMovement,
@@ -43,10 +50,11 @@ public enum EntityType {
         this(health, x, y, scale, speed, 0, playerMovement, texturePath);
     }
 
+    // FOR AI ENTITY
     // Constructor without PlayerMovement parameter (assumes default PlayerMovement)
     EntityType(int health, float x, float y, float scale,
-               float speed, int changeRate, String texturePath) {
-        this(health, x, y, scale, speed, changeRate, /* default PlayerMovement */ null, texturePath);
+               float speed, int defaultChangeRate, String texturePath) {
+        this(health, x, y, scale, speed, defaultChangeRate, /* default PlayerMovement */ null, texturePath);
     }
 
 }
