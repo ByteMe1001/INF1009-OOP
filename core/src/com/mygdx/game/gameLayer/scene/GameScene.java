@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.gameEngine.entity.EntityFactory;
 import com.mygdx.game.gameEngine.scene.Scene;
 import com.mygdx.game.gameEngine.scene.SceneManager;
 import com.mygdx.game.gameEngine.util.SoundManager;
@@ -17,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.gameEngine.util.iIO;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
+import com.mygdx.game.gameLayer.entity.EntityType;
 
 public class GameScene extends Scene implements iIO {
     private final static String TEXTURE_PATH = "scrolling_Background.png";
@@ -29,14 +31,16 @@ public class GameScene extends Scene implements iIO {
     private SoundManager soundManager;
     private float backgroundY = 0;
     private float backgroundVelocity = 4;
-
+    private EntityManager entityManager;
+    private EntityFactory entityFactory;
 
 
 
     public GameScene(SceneManager sceneManager, EntityManager entityManager, SoundManager soundManager, SpriteBatch batch) {
         super(sceneManager, entityManager, soundManager, batch);
-        this.soundManager = soundManager;
+        this.entityFactory = new EntityFactory(batch, entityManager); // Assign the provided EntityFactory instance
     }
+
 
     @Override
     public void show() {
@@ -73,7 +77,7 @@ public class GameScene extends Scene implements iIO {
         if (!super.getSoundManager().isMusicPlaying()) {
             super.getSoundManager().playMusic("GameScene");
         }
-
+        //Get EntityFactory.createEntity(id,x,y,z)
         // Create entities
         super.getEntityManager().createBucket();
         super.getEntityManager().createDroplets(5);
@@ -160,7 +164,6 @@ public class GameScene extends Scene implements iIO {
         // PATCH FIX
         if (!isPaused) {
             super.getEntityManager().update();
-
             //Below here is the logic for the moving scene when not paused
             backgroundY -= backgroundVelocity;
 

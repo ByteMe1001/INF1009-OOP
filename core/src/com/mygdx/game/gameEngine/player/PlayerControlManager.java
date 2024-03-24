@@ -9,16 +9,15 @@ import java.util.ArrayList;
 
 public class PlayerControlManager implements iIO {
 
-   // private float x, y, speed;
+    // private float x, y, speed;
     private ArrayList<iPlayerMovement> playerEntityList;
-    private  EntityManager entityManager;
-
+    private EntityManager entityManager;
 
     public PlayerControlManager() {
 
     }
 
-    public PlayerControlManager(EntityManager entityManager, ArrayList <iPlayerMovement> playerEntityList) {
+    public PlayerControlManager(EntityManager entityManager, ArrayList<iPlayerMovement> playerEntityList) {
         this.entityManager = entityManager;
         this.playerEntityList = playerEntityList;
     }
@@ -26,16 +25,17 @@ public class PlayerControlManager implements iIO {
 
     // PLease fix remove args
     public void update(EntityManager entityManager) {
-        for(iPlayerMovement e: playerEntityList) {
+        for (iPlayerMovement e : playerEntityList) {
             e.movement(movement(e));
+            shoot(e, e.getX(), e.getY());
         }
     }
 
     // Check for input keys to return movement vector, can user WASD (inputKey1()) or UDLR keys (inputKey2())
     public float[] movement(float x, float y, float speed) {
-        float [] vector = new float[2];     // [0] is X axis, [1] is Y axis
+        float[] vector = new float[2];     // [0] is X axis, [1] is Y axis
 
-        switch(inputKey1()) {               // inputKey1() or inputKey2()
+        switch (inputKey1()) {               // inputKey1() or inputKey2()
 
             case "FALSE":                   // Default case if no input
                 vector[0] = x;
@@ -49,14 +49,14 @@ public class PlayerControlManager implements iIO {
                 vector[0] = x;
                 vector[1] = (y - (speed * Gdx.graphics.getDeltaTime()));
                 break;
-            case "LEFT" :
+            case "LEFT":
                 vector[0] = (x - (speed * Gdx.graphics.getDeltaTime()));
                 vector[1] = y;
                 break;
-            case "RIGHT" :
+            case "RIGHT":
                 vector[0] = (x + (speed * Gdx.graphics.getDeltaTime()));
                 vector[1] = y;
-            break;
+                break;
             default:
                 break;
         }
@@ -65,26 +65,28 @@ public class PlayerControlManager implements iIO {
 
     // TODO: Add input key map according to string and inputkey function
     public String movement(iPlayerMovement entity) {
-        switch(inputKey1()) {               // inputKey1() or inputKey2()
+        switch (inputKey1()) {               // inputKey1() or inputKey2()
             case "UP":
                 return "UP";
             case "DOWN":
                 return "DOWN";
-            case "LEFT" :
+            case "LEFT":
                 return "LEFT";
-            case "RIGHT" :
+            case "RIGHT":
                 return "RIGHT";
             default:
                 return "FALSE";
         }
     }
 
-    public void shoot(float x, float y){
-        switch(inputKey3()) {
+    public void shoot(iPlayerMovement entity, float x, float y) {
+        switch (inputKey3()) {
             case "FALSE":
                 break;
-            case "SHOOT":
-                //entityManager.create("BULLET", x , y);
+            case "SPACE":
+                // Call the shoot method of the Boy instance
+                entity.shoot(); // Assuming EntityManager is needed for bullet creation
+                System.out.println("SPace");
                 break;
             default:
                 break;

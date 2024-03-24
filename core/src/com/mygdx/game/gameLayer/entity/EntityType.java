@@ -4,6 +4,7 @@ import com.mygdx.game.gameEngine.player.PlayerMovement;
 import com.mygdx.game.gameLayer.movement.Player1MovementStrategy;
 
 public enum EntityType {
+
     BOY(100, 100f, 100f, 1f,
             300f, new Player1MovementStrategy(),
             "spaceship.png"),
@@ -13,7 +14,6 @@ public enum EntityType {
     BULLET(10, 100f, 0f, 1f, 3000f, null, "bullet.png");
 
     public final int health;
-
     public final float x;
     public final float y;
     public final float scale;

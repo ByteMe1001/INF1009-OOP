@@ -16,6 +16,7 @@ import com.mygdx.game.gameEngine.util.iAiMovement;
 import com.mygdx.game.gameEngine.util.iCollision;
 import com.mygdx.game.gameEngine.util.iPlayerMovement;
 import com.mygdx.game.gameLayer.collision.CollisionHandler;
+import com.mygdx.game.gameLayer.entity.Boy;
 import com.mygdx.game.gameLayer.entity.EntityType;
 
 public class EntityManager {
@@ -292,5 +293,14 @@ public class EntityManager {
 //            }
 //        }
         throw new IllegalArgumentException("Entity not found in the entity list");
+    }
+
+    public Boy getBoyEntity() {
+        for (Entity entity : entityList) {
+            if (entity instanceof Boy) {
+                return (Boy) entity;
+            }
+        }
+        return null; // Return null if Boy entity is not found
     }
 }

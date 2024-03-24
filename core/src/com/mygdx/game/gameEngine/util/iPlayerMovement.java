@@ -1,5 +1,6 @@
 package com.mygdx.game.gameEngine.util;
 
+import com.mygdx.game.gameEngine.entity.EntityFactory;
 import com.mygdx.game.gameEngine.player.PlayerMovement;
 
 public interface iPlayerMovement {
@@ -11,5 +12,6 @@ public interface iPlayerMovement {
     public float getSpeed();
     public float getSpriteWidth();
     public float getSpriteHeight();
+    public void shoot();
 
 }

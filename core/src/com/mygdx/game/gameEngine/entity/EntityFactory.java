@@ -10,6 +10,7 @@ import com.mygdx.game.gameLayer.entity.EntityType;
 
 public class EntityFactory implements GameFactory {
     private EntityType entityType;
+    private EntityManager entityManager;
 
     private SpriteBatch batch;
 
@@ -19,6 +20,11 @@ public class EntityFactory implements GameFactory {
 
     public EntityFactory(SpriteBatch batch) {
         //EntityType entityType = EntityType.BOY;
+        this.batch = batch;
+    }
+
+    public EntityFactory(SpriteBatch batch, EntityManager entityManager) {
+        this.entityManager = entityManager;
         this.batch = batch;
     }
 
@@ -48,7 +54,7 @@ public class EntityFactory implements GameFactory {
         return new Boy(
                 entityType.health, entityType.x, entityType.y, entityType.scale,
                 new Sprite(new Texture(entityType.texturePath)),
-                entityType.speed, entityType.playerMovement, batch
+                entityType.speed, entityType.playerMovement,batch,this,entityManager
         );
     }
 
@@ -70,5 +76,23 @@ public class EntityFactory implements GameFactory {
                 entityType.speed, batch
         );
     }
-
+//For shoot function
+    public Entity shootBullets(float x ,float y) {
+        EntityType entityType = EntityType.BULLET;
+        return new Bullet(
+                entityType.health, entityType.x, entityType.y, entityType.scale,
+                new Sprite(new Texture(entityType.texturePath)),
+                entityType.speed, batch
+        );
+    }
 }
+/*public void creatX(float x ,float y) {
+        EntityType entityType = EntityType.BULLET;
+         Bullet bullet = new Bullet(
+                entityType.health, entityType.x, entityType.y, entityType.scale,
+                new Sprite(new Texture(entityType.texturePath)),
+                entityType.speed, batch
+        );
+        EntityManager.addEntity(Entity(bullet))
+    }
+    */
