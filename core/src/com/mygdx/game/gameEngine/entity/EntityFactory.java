@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.gameLayer.entity.Boy;
 import com.mygdx.game.gameLayer.entity.Boss;
+import com.mygdx.game.gameLayer.entity.Bullet;
 import com.mygdx.game.gameLayer.entity.EntityType;
 
 public class EntityFactory implements GameFactory {
@@ -34,6 +35,8 @@ public class EntityFactory implements GameFactory {
                 return createCharacterEntity();
             case BOSS:
                 return createBossEntity();
+            case BULLET:
+                return createBulletEntity();
             // Add cases for other entity types as needed
             default:
                 throw new IllegalArgumentException("Invalid entity type: " + entityType);
@@ -51,6 +54,14 @@ public class EntityFactory implements GameFactory {
 
     public Entity createBossEntity() {
         return new Boss(
+                entityType.health, entityType.x, entityType.y, entityType.scale,
+                new Sprite(new Texture(entityType.texturePath)),
+                entityType.speed, batch
+        );
+    }
+
+    public Entity createBulletEntity() {
+        return new Bullet(
                 entityType.health, entityType.x, entityType.y, entityType.scale,
                 new Sprite(new Texture(entityType.texturePath)),
                 entityType.speed, batch

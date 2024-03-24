@@ -77,7 +77,7 @@ public class GameScene extends Scene implements iIO {
         // Create entities
         super.getEntityManager().createBucket();
         super.getEntityManager().createDroplets(5);
-
+        super.getEntityManager().createBullets(1);
         //pause button logic
 
     }
