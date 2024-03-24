@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.mygdx.game.gameEngine.entity.EntityManager;
 import com.mygdx.game.gameEngine.util.SoundManager;
 import com.mygdx.game.gameEngine.util.iCollision;
+import com.mygdx.game.gameLayer.collision.CollisionHandler;
 
 
 public class CollisionManager {
@@ -15,13 +16,15 @@ public class CollisionManager {
     private ArrayList<iCollision> collisionList;
     private EntityManager entityManager;     // Entity Manager for entity control
     private SoundManager soundManager;      // Sound manager for collision sounds
+    private CollisionHandler collisionHandler;
 
     // private CollisionStrategy collisionStrategy;
 
-    public CollisionManager(EntityManager entityManager, SoundManager soundManager, ArrayList<iCollision> collisionList ) {
+    public CollisionManager(EntityManager entityManager, SoundManager soundManager, ArrayList<iCollision> collisionList, CollisionHandler collisionHandler ) {
         this.entityManager = entityManager;
         this.soundManager = new SoundManager();
         this.collisionList = collisionList;
+        this.collisionHandler = new CollisionHandler();
     }
 
     // Default constructor
@@ -33,8 +36,10 @@ public class CollisionManager {
     public void detectCollision(EntityManager entityManager){
         for (int i = 0; i < collisionList.size() - 1; i++){
             for (int j = i + 1; j < collisionList.size(); j++){
-                if(collisionList.get(i).collidesWith((iCollision) collisionList.get(j))){ //If entities overlaps with one another, print Collision Detected in console
-                    handleCollision(entityManager, soundManager, collisionList, collisionList.get(i), collisionList.get(j)); //handles collision logic when entity collide
+                if(collisionList.get(i).collidesWith(collisionList.get(j))){ //If entities overlaps with one another, print Collision Detected in console
+                    //handleCollision(entityManager, soundManager, collisionList, collisionList.get(i), collisionList.get(j)); //handles collision logic when entity collide
+                    //System.out.println("Collision Detected");
+                    collisionHandler.handleCollision(collisionList.get(i), collisionList.get(j));
                 }
             }
         }
@@ -67,6 +72,15 @@ public class CollisionManager {
 //            entityManager.setIsALive(y, false); //set entity is alive to false
 
 
+        //}
+        //else {
+            soundManager.playSE("GameScene_Collision");     // Player collision sound
+            System.out.println("Asteroid Killed!");     // DEMO ONLY
+            // collisionList.remove(x); //update collidableList to remove entity
+            // entityManager.deleteEntity(x); //update entityManager to remove entity
+
+
+
         soundManager.playSE("GameScene_Collision");     // Player collision sound
         System.out.println("Asteroid Killed!");     // DEMO ONLY
         // collisionList.remove(x); //update collidableList to remove entity
@@ -74,7 +88,7 @@ public class CollisionManager {
 
         collisionList.remove(y); //update collidable List to remove entity
         entityManager.setIsALive((Entity) y, false); //set entity is alive to false
-        // entityManager.deleteEntity(y); alternative logic to delete entity instead
+        //entityManager.deleteEntity((Entity) y); //alternative logic to delete entity instead
         // entityManager.removeEntity(x); //update entityManager to remove entity from entity list
     }
 }
