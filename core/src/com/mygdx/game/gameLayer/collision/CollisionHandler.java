@@ -21,6 +21,9 @@ public class CollisionHandler {
 
             }
         }
+        else if (x.getClass().equals(Bullet.class) && y.getClass().equals(Boss.class) || y.getClass().equals(Bullet.class) && x.getClass().equals(Boss.class)){
+            System.out.println(x + "has collided with " + y);
+        }
 
 
     }

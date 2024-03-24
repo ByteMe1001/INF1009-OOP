@@ -9,7 +9,7 @@ import com.mygdx.game.gameLayer.entity.Bullet;
 import com.mygdx.game.gameLayer.entity.EntityType;
 
 public class EntityFactory implements GameFactory {
-    private EntityType entityType = EntityType.BOY;
+    private EntityType entityType;
 
     private SpriteBatch batch;
 
@@ -18,7 +18,7 @@ public class EntityFactory implements GameFactory {
     }
 
     public EntityFactory(SpriteBatch batch) {
-        EntityType entityType = EntityType.BOY;
+        //EntityType entityType = EntityType.BOY;
         this.batch = batch;
     }
 
@@ -44,6 +44,7 @@ public class EntityFactory implements GameFactory {
     }
 
     public Entity createCharacterEntity() {
+        EntityType entityType = EntityType.BOY;
         return new Boy(
                 entityType.health, entityType.x, entityType.y, entityType.scale,
                 new Sprite(new Texture(entityType.texturePath)),
@@ -53,6 +54,7 @@ public class EntityFactory implements GameFactory {
 
 
     public Entity createBossEntity() {
+        EntityType entityType = EntityType.BOSS;
         return new Boss(
                 entityType.health, entityType.x, entityType.y, entityType.scale,
                 new Sprite(new Texture(entityType.texturePath)),
@@ -61,6 +63,7 @@ public class EntityFactory implements GameFactory {
     }
 
     public Entity createBulletEntity() {
+        EntityType entityType = EntityType.BULLET;
         return new Bullet(
                 entityType.health, entityType.x, entityType.y, entityType.scale,
                 new Sprite(new Texture(entityType.texturePath)),

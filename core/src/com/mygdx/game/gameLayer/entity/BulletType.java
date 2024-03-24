@@ -1,7 +1,7 @@
 package com.mygdx.game.gameLayer.entity;
 
 public enum BulletType {
-    DEFAULT(1, 100, 100f, 100f, 1f, 10f, 10f, 500f, 3, true, 'P', true, "bullet1.png", 30);
+    DEFAULT(1, 100, 100f, 100f, 1f, 10f, 10f, 500f, 3, true, 'P', true, "bullet.png", 30);
 
     private final int id;
     private final int health;
