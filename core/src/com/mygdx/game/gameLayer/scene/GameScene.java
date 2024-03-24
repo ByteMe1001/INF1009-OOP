@@ -27,6 +27,7 @@ public class GameScene extends Scene implements iIO {
     private Texture resumeButtonTexture;
     private boolean isPaused = false;
     private SoundManager soundManager;
+    private SceneManager sceneManager;
     private float backgroundY = 0;
     private float backgroundVelocity = 4;
 
@@ -35,8 +36,10 @@ public class GameScene extends Scene implements iIO {
 
     public GameScene(SceneManager sceneManager, EntityManager entityManager, SoundManager soundManager, SpriteBatch batch) {
         super(sceneManager, entityManager, soundManager, batch);
+        this.sceneManager = sceneManager;
         this.soundManager = soundManager;
     }
+
 
     @Override
     public void show() {
@@ -110,16 +113,29 @@ public class GameScene extends Scene implements iIO {
         pauseButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                // If the game is currently paused, resume it; otherwise, pause it
-                if (isPaused) {
-                    resume();
+
+                SceneManager sceneManager = getSceneManager();
+                if (sceneManager.isPaused()) {
+                    sceneManager.resume();
                     pauseButton.getStyle().imageUp = pauseButtonDrawable;
                 } else {
-                    pause();
+                    sceneManager.pause();
                     pauseButton.getStyle().imageUp = resumeButtonDrawable;
                 }
             }
         });
+
+//                // If the game is currently paused, resume it; otherwise, pause it
+//                if (isPaused) {
+//                    resume();
+//                    pauseButton.getStyle().imageUp = pauseButtonDrawable;
+//                } else {
+//                    pause();
+//                    pauseButton.getStyle().imageUp = resumeButtonDrawable;
+//                }
+//
+//            }
+//        });
 
 
         return pauseButton;
@@ -158,7 +174,7 @@ public class GameScene extends Scene implements iIO {
 
         // Game Loop
         // PATCH FIX
-        if (!isPaused) {
+        if (!getSceneManager().isPaused()) {
             super.getEntityManager().update();
 
             //Below here is the logic for the moving scene when not paused
@@ -188,11 +204,12 @@ public class GameScene extends Scene implements iIO {
     @Override
     public void pause() {
         // Pause the game
-        isPaused = true; // Set the isPaused flag to true
-        System.out.println("Game Paused"); // Print a message indicating that the game is paused
-
-        // Pause sound effects and music
-        soundManager.pauseAll();
+        super.pause();
+//        isPaused = true; // Set the isPaused flag to true
+//        System.out.println("Game Paused"); // Print a message indicating that the game is paused
+//
+//        // Pause sound effects and music
+//        soundManager.pauseAll();
 
         // Stop entity movements
         //super.getEntityManager().stopAllMovements(); // Implement this method in your EntityManager class
@@ -203,11 +220,12 @@ public class GameScene extends Scene implements iIO {
     @Override
     public void resume() {
         // Resume the game
-        isPaused = false; // Set the isPaused flag to false
-        System.out.println("Game Resumed"); // Print a message indicating that the game is resumed
-
-        // Resume sound effects and music
-        soundManager.resumeAll();
+        super.resume();
+//        isPaused = false; // Set the isPaused flag to false
+//        System.out.println("Game Resumed"); // Print a message indicating that the game is resumed
+//
+//        // Resume sound effects and music
+//        soundManager.resumeAll();
 
         // Resume any other game activities
     }
