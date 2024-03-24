@@ -54,7 +54,7 @@ public class EntityManager {
         this.collisionManager = new CollisionManager(this, soundManager, collisionList, collisionHandler);
         this.playerControlManager = new PlayerControlManager(this, playerEntityList);
         this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);;
-        this.entityFactory = new EntityFactory(batch);
+        this.entityFactory = new EntityFactory(batch, this);
     }
 
     // Constructor with EntityFactory
@@ -71,7 +71,7 @@ public class EntityManager {
         this.collisionManager = new CollisionManager(this, soundManager, collisionList, collisionHandler);
         this.playerControlManager = new PlayerControlManager(this, playerEntityList);
         this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);
-        this.entityFactory = new EntityFactory(batch);
+        this.entityFactory = new EntityFactory(batch, this);
     }
 
     // Main testing creation
@@ -142,16 +142,21 @@ public class EntityManager {
     public void addEntity(Entity entity) {
 
         entityList.add(entity);
-        if (entity instanceof iCollision) {
-            collisionList.add((iCollision) entity); // Adding to the AI-controlled list
+        System.out.println(entity);
+
+        if (entity instanceof iCollision && collisionList != null) {
+            collisionList.add((iCollision) entity); // Adding to the collision list
+            System.out.println("Added to collision list");
         }
 
-        if (entity instanceof iAiMovement) {
-            aiEntityList.add((iAiMovement) entity); // Adding to the AI-controlled list
+        if (entity instanceof iAiMovement && aiEntityList != null) {
+            aiEntityList.add((iAiMovement) entity); // Adding to the AI movement list
+            System.out.println("Added to AI movement list");
         }
 
-        if (entity instanceof iPlayerMovement) {
-            playerEntityList.add((iPlayerMovement) entity); // Adding to the player-controlled list
+        if (entity instanceof iPlayerMovement && playerEntityList != null) {
+            playerEntityList.add((iPlayerMovement) entity); // Adding to the player movement list
+            System.out.println("Added to player movement list");
         }
     }
 
@@ -176,12 +181,11 @@ public class EntityManager {
         Iterator<Entity> iterator = entities.iterator();
         while (iterator.hasNext()) {
             Entity entity = iterator.next();
-
             // TODO: See if we need this logic in the end
-//            if (!entity.isAlive()) {
-//                iterator.remove(); // Remove the entity from the list
-//                continue; // Skip to the next iteration if the entity is not alive
-//            }
+            if (!entity.isAlive()) {
+                iterator.remove(); // Remove the entity from the list
+                continue; // Skip to the next iteration if the entity is not alive
+            }
             entity.update();
         }
     }

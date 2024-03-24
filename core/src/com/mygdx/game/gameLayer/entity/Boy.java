@@ -45,6 +45,7 @@ public class Boy extends PlayableEntity {
         super(health, x, y, scale, sprite, speed, playerMovement, batch);
         this.entityFactory = entityFactory;
         this.entityManager = entityManager;
+        System.out.println(entityManager);
         this.playerMovementStrategy = new Player1MovementStrategy();
     }
 
@@ -75,7 +76,6 @@ public class Boy extends PlayableEntity {
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
-
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~GAME LOGIC~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -118,7 +118,8 @@ public class Boy extends PlayableEntity {
         float bulletSpawnY = getY() + BULLET_SPAWN_OFFSET_Y;
 
         // Create a new bullet instance and add it to the entity manager
-        Entity Bullet = getEntityFactory().shootBullets(bulletSpawnX, bulletSpawnY);
+        Entity bullet = getEntityFactory().shootBullets(bulletSpawnX, bulletSpawnY);
+        System.out.println(bullet);
         getEntityManager().addEntity(bullet);
     }
 

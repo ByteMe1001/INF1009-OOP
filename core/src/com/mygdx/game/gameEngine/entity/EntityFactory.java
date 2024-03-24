@@ -15,10 +15,10 @@ public class EntityFactory implements GameFactory {
         this.entityType = entityType;
     }
 
-    public EntityFactory(SpriteBatch batch) {
-        //EntityType entityType = EntityType.BOY;
-        this.batch = batch;
-    }
+//    public EntityFactory(SpriteBatch batch) {
+//        //EntityType entityType = EntityType.BOY;
+//        this.batch = batch;
+//    }
 
     public EntityFactory(SpriteBatch batch, EntityManager entityManager) {
         this.entityManager = entityManager;
@@ -53,7 +53,7 @@ public class EntityFactory implements GameFactory {
         return new Boy(
                 entityType.health, entityType.x, entityType.y, entityType.scale,
                 new Sprite(new Texture(entityType.texturePath)),
-                entityType.speed, entityType.playerMovement,batch,this,entityManager
+                entityType.speed, entityType.playerMovement,batch,this, entityManager
         );
     }
 
@@ -90,7 +90,7 @@ public class EntityFactory implements GameFactory {
         return new Bullet(
                 entityType.health, entityType.x, entityType.y, entityType.scale,
                 new Sprite(new Texture(entityType.texturePath)),
-                entityType.speed, batch
+                entityType.speed, entityType.defaultChangeRate, batch
         );
     }
 }
