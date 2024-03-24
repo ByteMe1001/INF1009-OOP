@@ -28,7 +28,8 @@ public class GameScene extends Scene implements iIO {
     private boolean isPaused = false;
     private SoundManager soundManager;
     private float backgroundY = 0;
-    private final float backgroundVelocity = 4;
+    private float backgroundVelocity = 4;
+
 
 
 
