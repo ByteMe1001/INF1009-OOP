@@ -24,7 +24,7 @@ public class CollisionManager {
         this.entityManager = entityManager;
         this.soundManager = new SoundManager();
         this.collisionList = collisionList;
-        this.collisionHandler = new CollisionHandler();
+        this.collisionHandler = new CollisionHandler(collisionList);
     }
 
     // Default constructor
@@ -92,35 +92,3 @@ public class CollisionManager {
         // entityManager.removeEntity(x); //update entityManager to remove entity from entity list
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
