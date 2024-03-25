@@ -1,5 +1,6 @@
 package com.mygdx.game.gameLayer.entity;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -7,6 +8,9 @@ import com.mygdx.game.gameEngine.entity.CollidableEntities;
 import com.mygdx.game.gameEngine.ai.AiControlManager;
 import com.mygdx.game.gameEngine.util.iAiMovement;
 import com.mygdx.game.gameLayer.movement.*;
+import com.mygdx.game.gameEngine.entity.EntityManager;
+import com.mygdx.game.gameEngine.entity.Entity;
+
 
 import java.util.ArrayList;
 
@@ -18,6 +22,13 @@ public class Boss extends CollidableEntities implements iAiMovement{
     private int changeRate;      // FOR AI MOVEMENT
     private int defaultChangeRate;
     private SpriteBatch batch;
+    
+    // For bullets stuff
+    private EntityFactory entityFactory;
+    private EntityManager entityManager;
+    private float shootTimer = 0;
+    private float shootInterval = 2; // Shoots an enemy bullet every 2 seconds
+
 
     private AIMovementStrategy movementStrategy;
     private ArrayList<AIMovementStrategy> movementStrategyList;
@@ -45,19 +56,35 @@ public class Boss extends CollidableEntities implements iAiMovement{
     // Additional constructor if needed
     public Boss(int health, float x, float y, float scale, Sprite sprite,
                 float speed, int defaultChangeRate,
-                SpriteBatch batch) {
+                SpriteBatch batch, EntityFactory entityFactory, EntityManager entityManager) {
         super(health, x, y, scale, sprite, speed, batch);
         this.changeRate = 0;
         this.defaultChangeRate = defaultChangeRate;
         this.movementStrategyList = new ArrayList<AIMovementStrategy>();
         initializeMovementStrategy();
+        this.entityFactory = entityFactory;
+        this.entityManager = entityManager;
     }
+    
+    //Shoot stuff
+    public void shoot() {
+        float bulletSpawnX = getX() + getSprite().getWidth() / 2 - (new Texture(TEXTURE_PATH).getWidth() / 2);
+        float bulletSpawnY = getY() - new Texture(TEXTURE_PATH).getHeight(); 
+        Entity enemyBullet = entityFactory.shootEnemyBullet(bulletSpawnX, bulletSpawnY);
+        entityManager.addEntity(enemyBullet);
+    }
+
 
     // Getter and setter methods
     @Override
     public void update() {
         //movementStrategy.move(this);
         super.update();
+        shootTimer += Gdx.graphics.getDeltaTime();
+        if (shootTimer >= shootInterval) {
+            shoot();
+            shootTimer = 0; // Reset the timer after shooting
+        }
     }
 
     public void initializeMovementStrategy() {
@@ -108,7 +135,6 @@ public class Boss extends CollidableEntities implements iAiMovement{
 
 
     // Game design logic
-
     @Override
     public void takeDamage(int damage) {
         // Handle damage logic for the Boss
@@ -119,7 +145,7 @@ public class Boss extends CollidableEntities implements iAiMovement{
     @Override
     public void heal(int amount) {
         // Handle healing logic for the Boss
-        if (amount >= 0) {
+    	if (amount >= 0) {
 
             int healedHealth = getHealth() + amount;
             if (healedHealth > 100) {
@@ -240,4 +266,3 @@ public class Boss extends CollidableEntities implements iAiMovement{
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SPARE CODE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
