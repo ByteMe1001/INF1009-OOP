@@ -25,6 +25,7 @@ public class EntityManager {
     private ArrayList<iAiMovement> aiEntityList;
     private ArrayList<iPlayerMovement> playerEntityList;
     private ArrayList<iCollision> collisionList;
+    private ArrayList<Entity> newEntities = new ArrayList<>();
     private EntityFactory entityFactory;
 
     private SpriteBatch batch;
@@ -125,7 +126,7 @@ public class EntityManager {
             throw new IllegalArgumentException("Entity cannot be null");
         }
 
-        entityList.add(entity);
+        newEntities.add(entity);
 
         boolean addedToList = false;
 
@@ -161,6 +162,8 @@ public class EntityManager {
 
     public void update() {
         updateEntities(entityList);
+        entityList.addAll(newEntities);
+        newEntities.clear();
 //        updateEntities(playerEntityList);
 //        updateEntities(aiEntityList);
 //        collisionManager.updateCollisionList(entityList, playerEntityList, aiEntityList);
@@ -173,12 +176,12 @@ public class EntityManager {
         Iterator<Entity> iterator = entities.iterator();
         while (iterator.hasNext()) {
             Entity entity = iterator.next();
+            entity.update();
             // TODO: See if we need this logic in the end
             if (!entity.isAlive()) {
-                iterator.remove(); // Remove the entity from the list
+            	iterator.remove();
                 continue; // Skip to the next iteration if the entity is not alive
             }
-            entity.update();
         }
     }
 
