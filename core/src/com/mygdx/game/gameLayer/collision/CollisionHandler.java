@@ -4,10 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.gameEngine.entity.CollidableEntities;
 import com.mygdx.game.gameEngine.util.iCollision;
-import com.mygdx.game.gameLayer.entity.Boss;
-import com.mygdx.game.gameLayer.entity.Boy;
-import com.mygdx.game.gameLayer.entity.Bullet;
-import com.mygdx.game.gameLayer.entity.EntityType;
+import com.mygdx.game.gameLayer.entity.*;
 
 import java.util.ArrayList;
 
@@ -39,7 +36,9 @@ public class CollisionHandler {
         }
 
         //Testing purposes
-        else if (x.getClass().equals(Bullet.class) && y.getClass().equals(Boss.class) || y.getClass().equals(Bullet.class) && x.getClass().equals(Boss.class)){
+        else if (x.getClass().equals(Boy.class) && y.getClass().equals(EnemyBullet.class)){
+            ((Boy) x).heal(10);
+            System.out.println("Player has been healed back to HP: " + ((Boy) x).getHealth() );
 
             //System.out.println(x + "has collided with " + y);
         }
