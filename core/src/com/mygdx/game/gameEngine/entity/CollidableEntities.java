@@ -82,6 +82,14 @@ public abstract class CollidableEntities extends Entity implements iCollision {
     @Override
     public void update() {
         setBoundingBox();
+        checkHealth();
+    }
+
+    // To check health status for object deletion
+    public void checkHealth() {
+        if(getHealth() <= 0) {
+            setAlive(false);
+        }
     }
 
     public boolean collidesWith(iCollision other){

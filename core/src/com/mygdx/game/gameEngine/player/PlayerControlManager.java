@@ -13,7 +13,7 @@ public class PlayerControlManager implements iIO {
     private ArrayList<iPlayerMovement> playerEntityList;
     private EntityManager entityManager;
     private float timeSeconds = 0f;
-    private float period = 0.15f;
+    private float period = 0.5f;
     public PlayerControlManager() {
 
     }
