@@ -2,12 +2,9 @@ package com.mygdx.game.gameLayer.entity;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.gameEngine.ai.AiControlManager;
 import com.mygdx.game.gameEngine.entity.Entity;
-import com.mygdx.game.gameEngine.entity.EntityFactory;
 import com.mygdx.game.gameEngine.entity.EntityManager;
 import com.mygdx.game.gameEngine.entity.PlayableEntity;
-import com.mygdx.game.gameEngine.player.PlayerControlManager;
 import com.mygdx.game.gameEngine.player.PlayerMovement;
 import com.mygdx.game.gameLayer.movement.Player1MovementStrategy;
 

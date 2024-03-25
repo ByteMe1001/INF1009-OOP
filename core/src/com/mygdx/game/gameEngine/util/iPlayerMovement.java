@@ -1,6 +1,5 @@
 package com.mygdx.game.gameEngine.util;
 
-import com.mygdx.game.gameEngine.entity.EntityFactory;
 import com.mygdx.game.gameEngine.player.PlayerMovement;
 
 public interface iPlayerMovement {

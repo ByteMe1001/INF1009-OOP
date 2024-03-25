@@ -2,7 +2,6 @@ package com.mygdx.game.gameEngine.entity;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.gameEngine.ai.AiControlManager;
 import com.mygdx.game.gameEngine.collision.CollisionManager;
 
@@ -16,7 +15,7 @@ import com.mygdx.game.gameEngine.util.iAiMovement;
 import com.mygdx.game.gameEngine.util.iCollision;
 import com.mygdx.game.gameEngine.util.iPlayerMovement;
 import com.mygdx.game.gameLayer.collision.CollisionHandler;
-import com.mygdx.game.gameLayer.entity.Boy;
+import com.mygdx.game.gameLayer.entity.EntityFactory;
 import com.mygdx.game.gameLayer.entity.EntityType;
 
 public class EntityManager {
@@ -78,7 +77,6 @@ public class EntityManager {
     // Entity creations
     public void createBucket() {
         Entity bucket = entityFactory.createEntity(EntityType.BOY); // Use factory to create bucket entity
-        addEntity(bucket);
         System.out.println(collisionList.size());
     }
 
@@ -86,34 +84,29 @@ public class EntityManager {
     public void createBuckets(int x) {
         for (int i = 0; i < x; i++) {
             Entity bucket = entityFactory.createEntity(EntityType.BOY); // Use EntityFactory to create bucket entity
-            addEntity(bucket);
         }
     }
 
     public void createDroplet() {
         Entity droplet = entityFactory.createEntity(EntityType.BOSS); // Use factory to create droplet entity
-        addEntity(droplet);
     }
 
     // Main testing creation
     public void createDroplets(int x) {
         for (int i = 0; i < x; i++) {
             Entity droplet = entityFactory.createEntity(EntityType.BOSS); // Use EntityFactory to create droplet entity
-            addEntity(droplet);
         }
     }
 
     public void createPlayerBullets(int x) {
         for (int i = 0; i < x; i++) {
             Entity bullet = entityFactory.createEntity(EntityType.BULLET); // Use EntityFactory to create bullet entity
-            addEntity(bullet);
         }
     }
 
     public void createEnemyBullets(int x){
         for (int i = 0; i < x; i++) {
             Entity bullet = entityFactory.createEntity(EntityType.ENEMYBULLET); // Use EntityFactory to create bullet entity
-            addEntity(bullet);
         }
     }
 
@@ -308,12 +301,4 @@ public class EntityManager {
         throw new IllegalArgumentException("Entity not found in the entity list");
     }
 
-    public Boy getBoyEntity() {
-        for (Entity entity : entityList) {
-            if (entity instanceof Boy) {
-                return (Boy) entity;
-            }
-        }
-        return null; // Return null if Boy entity is not found
-    }
 }

@@ -1,8 +1,12 @@
-package com.mygdx.game.gameEngine.entity;
+package com.mygdx.game.gameLayer.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.gameEngine.entity.DisplayElement;
+import com.mygdx.game.gameEngine.entity.Entity;
+import com.mygdx.game.gameEngine.entity.EntityManager;
+import com.mygdx.game.gameEngine.entity.GameFactory;
 import com.mygdx.game.gameLayer.entity.*;
 
 public class EntityFactory implements GameFactory {
@@ -50,48 +54,74 @@ public class EntityFactory implements GameFactory {
 
     public Entity createCharacterEntity() {
         EntityType entityType = EntityType.BOY;
-        return new Boy(
+        Boy entity = new Boy(
                 entityType.health, entityType.x, entityType.y, entityType.scale,
                 new Sprite(new Texture(entityType.texturePath)),
                 entityType.speed, entityType.playerMovement,batch,this, entityManager
         );
+
+        // Add the created entity to the EntityManager
+        entityManager.addEntity(entity);
+
+        return entity;
     }
 
 
     public Entity createBossEntity() {
         EntityType entityType = EntityType.BOSS;
-        return new Boss(
+        Boss entity = new Boss(
                 entityType.health, entityType.x, entityType.y, entityType.scale,
                 new Sprite(new Texture(entityType.texturePath)),
                 entityType.speed, entityType.defaultChangeRate, batch
         );
+
+        // Add the created entity to the EntityManager
+        entityManager.addEntity(entity);
+
+        return entity;
     }
 
     public Entity createBulletEntity() {
         EntityType entityType = EntityType.BULLET;
-        return new Bullet(
+        Bullet entity = new Bullet(
                 entityType.health, entityType.x, entityType.y, entityType.scale,
                 new Sprite(new Texture(entityType.texturePath)),
                 entityType.speed, entityType.defaultChangeRate, batch
         );
+
+        // Add the created entity to the EntityManager
+        entityManager.addEntity(entity);
+
+        return entity;
     }
 
     public Entity createEnemyBullet() {
         EntityType entityType = EntityType.ENEMYBULLET;
-        return new EnemyBullet(
+        EnemyBullet entity = new EnemyBullet(
                 entityType.health, entityType.x, entityType.y, entityType.scale,
                 new Sprite(new Texture(entityType.texturePath)),
                 entityType.speed, entityType.defaultChangeRate, batch
         );
+
+        // Add the created entity to the EntityManager
+        entityManager.addEntity(entity);
+
+        return entity;
     }
+
     //For shoot function
     public Entity shootBullets(float x ,float y) {
         EntityType entityType = EntityType.BULLET;
-        return new Bullet(
+        Bullet bullet = new Bullet(
                 entityType.health, x, y, entityType.scale,
                 new Sprite(new Texture(entityType.texturePath)),
                 entityType.speed, entityType.defaultChangeRate, batch
         );
+
+        // Add the created bullet entity to the EntityManager
+        entityManager.addEntity(bullet);
+
+        return bullet;
     }
 }
 /*public void creatX(float x ,float y) {
