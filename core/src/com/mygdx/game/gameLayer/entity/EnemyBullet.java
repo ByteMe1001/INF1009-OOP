@@ -37,7 +37,7 @@ public class EnemyBullet extends CollidableEntities implements iAiMovement {
         this.changeRate = 0;
         this.defaultChangeRate = defaultChangeRate;
         this.movementStrategyList = new ArrayList<AIMovementStrategy>();
-        setMovementStrategy(new UpMovement());
+        setMovementStrategy(new DownMovement());
         initializeMovementStrategy();
     }
 
@@ -69,7 +69,7 @@ public class EnemyBullet extends CollidableEntities implements iAiMovement {
     @Override
     public void update() {
         super.update();
-        if(getY() + getSpriteHeight() >= Gdx.graphics.getHeight()) {
+        if(getY() <= 0) {
             setAlive(false);
         }
     }
@@ -106,10 +106,10 @@ public class EnemyBullet extends CollidableEntities implements iAiMovement {
     }
     //Movement Logic
     public void movement() {
-        setUp();
+        setDown();
     }
-    public void setUp() {
-        setMovementStrategy(getMovementStrategy("UpMovement"));
+    public void setDown() {
+        setMovementStrategy(getMovementStrategy("DownMovement"));
     }
 
 }
