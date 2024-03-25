@@ -110,17 +110,27 @@ public class Boss extends CollidableEntities implements iAiMovement{
     // Game design logic
 
     public void takeDamage(int damage) {
-        // Handle damage logic for the droplet
+        // Handle damage logic for the Boss
+        int updatedHealth = getHealth() - damage;
+        setHealth(updatedHealth);
     }
 
     @Override
     public void heal(int amount) {
-        // Handle healing logic for the droplet
+        // Handle healing logic for the Boss
+        int healedHealth = getHealth() + amount;
+        if (healedHealth > 100) {
+            setHealth(100);
+        }
+        else{
+            setHealth(healedHealth);
+        }
     }
 
     @Override
     public void destroy() {
-        // Handle destruction logic for the droplet
+        // Handle destruction logic for the Boss
+
     }
 
     // Dunnid probably
