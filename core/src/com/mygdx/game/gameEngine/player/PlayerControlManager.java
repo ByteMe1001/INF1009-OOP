@@ -12,7 +12,8 @@ public class PlayerControlManager implements iIO {
     // private float x, y, speed;
     private ArrayList<iPlayerMovement> playerEntityList;
     private EntityManager entityManager;
-
+    private float timeSeconds = 0f;
+    private float period = 0.5f;
     public PlayerControlManager() {
 
     }
@@ -80,13 +81,18 @@ public class PlayerControlManager implements iIO {
     }
 
     public void shoot(iPlayerMovement entity, float x, float y) {
+
         switch (inputKey3()) {
             case "FALSE":
                 break;
             case "SPACE":
                 // Call the shoot method of the Boy instance
-                entity.shoot(); // Assuming EntityManager is needed for bullet creation
-                System.out.println("SPace");
+                timeSeconds += Gdx.graphics.getDeltaTime();
+                if(timeSeconds > period) {
+                    timeSeconds -= period;
+                    entity.shoot(); // Assuming EntityManager is needed for bullet creation
+                    System.out.println("SPace");
+                }
                 break;
             default:
                 break;
