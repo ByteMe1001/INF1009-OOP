@@ -204,7 +204,7 @@ public class GameScene extends Scene implements iIO {
         super.getBatch().draw(super.getBackground(), 0, backgroundY, 640, 640);
         super.getBatch().draw(super.getBackground(), 0, backgroundY + 640, 640, 640);
 
-        //For HealthBar
+        //For HealthBar logic
         super.getBatch().draw(blank, 10, Gdx.graphics.getHeight() - 30, Gdx.graphics.getWidth()/2, Gdx.graphics.getWidth()/2);
         // Draw foreground health bar based on current health
         float foregroundWidth = Gdx.graphics.getWidth()/2 * (health / 100.0f); // Calculate width based on current health percentage
