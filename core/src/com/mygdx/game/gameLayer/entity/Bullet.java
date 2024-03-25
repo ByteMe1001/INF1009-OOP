@@ -69,6 +69,9 @@ public class Bullet extends CollidableEntities implements iAiMovement {
     @Override
     public void update() {
         super.update();
+        if(getY() + getSpriteHeight() >= Gdx.graphics.getHeight()) {
+            setAlive(false);
+        }
     }
     @Override
     public void takeDamage(int damage) {

@@ -84,11 +84,11 @@ public class EntityFactory implements GameFactory {
                 entityType.speed, entityType.defaultChangeRate, batch
         );
     }
-//For shoot function
+    //For shoot function
     public Entity shootBullets(float x ,float y) {
         EntityType entityType = EntityType.BULLET;
         return new Bullet(
-                entityType.health, entityType.x, entityType.y, entityType.scale,
+                entityType.health, x, y, entityType.scale,
                 new Sprite(new Texture(entityType.texturePath)),
                 entityType.speed, entityType.defaultChangeRate, batch
         );
