@@ -87,6 +87,9 @@ public class Boy extends PlayableEntity {
 
     @Override
     public void takeDamage(int damage) {
+        int i = getHealth() - damage;
+        setHealth(i);
+        //System.out.println("Health: " + getHealth());
         // Handle damage logic for the Boy
     }
 
