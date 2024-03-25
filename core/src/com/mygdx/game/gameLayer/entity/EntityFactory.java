@@ -72,7 +72,7 @@ public class EntityFactory implements GameFactory {
         Boss entity = new Boss(
                 entityType.health, entityType.x, entityType.y, entityType.scale,
                 new Sprite(new Texture(entityType.texturePath)),
-                entityType.speed, entityType.defaultChangeRate, batch
+                entityType.speed, entityType.defaultChangeRate, batch, this, entityManager
         );
 
         // Add the created entity to the EntityManager
@@ -123,6 +123,21 @@ public class EntityFactory implements GameFactory {
 
         return bullet;
     }
+    
+    public Entity shootEnemyBullet(float x, float y) {
+        EntityType entityType = EntityType.ENEMYBULLET;
+        EnemyBullet enemyBullet = new EnemyBullet(
+                entityType.health, x, y, entityType.scale,
+                new Sprite(new Texture(entityType.texturePath)),
+                entityType.speed, entityType.defaultChangeRate, batch
+        );
+
+        // Add the created enemy bullet entity to the EntityManager
+        entityManager.addEntity(enemyBullet);
+
+        return enemyBullet;
+    }
+
 }
 /*public void creatX(float x ,float y) {
         EntityType entityType = EntityType.BULLET;
