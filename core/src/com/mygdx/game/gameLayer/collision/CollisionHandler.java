@@ -31,7 +31,7 @@ public class CollisionHandler {
             }
 
             if(((Boy) x).getHealth() == 0){
-                //collisionList.remove(y);
+                ((CollidableEntities) x).setAlive(false);
             }
         }
 
@@ -47,6 +47,21 @@ public class CollisionHandler {
             if(timeSeconds > period){
                 timeSeconds -= period;
                 //System.out.println("Cooldown on Collision");
+            }
+        }
+
+        else if (x.getClass().equals(Bullet.class) && y.getClass().equals(Boss.class)){
+            ((Boss) y).takeDamage(10);
+            if(((Boss) y).getHealth() == 0){
+                ((Boss) y).setAlive(false);
+            }
+
+        }
+
+        else if (x.getClass().equals(EnemyBullet.class) && y.getClass().equals(Boy.class)){
+            ((Boy) y).takeDamage(10);
+            if(((Boy) y).getHealth() == 0){
+                ((Boy) y).setAlive(false);
             }
         }
 
