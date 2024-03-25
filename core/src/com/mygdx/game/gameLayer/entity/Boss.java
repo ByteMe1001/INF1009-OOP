@@ -109,6 +109,7 @@ public class Boss extends CollidableEntities implements iAiMovement{
 
     // Game design logic
 
+    @Override
     public void takeDamage(int damage) {
         // Handle damage logic for the Boss
         int updatedHealth = getHealth() - damage;
@@ -118,12 +119,14 @@ public class Boss extends CollidableEntities implements iAiMovement{
     @Override
     public void heal(int amount) {
         // Handle healing logic for the Boss
-        int healedHealth = getHealth() + amount;
-        if (healedHealth > 100) {
-            setHealth(100);
-        }
-        else{
-            setHealth(healedHealth);
+        if (amount >= 0) {
+
+            int healedHealth = getHealth() + amount;
+            if (healedHealth > 100) {
+                setHealth(100);
+            } else {
+                setHealth(healedHealth);
+            }
         }
     }
 
