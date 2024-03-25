@@ -13,6 +13,11 @@ public class CollisionHandler {
     private ArrayList<iCollision> collisionList;
     private float timeSeconds = 0f;
     private float period = 3f;
+    
+	// Constructor to initialize collisionList
+    public CollisionHandler(ArrayList<iCollision> collisionList) {
+        this.collisionList = collisionList;
+    }
 
     public void handleCollision(iCollision x, iCollision y){
 
