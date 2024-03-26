@@ -5,9 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.Timer;
-import com.mygdx.game.gameEngine.entity.CollidableEntities;
-import com.mygdx.game.gameLayer.entity.EntityFactory;
+//import com.mygdx.game.gameEngine.entity.EntityFactory;
 import com.mygdx.game.gameEngine.scene.Scene;
 import com.mygdx.game.gameEngine.scene.SceneManager;
 import com.mygdx.game.gameEngine.util.SoundManager;
@@ -20,8 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.gameEngine.util.iIO;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
-
-import java.util.TimerTask;
+import com.mygdx.game.gameLayer.entity.EntityType;
 
 public class GameScene extends Scene implements iIO {
     private final static String TEXTURE_PATH = "scrolling_Background.png";
@@ -32,32 +29,21 @@ public class GameScene extends Scene implements iIO {
     private Texture resumeButtonTexture;
     private boolean isPaused = false;
     private SoundManager soundManager;
-    private SceneManager sceneManager;
+    //private SceneManager sceneManager;
     private float backgroundY = 0;
     private float backgroundVelocity = 4;
-
-    private int health = 100;
-    private Texture blank, green;
-    private CollidableEntities boss;
-    private float healthBarWidth = 200f; // Width of the health bar
-    private float healthBarHeight = 20f; // Height of the health bar
-
-    private float elapsedTime = 0f;
-    private float healthDecreaseInterval = 3f;
-    private int healthDecreaseAmount = 10;
-
     private EntityManager entityManager;
-    private EntityFactory entityFactory;
+    //private EntityFactory entityFactory; //commented out temporarily
+    SceneManager sceneManager = SceneManager.getInstance();
 
 
 
     public GameScene(SceneManager sceneManager, EntityManager entityManager, SoundManager soundManager, SpriteBatch batch) {
         super(sceneManager, entityManager, soundManager, batch);
-        this.entityFactory = new EntityFactory(batch, entityManager); // Assign the provided EntityFactory instance
+        //this.entityFactory = new EntityFactory(batch, entityManager); // Assign the provided EntityFactory instance
         this.sceneManager = sceneManager;
         this.soundManager = soundManager;
     }
-
 
     @Override
     public void show() {
@@ -66,10 +52,6 @@ public class GameScene extends Scene implements iIO {
         // Initialize stage
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-
-        //Making HealthBar
-        blank = new Texture("blackbackground.PNG");
-        green = new Texture("green.jpg");
 
         // Load pause button texture
         pauseButtonTexture = new Texture(PAUSE_BUTTON_PATH);
@@ -98,7 +80,7 @@ public class GameScene extends Scene implements iIO {
         if (!super.getSoundManager().isMusicPlaying()) {
             super.getSoundManager().playMusic("GameScene");
         }
-
+        //Get EntityFactory.createEntity(id,x,y,z)
         // Create entities
         super.getEntityManager().createBucket();
         super.getEntityManager().createDroplets(5);
@@ -111,15 +93,6 @@ public class GameScene extends Scene implements iIO {
     private void resumeGame() {
 
     }
-
-    //Replace with a method to update the entity health
-    private void decreaseHealth() {
-        health -= healthDecreaseAmount;
-        if (health < 0) {
-            health = 0;
-        }
-    }
-
 
     private ImageButton createPauseButton() {
         // Create pause button
@@ -204,14 +177,6 @@ public class GameScene extends Scene implements iIO {
         super.getBatch().draw(super.getBackground(), 0, backgroundY, 640, 640);
         super.getBatch().draw(super.getBackground(), 0, backgroundY + 640, 640, 640);
 
-        //For HealthBar logic
-        super.getBatch().draw(blank, 10, Gdx.graphics.getHeight() - 30, Gdx.graphics.getWidth()/2, Gdx.graphics.getWidth()/2);
-        // Draw foreground health bar based on current health
-        float foregroundWidth = Gdx.graphics.getWidth()/2 * (health / 100.0f); // Calculate width based on current health percentage
-        super.getBatch().draw(green, 10, Gdx.graphics.getHeight() - 30, foregroundWidth, healthBarHeight);
-        super.getBatch().draw(blank,0, 0, Gdx.graphics.getWidth() * health, 5);
-
-
         // Game Loop
         // PATCH FIX
         if (!getSceneManager().isPaused()) {
@@ -224,16 +189,6 @@ public class GameScene extends Scene implements iIO {
                 backgroundY = 0;
             }
         }
-
-        //Here is just a timer for the healthbar to show it deducting, remove once logic in implemented
-        elapsedTime += deltaTime;
-        if (elapsedTime >= healthDecreaseInterval) {
-            decreaseHealth();
-            elapsedTime = 0f;
-        }
-
-
-
         super.getEntityManager().draw();
         super.getBatch().end();
 
@@ -248,9 +203,6 @@ public class GameScene extends Scene implements iIO {
         // Dispose of resources
         super.dispose();
         pauseButtonTexture.dispose();
-        blank.dispose();
-        green.dispose();
-
         stage.dispose();
     }
 

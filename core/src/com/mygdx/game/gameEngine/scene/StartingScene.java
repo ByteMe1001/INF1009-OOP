@@ -21,9 +21,11 @@ public class StartingScene extends Scene implements iIO {
 
     private final static float BUTTON_SCALE = 0.2f;         // Scale to set button
     private Stage stage;
+    SceneManager sceneManager = SceneManager.getInstance();
 
     public StartingScene(SceneManager sceneManager, EntityManager entityManager, SoundManager soundManager, SpriteBatch batch) {
         super(sceneManager, entityManager, soundManager, batch);
+        this.sceneManager = sceneManager;
     }
 
     @Override
@@ -70,6 +72,7 @@ public class StartingScene extends Scene implements iIO {
         addButtonClickListener(playButton, () -> {
             // Logic to execute when the play button is clicked
             super.getSceneManager().swapScene(new GameScene(StartingScene.super.getSceneManager(), StartingScene.super.getEntityManager(), StartingScene.super.getSoundManager(), getBatch()));
+            //super.getSceneManager().swapScene(new GameScene(StartingScene.super.getSceneManager(), StartingScene.super.getSoundManager(), getBatch()));
         });
     }
 
@@ -81,6 +84,16 @@ public class StartingScene extends Scene implements iIO {
         // Draw stage
         stage.act(deltaTime);
         stage.draw();
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
     }
 
     @Override

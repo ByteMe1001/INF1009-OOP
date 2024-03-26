@@ -12,6 +12,7 @@ import com.mygdx.game.gameLayer.scene.GameScene;
 import java.util.ArrayList;
 
 public class SceneManager implements SceneChangeListener{
+    private static SceneManager instance;
     private SoundManager soundManager;
     private PlayerManager playerManager;
     private EntityManager entityManager;
@@ -34,6 +35,13 @@ public class SceneManager implements SceneChangeListener{
         PlayerManager playerManager = new PlayerManager();      // Later change to after starting scene ends
         this.batch = batch;
         scenes = new ArrayList<Scene>();
+    }
+
+    public static SceneManager getInstance() {
+        if (instance == null) {
+            instance = new SceneManager();
+        }
+        return instance;
     }
 
     // Example code for demo
