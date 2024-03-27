@@ -48,6 +48,8 @@ public class EntityFactory implements GameFactory {
             // Add cases for other entity types as needed
             case ENEMYBULLET:
                 return createEnemyBullet();
+            case HEALTHPACK:
+                return createHealthPack();
             default:
                 throw new IllegalArgumentException("Invalid entity type: " + entityType);
         }
@@ -137,6 +139,20 @@ public class EntityFactory implements GameFactory {
         entityManager.addEntity(enemyBullet);
 
         return enemyBullet;
+    }
+
+    public Entity createHealthPack() {
+        EntityType entityType = EntityType.HEALTHPACK;
+        HealthPack healthPack = new HealthPack(
+                entityType.health, entityType.x, entityType.y, entityType.scale,
+                new Sprite(new Texture(entityType.texturePath)),
+                entityType.speed, entityType.defaultChangeRate, batch
+        );
+
+        // Add the created enemy bullet entity to the EntityManager
+        entityManager.addEntity(healthPack);
+
+        return healthPack;
     }
 
 }

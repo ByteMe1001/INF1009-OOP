@@ -31,38 +31,45 @@ public class CollisionHandler {
                 ((Boy) x).takeDamage(10);
                 //((Boss) y).takeDamage(10);
                 //System.out.println("Cooldown on Collision");
-                System.out.println("Player Health: " + ((CollidableEntities) x).getHealth());
-                System.out.println("Boss Health: " + ((CollidableEntities) y).getHealth());
+                System.out.println("Player Health: " + ((Boy) x).getHealth());
+                System.out.println("Boss Health: " + ((Boss) y).getHealth());
                 System.out.println(x + "has collided with " + y);
             }
 
         }
 
-        //Testing purposes
-        else if (x.getClass().equals(Boy.class) && y.getClass().equals(EnemyBullet.class)){
-            ((Boy) x).heal(10);
-            //System.out.println("Player has been healed back to HP: " + ((Boy) x).getHealth() );
-
-            //System.out.println(x + "has collided with " + y);
-        }
 
         else if (x.getClass().equals(Bullet.class) && y.getClass().equals(Boss.class) || x.getClass().equals(Boss.class) && y.getClass().equals(Bullet.class)){
             ((Boss) x).takeDamage(10);
             ((Bullet) y).takeDamage(10);
-            if(((CollidableEntities) y).getHealth() == 0) {
-                //((Bullet) y).setAlive(false);
-                collisionList.remove(y);
-            }
+            collisionList.remove(y);
+            ((Bullet) y).setAlive(false);
 
             System.out.println("Boss Health" + x + " " + ((Boss) x).getHealth());
-             if(((CollidableEntities) x).getHealth() == 0) {
+             if(((Boss) x).getHealth() == 0) {
                  collisionList.remove(x);
+                 ((Boss) x).setAlive(false);
+
              }
 
         }
 
-        else if (x.getClass().equals(EnemyBullet.class) && y.getClass().equals(Boy.class)){
-            //((Boy) y).takeDamage(10);
+        else if (x.getClass().equals(Boy.class) && y.getClass().equals(EnemyBullet.class)||x.getClass().equals(EnemyBullet.class) && y.getClass().equals(Boy.class)){
+            ((CollidableEntities) x).takeDamage(10);
+            collisionList.remove(y);
+            ((CollidableEntities) y).setAlive(false);
+            System.out.println("Player Health: " + ((CollidableEntities) x).getHealth());
+            if(((CollidableEntities) x).getHealth() == 0) {
+                collisionList.remove(x);
+                ((CollidableEntities) x).setAlive(false);
+            }
+        }
+
+        else if (x.getClass().equals(Boy.class) && y.getClass().equals(HealthPack.class)){
+            ((Boy) x).heal(30);
+            System.out.println("Player Healed to HP: " + ((Boy) x).getHealth());
+            collisionList.remove(y);
+            ((HealthPack) y).setAlive(false);
 
         }
 

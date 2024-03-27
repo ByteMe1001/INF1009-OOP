@@ -14,9 +14,10 @@ public enum EntityType {
     // Leaving playermovement as null for now
     BULLET(10, 0, 0, 1f,
             400f, 0, "bullet.png"),
-
     ENEMYBULLET(10, 0, 0, 1f,
-                   200f, 0, "81_pizza.png");
+            200f, 0, "81_pizza.png"),
+    HEALTHPACK(10, 500f, 500f, 1f,
+                        50f, 0, "Broccoli.png");
 
     public final int health;
     public final float x;

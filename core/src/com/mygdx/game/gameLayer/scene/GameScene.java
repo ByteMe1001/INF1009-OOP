@@ -86,6 +86,7 @@ public class GameScene extends Scene implements iIO {
         super.getEntityManager().createDroplets(5);
         super.getEntityManager().createPlayerBullets(1);
         super.getEntityManager().createEnemyBullets(1);
+        super.getEntityManager().createHealthPack(1);
         //pause button logic
 
     }

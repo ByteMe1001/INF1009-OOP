@@ -113,6 +113,11 @@ public class EntityManager {
             Entity bullet = entityFactory.createEntity(EntityType.ENEMYBULLET); // Use EntityFactory to create bullet entity
         }
     }
+    public void createHealthPack(int x){
+        for (int i = 0; i < x; i++) {
+            Entity healthPack = entityFactory.createEntity(EntityType.HEALTHPACK); // Use EntityFactory to create bullet entity
+        }
+    }
 
     // Maybe can use this function to clear all list?
     public void deleteEntity(Entity e) {
