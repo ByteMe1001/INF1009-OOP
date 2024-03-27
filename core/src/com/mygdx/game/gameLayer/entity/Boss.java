@@ -14,6 +14,7 @@ import com.mygdx.game.gameEngine.entity.Entity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Boss extends CollidableEntities implements iAiMovement{
 
@@ -28,7 +29,8 @@ public class Boss extends CollidableEntities implements iAiMovement{
     private EntityFactory entityFactory;
     private EntityManager entityManager;
     private float shootTimer = 0;
-    private float shootInterval = 2; // Shoots an enemy bullet every 2 seconds
+    private float shootInterval;
+    private Random random = new Random();
 
 
     private AIMovementStrategy movementStrategy;
@@ -59,12 +61,14 @@ public class Boss extends CollidableEntities implements iAiMovement{
                 float speed, int defaultChangeRate,
                 SpriteBatch batch, EntityFactory entityFactory, EntityManager entityManager) {
         super(health, x, y, scale, sprite, speed, batch);
+        this.setY(Math.max(y, Gdx.graphics.getHeight() / 2)); //spawns only at top half
         this.changeRate = 0;
         this.defaultChangeRate = defaultChangeRate;
         this.movementStrategyList = new ArrayList<AIMovementStrategy>();
         initializeMovementStrategy();
         this.entityFactory = entityFactory;
         this.entityManager = entityManager;
+        this.shootInterval = 1 + random.nextFloat() * (5 - 1); //random shoot value 1 to 5
     }
 
     //Shoot stuff
@@ -81,9 +85,13 @@ public class Boss extends CollidableEntities implements iAiMovement{
         //movementStrategy.move(this);
         super.update();
         shootTimer += Gdx.graphics.getDeltaTime();
+        if (getY() < Gdx.graphics.getHeight() / 2) {
+            setY(Gdx.graphics.getHeight() / 2);
         if (shootTimer >= shootInterval) {
             shoot();
             shootTimer = 0; // Reset the timer after shooting
+            shootInterval = 1 + random.nextFloat() * (5 - 1);
+        	}
         }
     }
 
