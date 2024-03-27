@@ -7,7 +7,7 @@ import com.mygdx.game.gameEngine.entity.EntityManager;
 import com.mygdx.game.gameEngine.player.PlayerManager;
 import com.mygdx.game.gameEngine.util.SoundManager;
 import com.mygdx.game.gameLayer.scene.GameScene;
-
+import com.mygdx.game.gameLayer.scene.QuizScene;
 
 import java.util.ArrayList;
 
@@ -51,6 +51,10 @@ public class SceneManager implements SceneChangeListener{
 
     public void createGameScene() {
         scenes.add(new GameScene(this, entityManager, soundManager, batch));
+    }
+    
+    public void createQuizScene() {
+    	scenes.add(new QuizScene(this, soundManager, entityManager, batch));
     }
 
     // Scene Manager functions
