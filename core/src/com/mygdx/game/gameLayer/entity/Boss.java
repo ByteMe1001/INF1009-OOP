@@ -13,6 +13,7 @@ import com.mygdx.game.gameEngine.entity.Entity;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Boss extends CollidableEntities implements iAiMovement{
 
@@ -22,7 +23,7 @@ public class Boss extends CollidableEntities implements iAiMovement{
     private int changeRate;      // FOR AI MOVEMENT
     private int defaultChangeRate;
     private SpriteBatch batch;
-    
+
     // For bullets stuff
     private EntityFactory entityFactory;
     private EntityManager entityManager;
@@ -65,13 +66,12 @@ public class Boss extends CollidableEntities implements iAiMovement{
         this.entityFactory = entityFactory;
         this.entityManager = entityManager;
     }
-    
+
     //Shoot stuff
     public void shoot() {
-        float bulletSpawnX = getX() + getSprite().getWidth() / 2 - (new Texture(TEXTURE_PATH).getWidth() / 2);
-        float bulletSpawnY = getY() - new Texture(TEXTURE_PATH).getHeight(); 
-        Entity enemyBullet = entityFactory.shootEnemyBullet(bulletSpawnX, bulletSpawnY);
-        entityManager.addEntity(enemyBullet);
+        float bulletSpawnX = getX() + getSprite().getWidth() / 2;
+        float bulletSpawnY = getY();
+        entityFactory.shootEnemyBullet(bulletSpawnX, bulletSpawnY);
     }
 
 
@@ -88,10 +88,8 @@ public class Boss extends CollidableEntities implements iAiMovement{
     }
 
     public void initializeMovementStrategy() {
-        movementStrategyList.add(new LeftMovement());
-        movementStrategyList.add(new RightMovement());
-        movementStrategyList.add(new UpMovement());
-        movementStrategyList.add(new DownMovement());
+        movementStrategyList.addAll(Arrays.asList(new LeftMovement(),
+                new RightMovement(), new UpMovement(), new DownMovement()));
     }
 
     public void setMovementStrategy(AIMovementStrategy movementStrategy) {

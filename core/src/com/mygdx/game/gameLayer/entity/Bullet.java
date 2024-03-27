@@ -10,12 +10,13 @@ import com.mygdx.game.gameEngine.util.iAiMovement;
 import com.mygdx.game.gameLayer.movement.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Bullet extends CollidableEntities implements iAiMovement {
 
     // Texture path for the bullet
     private static final String TEXTURE_PATH = "bullet.png";
-    //private static final int DEFAULT_CHANGE_RATE = 0;
+
     private int changeRate;
     private int defaultChangeRate;
     private AIMovementStrategy movementStrategy;
@@ -42,10 +43,8 @@ public class Bullet extends CollidableEntities implements iAiMovement {
     }
 
     public void initializeMovementStrategy() {
-        movementStrategyList.add(new LeftMovement());
-        movementStrategyList.add(new RightMovement());
-        movementStrategyList.add(new UpMovement());
-        movementStrategyList.add(new DownMovement());
+        movementStrategyList.addAll(Arrays.asList(new LeftMovement(),
+                new RightMovement(), new UpMovement(), new DownMovement()));
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~AI CODE BLOCK~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public int getChangeRate() {

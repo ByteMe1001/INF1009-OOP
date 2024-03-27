@@ -13,7 +13,7 @@ public enum EntityType {
 
     // Leaving playermovement as null for now
     BULLET(10, 0, 0, 1f,
-            200f, 0, "bullet.png"),
+            400f, 0, "bullet.png"),
 
     ENEMYBULLET(10, 0, 0, 1f,
                    200f, 0, "81_pizza.png");

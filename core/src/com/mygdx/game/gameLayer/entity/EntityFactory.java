@@ -26,6 +26,7 @@ public class EntityFactory implements GameFactory {
 
     public EntityFactory(SpriteBatch batch, EntityManager entityManager) {
         this.entityManager = entityManager;
+        System.out.println(entityManager);
         this.batch = batch;
     }
 

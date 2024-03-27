@@ -1,5 +1,8 @@
-package com.mygdx.game.gameEngine.entity;
+package com.mygdx.game.gameLayer.entity;
 
+import com.mygdx.game.gameEngine.entity.DisplayElement;
+import com.mygdx.game.gameEngine.entity.Entity;
+import com.mygdx.game.gameEngine.entity.GameFactory;
 import com.mygdx.game.gameLayer.entity.EntityType;
 
 public class DisplayFactory implements GameFactory {

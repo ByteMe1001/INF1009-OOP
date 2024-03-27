@@ -45,26 +45,7 @@ public class CollisionManager {
         }
     }
 
-//    // Refresh collision list
-//    public void updateCollisionList(List<Entity> entityList , List<Entity> playerEntityList, List<Entity> aiEntityList) {
-//        // Clear list first
-//        //collisionList.clear();        // Alternative logic
-//
-//        for (Entity entity : entityList) {
-//            if (entityManager.getIsCollidable(entity) != collisionList.contains(entity))
-//                collisionList.add((iCollision) entity); //add collidable objects into entityList
-//        }
-//
-//        for (Entity entity : playerEntityList) {
-//            if (entityManager.getIsCollidable(entity) != collisionList.contains(entity))
-//                collisionList.add((iCollision) entity); //add collidable objects into a playerEntityList
-//        }
-//        for (Entity entity : aiEntityList) {
-//            if (entityManager.getIsCollidable(entity) != collisionList.contains(entity))
-//                collisionList.add((iCollision) entity); //add collidable objects into a aiEntityList
-//        }
-//    }
-
+    // Handle collision logic when entities collide
     protected void handleCollision(EntityManager entityManager, SoundManager soundManager, List<iCollision> collisionList, iCollision x, iCollision y){
 
         // System.out.println("Boing Boing"); // DEMO ONLY if entity control type is the same, print message on collide

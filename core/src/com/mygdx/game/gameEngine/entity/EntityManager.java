@@ -25,7 +25,7 @@ public class EntityManager {
     private ArrayList<iAiMovement> aiEntityList;
     private ArrayList<iPlayerMovement> playerEntityList;
     private ArrayList<iCollision> collisionList;
-    private ArrayList<Entity> newEntities = new ArrayList<>();
+    private ArrayList<Entity> newEntityList;
     private EntityFactory entityFactory;
 
     private SpriteBatch batch;
@@ -51,6 +51,7 @@ public class EntityManager {
         this.playerEntityList = new ArrayList<iPlayerMovement>();
         this.aiEntityList = new ArrayList<iAiMovement>();
         this.collisionList = new ArrayList<iCollision>();
+        this.newEntityList = new ArrayList<>();
         this.collisionManager = new CollisionManager(this, soundManager, collisionList, collisionHandler);
         this.playerControlManager = new PlayerControlManager(this, playerEntityList);
         this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);;
@@ -67,6 +68,7 @@ public class EntityManager {
         this.playerEntityList = new ArrayList<iPlayerMovement>();
         this.aiEntityList = new ArrayList<iAiMovement>();
         this.collisionList = new ArrayList<iCollision>();
+        this.newEntityList = new ArrayList<>();
         //~~~~~~~~~~~MANAGER CREATION~~~~~~~~~~~~~~~~~~~~~~~~
         this.collisionManager = new CollisionManager(this, soundManager, collisionList, collisionHandler);
         this.playerControlManager = new PlayerControlManager(this, playerEntityList);
@@ -78,7 +80,8 @@ public class EntityManager {
     // Entity creations
     public void createBucket() {
         Entity bucket = entityFactory.createEntity(EntityType.BOY); // Use factory to create bucket entity
-        System.out.println(collisionList.size());
+        // addEntity(bucket);
+        //System.out.println(collisionList.size());
     }
 
 
@@ -113,7 +116,7 @@ public class EntityManager {
 
     // Maybe can use this function to clear all list?
     public void deleteEntity(Entity e) {
-        if (!entityList.remove(e) && !playerEntityList.remove(e) && !aiEntityList.remove(e)) {
+        if (!entityList.remove(e) && !playerEntityList.remove((iPlayerMovement) e) && !aiEntityList.remove((iAiMovement) e)) {
             throw new IllegalArgumentException("Entity not found in any entity list");
         }
     }
@@ -126,25 +129,25 @@ public class EntityManager {
             throw new IllegalArgumentException("Entity cannot be null");
         }
 
-        newEntities.add(entity);
+        newEntityList.add(entity);
 
         boolean addedToList = false;
 
         if (entity instanceof iCollision && collisionList != null) {
             collisionList.add((iCollision) entity); // Adding to the collision list
-            System.out.println("Added to collision list");
+//            System.out.println("Added to collision list");
             addedToList = true;
         }
 
         if (entity instanceof iAiMovement && aiEntityList != null) {
             aiEntityList.add((iAiMovement) entity); // Adding to the AI movement list
-            System.out.println("Added to AI movement list");
+//            System.out.println("Added to AI movement list");
             addedToList = true;
         }
 
         if (entity instanceof iPlayerMovement && playerEntityList != null) {
             playerEntityList.add((iPlayerMovement) entity); // Adding to the player movement list
-            System.out.println("Added to player movement list");
+//            System.out.println("Added to player movement list");
             addedToList = true;
         }
 
@@ -155,15 +158,16 @@ public class EntityManager {
 
     // For loop to draw all entities
     public void draw() {
-        for (Entity entity : entityList) {
+        ArrayList<Entity> copyOfEntityList = new ArrayList<>(entityList);
+        for (Entity entity : copyOfEntityList) {
             entity.draw();
         }
     }
 
     public void update() {
         updateEntities(entityList);
-        entityList.addAll(newEntities);
-        newEntities.clear();
+        entityList.addAll(newEntityList);
+        newEntityList.clear();
 //        updateEntities(playerEntityList);
 //        updateEntities(aiEntityList);
 //        collisionManager.updateCollisionList(entityList, playerEntityList, aiEntityList);
@@ -172,15 +176,13 @@ public class EntityManager {
         collisionManager.detectCollision(this);
     }
 
-    private void updateEntities(ArrayList<Entity> entities) {
-        Iterator<Entity> iterator = entities.iterator();
+    private void updateEntities(ArrayList<Entity> entityList) {
+        Iterator<Entity> iterator = entityList.iterator();
         while (iterator.hasNext()) {
             Entity entity = iterator.next();
             entity.update();
-            // TODO: See if we need this logic in the end
             if (!entity.isAlive()) {
-            	iterator.remove();
-                continue; // Skip to the next iteration if the entity is not alive
+                iterator.remove();
             }
         }
     }

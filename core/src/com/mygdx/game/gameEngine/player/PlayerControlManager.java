@@ -12,8 +12,12 @@ public class PlayerControlManager implements iIO {
     // private float x, y, speed;
     private ArrayList<iPlayerMovement> playerEntityList;
     private EntityManager entityManager;
+
+    // SHOULD NOT BE HERE
     private float timeSeconds = 0f;
-    private float period = 0.5f;
+    private float period = 0.2f;
+    // END
+
     public PlayerControlManager() {
 
     }
@@ -22,7 +26,6 @@ public class PlayerControlManager implements iIO {
         this.entityManager = entityManager;
         this.playerEntityList = playerEntityList;
     }
-
 
     // PLease fix remove args
     public void update(EntityManager entityManager) {

@@ -10,6 +10,8 @@ import com.mygdx.game.gameEngine.util.iAiMovement;
 import com.mygdx.game.gameLayer.movement.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
 
 public class EnemyBullet extends CollidableEntities implements iAiMovement {
 
@@ -42,10 +44,8 @@ public class EnemyBullet extends CollidableEntities implements iAiMovement {
     }
 
     public void initializeMovementStrategy() {
-        movementStrategyList.add(new LeftMovement());
-        movementStrategyList.add(new RightMovement());
-        movementStrategyList.add(new UpMovement());
-        movementStrategyList.add(new DownMovement());
+        movementStrategyList.addAll(Arrays.asList(new LeftMovement(),
+                new RightMovement(), new UpMovement(), new DownMovement()));
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~AI CODE BLOCK~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public int getChangeRate() {
@@ -69,10 +69,14 @@ public class EnemyBullet extends CollidableEntities implements iAiMovement {
     @Override
     public void update() {
         super.update();
-        if(getY() <= 0) {
+
+        // Try to move elsewhere
+        if (getY() <= 0) {
             setAlive(false);
         }
     }
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~GAME LOGIC CODE BLOCK~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     @Override
     public void takeDamage(int damage) {
 
@@ -87,6 +91,7 @@ public class EnemyBullet extends CollidableEntities implements iAiMovement {
     public void destroy() {
 
     }
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~GAME LOGIC CODE BLOCK ENDS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     public AIMovementStrategy getMovementStrategy() {
         return this.movementStrategy;

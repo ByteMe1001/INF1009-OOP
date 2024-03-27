@@ -15,10 +15,6 @@ public class AiControlManager{
     private float speed; // Speed at which entities move
     private Random random;
 
-    // Constants for movement rule set IDs
-//    public static final int MOVE_UP_DOWN = 1;
-//    public static final int MOVE_LEFT_RIGHT = 2;
-//    public static final int MOVE_ALL = 3;
 
     public AiControlManager(float screenWidth, float screenHeight, EntityManager entityManager, ArrayList<iAiMovement> aiEntityList) {
         this.aiEntityList = aiEntityList;
@@ -42,6 +38,10 @@ public class AiControlManager{
             entity.setChangeRate(random.nextInt(entity.getDefaultChangeRate() + 1));
         }
         entity.getMovementStrategy().move(entity);
+    }
+
+    public void action(iAiMovement entity) {
+        //entity.getMovementStrategy().action(entity);
     }
 
 }
