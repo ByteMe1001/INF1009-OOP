@@ -34,7 +34,7 @@ public class GameScene extends Scene implements iIO {
     private float backgroundY = 0;
     private float backgroundVelocity = 4;
     private EntityManager entityManager;
-    //private EntityFactory entityFactory; //commented out temporarily
+    private EntityFactory entityFactory; //commented out temporarily
     SceneManager sceneManager = SceneManager.getInstance();
 
 
@@ -74,6 +74,7 @@ public class GameScene extends Scene implements iIO {
         float buttonWidth = 100f; // Specify the width of the button
         float buttonHeight = 35f; // Specify the height of the button
         uiTable.add(pauseButton).width(buttonWidth).height(buttonHeight).padRight(10).align(Align.top).align(Align.right).padTop(20);
+        //uiTable.add(resumeButton).width(buttonWidth).height(buttonHeight).padRight(20).align(Align.top).align(Align.right).padTop(20);
         uiTable.add(homeButton).width(buttonWidth).height(buttonHeight).padRight(20).align(Align.top).align(Align.right).padTop(20);
 
         // Add UI table to the stage
@@ -87,13 +88,14 @@ public class GameScene extends Scene implements iIO {
         // Create entities
         super.getEntityManager().createBucket();
         super.getEntityManager().createDroplets(5);
-        super.getEntityManager().createPlayerBullets(1);
+        super.getEntityManager().createPlayerBullets(0);
         super.getEntityManager().createEnemyBullets(1);
         super.getEntityManager().createHealthPack(1);
         //pause button logic
 
     }
-//
+
+
 
     private ImageButton createPauseButton() {
         // Create pause button
@@ -131,9 +133,10 @@ public class GameScene extends Scene implements iIO {
             }
         });
 
+
         return pauseButton;
     }
-
+    
     private ImageButton createHomeButton() {
         TextureRegion backBtnRegion = new TextureRegion(new Texture("home_button.png"));
         TextureRegionDrawable backBtnDrawable = new TextureRegionDrawable(backBtnRegion);
@@ -150,6 +153,7 @@ public class GameScene extends Scene implements iIO {
         return backButton;
     }
 
+
     @Override
     public void render(float deltaTime) {
         ScreenUtils.clear(0, 0, 0, 1); // Clear screen
@@ -163,6 +167,17 @@ public class GameScene extends Scene implements iIO {
         // PATCH FIX
         if (!getSceneManager().isPaused()) {
             super.getEntityManager().update();
+            
+            
+         // Check if all boss entities are dead and go to the QuizScene
+            if (super.getEntityManager().areAllBossesDead()) {
+                SceneManager sceneManager = getSceneManager();
+                SoundManager soundManager = getSoundManager();
+                SpriteBatch batch = getBatch();
+                sceneManager.swapScene(new QuizScene(sceneManager, soundManager, entityManager, batch));
+                return; // Skip the remaining rendering code since we're going to a new scene
+            }
+            
 
             //Below here is the logic for the moving scene when not paused
             backgroundY -= backgroundVelocity;
@@ -189,73 +204,51 @@ public class GameScene extends Scene implements iIO {
     }
 
     @Override
+    public void pause() {
+        // Pause the game
+        super.pause();
+//        isPaused = true; // Set the isPaused flag to true
+//        System.out.println("Game Paused"); // Print a message indicating that the game is paused
+//
+//        // Pause sound effects and music
+//        soundManager.pauseAll();
+        
+        
+
+        // Stop entity movements
+        //super.getEntityManager().stopAllMovements(); // Implement this method in your EntityManager class
+
+
+    }
+    
+    
+
+    @Override
+    public void resume() {
+        // Resume the game
+        super.resume();
+//        isPaused = false; // Set the isPaused flag to false
+//        System.out.println("Game Resumed"); // Print a message indicating that the game is resumed
+//
+//        // Resume sound effects and music
+//        soundManager.resumeAll();
+
+        // Resume any other game activities
+    }
+
+
+
+    @Override
     public void hide() {
         // Hide logic
     }
 
 }
 
-//    private ImageButton createResumeButton() {
-//        // Create resume button
-//        TextureRegion resumeButtonRegion = new TextureRegion(resumeButtonTexture);
-//        TextureRegionDrawable resumeButtonDrawable = new TextureRegionDrawable(resumeButtonRegion);
-//        ImageButton resumeButton = new ImageButton(resumeButtonDrawable);
-//
-//        // Align the button within its cell to top-center
-//        resumeButton.getImageCell().align(Align.center);
-//
-//        // Add click listener to the resume button
-//        resumeButton.addListener(new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                // Handle resume button click event
-//                resumeGame();
-//            }
-//        });
-//
-//        return resumeButton;
-//    }
-
-
-
-//    @Override
-//    public void pause() {
-//        // Pause the game
-//        super.pause();
-////        isPaused = true; // Set the isPaused flag to true
-////        System.out.println("Game Paused"); // Print a message indicating that the game is paused
-////
-////        // Pause sound effects and music
-////        soundManager.pauseAll();
-//
-//        // Stop entity movements
-//        //super.getEntityManager().stopAllMovements(); // Implement this method in your EntityManager class
-//
-//
-//    }
-
-//    @Override
-//    public void resume() {
-//        // Resume the game
-//        super.resume();
-////        isPaused = false; // Set the isPaused flag to false
-////        System.out.println("Game Resumed"); // Print a message indicating that the game is resumed
-////
-////        // Resume sound effects and music
-////        soundManager.resumeAll();
-//
-//        // Resume any other game activities
-//    }
 
 
 
 
-
-
-
-//    private void resumeGame() {
-//
-//    }
 
 
 // ORIGINAL CODES
