@@ -44,12 +44,6 @@ public class SoundManager {
         }
     }
 
-    public static SoundManager getInstance(SoundTrack soundTrack) {
-        if (instance == null) {
-            instance = new SoundManager(soundTrack);
-        }
-        return instance;
-    }
 
     public static SoundManager getInstance() {
         if (instance == null) {
@@ -58,9 +52,62 @@ public class SoundManager {
         return instance;
     }
 
-    // Play sound effect
-    // Play sound effect
+    // Overload instance
+    public static SoundManager getInstance(SoundTrack soundTrack) {
+        if (instance == null) {
+            instance = new SoundManager(soundTrack);
+        }
+        return instance;
+    }
 
+    // Play sound effect
+    public void playSE(String effectName) {
+        SoundEffect soundEffect = soundTrack.getSoundEffect(effectName);
+        if (soundEffect != null) {
+            soundEffect.play();
+        } else {
+            throw new IllegalArgumentException("Effect name not found in sound map: " + effectName);
+        }
+    }
+
+    // Play music
+    public void playMusic(String sceneName) {
+        backgroundMusic music = soundTrack.getBackgroundMusic(sceneName);
+        if (music != null) {
+            music.play();
+            isMusicPlaying = true;
+        } else {
+            throw new IllegalArgumentException("Scene name not found in sound map: " + sceneName);
+        }
+    }
+
+    // Stop all sounds and music
+    public void stopAll() {
+        for (List<Clip> clipList : clips.values()) {
+            for (Clip clip : clipList) {
+                clip.stop();
+            }
+        }
+        isMusicPlaying = false;
+    }
+
+    // TODO: change to pause logic
+    // Pause all sounds and music
+    public void pauseAll() {
+        soundTrack.pauseAllBackgroundMusic();
+        isMusicPlaying = false;
+    }
+
+    // Resume all music
+    public void resumeAll() {
+        soundTrack.resumeAllBackgroundMusic();
+        isMusicPlaying = true;
+    }
+
+    // Dispose resources
+    public void dispose() {
+        soundTrack.dispose();
+    }
 
     // To prevent concurrent music playing
     public boolean isMusicPlaying() {

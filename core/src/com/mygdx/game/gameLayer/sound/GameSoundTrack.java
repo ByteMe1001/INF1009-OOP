@@ -39,7 +39,6 @@ public class GameSoundTrack extends SoundTrack {
         }
     }
 
-    @Override
     public void resumeAllBackgroundMusic() {
         Collection<backgroundMusic> backgroundMusicCollection = backgroundMusicMap.values();
         for (backgroundMusic music : backgroundMusicCollection) {
