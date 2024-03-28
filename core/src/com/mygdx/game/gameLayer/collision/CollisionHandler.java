@@ -2,6 +2,7 @@ package com.mygdx.game.gameLayer.collision;
 
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.gameEngine.entity.CollidableEntities;
+import com.mygdx.game.gameEngine.player.Player;
 import com.mygdx.game.gameEngine.sound.SoundManager;
 import com.mygdx.game.gameEngine.util.iAiMovement;
 import com.mygdx.game.gameEngine.util.iCollision;
@@ -13,6 +14,7 @@ public class CollisionHandler {
 
     private ArrayList<iCollision> collisionList;
     private static SoundManager soundManager;
+    private Player player;
     private float timeSeconds = 0f;
     private float period = 3f;
     
@@ -20,6 +22,7 @@ public class CollisionHandler {
     public CollisionHandler(ArrayList<iCollision> collisionList) {
         this.collisionList = collisionList;
         soundManager = SoundManager.getInstance();
+        this.player = new Player();
     }
 
     public void handleCollision(iCollision x, iCollision y){
@@ -54,6 +57,8 @@ public class CollisionHandler {
                  collisionList.remove(x);
                  ((Boss) x).setAlive(false);
 
+
+
              }
 
              if(((Bullet) y).getY() >= 500){
@@ -72,6 +77,8 @@ public class CollisionHandler {
             if(((Enemy) x).getHealth() == 0) {
                 collisionList.remove(x);
                 ((Enemy) x).setAlive(false);
+                player.setScore(10);
+                System.out.println("Player Score: " + player.getScore());
 
             }
             if(((Bullet) y).getY() >= 500){
@@ -82,13 +89,13 @@ public class CollisionHandler {
         }
 
         else if (x.getClass().equals(Boy.class) && y.getClass().equals(EnemyBullet.class)||x.getClass().equals(EnemyBullet.class) && y.getClass().equals(Boy.class)){
-            ((CollidableEntities) x).takeDamage(10);
+            ((Boy) x).takeDamage(10);
             collisionList.remove(y);
-            ((CollidableEntities) y).setAlive(false);
-            System.out.println("Player Health: " + ((CollidableEntities) x).getHealth());
-            if(((CollidableEntities) x).getHealth() == 0) {
+            ((EnemyBullet) y).setAlive(false);
+            System.out.println("Player Health: " + ((Boy) x).getHealth());
+            if(((Boy) x).getHealth() == 0) {
                 collisionList.remove(x);
-                ((CollidableEntities) x).setAlive(false);
+                ((Boy) x).setAlive(false);
             }
             if(((EnemyBullet) y).getY() == 0){
                 ((EnemyBullet) y).setAlive(false);
@@ -98,6 +105,19 @@ public class CollisionHandler {
 
         else if (x.getClass().equals(Boy.class) && y.getClass().equals(HealthPack.class)){
             ((Boy) x).heal(30);
+            ((Boy) x).setPowerUpLevel(1);
+            if(((Boy) x).getPowerUpLevel() == 1) {
+                ((Boy) x).setSpeed(((Boy) x).getSpeed() + 100);
+
+            }
+            if(((Boy) x).getPowerUpLevel() == 2) {
+                ((Boy) x).setSpeed(((Boy) x).getSpeed() + 200);
+
+            }
+            if(((Boy) x).getPowerUpLevel() == 3) {
+                ((Boy) x).setSpeed(((Boy) x).getSpeed() + 300);
+            }
+            System.out.println("Player speed increased to: " + ((Boy) x).getSpeed());
             System.out.println("Player Healed to HP: " + ((Boy) x).getHealth());
             collisionList.remove(y);
             ((HealthPack) y).setAlive(false);
@@ -106,5 +126,7 @@ public class CollisionHandler {
                 collisionList.remove(y);
             }
         }
+
+
     }
 }
