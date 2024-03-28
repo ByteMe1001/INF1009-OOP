@@ -67,7 +67,7 @@ public class CollisionHandler {
             ((Enemy) x).takeDamage(10);
             collisionList.remove(y);
             ((Bullet) y).setAlive(false);
-
+            soundManager.playSE("GameScene_Collision");
             System.out.println("Boss Health" + x + " " + ((Enemy) x).getHealth());
             if(((Enemy) x).getHealth() == 0) {
                 collisionList.remove(x);
