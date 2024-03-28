@@ -105,17 +105,18 @@ public class CollisionHandler {
 
         else if (x.getClass().equals(Boy.class) && y.getClass().equals(HealthPack.class)){
             ((Boy) x).heal(30);
+            
             ((Boy) x).setPowerUpLevel(1);
             if(((Boy) x).getPowerUpLevel() == 1) {
                 ((Boy) x).setSpeed(((Boy) x).getSpeed() + 100);
 
             }
             if(((Boy) x).getPowerUpLevel() == 2) {
-                ((Boy) x).setSpeed(((Boy) x).getSpeed() + 200);
+                ((Boy) x).setSpeed(((Boy) x).getSpeed() + 100);
 
             }
             if(((Boy) x).getPowerUpLevel() == 3) {
-                ((Boy) x).setSpeed(((Boy) x).getSpeed() + 300);
+                ((Boy) x).setSpeed(((Boy) x).getSpeed() + 100);
             }
             System.out.println("Player speed increased to: " + ((Boy) x).getSpeed());
             System.out.println("Player Healed to HP: " + ((Boy) x).getHealth());
