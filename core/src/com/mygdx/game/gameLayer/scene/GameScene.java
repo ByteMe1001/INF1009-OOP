@@ -191,7 +191,15 @@ public class GameScene extends Scene implements iIO {
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                sceneManager.createStartingScene(); // Add the StartingScene to the SceneManager
+            	// Stop and dispose of the music
+                getSoundManager().stopAll();
+                getSoundManager().dispose();
+
+                // Clear entities
+                getEntityManager().dispose();
+
+                // Navigate to the StartingScene
+                sceneManager.createStartingScene(); 
                 sceneManager.swapScene(sceneManager.getStartingScene());
             }
         });
