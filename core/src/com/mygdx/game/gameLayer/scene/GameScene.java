@@ -2,10 +2,12 @@ package com.mygdx.game.gameLayer.scene;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.gameEngine.entity.CollidableEntities;
+import com.mygdx.game.gameLayer.HealthBar;
 import com.mygdx.game.gameLayer.entity.EntityFactory;
 import com.mygdx.game.gameEngine.scene.Scene;
 import com.mygdx.game.gameEngine.scene.SceneManager;
@@ -33,6 +35,9 @@ public class GameScene extends Scene implements iIO {
     //private SceneManager sceneManager;
     private float backgroundY = 0;
     private float backgroundVelocity = 4;
+
+    // HealthBar Demo Code
+    private HealthBar healthBar;
 
 
 
@@ -100,6 +105,8 @@ public class GameScene extends Scene implements iIO {
         // Add UI table to the stage
         stage.addActor(uiTable);
 
+
+
         // Start playing music if not already playing
         if (!super.getSoundManager().isMusicPlaying()) {
             super.getSoundManager().playMusic("GameScene");
@@ -117,6 +124,9 @@ public class GameScene extends Scene implements iIO {
 //        super.getEntityManager().createHealthPack(1);
 //        super.getEntityManager().createBoss();
         //pause button logic
+
+        // HealthBar Demo Code
+        this.healthBar = new HealthBar(super.getEntityManager().getPlayerControlManager());
 
     }
 
@@ -164,12 +174,12 @@ public class GameScene extends Scene implements iIO {
 
 
     //Replace with a method to update the entity health
-    private void decreaseHealth() {
-        health -= healthDecreaseAmount;
-        if (health < 0) {
-            health = 0;
-        }
-    }
+//    private void decreaseHealth() {
+//        health -= healthDecreaseAmount;
+//        if (health < 0) {
+//            health = 0;
+//        }
+//    }
 
 
 
@@ -202,12 +212,13 @@ public class GameScene extends Scene implements iIO {
 
 
 
-        //For HealthBar logic
-        super.getBatch().draw(blank, 10, Gdx.graphics.getHeight() - 30, Gdx.graphics.getWidth()/2, Gdx.graphics.getWidth()/2);
-        // Draw foreground health bar based on current health
-        float foregroundWidth = Gdx.graphics.getWidth()/2 * (health / 100.0f); // Calculate width based on current health percentage
-        super.getBatch().draw(green, 10, Gdx.graphics.getHeight() - 30, foregroundWidth, healthBarHeight);
-        super.getBatch().draw(blank,0, 0, Gdx.graphics.getWidth() * health, 5);
+//        //For HealthBar logic
+//        super.getBatch().draw(blank, 10, Gdx.graphics.getHeight() - 30, Gdx.graphics.getWidth()/2, Gdx.graphics.getWidth()/2);
+//        // Draw foreground health bar based on current health
+//        float foregroundWidth = Gdx.graphics.getWidth()/2 * (health / 100.0f); // Calculate width based on current health percentage
+//        super.getBatch().draw(green, 10, Gdx.graphics.getHeight() - 30, foregroundWidth, healthBarHeight);
+//        super.getBatch().draw(blank,0, 0, Gdx.graphics.getWidth() * health, 5);
+
 
 
 
@@ -215,7 +226,8 @@ public class GameScene extends Scene implements iIO {
         // PATCH FIX
         if (!getSceneManager().isPaused()) {
             super.getEntityManager().update();
-            
+            healthBar.draw(getBatch());
+
             
          // Check if all boss entities are dead and go to the QuizScene
             if (super.getEntityManager().areAllEnemiesDead()) {
@@ -237,12 +249,12 @@ public class GameScene extends Scene implements iIO {
 
 
 
-        //Here is just a timer for the healthbar to show it deducting, remove once logic in implemented
-        elapsedTime += deltaTime;
-        if (elapsedTime >= healthDecreaseInterval) {
-            decreaseHealth();
-            elapsedTime = 0f;
-        }
+//        //Here is just a timer for the healthbar to show it deducting, remove once logic in implemented
+//        elapsedTime += deltaTime;
+//        if (elapsedTime >= healthDecreaseInterval) {
+//            decreaseHealth();
+//            elapsedTime = 0f;
+//        }
 
 
         super.getEntityManager().draw();
@@ -301,7 +313,6 @@ public class GameScene extends Scene implements iIO {
     public void hide() {
         // Hide logic
     }
-
 }
 
 

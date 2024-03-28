@@ -2,7 +2,9 @@ package com.mygdx.game.gameLayer;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.gameEngine.player.PlayerControlManager;
 import com.mygdx.game.gameEngine.util.iIO;
@@ -16,23 +18,22 @@ public class HealthBar implements iIO {
     private PlayerControlManager playerControlManager;
     private BitmapFont font;
 
-    private ShapeRenderer shapeRenderer;
+    private Texture blank, green;
+
 
     protected static final float BAR_WIDTH = (float) Gdx.graphics.getWidth() / 2;
-    protected static final float BAR_HEIGHT = 15;
+    protected static final float BAR_HEIGHT = 15f;
 
-
-
-    public HealthBar(PlayerControlManager playerControlManager, ShapeRenderer shapeRenderer) {
+    public HealthBar(PlayerControlManager playerControlManager) {
         this.playerControlManager = playerControlManager;
-        this.shapeRenderer = shapeRenderer;
-        this.font = new BitmapFont();
+        // TEXTURES
+        blank = new Texture("blackbackground.PNG");
+        green = new Texture("green.jpg");
     }
 
-    public void draw() {
+    public void draw(SpriteBatch batch) {
         float healthBarX = 10;
-        float healthBarY = Gdx.graphics.getHeight() - 10;
-
+        float healthBarY = Gdx.graphics.getHeight() - 30;
         HashMap<Integer, List<Integer>> healthDataMap = playerControlManager.getHealthDataMap();
 
         for (int i = 0; i < healthDataMap.size(); i++) {
@@ -43,10 +44,13 @@ public class HealthBar implements iIO {
             if (i != 0) {
                 healthBarY -= BAR_HEIGHT + 50;
             }
-            drawShape(shapeRenderer, "RECTANGLE", healthBarX, healthBarY, BAR_WIDTH, BAR_HEIGHT, Color.BLACK);
-            drawShape(shapeRenderer, "RECTANGLE", healthBarX, healthBarY, (BAR_WIDTH * health / maxHealth), BAR_HEIGHT, Color.GREEN);
-        }
-        shapeRenderer.end();
-    }
 
+            //For HealthBar logic
+            batch.draw(blank, healthBarX, healthBarY, BAR_WIDTH, BAR_HEIGHT);
+            // Draw foreground health bar based on current health
+            float foregroundWidth = BAR_WIDTH * ((float)health / maxHealth);           // Calculate width based on current health percentage
+            batch.draw(green, healthBarX, healthBarY, foregroundWidth, BAR_HEIGHT);
+            //batch.draw(blank,0, 0, Gdx.graphics.getWidth() * health, 5);
+        }
+    }
 }

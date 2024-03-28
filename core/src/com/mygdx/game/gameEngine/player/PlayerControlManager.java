@@ -30,6 +30,7 @@ public class PlayerControlManager implements iIO {
     public PlayerControlManager(EntityManager entityManager, ArrayList<iPlayerMovement> playerEntityList) {
         this.entityManager = entityManager;
         this.playerEntityList = playerEntityList;
+        healthDataMap = new HashMap<>();
     }
 
     // PLease fix remove args
@@ -37,6 +38,7 @@ public class PlayerControlManager implements iIO {
         for (iPlayerMovement e : playerEntityList) {
             e.movement(movement(e));
             shoot(e, e.getX(), e.getY());
+            addHealthData();
         }
     }
 
@@ -110,6 +112,7 @@ public class PlayerControlManager implements iIO {
 
     public void addHealthData() {
         int key = 0;
+        healthDataMap.clear();
         for (iPlayerMovement playerEntity : playerEntityList) {
             List<Integer> healthDataList = new ArrayList<>();
             healthDataList.add(playerEntity.getHealth());
