@@ -86,8 +86,8 @@ public class GameScene extends Scene implements iIO {
         }
         //Get EntityFactory.createEntity(id,x,y,z)
         // Create entities
-        super.getEntityManager().createBucket();
-        super.getEntityManager().createDroplets(5);
+        super.getEntityManager().createPlayer();
+        super.getEntityManager().createEnemies(5);
         super.getEntityManager().createPlayerBullets(0);
         super.getEntityManager().createEnemyBullets(1);
         super.getEntityManager().createHealthPack(1);
@@ -170,7 +170,7 @@ public class GameScene extends Scene implements iIO {
             
             
          // Check if all boss entities are dead and go to the QuizScene
-            if (super.getEntityManager().areAllBossesDead()) {
+            if (super.getEntityManager().areAllEnemiesDead()) {
                 SceneManager sceneManager = getSceneManager();
                 SoundManager soundManager = getSoundManager();
                 SpriteBatch batch = getBatch();

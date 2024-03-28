@@ -16,6 +16,7 @@ import com.mygdx.game.gameEngine.util.iCollision;
 import com.mygdx.game.gameEngine.util.iPlayerMovement;
 import com.mygdx.game.gameLayer.collision.CollisionHandler;
 import com.mygdx.game.gameLayer.entity.Boss;
+import com.mygdx.game.gameLayer.entity.Enemy;
 import com.mygdx.game.gameLayer.entity.EntityFactory;
 import com.mygdx.game.gameLayer.entity.EntityType;
 
@@ -79,37 +80,63 @@ public class EntityManager {
 
     // Main testing creation
     // Entity creations
-    public void createBucket() {
+    public void createPlayer() {
         Entity bucket = entityFactory.createEntity(EntityType.BOY); // Use factory to create bucket entity
         // addEntity(bucket);
         //System.out.println(collisionList.size());
     }
 
 
-    public void createBuckets(int x) {
+    public void createPlayers(int x) {
         for (int i = 0; i < x; i++) {
             Entity bucket = entityFactory.createEntity(EntityType.BOY); // Use EntityFactory to create bucket entity
         }
     }
 
-    public void createDroplet() {
-        Entity droplet = entityFactory.createEntity(EntityType.BOSS); // Use factory to create droplet entity
+    public void createEnemy() {
+        Entity droplet = entityFactory.createEntity(EntityType.ENEMY); // Use factory to create droplet entity
     }
 
     // Main testing creation
-    public void createDroplets(int x) {
+    public void createEnemies(int x) {
         for (int i = 0; i < x; i++) {
         	// spawn at random parts of the screen in the top half
         	float randomX = random.nextFloat() * Gdx.graphics.getWidth();
             float randomY = (Gdx.graphics.getHeight() / 2) + random.nextFloat() * (Gdx.graphics.getHeight() / 2);
-            Entity droplet = entityFactory.createEntity(EntityType.BOSS);
+            Entity droplet = entityFactory.createEntity(EntityType.ENEMY);
             droplet.setX(randomX);
             droplet.setY(randomY);
            // Entity droplet = entityFactory.createEntity(EntityType.BOSS); // Use EntityFactory to create droplet entity
         }
     }
+
+    public void createBoss() {
+        Entity droplet = entityFactory.createEntity(EntityType.BOSS); // Use factory to create droplet entity
+    }
+
+    // Main testing creation
+    public void createBosses(int x) {
+        for (int i = 0; i < x; i++) {
+            // spawn at random parts of the screen in the top half
+            float randomX = random.nextFloat() * Gdx.graphics.getWidth();
+            float randomY = (Gdx.graphics.getHeight() / 2) + random.nextFloat() * (Gdx.graphics.getHeight() / 2);
+            Entity droplet = entityFactory.createEntity(EntityType.BOSS);
+            droplet.setX(randomX);
+            droplet.setY(randomY);
+            // Entity droplet = entityFactory.createEntity(EntityType.BOSS); // Use EntityFactory to create droplet entity
+        }
+    }
     
     // To check if boss entities are all dead
+    public boolean areAllEnemiesDead() {
+        for (Entity entity : entityList) {
+            if (entity instanceof Enemy && entity.isAlive()) {
+                return false;  // If boss is alive, return false
+            }
+        }
+        return true;  // If bosses are dead, return true
+    }
+
     public boolean areAllBossesDead() {
         for (Entity entity : entityList) {
             if (entity instanceof Boss && entity.isAlive()) {
@@ -133,7 +160,7 @@ public class EntityManager {
     
     public void createHealthPack(int x){
         for (int i = 0; i < x; i++) {
-            Entity healthPack = entityFactory.createEntity(EntityType.HEALTHPACK); // Use EntityFactory to create bullet entity
+            Entity healthPack = entityFactory.createEntity(EntityType.HEALTHPACK); // Use EntityFactory to create healthpack entity
         }
     }
 

@@ -7,8 +7,10 @@ public enum EntityType {
 
     BOY(100, 100f, 100f, 1f,
             300f, new Player1MovementStrategy(),
-            "spaceship.png"),
-    BOSS(100, 500f, 500f, 1f,
+            "Boy.png"),
+    ENEMY(100, 500f, 500f, 1f,
+            200f, 30, "gameBoss.png"),
+    BOSS(500, 500f, 500f, 1f,
             200f, 30, "Boss.png"),
 
     // Leaving playermovement as null for now

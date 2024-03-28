@@ -41,6 +41,8 @@ public class EntityFactory implements GameFactory {
         switch (entityType) {
             case BOY:
                 return createCharacterEntity();
+            case ENEMY:
+                return createEnemyEntity();
             case BOSS:
                 return createBossEntity();
             case BULLET:
@@ -69,6 +71,19 @@ public class EntityFactory implements GameFactory {
         return entity;
     }
 
+    public Entity createEnemyEntity() {
+        EntityType entityType = EntityType.ENEMY;
+        Enemy entity = new Enemy(
+                entityType.health, entityType.x, entityType.y, entityType.scale,
+                new Sprite(new Texture(entityType.texturePath)),
+                entityType.speed, entityType.defaultChangeRate, batch, this, entityManager
+        );
+
+        // Add the created entity to the EntityManager
+        entityManager.addEntity(entity);
+
+        return entity;
+    }
 
     public Entity createBossEntity() {
         EntityType entityType = EntityType.BOSS;
