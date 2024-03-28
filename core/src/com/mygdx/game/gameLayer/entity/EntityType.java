@@ -10,7 +10,7 @@ public enum EntityType {
             "Boy.png"),
     ENEMY(100, 500f, 500f, 1f,
             200f, 30, "gameBoss.png"),
-    BOSS(500, 500f, 500f, 1f,
+    BOSS(500, 500f, 500f, 3f,
             200f, 30, "Boss.png"),
 
     // Leaving playermovement as null for now

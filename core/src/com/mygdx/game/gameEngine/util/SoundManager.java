@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 public class SoundManager {
+
+    private static SoundManager instance = null;
     private Map<String, URL> soundURLs;
     private Map<String, List<Clip>> clips;
     private boolean isMusicPlaying = false;
@@ -19,7 +21,7 @@ public class SoundManager {
 
 
     // TODO: THIS IS HARDCODE NEED CHANGE
-    public SoundManager() {
+    private SoundManager() {
         soundURLs = new HashMap<>();
         soundURLs.put("StartingScene", getClass().getResource("/Ground_Theme.wav"));
         soundURLs.put("StartingScene_Button", getClass().getResource("/button_sound.wav"));
@@ -28,6 +30,8 @@ public class SoundManager {
 
         clips = new HashMap<>();
     }
+
+
 
     // Load track into clip map
     private void loadClip(String sceneName) {
@@ -41,6 +45,13 @@ public class SoundManager {
         } catch (Exception e) {
             System.out.println("Error loading sound for scene " + sceneName + ": " + e.getMessage());
         }
+    }
+
+    public static SoundManager getInstance() {
+        if (instance == null) {
+            instance = new SoundManager();
+        }
+        return instance;
     }
 
     // Play sound effect

@@ -50,6 +50,11 @@ public abstract class Entity {
         this.isAlive = true;
         this.sprite = sprite;
         this.batch = batch;
+        setSpriteSize();
+    }
+
+    public void setSpriteSize() {
+        this.sprite.setSize(getSpriteWidth() * getScale(), getSpriteHeight() * getScale());
     }
 
     //Setters and Getters methods

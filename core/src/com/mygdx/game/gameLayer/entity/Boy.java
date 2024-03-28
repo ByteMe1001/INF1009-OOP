@@ -19,6 +19,8 @@ public class Boy extends PlayableEntity {
     private EntityManager entityManager;
     private Bullet bullet;
 
+    private int powerUpLevel;
+
     // Default constructor
     public Boy() {
         //do nothing for now
@@ -42,6 +44,7 @@ public class Boy extends PlayableEntity {
         super(health, x, y, scale, sprite, speed, playerMovement, batch);
         this.entityFactory = entityFactory;
         this.entityManager = entityManager;
+        this.powerUpLevel = 0;
         System.out.println(entityManager);
         this.playerMovementStrategy = new Player1MovementStrategy();
     }
@@ -74,6 +77,13 @@ public class Boy extends PlayableEntity {
         this.entityManager = entityManager;
     }
 
+    public int getPowerUpLevel() {
+        return powerUpLevel;
+    }
+
+    public void setPowerUpLevel(int powerUpLevel) {
+        this.powerUpLevel = powerUpLevel;
+    }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~GAME LOGIC~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     @Override
