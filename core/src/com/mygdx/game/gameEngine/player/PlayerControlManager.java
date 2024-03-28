@@ -6,11 +6,16 @@ import com.mygdx.game.gameEngine.util.iIO;
 import com.mygdx.game.gameEngine.util.iPlayerMovement;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+// TODO: CHANGE TO PLAYABLE ENTITY
 public class PlayerControlManager implements iIO {
 
-    // private float x, y, speed;
     private ArrayList<iPlayerMovement> playerEntityList;
+    private HashMap<Integer, List<Integer>> healthDataMap;
+
     private EntityManager entityManager;
 
     // TODO: SHOULD NOT BE HERE
@@ -100,6 +105,26 @@ public class PlayerControlManager implements iIO {
             default:
                 break;
         }
+    }
+
+
+    public void addHealthData() {
+        int key = 0;
+        for (iPlayerMovement playerEntity : playerEntityList) {
+            List<Integer> healthDataList = new ArrayList<>();
+            healthDataList.add(playerEntity.getHealth());
+            healthDataList.add(playerEntity.getMaxHealth());
+            healthDataMap.put(key, healthDataList);
+            key++;
+        }
+    }
+
+    public List<Integer> getHealthData(int entityId) {
+        return healthDataMap.get(entityId);
+    }
+
+    public HashMap<Integer, List<Integer>> getHealthDataMap() {
+        return healthDataMap;
     }
 
     // Getter and setter methods

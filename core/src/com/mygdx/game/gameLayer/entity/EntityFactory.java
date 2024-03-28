@@ -73,7 +73,7 @@ public class EntityFactory implements Factory {
     public Entity createCharacterEntity() {
         EntityType entityType = EntityType.BOY;
         Boy entity = new Boy(
-                entityType.health, entityType.x, entityType.y, entityType.scale,
+                entityType.health, entityType.maxHealth, entityType.x, entityType.y, entityType.scale,
                 new Sprite(new Texture(entityType.texturePath)),
                 entityType.speed, entityType.playerMovement,batch,this, entityManager
         );

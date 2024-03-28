@@ -257,6 +257,22 @@ public class EntityManager {
         findEntity(e).setAlive(b);
     }
 
+    public PlayerControlManager getPlayerControlManager() {
+        return playerControlManager;
+    }
+
+    public void setPlayerControlManager(PlayerControlManager playerControlManager) {
+        this.playerControlManager = playerControlManager;
+    }
+
+    public AiControlManager getAiControlManager() {
+        return aiControlManager;
+    }
+
+    public void setAiControlManager(AiControlManager aiControlManager) {
+        this.aiControlManager = aiControlManager;
+    }
+
     // To check if boss entities are all dead
     public boolean areAllEnemiesDead() {
         for (Entity entity : entityList) {

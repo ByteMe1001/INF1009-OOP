@@ -104,11 +104,11 @@ public interface iIO {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
         switch (shapeType) {
-            case "Circle":
+            case "CIRCLE":
                 shapeRenderer.setColor(color);
                 shapeRenderer.circle(x, y, width / 2);
                 break;
-            case "Rectangle":
+            case "RECTANGLE":
                 shapeRenderer.setColor(color);
                 shapeRenderer.rect(x, y, width, height);
                 break;

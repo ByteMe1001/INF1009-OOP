@@ -32,16 +32,16 @@ public class Boy extends PlayableEntity {
     }
 
     // Constructor with ID
-    public Boy(int health, float x, float y, float scale, Sprite sprite,
+    public Boy(int health, int maxHealth, float x, float y, float scale, Sprite sprite,
               float speed, PlayerMovement playerMovement, SpriteBatch batch) {
-        super(health, x, y, scale, sprite ,speed, playerMovement, batch);
+        super(health, maxHealth, x, y, scale, sprite ,speed, playerMovement, batch);
         // TODO: upgrade to dynamic assignment of strat?
         this.playerMovementStrategy = new Player1MovementStrategy();
     }
-    public Boy(int health, float x, float y, float scale, Sprite sprite,
+    public Boy(int health, int maxHealth, float x, float y, float scale, Sprite sprite,
                float speed, PlayerMovement playerMovement, SpriteBatch batch,
                EntityFactory entityFactory, EntityManager entityManager) {
-        super(health, x, y, scale, sprite, speed, playerMovement, batch);
+        super(health, maxHealth, x, y, scale, sprite, speed, playerMovement, batch);
         this.entityFactory = entityFactory;
         this.entityManager = entityManager;
         this.powerUpLevel = 0;

@@ -9,6 +9,7 @@ import com.mygdx.game.gameEngine.util.iPlayerMovement;
 public abstract class PlayableEntity extends CollidableEntities implements iPlayerMovement {
 
     private PlayerMovement playerMovement;
+    private int maxHealth;
 
     // Constructors
     public PlayableEntity() {
@@ -19,9 +20,10 @@ public abstract class PlayableEntity extends CollidableEntities implements iPlay
         super(batch);
     }
 
-    public PlayableEntity(int health, float x, float y, float scale,
+    public PlayableEntity(int health, int maxHealth, float x, float y, float scale,
                           Sprite sprite, float speed, PlayerMovement playerMovement, SpriteBatch batch) {
         super(health, x, y, scale, sprite, speed, batch);
+        this.maxHealth = maxHealth;
         this.playerMovement = playerMovement;
     }
 
@@ -46,4 +48,9 @@ public abstract class PlayableEntity extends CollidableEntities implements iPlay
     public void setPlayerMovement(PlayerMovement playerMovement) {
         this.playerMovement = playerMovement;
     }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
 }

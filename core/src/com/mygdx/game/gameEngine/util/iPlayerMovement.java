@@ -13,4 +13,7 @@ public interface iPlayerMovement {
     public float getSpriteHeight();
     public void shoot();
 
+    public int getHealth();
+    public int getMaxHealth();
+
 }

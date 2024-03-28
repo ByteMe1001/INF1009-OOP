@@ -8,7 +8,7 @@ public enum EntityType {
 
     // BOY = 0, ENEMY = 1, BOSS = 2, BULLET = 3, ENEMYBULLET = 4, HEALTHPACK = 5
 
-    BOY(100, 100f, 100f, 1f,
+    BOY(100, 100, 100f, 100f, 1f,
             300f, new Player1MovementStrategy(),
             "Boy.png"),
     ENEMY(100, 500f, 500f, 1f,
@@ -25,6 +25,7 @@ public enum EntityType {
                         50f, 0, "Broccoli.png");
 
     public final int health;
+    public final int maxHealth;
     public final float x;
     public final float y;
     public final float scale;
@@ -35,10 +36,11 @@ public enum EntityType {
 
     // FOR ALL ARGUMENTS, AS TEMPLATE
     // Constructor with PlayerMovement parameter & change rate
-    EntityType(int health, float x, float y, float scale,
+    EntityType(int health, int maxHealth, float x, float y, float scale,
                float speed, int defaultChangeRate, PlayerMovement playerMovement,
                String texturePath) {
         this.health = health;
+        this.maxHealth = maxHealth;
         this.x = x;
         this.y = y;
         this.scale = scale;
@@ -50,17 +52,19 @@ public enum EntityType {
 
     // FOR PLAYABLE ENTITY
     // Constructor without changeRate parameter (defaults to 0)
-    EntityType(int health, float x, float y, float scale,
+    EntityType(int health, int maxHealth, float x, float y, float scale,
                float speed, PlayerMovement playerMovement,
                String texturePath) {
-        this(health, x, y, scale, speed, 0, playerMovement, texturePath);
+        this(health, maxHealth, x, y, scale, speed, 0, playerMovement, texturePath);
     }
 
     // FOR AI ENTITY
     // Constructor without PlayerMovement parameter (assumes default PlayerMovement)
     EntityType(int health, float x, float y, float scale,
                float speed, int defaultChangeRate, String texturePath) {
-        this(health, x, y, scale, speed, defaultChangeRate, /* default PlayerMovement */ null, texturePath);
+        this(health, 0, x, y, scale, speed, defaultChangeRate, /* default PlayerMovement */ null, texturePath);
     }
+
+
 
 }
