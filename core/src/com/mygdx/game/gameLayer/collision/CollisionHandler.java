@@ -3,6 +3,7 @@ package com.mygdx.game.gameLayer.collision;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.gameEngine.entity.CollidableEntities;
 import com.mygdx.game.gameEngine.sound.SoundManager;
+import com.mygdx.game.gameEngine.util.iAiMovement;
 import com.mygdx.game.gameEngine.util.iCollision;
 import com.mygdx.game.gameLayer.entity.*;
 
@@ -55,6 +56,11 @@ public class CollisionHandler {
 
              }
 
+             if(((Bullet) y).getY() >= 500){
+                 collisionList.remove(y);
+                 ((Bullet) y).setAlive(false);
+             }
+
         }
 
         else if (x.getClass().equals(Bullet.class) && y.getClass().equals(Enemy.class) || x.getClass().equals(Enemy.class) && y.getClass().equals(Bullet.class)){
@@ -67,6 +73,10 @@ public class CollisionHandler {
                 collisionList.remove(x);
                 ((Enemy) x).setAlive(false);
 
+            }
+            if(((Bullet) y).getY() >= 500){
+                collisionList.remove(y);
+                ((Bullet) y).setAlive(false);
             }
 
         }
