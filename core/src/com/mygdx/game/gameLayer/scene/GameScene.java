@@ -2,12 +2,11 @@ package com.mygdx.game.gameLayer.scene;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.gameEngine.entity.CollidableEntities;
-import com.mygdx.game.gameLayer.HealthBar;
+import com.mygdx.game.gameLayer.display.HealthBar;
 import com.mygdx.game.gameLayer.entity.EntityFactory;
 import com.mygdx.game.gameEngine.scene.Scene;
 import com.mygdx.game.gameEngine.scene.SceneManager;
@@ -112,12 +111,13 @@ public class GameScene extends Scene implements iIO {
             super.getSoundManager().playMusic("GameScene");
         }
         //Get EntityFactory.createEntity(id,x,y,z)
+
         // Create entities
         // BOY = 0, ENEMY = 1, BOSS = 2, BULLET = 3, ENEMYBULLET = 4, HEALTHPACK = 5
-        entityFactory.createEntity(0,1);
-        entityFactory.createEntity(1,1);
-        entityFactory.createEntity(2,1);
-        entityFactory.createEntity(5,1);
+        entityFactory.createEntity(0,1);        // Create player
+        entityFactory.createEntity(1,5);        // Create enemy
+        entityFactory.createEntity(2,1);        // Create boss
+        entityFactory.createEntity(5,1);        // Create health pack
 //        super.getEntityManager().createEnemies(5);
 //        super.getEntityManager().createPlayerBullets(0);
 //        super.getEntityManager().createEnemyBullets(1);
