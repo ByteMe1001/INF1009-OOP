@@ -6,7 +6,13 @@ import com.mygdx.game.gameLayer.movement.Player1MovementStrategy;
 
 public enum EntityType {
 
-    // BOY = 0, ENEMY = 1, BOSS = 2, BULLET = 3, ENEMYBULLET = 4, HEALTHPACK = 5
+    /** BOY = 0
+     * ENEMY = 1
+     * BOSS = 2
+     * BULLET = 3
+     * ENEMYBULLET = 4
+     * HEALTHPACK = 5
+     */
 
     BOY(100, 100, 100f, 100f, 1f,
             300f, new Player1MovementStrategy(),
@@ -15,14 +21,12 @@ public enum EntityType {
             200f, 30, "gameBoss.png"),
     BOSS(500, 500f, (Gdx.graphics.getHeight() / 1.5f), 3f,
             300f, 40, "Boss.png"),
-
-    // Leaving playermovement as null for now
     BULLET(10, 0, 0, 1f,
             400f, 0, "bullet.png"),
     ENEMYBULLET(10, 0, 0, 1f,
             200f, 0, "81_pizza.png"),
     HEALTHPACK(10, 500f, 500f, 1f,
-                        50f, 0, "Broccoli.png");
+                        50f, 50, "Broccoli.png");
 
     public final int health;
     public final int maxHealth;

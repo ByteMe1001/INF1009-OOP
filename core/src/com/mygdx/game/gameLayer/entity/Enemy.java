@@ -75,7 +75,7 @@ public class Enemy extends CollidableEntities implements iAiMovement{
     public void shoot() {
         float bulletSpawnX = getX() + getSprite().getWidth() / 2;
         float bulletSpawnY = getY();
-        entityFactory.shootEnemyBullet(bulletSpawnX, bulletSpawnY);
+        entityFactory.createEntity(4, 1, bulletSpawnX, bulletSpawnY);;
     }
 
 

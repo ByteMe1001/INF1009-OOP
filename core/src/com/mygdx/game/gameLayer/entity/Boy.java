@@ -138,9 +138,7 @@ public class Boy extends PlayableEntity {
         float bulletSpawnY = getY() + BULLET_SPAWN_OFFSET_Y;
 
         // Create a new bullet instance and add it to the entity manager
-        Entity bullet = getEntityFactory().shootBullets(bulletSpawnX, bulletSpawnY);
-        System.out.println(bullet);
-        getEntityManager().addEntity(bullet);
+        Entity bullet = getEntityFactory().createEntity(3, 1, bulletSpawnX, bulletSpawnY);
     }
 
 }

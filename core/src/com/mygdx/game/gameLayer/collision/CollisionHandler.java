@@ -105,12 +105,6 @@ public class CollisionHandler {
                 ((HealthPack) y).setAlive(false);
                 collisionList.remove(y);
             }
-
         }
-
-
     }
-
-
-
 }
