@@ -38,7 +38,7 @@ public class EntityManager {
 
     Random random = new Random();
 
-    private SoundManager soundManager;
+    private static SoundManager soundManager;
 
     //Default constructor
     public EntityManager() {
@@ -47,23 +47,23 @@ public class EntityManager {
 
     //Constructor with collisionManager as an instance variable
     public EntityManager(SoundManager soundManager, SpriteBatch batch) {
-        this.soundManager = soundManager;
+        soundManager = SoundManager.getInstance();
         this.batch = batch;
         this.entityList = new ArrayList<Entity>();
         this.playerEntityList = new ArrayList<iPlayerMovement>();
         this.aiEntityList = new ArrayList<iAiMovement>();
         this.collisionList = new ArrayList<iCollision>();
         this.newEntityList = new ArrayList<>();
-        this.collisionManager = new CollisionManager(this, soundManager, collisionList, collisionHandler);
+        this.collisionManager = new CollisionManager(this, collisionList, collisionHandler);
         this.playerControlManager = new PlayerControlManager(this, playerEntityList);
         this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);;
         this.entityFactory = new EntityFactory(batch, this);
     }
 
     // Constructor with EntityFactory
-    public EntityManager(EntityFactory entityFactory, SoundManager soundManager, SpriteBatch batch) {
+    public EntityManager(EntityFactory entityFactory, SpriteBatch batch) {
         this.entityFactory = entityFactory; // Initialize EntityFactory
-        this.soundManager = soundManager;
+        this.soundManager = SoundManager.getInstance();
         this.batch = batch;
         //~~~~~~~~~~~LIST CREATION~~~~~~~~~~~~~~~~~~~~~~~~~~
         this.entityList = new ArrayList<Entity>();
@@ -72,7 +72,7 @@ public class EntityManager {
         this.collisionList = new ArrayList<iCollision>();
         this.newEntityList = new ArrayList<>();
         //~~~~~~~~~~~MANAGER CREATION~~~~~~~~~~~~~~~~~~~~~~~~
-        this.collisionManager = new CollisionManager(this, soundManager, collisionList, collisionHandler);
+        this.collisionManager = new CollisionManager(this, collisionList, collisionHandler);
         this.playerControlManager = new PlayerControlManager(this, playerEntityList);
         this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);
         this.entityFactory = new EntityFactory(batch, this);

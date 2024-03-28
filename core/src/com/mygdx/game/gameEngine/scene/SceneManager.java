@@ -29,7 +29,7 @@ public class SceneManager implements SceneChangeListener{
     }
 
     public SceneManager (LifeCycleManager lifeCycleManager, SpriteBatch batch) {
-        this.soundManager = new SoundManager();
+        this.soundManager = SoundManager.getInstance();
         this.entityManager = new EntityManager(soundManager, batch);
         this.lifeCycleManager = lifeCycleManager;
         PlayerManager playerManager = new PlayerManager();      // Later change to after starting scene ends

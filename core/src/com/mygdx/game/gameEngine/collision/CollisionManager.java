@@ -15,14 +15,14 @@ public class CollisionManager {
 
     private ArrayList<iCollision> collisionList;
     private EntityManager entityManager;     // Entity Manager for entity control
-    private SoundManager soundManager;      // Sound manager for collision sounds
+    private static SoundManager soundManager;      // Sound manager for collision sounds
     private CollisionHandler collisionHandler;
 
     // private CollisionStrategy collisionStrategy;
 
-    public CollisionManager(EntityManager entityManager, SoundManager soundManager, ArrayList<iCollision> collisionList, CollisionHandler collisionHandler ) {
+    public CollisionManager(EntityManager entityManager, ArrayList<iCollision> collisionList, CollisionHandler collisionHandler ) {
         this.entityManager = entityManager;
-        this.soundManager = new SoundManager();
+        soundManager = SoundManager.getInstance();
         this.collisionList = collisionList;
         this.collisionHandler = new CollisionHandler(collisionList);
     }

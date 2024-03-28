@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.gameEngine.entity.CollidableEntities;
 import com.mygdx.game.gameEngine.entity.Entity;
+import com.mygdx.game.gameEngine.util.SoundManager;
 import com.mygdx.game.gameEngine.util.iCollision;
 import com.mygdx.game.gameLayer.entity.*;
 
@@ -12,12 +13,14 @@ import java.util.ArrayList;
 public class CollisionHandler {
 
     private ArrayList<iCollision> collisionList;
+    private static SoundManager soundManager;
     private float timeSeconds = 0f;
     private float period = 3f;
     
 	// Constructor to initialize collisionList
     public CollisionHandler(ArrayList<iCollision> collisionList) {
         this.collisionList = collisionList;
+        soundManager = SoundManager.getInstance();
     }
 
     public void handleCollision(iCollision x, iCollision y){
@@ -45,6 +48,7 @@ public class CollisionHandler {
             ((Bullet) y).takeDamage(10);
             collisionList.remove(y);
             ((Bullet) y).setAlive(false);
+            soundManager.playSE("GameScene_Collision");
 
             System.out.println("Boss Health" + x + " " + ((Boss) x).getHealth());
              if(((Boss) x).getHealth() == 0) {

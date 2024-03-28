@@ -49,7 +49,7 @@ public abstract class CollidableEntities extends Entity implements iCollision {
         this.speed = speed;
     }
 
-    // Shift bounding box logic to collision manage maybe?
+    // TODO: Shift bounding box logic to collision manage maybe?
     public void setBoundingBox() {
         this.boundingBox.setSize(getSpriteWidth() * getScale(), getSpriteHeight() * getScale());
         this.boundingBox.setPosition(getX(), getY());
