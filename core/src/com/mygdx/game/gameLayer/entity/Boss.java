@@ -172,7 +172,7 @@ public class Boss extends CollidableEntities implements iAiMovement{
     // Movement logic
 
     public void movement() {
-        setAll();
+        setLeftRight();
     }
 
     // Dunnid probably
