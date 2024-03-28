@@ -184,7 +184,7 @@ public class GameScene extends Scene implements iIO {
 
 
     private ImageButton createHomeButton() {
-        TextureRegion backBtnRegion = new TextureRegion(new Texture("home_button.png"));
+        TextureRegion backBtnRegion = new TextureRegion(new Texture("restart_button.png"));
         TextureRegionDrawable backBtnDrawable = new TextureRegionDrawable(backBtnRegion);
         ImageButton backButton = new ImageButton(backBtnDrawable);
 
