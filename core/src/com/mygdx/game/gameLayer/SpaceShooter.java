@@ -1,4 +1,4 @@
-package com.mygdx.game.gameLayer.display;
+package com.mygdx.game.gameLayer;
 
 
 import com.badlogic.gdx.Game;
