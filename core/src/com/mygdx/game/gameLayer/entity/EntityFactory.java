@@ -45,6 +45,8 @@ public class EntityFactory implements Factory {
         return null;
     }
 
+
+    // TODO: change return type? void looks ok?
     @Override
     public Entity createEntity(int entityTypeKey, int quantity) {
         EntityType entityType = entityTypeMap.get(entityTypeKey);
@@ -52,24 +54,35 @@ public class EntityFactory implements Factory {
         if (entityType == null) {
             throw new IllegalArgumentException("Invalid entity type key: " + entityTypeKey);
         }
-        switch (entityType) {
-            case BOY:
-                return createCharacterEntity();
-            case ENEMY:
-                return createEnemyEntity();
-            case BOSS:
-                return createBossEntity();
-            case BULLET:
-                return createBulletEntity();
-            case ENEMYBULLET:
-                return createEnemyBullet();
-            case HEALTHPACK:
-                return createHealthPack();
-            default:
-                throw new IllegalArgumentException("Invalid entity type: " + entityType);
+        Entity entity = null;
+        for (int i = 0; i < quantity; i++) {
+            switch (entityType) {
+                case BOY:
+                    entity = createCharacterEntity();
+                    break;
+                case ENEMY:
+                    entity = createEnemyEntity();
+                    break;
+                case BOSS:
+                    entity = createBossEntity();
+                    break;
+                case BULLET:
+                    entity = createBulletEntity();
+                    break;
+                case ENEMYBULLET:
+                    entity = createEnemyBullet();
+                    break;
+                case HEALTHPACK:
+                    entity = createHealthPack();
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid entity type: " + entityType);
+            }
         }
+        return entity;
     }
 
+    // TODO: Remove quantity if not used
     public Entity createEntity(int entityTypeKey, int quantity, float x, float y) {
         EntityType entityType = entityTypeMap.get(entityTypeKey);
         Entity entity;
