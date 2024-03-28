@@ -6,6 +6,8 @@ import com.mygdx.game.gameLayer.movement.Player1MovementStrategy;
 
 public enum EntityType {
 
+    // BOY = 0, ENEMY = 1, BOSS = 2, BULLET = 3, ENEMYBULLET = 4, HEALTHPACK = 5
+
     BOY(100, 100f, 100f, 1f,
             300f, new Player1MovementStrategy(),
             "Boy.png"),

@@ -80,89 +80,71 @@ public class EntityManager {
 
     // Main testing creation
     // Entity creations
-    public void createPlayer() {
-        Entity bucket = entityFactory.createEntity(EntityType.BOY); // Use factory to create bucket entity
-        // addEntity(bucket);
-        //System.out.println(collisionList.size());
-    }
-
-
-    public void createPlayers(int x) {
-        for (int i = 0; i < x; i++) {
-            Entity bucket = entityFactory.createEntity(EntityType.BOY); // Use EntityFactory to create bucket entity
-        }
-    }
-
-    public void createEnemy() {
-        Entity droplet = entityFactory.createEntity(EntityType.ENEMY); // Use factory to create droplet entity
-    }
-
-    // Main testing creation
-    public void createEnemies(int x) {
-        for (int i = 0; i < x; i++) {
-        	// spawn at random parts of the screen in the top half
-        	float randomX = random.nextFloat() * Gdx.graphics.getWidth();
-            float randomY = (Gdx.graphics.getHeight() / 2) + random.nextFloat() * (Gdx.graphics.getHeight() / 2);
-            Entity droplet = entityFactory.createEntity(EntityType.ENEMY);
-            droplet.setX(randomX);
-            droplet.setY(randomY);
-           // Entity droplet = entityFactory.createEntity(EntityType.BOSS); // Use EntityFactory to create droplet entity
-        }
-    }
-
-    public void createBoss() {
-        Entity droplet = entityFactory.createEntity(EntityType.BOSS); // Use factory to create droplet entity
-    }
-
-    // Main testing creation
-    public void createBosses(int x) {
-        for (int i = 0; i < x; i++) {
-            // spawn at random parts of the screen in the top half
-            float randomX = random.nextFloat() * Gdx.graphics.getWidth();
-            float randomY = (Gdx.graphics.getHeight() / 2) + random.nextFloat() * (Gdx.graphics.getHeight() / 2);
-            Entity droplet = entityFactory.createEntity(EntityType.BOSS);
-            droplet.setX(randomX);
-            droplet.setY(randomY);
-            // Entity droplet = entityFactory.createEntity(EntityType.BOSS); // Use EntityFactory to create droplet entity
-        }
-    }
-    
-    // To check if boss entities are all dead
-    public boolean areAllEnemiesDead() {
-        for (Entity entity : entityList) {
-            if (entity instanceof Enemy && entity.isAlive()) {
-                return false;  // If boss is alive, return false
-            }
-        }
-        return true;  // If bosses are dead, return true
-    }
-
-    public boolean areAllBossesDead() {
-        for (Entity entity : entityList) {
-            if (entity instanceof Boss && entity.isAlive()) {
-                return false;  // If boss is alive, return false
-            }
-        }
-        return true;  // If bosses are dead, return true
-    }
-
-    public void createPlayerBullets(int x) {
-        for (int i = 0; i < x; i++) {
-            Entity bullet = entityFactory.createEntity(EntityType.BULLET); // Use EntityFactory to create bullet entity
-        }
-    }
-
-    public void createEnemyBullets(int x){
-        for (int i = 0; i < x; i++) {
-            Entity bullet = entityFactory.createEntity(EntityType.ENEMYBULLET); // Use EntityFactory to create bullet entity
-        }
-    }
-    
-    public void createHealthPack(int x){
-        for (int i = 0; i < x; i++) {
-            Entity healthPack = entityFactory.createEntity(EntityType.HEALTHPACK); // Use EntityFactory to create healthpack entity
-        }
-    }
+//    public void createPlayer() {
+//        Entity bucket = entityFactory.createEntity(EntityType.BOY); // Use factory to create bucket entity
+//        // addEntity(bucket);
+//        //System.out.println(collisionList.size());
+//    }
+//
+//
+//    public void createPlayers(int x) {
+//        for (int i = 0; i < x; i++) {
+//            Entity bucket = entityFactory.createEntity(EntityType.BOY); // Use EntityFactory to create bucket entity
+//        }
+//    }
+//
+//    public void createEnemy() {
+//        Entity droplet = entityFactory.createEntity(EntityType.ENEMY); // Use factory to create droplet entity
+//    }
+//
+//    // Main testing creation
+//    public void createEnemies(int x) {
+//        for (int i = 0; i < x; i++) {
+//        	// spawn at random parts of the screen in the top half
+//        	float randomX = random.nextFloat() * Gdx.graphics.getWidth();
+//            float randomY = (Gdx.graphics.getHeight() / 2) + random.nextFloat() * (Gdx.graphics.getHeight() / 2);
+//            Entity droplet = entityFactory.createEntity(EntityType.ENEMY);
+//            droplet.setX(randomX);
+//            droplet.setY(randomY);
+//           // Entity droplet = entityFactory.createEntity(EntityType.BOSS); // Use EntityFactory to create droplet entity
+//        }
+//    }
+//
+//    public void createBoss() {
+//        Entity droplet = entityFactory.createEntity(EntityType.BOSS); // Use factory to create droplet entity
+//    }
+//
+//    // Main testing creation
+//    public void createBosses(int x) {
+//        for (int i = 0; i < x; i++) {
+//            // spawn at random parts of the screen in the top half
+//            float randomX = random.nextFloat() * Gdx.graphics.getWidth();
+//            float randomY = (Gdx.graphics.getHeight() / 2) + random.nextFloat() * (Gdx.graphics.getHeight() / 2);
+//            Entity droplet = entityFactory.createEntity(EntityType.BOSS);
+//            droplet.setX(randomX);
+//            droplet.setY(randomY);
+//            // Entity droplet = entityFactory.createEntity(EntityType.BOSS); // Use EntityFactory to create droplet entity
+//        }
+//    }
+//
+//
+//    public void createPlayerBullets(int x) {
+//        for (int i = 0; i < x; i++) {
+//            Entity bullet = entityFactory.createEntity(EntityType.BULLET); // Use EntityFactory to create bullet entity
+//        }
+//    }
+//
+//    public void createEnemyBullets(int x){
+//        for (int i = 0; i < x; i++) {
+//            Entity bullet = entityFactory.createEntity(EntityType.ENEMYBULLET); // Use EntityFactory to create bullet entity
+//        }
+//    }
+//
+//    public void createHealthPack(int x){
+//        for (int i = 0; i < x; i++) {
+//            Entity healthPack = entityFactory.createEntity(EntityType.HEALTHPACK); // Use EntityFactory to create healthpack entity
+//        }
+//    }
 
     // Maybe can use this function to clear all list?
     public void deleteEntity(Entity e) {
@@ -275,6 +257,24 @@ public class EntityManager {
         findEntity(e).setAlive(b);
     }
 
+    // To check if boss entities are all dead
+    public boolean areAllEnemiesDead() {
+        for (Entity entity : entityList) {
+            if (entity instanceof Enemy && entity.isAlive()) {
+                return false;  // If boss is alive, return false
+            }
+        }
+        return true;  // If bosses are dead, return true
+    }
+
+    public boolean areAllBossesDead() {
+        for (Entity entity : entityList) {
+            if (entity instanceof Boss && entity.isAlive()) {
+                return false;  // If boss is alive, return false
+            }
+        }
+        return true;  // If bosses are dead, return true
+    }
 //    public boolean getIsCollidable(Entity e) {
 //        return findEntity(e).isCollidable();
 //    }

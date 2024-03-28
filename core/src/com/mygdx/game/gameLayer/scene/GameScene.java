@@ -50,14 +50,14 @@ public class GameScene extends Scene implements iIO {
 
 
     private EntityManager entityManager;
-    private EntityFactory entityFactory; //commented out temporarily
+    private EntityFactory entityFactory;
     SceneManager sceneManager = SceneManager.getInstance();
 
 
 
     public GameScene(SceneManager sceneManager, EntityManager entityManager, SoundManager soundManager, SpriteBatch batch) {
         super(sceneManager, entityManager, soundManager, batch);
-        //this.entityFactory = new EntityFactory(batch, entityManager); // Assign the provided EntityFactory instance
+        this.entityFactory = new EntityFactory(batch, entityManager); // Assign the provided EntityFactory instance
         this.sceneManager = sceneManager;
         this.soundManager = soundManager;
     }
@@ -106,12 +106,16 @@ public class GameScene extends Scene implements iIO {
         }
         //Get EntityFactory.createEntity(id,x,y,z)
         // Create entities
-        super.getEntityManager().createPlayer();
-        super.getEntityManager().createEnemies(5);
-        super.getEntityManager().createPlayerBullets(0);
-        super.getEntityManager().createEnemyBullets(1);
-        super.getEntityManager().createHealthPack(1);
-        super.getEntityManager().createBoss();
+        // BOY = 0, ENEMY = 1, BOSS = 2, BULLET = 3, ENEMYBULLET = 4, HEALTHPACK = 5
+        entityFactory.createEntity(0,1);
+        entityFactory.createEntity(1,1);
+        entityFactory.createEntity(2,1);
+        entityFactory.createEntity(5,1);
+//        super.getEntityManager().createEnemies(5);
+//        super.getEntityManager().createPlayerBullets(0);
+//        super.getEntityManager().createEnemyBullets(1);
+//        super.getEntityManager().createHealthPack(1);
+//        super.getEntityManager().createBoss();
         //pause button logic
 
     }
@@ -239,9 +243,6 @@ public class GameScene extends Scene implements iIO {
             decreaseHealth();
             elapsedTime = 0f;
         }
-
-
-
 
 
         super.getEntityManager().draw();

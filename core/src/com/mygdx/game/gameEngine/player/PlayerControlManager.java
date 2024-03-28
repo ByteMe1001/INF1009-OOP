@@ -13,7 +13,7 @@ public class PlayerControlManager implements iIO {
     private ArrayList<iPlayerMovement> playerEntityList;
     private EntityManager entityManager;
 
-    // SHOULD NOT BE HERE
+    // TODO: SHOULD NOT BE HERE
     private float timeSeconds = 0f;
     private float period = 0.2f;
     // END
@@ -83,8 +83,8 @@ public class PlayerControlManager implements iIO {
         }
     }
 
+    // TODO: Move to BOY
     public void shoot(iPlayerMovement entity, float x, float y) {
-
         switch (inputKey3()) {
             case "FALSE":
                 break;

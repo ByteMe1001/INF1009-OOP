@@ -6,14 +6,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.gameEngine.entity.DisplayElement;
 import com.mygdx.game.gameEngine.entity.Entity;
 import com.mygdx.game.gameEngine.entity.EntityManager;
-import com.mygdx.game.gameEngine.entity.GameFactory;
-import com.mygdx.game.gameLayer.entity.*;
+import com.mygdx.game.gameEngine.entity.Factory;
 
-public class EntityFactory implements GameFactory {
+import java.util.HashMap;
+
+public class EntityFactory implements Factory {
     private EntityType entityType;
+
+    private HashMap<Integer, EntityType> entityTypeMap;
     private EntityManager entityManager;
 
     private SpriteBatch batch;
+
+
 
     public EntityFactory(EntityType entityType) {
         this.entityType = entityType;
@@ -26,8 +31,12 @@ public class EntityFactory implements GameFactory {
 
     public EntityFactory(SpriteBatch batch, EntityManager entityManager) {
         this.entityManager = entityManager;
-        System.out.println(entityManager);
         this.batch = batch;
+
+        this.entityTypeMap = new HashMap<>();
+        for (EntityType entityType : EntityType.values()) {
+            this.entityTypeMap.put(entityType.ordinal(), entityType);
+        }
     }
 
     @Override
@@ -37,7 +46,12 @@ public class EntityFactory implements GameFactory {
     }
 
     @Override
-    public Entity createEntity(EntityType entityType) {
+    public Entity createEntity(int entityTypeKey, int quantity) {
+        EntityType entityType = entityTypeMap.get(entityTypeKey);
+        System.out.println("Entity Type: " + entityType);
+        if (entityType == null) {
+            throw new IllegalArgumentException("Invalid entity type key: " + entityTypeKey);
+        }
         switch (entityType) {
             case BOY:
                 return createCharacterEntity();
@@ -47,7 +61,6 @@ public class EntityFactory implements GameFactory {
                 return createBossEntity();
             case BULLET:
                 return createBulletEntity();
-            // Add cases for other entity types as needed
             case ENEMYBULLET:
                 return createEnemyBullet();
             case HEALTHPACK:
