@@ -113,11 +113,11 @@ public abstract class Entity {
 
     //Methods
     // Move to colliadable???
-    public abstract void takeDamage(int damage);
-
-    public abstract void heal(int amount);
-
-    public abstract void destroy();
+//    public abstract void takeDamage(int damage);
+//
+//    public abstract void heal(int amount);
+//
+//    public abstract void destroy();
     public void update() {
 
     }

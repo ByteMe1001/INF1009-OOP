@@ -8,6 +8,7 @@ import com.mygdx.game.gameEngine.player.PlayerManager;
 import com.mygdx.game.gameEngine.sound.SoundManager;
 import com.mygdx.game.gameLayer.scene.GameScene;
 import com.mygdx.game.gameLayer.scene.QuizScene;
+import com.mygdx.game.gameLayer.scene.StartingScene;
 
 import java.util.ArrayList;
 

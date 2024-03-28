@@ -1,5 +1,6 @@
 package com.mygdx.game.gameLayer.entity;
 
+import com.badlogic.gdx.Gdx;
 import com.mygdx.game.gameEngine.player.PlayerMovement;
 import com.mygdx.game.gameLayer.movement.Player1MovementStrategy;
 
@@ -10,8 +11,8 @@ public enum EntityType {
             "Boy.png"),
     ENEMY(100, 500f, 500f, 1f,
             200f, 30, "gameBoss.png"),
-    BOSS(500, 500f, 500f, 3f,
-            200f, 30, "Boss.png"),
+    BOSS(500, 500f, (Gdx.graphics.getHeight() / 1.5f), 3f,
+            300f, 40, "Boss.png"),
 
     // Leaving playermovement as null for now
     BULLET(10, 0, 0, 1f,
