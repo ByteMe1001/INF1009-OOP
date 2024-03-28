@@ -70,6 +70,7 @@ public class Bullet extends CollidableEntities implements iAiMovement {
         super.update();
         if(getY() + getSpriteHeight() >= Gdx.graphics.getHeight()) {
             setAlive(false);
+            System.out.println("Bullet is dead");
         }
     }
     @Override

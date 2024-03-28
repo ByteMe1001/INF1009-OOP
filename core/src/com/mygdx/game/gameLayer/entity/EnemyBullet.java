@@ -69,10 +69,10 @@ public class EnemyBullet extends CollidableEntities implements iAiMovement {
     @Override
     public void update() {
         super.update();
-
         // Try to move elsewhere
         if (getY() <= 0) {
             setAlive(false);
+            System.out.println("EnemyBullet is dead");
         }
     }
 

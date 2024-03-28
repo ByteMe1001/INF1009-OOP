@@ -215,6 +215,15 @@ public class EntityManager {
             entity.update();
             if (!entity.isAlive()) {
                 iterator.remove();
+                if (entity instanceof iCollision) {
+                    collisionList.remove(entity);
+                }
+                if (entity instanceof iPlayerMovement) {
+                    playerEntityList.remove(entity);
+                }
+                if (entity instanceof iAiMovement) {
+                    aiEntityList.remove(entity);
+                }
             }
         }
     }
