@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.gameLayer.entity.EntityFactory;
 import com.mygdx.game.gameEngine.scene.Scene;
 import com.mygdx.game.gameEngine.scene.SceneManager;
-import com.mygdx.game.gameEngine.util.SoundManager;
+import com.mygdx.game.gameEngine.sound.SoundManager;
 import com.mygdx.game.gameEngine.entity.EntityManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -18,7 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.gameEngine.util.iIO;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
-import com.mygdx.game.gameLayer.entity.EntityType;
 
 public class GameScene extends Scene implements iIO {
     private final static String TEXTURE_PATH = "scrolling_Background.png";

@@ -1,10 +1,8 @@
 package com.mygdx.game.gameLayer.collision;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.gameEngine.entity.CollidableEntities;
-import com.mygdx.game.gameEngine.entity.Entity;
-import com.mygdx.game.gameEngine.util.SoundManager;
+import com.mygdx.game.gameEngine.sound.SoundManager;
 import com.mygdx.game.gameEngine.util.iCollision;
 import com.mygdx.game.gameLayer.entity.*;
 

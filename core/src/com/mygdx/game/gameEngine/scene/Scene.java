@@ -8,8 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameEngine.entity.EntityManager;
-import com.mygdx.game.gameEngine.scene.SceneManager;
-import com.mygdx.game.gameEngine.util.SoundManager;
+import com.mygdx.game.gameEngine.sound.SoundManager;
 
 
 public abstract class Scene implements Screen {

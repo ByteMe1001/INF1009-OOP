@@ -1,4 +1,6 @@
-package com.mygdx.game.gameEngine.util;
+package com.mygdx.game.gameEngine.sound;
+
+import com.mygdx.game.gameLayer.sound.GameSoundTrack;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -12,6 +14,7 @@ import java.util.Map;
 public class SoundManager {
 
     private static SoundManager instance = null;
+    private SoundTrack soundTrack;
     private Map<String, URL> soundURLs;
     private Map<String, List<Clip>> clips;
     private boolean isMusicPlaying = false;
@@ -21,16 +24,10 @@ public class SoundManager {
 
 
     // TODO: THIS IS HARDCODE NEED CHANGE
-    private SoundManager() {
-        soundURLs = new HashMap<>();
-        soundURLs.put("StartingScene", getClass().getResource("/Ground_Theme.wav"));
-        soundURLs.put("StartingScene_Button", getClass().getResource("/button_sound.wav"));
-        soundURLs.put("GameScene", getClass().getResource("/SkyFire.wav"));
-        soundURLs.put("GameScene_Collision", getClass().getResource("/explosion.wav"));
-
+    private SoundManager(SoundTrack soundTrack) {
+        this.soundTrack = soundTrack;
         clips = new HashMap<>();
     }
-
 
 
     // Load track into clip map
@@ -47,48 +44,37 @@ public class SoundManager {
         }
     }
 
+    public static SoundManager getInstance(SoundTrack soundTrack) {
+        if (instance == null) {
+            instance = new SoundManager(soundTrack);
+        }
+        return instance;
+    }
+
     public static SoundManager getInstance() {
         if (instance == null) {
-            instance = new SoundManager();
+            instance = new SoundManager(new GameSoundTrack());
         }
         return instance;
     }
 
     // Play sound effect
-    public void playSE(String sceneName) {
-        if (soundURLs.containsKey(sceneName)) {
-            try {
-                if (!clips.containsKey(sceneName)) {
-                    loadClip(sceneName);
-                }
-                List<Clip> clipList = clips.get(sceneName);
-                for (Clip clip : clipList) {
-                    clip.setFramePosition(0);
-                    clip.start();
-                }
-            } catch (Exception e) {
-                System.out.println("Error playing sound for scene " + sceneName + ": " + e.getMessage());
-            }
+    // Play sound effect
+    public void playSE(String effectName) {
+        SoundEffect soundEffect = soundTrack.getSoundEffect(effectName);
+        if (soundEffect != null) {
+            soundEffect.play();
         } else {
-            throw new IllegalArgumentException("Scene name not found in sound map: " + sceneName);
+            throw new IllegalArgumentException("Effect name not found in sound map: " + effectName);
         }
     }
 
     // Play music
     public void playMusic(String sceneName) {
-        if (soundURLs.containsKey(sceneName)) {
-            try {
-                if (!clips.containsKey(sceneName)) {
-                    loadClip(sceneName);
-                }
-                List<Clip> clipList = clips.get(sceneName);
-                for (Clip clip : clipList) {
-                    clip.loop(Clip.LOOP_CONTINUOUSLY);
-                }
-                isMusicPlaying = true;
-            } catch (Exception e) {
-                System.out.println("Error playing music for scene " + sceneName + ": " + e.getMessage());
-            }
+        backgroundMusic music = soundTrack.getBackgroundMusic(sceneName);
+        if (music != null) {
+            music.play();
+            isMusicPlaying = true;
         } else {
             throw new IllegalArgumentException("Scene name not found in sound map: " + sceneName);
         }
@@ -134,39 +120,19 @@ public class SoundManager {
     // TODO: change to pause logic
     // Pause all sounds and music
     public void pauseAll() {
-        for (List<Clip> clipList : clips.values()) {
-            for (Clip clip : clipList) {
-                if (clip.isRunning()) { // Check if the clip is running before pausing
-                    long position = clip.getMicrosecondPosition(); // Get the current position
-                    clipPositions.put(clip, position); // Store the position for later use
-                    clip.stop(); // Stop the clip
-                }
-            }
-        }
+        soundTrack.pauseAllBackgroundMusic();
         isMusicPlaying = false;
     }
 
     // TODO: Change to resume logic
     public void resumeAll() {
-        for (Map.Entry<Clip, Long> entry : clipPositions.entrySet()) {
-            Clip clip = entry.getKey();
-            Long position = entry.getValue();
-            clip.setMicrosecondPosition(position); // Set the clip position to the stored position
-            clip.start(); // Start the clip from the stored position
-        }
+        soundTrack.resumeAllBackgroundMusic();
         isMusicPlaying = true;
     }
 
-
-
     // Dispose resources
     public void dispose() {
-        for (List<Clip> clipList : clips.values()) {
-            for (Clip clip : clipList) {
-                clip.close();
-            }
-        }
-        clips.clear();
+        soundTrack.dispose();
     }
 
     // To prevent concurrent music playing

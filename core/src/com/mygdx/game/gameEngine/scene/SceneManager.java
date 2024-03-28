@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.gameEngine.LifeCycleManager;
 import com.mygdx.game.gameEngine.entity.EntityManager;
 import com.mygdx.game.gameEngine.player.PlayerManager;
-import com.mygdx.game.gameEngine.util.SoundManager;
+import com.mygdx.game.gameEngine.sound.SoundManager;
 import com.mygdx.game.gameLayer.scene.GameScene;
 import com.mygdx.game.gameLayer.scene.QuizScene;
 

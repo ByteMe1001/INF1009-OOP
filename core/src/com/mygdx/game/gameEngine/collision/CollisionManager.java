@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import com.mygdx.game.gameEngine.entity.EntityManager;
-import com.mygdx.game.gameEngine.util.SoundManager;
+import com.mygdx.game.gameEngine.sound.SoundManager;
 import com.mygdx.game.gameEngine.util.iCollision;
 import com.mygdx.game.gameLayer.collision.CollisionHandler;
 

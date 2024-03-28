@@ -10,7 +10,7 @@ import com.badlogic.gdx.Gdx;
 import com.mygdx.game.gameEngine.entity.EntityManager;
 import com.mygdx.game.gameEngine.player.Player;
 import com.mygdx.game.gameEngine.scene.SceneManager;
-import com.mygdx.game.gameEngine.util.SoundManager;
+import com.mygdx.game.gameEngine.sound.SoundManager;
 
 public class LifeCycleManager extends Game {
     private Player player;

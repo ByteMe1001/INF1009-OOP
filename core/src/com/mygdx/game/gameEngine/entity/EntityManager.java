@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 import com.mygdx.game.gameEngine.player.PlayerControlManager;
-import com.mygdx.game.gameEngine.util.SoundManager;
+import com.mygdx.game.gameEngine.sound.SoundManager;
 import com.mygdx.game.gameEngine.util.iAiMovement;
 import com.mygdx.game.gameEngine.util.iCollision;
 import com.mygdx.game.gameEngine.util.iPlayerMovement;
@@ -63,7 +63,7 @@ public class EntityManager {
     // Constructor with EntityFactory
     public EntityManager(EntityFactory entityFactory, SpriteBatch batch) {
         this.entityFactory = entityFactory; // Initialize EntityFactory
-        this.soundManager = SoundManager.getInstance();
+        soundManager = SoundManager.getInstance();
         this.batch = batch;
         //~~~~~~~~~~~LIST CREATION~~~~~~~~~~~~~~~~~~~~~~~~~~
         this.entityList = new ArrayList<Entity>();
