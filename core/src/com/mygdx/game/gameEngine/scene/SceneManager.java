@@ -29,11 +29,11 @@ public class SceneManager implements SceneChangeListener{
         scenes = new ArrayList<>();
     }
 
-    public SceneManager (LifeCycleManager lifeCycleManager, SpriteBatch batch) {
+    public SceneManager (LifeCycleManager lifeCycleManager, PlayerManager playerManager, SpriteBatch batch) {
         this.soundManager = SoundManager.getInstance();
+        this.playerManager = playerManager;
         this.entityManager = new EntityManager(playerManager, batch);
         this.lifeCycleManager = lifeCycleManager;
-        PlayerManager playerManager = new PlayerManager();
         this.batch = batch;
         scenes = new ArrayList<Scene>();
     }

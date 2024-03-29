@@ -6,7 +6,7 @@ public class PlayerManager {
     private ArrayList<Player> playerList;
 
     public PlayerManager() {
-        ArrayList<Player> playerList = new ArrayList<>();
+        this.playerList = new ArrayList<>();
     }
 
     public void createPlayer(String name) {
@@ -32,6 +32,10 @@ public class PlayerManager {
     public int getScore(Player p) {
         return findPlayer(p).getScore();
     }
+    public int getScore() {
+        return playerList.get(0).getScore();
+    }
+
     public boolean isPlaying(Player p) {
         return findPlayer(p).isPlaying();
     }

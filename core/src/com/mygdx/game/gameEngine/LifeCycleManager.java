@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 
 import com.mygdx.game.gameEngine.entity.EntityManager;
 import com.mygdx.game.gameEngine.player.Player;
+import com.mygdx.game.gameEngine.player.PlayerManager;
 import com.mygdx.game.gameEngine.scene.SceneManager;
 import com.mygdx.game.gameEngine.sound.SoundManager;
 
@@ -17,7 +18,7 @@ public class LifeCycleManager extends Game {
     private SceneManager sceneManager;
     private SpriteBatch batch;
     private SoundManager soundManager;
-    private EntityManager entityManager;
+    private PlayerManager playerManager;
 
     // Logger creation
     private static final Logger logger = Logger.getLogger(LifeCycleManager.class.getName());
@@ -36,8 +37,10 @@ public class LifeCycleManager extends Game {
     @Override
     public void create() {
         player = new Player();
+        playerManager = new PlayerManager();
+        playerManager.addPlayer(player);
         batch = new SpriteBatch();
-        sceneManager = new SceneManager(this, batch);
+        sceneManager = new SceneManager(this, playerManager, batch);
         Gdx.app.log("MyGDXGame", player.getName());
         run();
     }
