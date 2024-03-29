@@ -76,6 +76,12 @@ public class CollisionHandler {
                  collisionList.remove(x);
                  ((Boss) x).setAlive(false);
 
+                     int score = player.getScore(); // Retrieve the current score from the player
+                     collisionList.remove(x);
+                     ((Boss) x).setAlive(false);
+                     score += 500; // Increment the score by 10 for killing an enemy
+                     player.setScore(score); // Set the updated score back to the player
+                     System.out.println("Player Score: " + player.getScore());
 
 
              }
