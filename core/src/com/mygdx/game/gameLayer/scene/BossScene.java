@@ -101,8 +101,6 @@ public class BossScene extends Scene implements iIO {
         // Add UI table to the stage
         stage.addActor(uiTable);
 
-
-
         // Start playing music if not already playing
         if (!super.getSoundManager().isMusicPlaying()) {
             super.getSoundManager().playMusic("GameScene");
@@ -112,19 +110,10 @@ public class BossScene extends Scene implements iIO {
         // Create entities TO CHANGE ACCODRING TO BOSS LEVEL
         // BOY = 0, ENEMY = 1, BOSS = 2, BULLET = 3, ENEMYBULLET = 4, HEALTHPACK = 5
         entityFactory.createEntity(0,1);        // Create player
-        entityFactory.createEntity(1,3);        // Create enemy
         entityFactory.createEntity(2,1);        // Create boss
-        entityFactory.createEntity(5,3);        // Create health pack
-//        super.getEntityManager().createEnemies(5);
-//        super.getEntityManager().createPlayerBullets(0);
-//        super.getEntityManager().createEnemyBullets(1);
-//        super.getEntityManager().createHealthPack(1);
-//        super.getEntityManager().createBoss();
-        //pause button logic
 
         // HealthBar Demo Code
         this.healthBar = new HealthBar(super.getEntityManager().getPlayerControlManager());
-
     }
 
 
@@ -164,16 +153,6 @@ public class BossScene extends Scene implements iIO {
     }
 
 
-    //Replace with a method to update the entity health
-//    private void decreaseHealth() {
-//        health -= healthDecreaseAmount;
-//        if (health < 0) {
-//            health = 0;
-//        }
-//    }
-
-
-
     private ImageButton createHomeButton() {
         TextureRegion backBtnRegion = new TextureRegion(new Texture("restart_button.png"));
         TextureRegionDrawable backBtnDrawable = new TextureRegionDrawable(backBtnRegion);
@@ -206,25 +185,11 @@ public class BossScene extends Scene implements iIO {
         super.getBatch().draw(super.getBackground(), 0, backgroundY, 640, 640);
         super.getBatch().draw(super.getBackground(), 0, backgroundY + 640, 640, 640);
 
-
-
-
-//        //For HealthBar logic
-//        super.getBatch().draw(blank, 10, Gdx.graphics.getHeight() - 30, Gdx.graphics.getWidth()/2, Gdx.graphics.getWidth()/2);
-//        // Draw foreground health bar based on current health
-//        float foregroundWidth = Gdx.graphics.getWidth()/2 * (health / 100.0f); // Calculate width based on current health percentage
-//        super.getBatch().draw(green, 10, Gdx.graphics.getHeight() - 30, foregroundWidth, healthBarHeight);
-//        super.getBatch().draw(blank,0, 0, Gdx.graphics.getWidth() * health, 5);
-
-
-
-
         // Game Loop
         // PATCH FIX
         if (!getSceneManager().isPaused()) {
             super.getEntityManager().update();
             healthBar.draw(getBatch());
-
 
             // Check if all boss entities are dead and go to the QuizScene
             if (super.getEntityManager().areAllEnemiesDead()) {
@@ -235,8 +200,6 @@ public class BossScene extends Scene implements iIO {
                 return; // Skip the remaining rendering code since we're going to a new scene
             }
 
-
-
             //Below here is the logic for the moving scene when not paused
             backgroundY -= backgroundVelocity;
 
@@ -244,16 +207,6 @@ public class BossScene extends Scene implements iIO {
                 backgroundY += 640;
             }
         }
-
-
-
-//        //Here is just a timer for the healthbar to show it deducting, remove once logic in implemented
-//        elapsedTime += deltaTime;
-//        if (elapsedTime >= healthDecreaseInterval) {
-//            decreaseHealth();
-//            elapsedTime = 0f;
-//        }
-
 
         super.getEntityManager().draw();
         super.getBatch().end();
