@@ -115,7 +115,7 @@ public class GameScene extends Scene implements iIO {
         // Create entities
         // BOY = 0, ENEMY = 1, BOSS = 2, BULLET = 3, ENEMYBULLET = 4, HEALTHPACK = 5
         entityFactory.createEntity(0,1);        // Create player
-        entityFactory.createEntity(1,1);        // Create enemy
+        entityFactory.createEntity(1,3);        // Create enemy
         entityFactory.createEntity(2,1);        // Create boss
         entityFactory.createEntity(5,1);        // Create health pack
 //        super.getEntityManager().createEnemies(5);
@@ -245,6 +245,7 @@ public class GameScene extends Scene implements iIO {
                 sceneManager.swapScene(new QuizScene(sceneManager, soundManager, entityManager, batch));
                 return; // Skip the remaining rendering code since we're going to a new scene
             }
+
             
 
             //Below here is the logic for the moving scene when not paused

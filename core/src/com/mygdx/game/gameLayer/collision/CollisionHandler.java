@@ -2,6 +2,7 @@ package com.mygdx.game.gameLayer.collision;
 
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.gameEngine.entity.CollidableEntities;
+import com.mygdx.game.gameEngine.entity.Entity;
 import com.mygdx.game.gameEngine.player.Player;
 import com.mygdx.game.gameEngine.sound.SoundManager;
 import com.mygdx.game.gameEngine.util.iAiMovement;
@@ -16,7 +17,7 @@ public class CollisionHandler {
     private static SoundManager soundManager;
     private Player player;
     private float timeSeconds = 0f;
-    private float period = 3f;
+    private float period = 1.5f;
     
 	// Constructor to initialize collisionList
     public CollisionHandler(ArrayList<iCollision> collisionList) {
@@ -44,8 +45,26 @@ public class CollisionHandler {
 
         }
 
+        else if(x.getClass().equals(Boy.class) && y.getClass().equals(Enemy.class)
+                || y.getClass().equals(Boy.class) && x.getClass().equals(Enemy.class)){
+            // Handle collision
 
-        else if (x.getClass().equals(Bullet.class) && y.getClass().equals(Boss.class) || x.getClass().equals(Boss.class) && y.getClass().equals(Bullet.class)){
+            timeSeconds += Gdx.graphics.getDeltaTime();
+            if(timeSeconds > period){
+                timeSeconds -= period;
+                ((Boy) x).takeDamage(10);
+                //((Boss) y).takeDamage(10);
+                //System.out.println("Cooldown on Collision");
+                System.out.println("Player Health: " + ((Boy) x).getHealth());
+                System.out.println("Enemy Health: " + ((Enemy) y).getHealth());
+                System.out.println(x + "has collided with " + y);
+            }
+
+        }
+
+
+        else if (x.getClass().equals(Bullet.class) && y.getClass().equals(Boss.class)
+                || x.getClass().equals(Boss.class) && y.getClass().equals(Bullet.class)){
             ((Boss) x).takeDamage(10);
             ((Bullet) y).takeDamage(10);
             collisionList.remove(y);
@@ -68,16 +87,20 @@ public class CollisionHandler {
 
         }
 
-        else if (x.getClass().equals(Bullet.class) && y.getClass().equals(Enemy.class) || x.getClass().equals(Enemy.class) && y.getClass().equals(Bullet.class)){
+        else if (x.getClass().equals(Bullet.class) && y.getClass().equals(Enemy.class)
+                || x.getClass().equals(Enemy.class) && y.getClass().equals(Bullet.class)){
             ((Enemy) x).takeDamage(10);
             collisionList.remove(y);
             ((Bullet) y).setAlive(false);
             soundManager.playSE("GameScene_Collision");
             System.out.println("Boss Health" + x + " " + ((Enemy) x).getHealth());
             if(((Enemy) x).getHealth() == 0) {
+
+                int score = player.getScore(); // Retrieve the current score from the player
                 collisionList.remove(x);
                 ((Enemy) x).setAlive(false);
-                player.setScore(10);
+                score += 10; // Increment the score by 10 for killing an enemy
+                player.setScore(score); // Set the updated score back to the player
                 System.out.println("Player Score: " + player.getScore());
 
             }
@@ -88,7 +111,8 @@ public class CollisionHandler {
 
         }
 
-        else if (x.getClass().equals(Boy.class) && y.getClass().equals(EnemyBullet.class)||x.getClass().equals(EnemyBullet.class) && y.getClass().equals(Boy.class)){
+        else if (x.getClass().equals(Boy.class) && y.getClass().equals(EnemyBullet.class)
+                ||x.getClass().equals(EnemyBullet.class) && y.getClass().equals(Boy.class)){
             ((Boy) x).takeDamage(10);
             collisionList.remove(y);
             ((EnemyBullet) y).setAlive(false);

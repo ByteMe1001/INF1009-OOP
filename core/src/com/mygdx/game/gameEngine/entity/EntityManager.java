@@ -15,10 +15,7 @@ import com.mygdx.game.gameEngine.util.iAiMovement;
 import com.mygdx.game.gameEngine.util.iCollision;
 import com.mygdx.game.gameEngine.util.iPlayerMovement;
 import com.mygdx.game.gameLayer.collision.CollisionHandler;
-import com.mygdx.game.gameLayer.entity.Boss;
-import com.mygdx.game.gameLayer.entity.Enemy;
-import com.mygdx.game.gameLayer.entity.EntityFactory;
-import com.mygdx.game.gameLayer.entity.EntityType;
+import com.mygdx.game.gameLayer.entity.*;
 
 public class EntityManager {
 
@@ -290,6 +287,15 @@ public class EntityManager {
             }
         }
         return true;  // If bosses are dead, return true
+    }
+
+    public boolean isPlayerDead() {
+        for (Entity entity : entityList) {
+            if (entity instanceof Boy && entity.isAlive()) {
+                return false;  // If player is alive, return false
+            }
+        }
+        return true;  // If player is dead, return true
     }
 
     public boolean areAllBossesDead() {
