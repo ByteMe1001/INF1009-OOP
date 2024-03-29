@@ -2,10 +2,9 @@ package com.mygdx.game.gameLayer.scene;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.gameEngine.entity.CollidableEntities;
+import com.mygdx.game.gameLayer.GamePlayerManager;
 import com.mygdx.game.gameLayer.display.HealthBar;
 import com.mygdx.game.gameLayer.entity.EntityFactory;
 import com.mygdx.game.gameEngine.scene.Scene;
@@ -52,12 +51,15 @@ public class BossScene extends Scene implements iIO {
 
     private EntityManager entityManager;
     private EntityFactory entityFactory;
+
+    private GamePlayerManager gamePlayerManager;
     SceneManager sceneManager = SceneManager.getInstance();
 
 
 
     public BossScene(SceneManager sceneManager, EntityManager entityManager, SoundManager soundManager, SpriteBatch batch) {
         super(sceneManager, entityManager, soundManager, batch);
+        this.gamePlayerManager = (GamePlayerManager) (entityManager.getAbstractGamePlayerManager());
         this.entityFactory = new EntityFactory(batch, entityManager); // Assign the provided EntityFactory instance
         this.sceneManager = sceneManager;
         this.soundManager = soundManager;
@@ -113,7 +115,7 @@ public class BossScene extends Scene implements iIO {
         entityFactory.createEntity(2,1);        // Create boss
 
         // HealthBar Demo Code
-        this.healthBar = new HealthBar(super.getEntityManager().getPlayerControlManager());
+        this.healthBar = new HealthBar(gamePlayerManager);
     }
 
 

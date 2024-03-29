@@ -1,8 +1,9 @@
-package com.mygdx.game.gameEngine.player;
+package com.mygdx.game.gameLayer;
 
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.gameEngine.entity.EntityManager;
 import com.mygdx.game.gameEngine.entity.PlayableEntity;
+import com.mygdx.game.gameEngine.player.AbstractGamePlayerManager;
 import com.mygdx.game.gameEngine.util.iIO;
 import com.mygdx.game.gameEngine.util.iPlayerMovement;
 
@@ -11,12 +12,10 @@ import java.util.HashMap;
 import java.util.List;
 
 // TODO: CHANGE TO PLAYABLE ENTITY
-public class GamePlayerManager implements iIO {
-
-    private ArrayList<PlayableEntity> playerEntityList;
+public class GamePlayerManager extends AbstractGamePlayerManager {
     private HashMap<Integer, List<Integer>> healthDataMap;
 
-    private EntityManager entityManager;
+
 
     // END
 
@@ -25,14 +24,13 @@ public class GamePlayerManager implements iIO {
     }
 
     public GamePlayerManager(EntityManager entityManager, ArrayList<PlayableEntity> playerEntityList) {
-        this.entityManager = entityManager;
-        this.playerEntityList = playerEntityList;
+        super(entityManager, playerEntityList);
         healthDataMap = new HashMap<>();
     }
 
     // PLease fix remove args
     public void update(EntityManager entityManager) {
-        for (PlayableEntity e : playerEntityList) {
+        for (PlayableEntity e : getPlayerEntityList()) {
             e.movement(movement(e));
             shoot(e);
             addHealthData();
@@ -104,7 +102,7 @@ public class GamePlayerManager implements iIO {
     public void addHealthData() {
         int key = 0;
         healthDataMap.clear();
-        for (iPlayerMovement playerEntity : playerEntityList) {
+        for (iPlayerMovement playerEntity : getPlayerEntityList()) {
             List<Integer> healthDataList = new ArrayList<>();
             healthDataList.add(playerEntity.getHealth());
             healthDataList.add(playerEntity.getMaxHealth());
@@ -120,6 +118,9 @@ public class GamePlayerManager implements iIO {
     public HashMap<Integer, List<Integer>> getHealthDataMap() {
         return healthDataMap;
     }
+}
+
+
 
     // Getter and setter methods
 //    public float getX() {
@@ -145,4 +146,3 @@ public class GamePlayerManager implements iIO {
 //    public void setSpeed(float speed) {
 //        this.speed = speed;
 //    }
-}

@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-import com.mygdx.game.gameEngine.player.GamePlayerManager;
+import com.mygdx.game.gameEngine.player.AbstractGamePlayerManager;
+import com.mygdx.game.gameLayer.GamePlayerManager;
 import com.mygdx.game.gameEngine.sound.SoundManager;
 import com.mygdx.game.gameEngine.util.iAiMovement;
 import com.mygdx.game.gameEngine.util.iCollision;
@@ -28,7 +29,7 @@ public class EntityManager {
 
     private SpriteBatch batch;
 
-    private GamePlayerManager gamePlayerManager;
+    private AbstractGamePlayerManager abstractGamePlayerManager;
     private AiControlManager aiControlManager;
     private CollisionHandler collisionHandler;
 
@@ -51,7 +52,7 @@ public class EntityManager {
         this.collisionList = new ArrayList<iCollision>();
         this.newEntityList = new ArrayList<>();
         this.collisionManager = new CollisionManager(this, collisionList, collisionHandler);
-        this.gamePlayerManager = new GamePlayerManager(this, playerEntityList);
+        this.abstractGamePlayerManager = new GamePlayerManager(this, playerEntityList);
         this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);;
         this.entityFactory = new EntityFactory(batch, this);
     }
@@ -69,7 +70,7 @@ public class EntityManager {
         this.newEntityList = new ArrayList<>();
         //~~~~~~~~~~~MANAGER CREATION~~~~~~~~~~~~~~~~~~~~~~~~
         this.collisionManager = new CollisionManager(this, collisionList, collisionHandler);
-        this.gamePlayerManager = new GamePlayerManager(this, playerEntityList);
+        this.abstractGamePlayerManager = new GamePlayerManager(this, playerEntityList);
         this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);
         this.entityFactory = new EntityFactory(batch, this);
     }
@@ -199,7 +200,7 @@ public class EntityManager {
 //        updateEntities(playerEntityList);
 //        updateEntities(aiEntityList);
 //        collisionManager.updateCollisionList(entityList, playerEntityList, aiEntityList);
-        gamePlayerManager.update(this);
+        abstractGamePlayerManager.update(this);
         aiControlManager.update();
         collisionManager.detectCollision(this);
     }
@@ -251,13 +252,14 @@ public class EntityManager {
         findEntity(e).setAlive(b);
     }
 
-    public GamePlayerManager getPlayerControlManager() {
-        return gamePlayerManager;
+    public AbstractGamePlayerManager getAbstractGamePlayerManager() {
+        return abstractGamePlayerManager;
     }
 
-    public void setPlayerControlManager(GamePlayerManager gamePlayerManager) {
-        this.gamePlayerManager = gamePlayerManager;
+    public void setAbstractGamePlayerManager(AbstractGamePlayerManager abstractGamePlayerManager) {
+        this.abstractGamePlayerManager = abstractGamePlayerManager;
     }
+
 
     public AiControlManager getAiControlManager() {
         return aiControlManager;

@@ -2,9 +2,8 @@ package com.mygdx.game.gameLayer.display;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.gameEngine.player.GamePlayerManager;
+import com.mygdx.game.gameLayer.GamePlayerManager;
 import com.mygdx.game.gameEngine.util.iIO;
 
 import java.util.HashMap;
