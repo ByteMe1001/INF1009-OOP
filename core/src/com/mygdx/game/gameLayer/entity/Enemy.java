@@ -231,6 +231,7 @@ public class Enemy extends CollidableEntities implements iAiMovement{
         decrementChangeRate();
     }
 
+    // TODO: TO CLEAR AFTER FINALISING
     public void setLeftRight() {
         if (getChangeRate() <= 0) {
             int randomNumber = random.nextInt(2);
@@ -248,6 +249,7 @@ public class Enemy extends CollidableEntities implements iAiMovement{
         decrementChangeRate();
     }
 
+    // TODO: TO CLEAR AFTER FINALISING
     public void setUpDown() {
         // Check if entity has finished moving
         if (getChangeRate() <= 0) {

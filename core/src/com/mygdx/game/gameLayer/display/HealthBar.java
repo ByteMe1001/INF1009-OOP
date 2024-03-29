@@ -13,10 +13,7 @@ import java.util.List;
 public class HealthBar implements iIO {
 
     private GamePlayerManager gamePlayerManager;
-    private BitmapFont font;
-
     private Texture blank, green;
-
 
     protected static final float BAR_WIDTH = (float) Gdx.graphics.getWidth() / 2;
     protected static final float BAR_HEIGHT = 15f;

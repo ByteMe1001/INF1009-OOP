@@ -1,5 +1,6 @@
 package com.mygdx.game.gameLayer.entity;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.gameEngine.entity.Entity;
@@ -20,6 +21,10 @@ public class Boy extends PlayableEntity {
     private Bullet bullet;
 
     private int powerUpLevel;
+
+    // SHOOTING VARIABLES
+    private float timeSeconds = 0;
+    private static final float shootRate = 0.2f;
 
     // Default constructor
     public Boy() {
@@ -137,8 +142,12 @@ public class Boy extends PlayableEntity {
         float bulletSpawnX = getX() + BULLET_SPAWN_OFFSET_X;
         float bulletSpawnY = getY() + BULLET_SPAWN_OFFSET_Y;
 
-        // Create a new bullet instance and add it to the entity manager
-        Entity bullet = getEntityFactory().createEntity(3, 1, bulletSpawnX, bulletSpawnY);
+        // Call the shoot method of the Boy instance
+        timeSeconds += Gdx.graphics.getDeltaTime();
+        if(timeSeconds > shootRate) {
+            timeSeconds -= shootRate;
+            Entity bullet = getEntityFactory().createEntity(3, 1, bulletSpawnX, bulletSpawnY);
+        }
     }
 
 }

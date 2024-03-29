@@ -18,9 +18,6 @@ public class GamePlayerManager implements iIO {
 
     private EntityManager entityManager;
 
-    // TODO: SHOULD NOT BE HERE
-    private float timeSeconds = 0f;
-    private float period = 0.2f;
     // END
 
     public GamePlayerManager() {
@@ -37,7 +34,7 @@ public class GamePlayerManager implements iIO {
     public void update(EntityManager entityManager) {
         for (PlayableEntity e : playerEntityList) {
             e.movement(movement(e));
-            shoot(e, e.getX(), e.getY());
+            shoot(e);
             addHealthData();
         }
     }
@@ -91,17 +88,12 @@ public class GamePlayerManager implements iIO {
     }
 
     // TODO: Move to BOY
-    public void shoot(PlayableEntity entity, float x, float y) {
+    public void shoot(PlayableEntity entity) {
         switch (inputKey3()) {
             case "FALSE":
                 break;
             case "SPACE":
-                // Call the shoot method of the Boy instance
-                timeSeconds += Gdx.graphics.getDeltaTime();
-                if(timeSeconds > period) {
-                    timeSeconds -= period;
-                    entity.shoot(); // Assuming EntityManager is needed for bullet creation
-                }
+                entity.shoot(); // Assuming EntityManager is needed for bullet creation
                 break;
             default:
                 break;
