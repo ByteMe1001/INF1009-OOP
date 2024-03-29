@@ -11,6 +11,7 @@ import com.mygdx.game.gameLayer.scene.GameScene;
 import com.mygdx.game.gameLayer.scene.QuizScene;
 import com.mygdx.game.gameLayer.scene.StartingScene;
 import com.mygdx.game.gameLayer.scene.exitScene;
+import com.mygdx.game.gameLayer.scene.CongratsScene;
 
 import java.util.ArrayList;
 
@@ -63,6 +64,10 @@ public class SceneManager implements SceneChangeListener{
     }
     
     public void createExitScene() {
+        scenes.add(new exitScene(this, entityManager, soundManager, batch));
+    }
+    
+    public void createCongratsScene() {
         scenes.add(new exitScene(this, entityManager, soundManager, batch));
     }
 
@@ -143,6 +148,15 @@ public class SceneManager implements SceneChangeListener{
     public Scene getExitScene() {
         for (Scene scene : scenes) {
             if (scene instanceof exitScene) {
+                return scene;
+            }
+        }
+        return null;
+    }
+    
+    public Scene getCongratsScene() {
+        for (Scene scene : scenes) {
+            if (scene instanceof CongratsScene) {
                 return scene;
             }
         }
