@@ -146,7 +146,9 @@ public class CollisionHandler {
     	    } else if (boy.getPowerUpLevel() == 3) {
     	        boy.heal(50);
     	        boy.setSpeed(boy.getSpeed() + 50);
-    	    }
+    	    } else if (boy.getPowerUpLevel() >= 4){
+				System.out.println("Hit power up limit");
+			}
     	    
     	    System.out.println("Player speed increased to: " + boy.getSpeed());
     	    System.out.println("Player Healed to HP: " + boy.getHealth());
