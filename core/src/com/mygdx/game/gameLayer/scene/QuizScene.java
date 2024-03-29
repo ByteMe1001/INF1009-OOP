@@ -80,6 +80,20 @@ public class QuizScene extends Scene implements iIO {
         } else {
             System.out.println("SoundManager is null in QuizScene");
         }
+        
+        addButtonClickListener(trueButton, () -> {
+            // Logic to execute when the false button is clicked
+        	super.getSoundManager().stopMusic("StartingScene");
+            super.getSceneManager().swapScene(new BossScene(QuizScene.super.getSceneManager(), QuizScene.super.getEntityManager(), QuizScene.super.getSoundManager(), getBatch()));
+            //super.getSceneManager().swapScene(new GameScene(StartingScene.super.getSceneManager(), StartingScene.super.getSoundManager(), getBatch()));
+        });
+        
+        addButtonClickListener(falseButton, () -> {
+            // Logic to execute when the false button is clicked
+        	super.getSoundManager().stopMusic("StartingScene");
+            super.getSceneManager().swapScene(new exitScene(QuizScene.super.getSceneManager(), QuizScene.super.getEntityManager(), QuizScene.super.getSoundManager(), getBatch()));
+            //super.getSceneManager().swapScene(new GameScene(StartingScene.super.getSceneManager(), StartingScene.super.getSoundManager(), getBatch()));
+        });
 
        // super.getSoundManager().playMusic("StartingScene"); // to be changed
     }
@@ -97,7 +111,7 @@ public class QuizScene extends Scene implements iIO {
         button.setSize(buttonTexture.getWidth() * BUTTON_SCALE, buttonTexture.getHeight() * BUTTON_SCALE);
 
         // Add click listener to the button
-        button.addListener(new ClickListener() {
+       /* button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 // Handle button click
@@ -110,12 +124,12 @@ public class QuizScene extends Scene implements iIO {
                     handleFalseButtonClick();
                 }
             }
-        });
+        }); */
 
         return button;
     }
 
-    private void handleTrueButtonClick() {
+   /* private void handleTrueButtonClick() {
     	SceneManager sceneManager = getSceneManager();
         sceneManager.createBossScene();
         sceneManager.swapScene(sceneManager.getBossScene());
@@ -124,15 +138,15 @@ public class QuizScene extends Scene implements iIO {
     	//Gdx.app.exit();
     	// TODO MAKE IT SUCH THAT WHEN THE USER CLICKS THIS, IT BRINGS THEM TO ANOTHER PAGE
     	// THAT SAYS THANKS FOR PLAYING OR SOMETHING LIKE THAT
-    }
+    } */
 
 
 
-    private void handleFalseButtonClick() {
+    //private void handleFalseButtonClick() {
     	
-    	SceneManager sceneManager = getSceneManager();
-        sceneManager.createExitScene();
-        sceneManager.swapScene(sceneManager.getExitScene());
+    	//SceneManager sceneManager = getSceneManager();
+        //sceneManager.createExitScene();
+        //sceneManager.swapScene(sceneManager.getExitScene());
     	
         // Handle false button click
         //dx.app.exit(); // Exit the game if false button is clicked
@@ -148,7 +162,7 @@ public class QuizScene extends Scene implements iIO {
         // Swap to the GameScene
         sceneManager.swapScene(gameScene); */
 
-    }
+    //}
 
     private void addCenterText(Table table, String text) {
         // Create LabelStyle with the initialized font
