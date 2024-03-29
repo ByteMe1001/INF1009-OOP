@@ -27,6 +27,7 @@ public class exitScene extends Scene implements iIO {
 
     private final static String EXIT_BUTTON_TEXTURE_PATH = "exit_button.png";
     private final static String BACKGROUND_TEXTURE_PATH = "exit_image.png";
+    private final static String RESTART_BUTTON_TEXTURE_PATH = "restart_button.png";
 
     private final static float BUTTON_SCALE = 0.05f; // Adjusted scale for buttons
     private Stage stage;
@@ -59,14 +60,31 @@ public class exitScene extends Scene implements iIO {
         //mainTable.setDebug(true);
 
         // Add text to the main table
-        addCenterText(mainTable, "Game Over, Thank you for playing :)");
+        Label gameOverLabel = new Label("Game Over, Thank you for playing :)", new Label.LabelStyle(font, Color.BLACK));
+        gameOverLabel.setFontScale(2f);
+        gameOverLabel.setAlignment(Align.center);
 
         // Create exit button
         ImageButton exitButton = createButton(EXIT_BUTTON_TEXTURE_PATH, true);
+        
+        // Create restart button
+        ImageButton restartButton = createButton(RESTART_BUTTON_TEXTURE_PATH, false);
+        
+        restartButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // Logic for restarting the game
+                exitScene.super.getSoundManager().stopAll(); // Stop all sounds
+                getSceneManager().createStartingScene(); // Create the starting scene again
+                getSceneManager().swapScene(getSceneManager().getStartingScene()); // Swap to the starting scene
+            }
+        });
+
 
         // Add buttons to the main table
-        mainTable.row().padTop(40); // Add a row and padding to separate the text and buttons
-        mainTable.add(exitButton).size(150, 50).align(Align.center); // Adjusted button size and alignment
+        mainTable.add(gameOverLabel).colspan(2).padBottom(20).row();
+        mainTable.add(exitButton).size(150, 50).padRight(10); 
+        mainTable.add(restartButton).size(150, 50).padLeft(10);
         //mainTable.row().pad(10);
 
 
