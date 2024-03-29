@@ -93,7 +93,7 @@ public class QuizScene extends Scene implements iIO {
         	super.getSoundManager().stopMusic("StartingScene");
             getBatch().end();
             System.out.println(QuizScene.super.getEntityManager());
-            super.getSceneManager().swapScene(new BossScene(super.getSceneManager(), super.getEntityManager(), super.getSoundManager(), getBatch()));
+            super.getSceneManager().swapScene(new CongratsScene(super.getSceneManager(), super.getEntityManager(), super.getSoundManager(), getBatch()));
             //super.getSceneManager().swapScene(new GameScene(StartingScene.super.getSceneManager(), StartingScene.super.getSoundManager(), getBatch()));
         });
         
