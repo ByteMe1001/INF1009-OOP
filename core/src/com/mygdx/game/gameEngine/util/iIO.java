@@ -101,8 +101,6 @@ public interface iIO {
 
     // Default method to draw a shape using a ShapeRenderer
     default void drawShape(ShapeRenderer shapeRenderer, String shapeType, float x, float y, float width, float height, Color color) {
-        //shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-
         switch (shapeType) {
             case "CIRCLE":
                 shapeRenderer.setColor(color);

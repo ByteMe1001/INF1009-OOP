@@ -118,11 +118,6 @@ public class GameScene extends Scene implements iIO {
         entityFactory.createEntity(1,5);        // Create enemy
         entityFactory.createEntity(2,1);        // Create boss
 //        entityFactory.createEntity(5,3);        // Create health pack
-//        super.getEntityManager().createEnemies(5);
-//        super.getEntityManager().createPlayerBullets(0);
-//        super.getEntityManager().createEnemyBullets(1);
-//        super.getEntityManager().createHealthPack(1);
-//        super.getEntityManager().createBoss();
         //pause button logic
 
         // HealthBar Demo Code
@@ -151,36 +146,19 @@ public class GameScene extends Scene implements iIO {
         pauseButton.getImageCell().align(Align.center);
 
         // Add click listener to the pause button
-        //pause button logic
-        // Pause button logic
-        pauseButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-
-                SceneManager sceneManager = getSceneManager();
-                if (sceneManager.isPaused()) {
-                    sceneManager.resume();
-                    pauseButton.getStyle().imageUp = pauseButtonDrawable;
-                } else {
-                    sceneManager.pause();
-                    pauseButton.getStyle().imageUp = resumeButtonDrawable;
-                }
+        addButtonClickListener(pauseButton, () -> {
+            SceneManager sceneManager = getSceneManager();
+            if (sceneManager.isPaused()) {
+                sceneManager.resume();
+                pauseButton.getStyle().imageUp = pauseButtonDrawable;
+            } else {
+                sceneManager.pause();
+                pauseButton.getStyle().imageUp = resumeButtonDrawable;
             }
         });
 
-
         return pauseButton;
     }
-
-
-    //Replace with a method to update the entity health
-//    private void decreaseHealth() {
-//        health -= healthDecreaseAmount;
-//        if (health < 0) {
-//            health = 0;
-//        }
-//    }
-
 
 
     private ImageButton createHomeButton() {
@@ -188,20 +166,17 @@ public class GameScene extends Scene implements iIO {
         TextureRegionDrawable backBtnDrawable = new TextureRegionDrawable(backBtnRegion);
         ImageButton backButton = new ImageButton(backBtnDrawable);
 
-        backButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-            	// Stop and dispose of the music
-                getSoundManager().stopAll();
-                getSoundManager().dispose();
+        addButtonClickListener(backButton, () -> {
+            // Stop and dispose of the music
+            getSoundManager().stopAll();
+            getSoundManager().dispose();
 
-                // Clear entities
-                getEntityManager().dispose();
+            // Clear entities
+            getEntityManager().dispose();
 
-                // Navigate to the StartingScene
-                sceneManager.createStartingScene(); 
-                sceneManager.swapScene(sceneManager.getStartingScene());
-            }
+            // Navigate to the StartingScene
+            sceneManager.createStartingScene();
+            sceneManager.swapScene(sceneManager.getStartingScene());
         });
 
         return backButton;
@@ -217,26 +192,12 @@ public class GameScene extends Scene implements iIO {
         super.getBatch().draw(super.getBackground(), 0, backgroundY, 640, 640);
         super.getBatch().draw(super.getBackground(), 0, backgroundY + 640, 640, 640);
 
-
-
-
-//        //For HealthBar logic
-//        super.getBatch().draw(blank, 10, Gdx.graphics.getHeight() - 30, Gdx.graphics.getWidth()/2, Gdx.graphics.getWidth()/2);
-//        // Draw foreground health bar based on current health
-//        float foregroundWidth = Gdx.graphics.getWidth()/2 * (health / 100.0f); // Calculate width based on current health percentage
-//        super.getBatch().draw(green, 10, Gdx.graphics.getHeight() - 30, foregroundWidth, healthBarHeight);
-//        super.getBatch().draw(blank,0, 0, Gdx.graphics.getWidth() * health, 5);
-
-
-
-
         // Game Loop
         // PATCH FIX
         if (!getSceneManager().isPaused()) {
             super.getEntityManager().update();
             healthBar.draw(getBatch());
 
-            
          // Check if all boss entities are dead and go to the QuizScene
             if (super.getEntityManager().areAllEnemiesDead()) {
                 SceneManager sceneManager = getSceneManager();
@@ -245,8 +206,6 @@ public class GameScene extends Scene implements iIO {
                 sceneManager.swapScene(new QuizScene(sceneManager, soundManager, entityManager, batch));
                 return; // Skip the remaining rendering code since we're going to a new scene
             }
-
-            
 
             //Below here is the logic for the moving scene when not paused
             backgroundY -= backgroundVelocity;
