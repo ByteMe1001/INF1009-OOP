@@ -111,6 +111,7 @@ public class GameScene extends Scene implements iIO {
 
         // HealthBar
         this.healthBar = new HealthBar(gamePlayerManager);
+
     }
 
 
@@ -182,13 +183,24 @@ public class GameScene extends Scene implements iIO {
         // Game Loop
         if (!getSceneManager().isPaused()) {
             super.getEntityManager().update();
+            healthBar.draw(getBatch());
 
          // Check if all boss entities are dead and go to the QuizScene
             if (super.getEntityManager().areAllEnemiesDead()) {
                 SceneManager sceneManager = getSceneManager();
                 SoundManager soundManager = getSoundManager();
                 SpriteBatch batch = getBatch();
-                sceneManager.swapScene(new QuizScene(sceneManager, soundManager, entityManager, batch));
+                batch.end();
+                sceneManager.swapScene(new QuizScene(sceneManager, soundManager, super.getEntityManager(), batch));
+                return; // Skip the remaining rendering code since we're going to a new scene
+            }
+            
+            if (super.getEntityManager().isPlayerDead()) {
+                SceneManager sceneManager = getSceneManager();
+                SoundManager soundManager = getSoundManager();
+                SpriteBatch batch = getBatch();
+                batch.end();
+                sceneManager.swapScene(new exitScene(sceneManager, super.getEntityManager(), soundManager, batch));
                 return; // Skip the remaining rendering code since we're going to a new scene
             }
 
@@ -199,8 +211,6 @@ public class GameScene extends Scene implements iIO {
                 backgroundY = 0;
             }
         }
-
-        healthBar.draw(getBatch());
 
         // Entity Rendering
         super.getEntityManager().draw();
