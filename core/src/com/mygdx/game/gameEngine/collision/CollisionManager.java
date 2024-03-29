@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import com.mygdx.game.gameEngine.entity.EntityManager;
+import com.mygdx.game.gameEngine.player.PlayerManager;
 import com.mygdx.game.gameEngine.sound.SoundManager;
 import com.mygdx.game.gameEngine.util.iCollision;
 import com.mygdx.game.gameLayer.collision.CollisionHandler;
@@ -16,15 +17,17 @@ public class CollisionManager {
     private ArrayList<iCollision> collisionList;
     private EntityManager entityManager;     // Entity Manager for entity control
     private static SoundManager soundManager;      // Sound manager for collision sounds
+    private PlayerManager playerManager;
     private CollisionHandler collisionHandler;
 
     // private CollisionStrategy collisionStrategy;
 
-    public CollisionManager(EntityManager entityManager, ArrayList<iCollision> collisionList, CollisionHandler collisionHandler ) {
+    public CollisionManager(EntityManager entityManager, PlayerManager playerManager, ArrayList<iCollision> collisionList, CollisionHandler collisionHandler ) {
         this.entityManager = entityManager;
+        this.playerManager = playerManager;
         soundManager = SoundManager.getInstance();
         this.collisionList = collisionList;
-        this.collisionHandler = new CollisionHandler(collisionList);
+        this.collisionHandler = new CollisionHandler(playerManager, collisionList);
     }
 
     // Default constructor

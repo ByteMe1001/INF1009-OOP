@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.mygdx.game.gameEngine.entity.CollidableEntities;
 import com.mygdx.game.gameEngine.entity.Entity;
 import com.mygdx.game.gameEngine.player.Player;
+import com.mygdx.game.gameEngine.player.PlayerManager;
 import com.mygdx.game.gameEngine.sound.SoundManager;
 import com.mygdx.game.gameEngine.util.iAiMovement;
 import com.mygdx.game.gameEngine.util.iCollision;
@@ -14,16 +15,17 @@ import java.util.ArrayList;
 public class CollisionHandler {
 
     private ArrayList<iCollision> collisionList;
+	private PlayerManager playerManager;
     private static SoundManager soundManager;
-    private Player player;
+
     private float timeSeconds = 0f;
     private float period = 1.5f;
     
 	// Constructor to initialize collisionList
-    public CollisionHandler(ArrayList<iCollision> collisionList) {
+    public CollisionHandler(PlayerManager playerManager, ArrayList<iCollision> collisionList) {
+		this.playerManager = playerManager;
         this.collisionList = collisionList;
         soundManager = SoundManager.getInstance();
-        this.player = new Player();
     }
 
     public void handleCollision(iCollision x, iCollision y){
@@ -70,9 +72,9 @@ public class CollisionHandler {
     	    if (boss.getHealth() <= 0) {
     	        collisionList.remove(boss);
     	        boss.setAlive(false);
-    	        int score = player.getScore() + 500;
-    	        player.setScore(score);
-    	        System.out.println("Player Score: " + player.getScore());
+    	        //int score = player.getScore() + 500;
+    	        //player.setScore(score);
+    	        //System.out.println("Player Score: " + player.getScore());
     	    }
     	    
     	    if (bullet.getY() >= 500) {
@@ -92,9 +94,9 @@ public class CollisionHandler {
     	    System.out.println("Enemy Health: " + enemy.getHealth());
     	    
     	    if (enemy.getHealth() <= 0) {
-    	        int score = player.getScore() + 10;
-    	        player.setScore(score);
-    	        System.out.println("Player Score: " + player.getScore());
+    	        //int score = player.getScore() + 10;
+    	        //player.setScore(score);
+    	        //System.out.println("Player Score: " + player.getScore());
 				enemy.setAlive(false);
 				collisionList.remove(enemy);
     	    }
