@@ -101,7 +101,6 @@ public class GamePlayerManager implements iIO {
                 if(timeSeconds > period) {
                     timeSeconds -= period;
                     entity.shoot(); // Assuming EntityManager is needed for bullet creation
-                    System.out.println("SPace");
                 }
                 break;
             default:

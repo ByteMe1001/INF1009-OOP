@@ -224,17 +224,6 @@ public class EntityManager {
         }
     }
 
-    public void dispose() {
-        // Dispose entities in entityList FOR SPRITE
-        for (Entity entity : entityList) {
-            entity.dispose();
-        }
-
-        // Clear Lists
-        entityList.clear();
-        playerEntityList.clear();
-        aiEntityList.clear();
-    }
 
     // Getter Setter methods
 
@@ -384,6 +373,17 @@ public class EntityManager {
 //            }
 //        }
         throw new IllegalArgumentException("Entity not found in the entity list");
+    }
+    public void dispose() {
+        // Dispose entities in entityList FOR SPRITE
+        for (Entity entity : entityList) {
+            entity.dispose();
+        }
+
+        // Clear Lists
+        entityList.clear();
+        playerEntityList.clear();
+        aiEntityList.clear();
     }
 
 }

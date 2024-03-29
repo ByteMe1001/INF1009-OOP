@@ -100,7 +100,7 @@ public class StartingScene extends Scene implements iIO {
 
     @Override
     public void dispose() {
-        StartingScene.super.getSoundManager().stopAll();        // Stop music only, do not dispose sound manager
-        stage.dispose(); // Dispose stage
+        super.getSoundManager().stopAll();        // Stop music only, do not dispose sound manager
+        //stage.dispose(); // Dispose stage
     }
 }

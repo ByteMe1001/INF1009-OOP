@@ -163,8 +163,6 @@ public class SceneManager implements SceneChangeListener{
 
         // Resume sound effects and music
         soundManager.resumeAll();
-
-
     }
 
 }
