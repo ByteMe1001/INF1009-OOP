@@ -287,36 +287,13 @@ public class GameScene extends Scene implements iIO {
     public void pause() {
         // Pause the game
         super.pause();
-//        isPaused = true; // Set the isPaused flag to true
-//        System.out.println("Game Paused"); // Print a message indicating that the game is paused
-//
-//        // Pause sound effects and music
-//        soundManager.pauseAll();
-        
-        
-
-        // Stop entity movements
-        //super.getEntityManager().stopAllMovements(); // Implement this method in your EntityManager class
-
-
     }
     
-    
-
     @Override
     public void resume() {
         // Resume the game
         super.resume();
-//        isPaused = false; // Set the isPaused flag to false
-//        System.out.println("Game Resumed"); // Print a message indicating that the game is resumed
-//
-//        // Resume sound effects and music
-//        soundManager.resumeAll();
-
-        // Resume any other game activities
     }
-
-
 
     @Override
     public void hide() {
