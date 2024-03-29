@@ -230,6 +230,9 @@ public class GameScene extends Scene implements iIO {
     public void dispose() {
         // Dispose of resources
         super.dispose();
+        if (super.getSoundManager().isMusicPlaying()) {
+            super.getSoundManager().stopMusic("GameScene"); // can change to whatever music ltr
+        }
         pauseButtonTexture.dispose();
         stage.dispose();
     }

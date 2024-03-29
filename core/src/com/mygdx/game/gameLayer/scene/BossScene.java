@@ -21,7 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 
 public class BossScene extends Scene implements iIO {
-    private final static String TEXTURE_PATH = "scrolling_Background.png";
+    private final static String TEXTURE_PATH = "boss_BG.png";
     private final static String PAUSE_BUTTON_PATH = "pause_button.png";
     private final static String RESUME_BUTTON_PATH = "resume_button.png";
     private Stage stage; // Stage for buttons
