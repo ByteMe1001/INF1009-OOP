@@ -3,7 +3,7 @@ package com.mygdx.game.gameLayer.sound;
 import com.mygdx.game.gameEngine.sound.SoundEffect;
 import com.mygdx.game.gameEngine.sound.SoundEffectType;
 import com.mygdx.game.gameEngine.sound.SoundTrack;
-import com.mygdx.game.gameEngine.sound.backgroundMusic;
+import com.mygdx.game.gameEngine.sound.BackgroundMusic;
 
 import java.util.Collection;
 
@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GameSoundTrack extends SoundTrack {
-    private Map<String, backgroundMusic> backgroundMusicMap;
+    private Map<String, BackgroundMusic> backgroundMusicMap;
     private Map<SoundEffectType, SoundEffect> soundEffectMap;
 
     public GameSoundTrack() {
@@ -19,8 +19,8 @@ public class GameSoundTrack extends SoundTrack {
         soundEffectMap = new HashMap<>();
 
         // BGM addition
-        backgroundMusicMap.put("StartingScene", new backgroundMusic("Ground_Theme.wav"));
-        backgroundMusicMap.put("GameScene", new backgroundMusic("SkyFire.wav"));
+        backgroundMusicMap.put("StartingScene", new BackgroundMusic("Ground_Theme.wav"));
+        backgroundMusicMap.put("GameScene", new BackgroundMusic("SkyFire.wav"));
         // SFX addition
         soundEffectMap.put(SoundEffectType.BUTTON, new SoundEffect("button_sound.wav"));
         soundEffectMap.put(SoundEffectType.HIT, new SoundEffect("explosion.wav"));
@@ -28,7 +28,7 @@ public class GameSoundTrack extends SoundTrack {
         soundEffectMap.put(SoundEffectType.COLLECT, new SoundEffect("eatingSound.wav"));
     }
 
-    public backgroundMusic getBackgroundMusic(String sceneName) {
+    public BackgroundMusic getBackgroundMusic(String sceneName) {
         return backgroundMusicMap.get(sceneName);
     }
 
@@ -38,23 +38,23 @@ public class GameSoundTrack extends SoundTrack {
 
     // Pause all BGM
     public void pauseAllBackgroundMusic() {
-        Collection<backgroundMusic> backgroundMusicCollection = backgroundMusicMap.values();
-        for (backgroundMusic music : backgroundMusicCollection) {
+        Collection<BackgroundMusic> backgroundMusicCollection = backgroundMusicMap.values();
+        for (BackgroundMusic music : backgroundMusicCollection) {
             music.pause();
         }
     }
 
     // Resume all BGM
     public void resumeAllBackgroundMusic() {
-        Collection<backgroundMusic> backgroundMusicCollection = backgroundMusicMap.values();
-        for (backgroundMusic music : backgroundMusicCollection) {
+        Collection<BackgroundMusic> backgroundMusicCollection = backgroundMusicMap.values();
+        for (BackgroundMusic music : backgroundMusicCollection) {
             music.resume();
         }
     }
 
     // Stop specific BGM
     public void stopMusic(String sceneName) {
-        backgroundMusic music = getBackgroundMusic(sceneName);
+        BackgroundMusic music = getBackgroundMusic(sceneName);
         if (music != null) {
             music.stop();
         } else {
@@ -64,16 +64,16 @@ public class GameSoundTrack extends SoundTrack {
 
     // Stop all sound
     public void stopAll() {
-        Collection<backgroundMusic> backgroundMusicCollection = backgroundMusicMap.values();
-        for (backgroundMusic music : backgroundMusicCollection) {
+        Collection<BackgroundMusic> backgroundMusicCollection = backgroundMusicMap.values();
+        for (BackgroundMusic music : backgroundMusicCollection) {
             music.stop();
         }
     }
 
     // Dispose method
     public void dispose() {
-        Collection<backgroundMusic> backgroundMusicCollection = backgroundMusicMap.values();
-        for (backgroundMusic music : backgroundMusicCollection) {
+        Collection<BackgroundMusic> backgroundMusicCollection = backgroundMusicMap.values();
+        for (BackgroundMusic music : backgroundMusicCollection) {
             music.dispose();
         }
 

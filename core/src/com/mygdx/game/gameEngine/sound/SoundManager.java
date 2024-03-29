@@ -2,13 +2,7 @@ package com.mygdx.game.gameEngine.sound;
 
 import com.mygdx.game.gameLayer.sound.GameSoundTrack;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class SoundManager {
@@ -50,7 +44,7 @@ public class SoundManager {
 
     // Play music
     public void playMusic(String sceneName) {
-        backgroundMusic music = soundTrack.getBackgroundMusic(sceneName);
+        BackgroundMusic music = soundTrack.getBackgroundMusic(sceneName);
         if (music != null) {
             music.play();
             isMusicPlaying = true;
@@ -66,7 +60,7 @@ public class SoundManager {
     }
     
     public void stopMusic(String sceneName) {
-        backgroundMusic music = soundTrack.getBackgroundMusic(sceneName);
+        BackgroundMusic music = soundTrack.getBackgroundMusic(sceneName);
         if (music != null) {
             music.stop();
             isMusicPlaying = false;

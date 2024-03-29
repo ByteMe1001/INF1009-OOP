@@ -3,12 +3,12 @@ package com.mygdx.game.gameEngine.sound;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 
-public class backgroundMusic {
+public class BackgroundMusic {
     private Music music;        // Music object
     private float position;     // Set position to resume music
 
     // Constructor with fileName
-    public backgroundMusic(String fileName) {
+    public BackgroundMusic(String fileName) {
         try{
             this.music = Gdx.audio.newMusic(Gdx.files.internal(fileName));
         } catch (Exception e) {

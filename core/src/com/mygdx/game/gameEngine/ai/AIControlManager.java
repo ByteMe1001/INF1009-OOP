@@ -36,7 +36,6 @@ public class AIControlManager {
      * If the entity's change rate is negative, it is reset to a random positive value.
      * Then, the entity's movement strategy is used to move the entity.
      */
-
     public void movement(iAiMovement entity) {
         // If change rate is negative reset it back to random +ve
         if (entity.getChangeRate() < 0 ) {
