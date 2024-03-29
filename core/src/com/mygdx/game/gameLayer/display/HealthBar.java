@@ -1,21 +1,18 @@
 package com.mygdx.game.gameLayer.display;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mygdx.game.gameEngine.player.PlayerControlManager;
+import com.mygdx.game.gameEngine.player.gamePlayerManager;
 import com.mygdx.game.gameEngine.util.iIO;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class HealthBar implements iIO {
 
-    private PlayerControlManager playerControlManager;
+    private gamePlayerManager gamePlayerManager;
     private BitmapFont font;
 
     private Texture blank, green;
@@ -24,8 +21,8 @@ public class HealthBar implements iIO {
     protected static final float BAR_WIDTH = (float) Gdx.graphics.getWidth() / 2;
     protected static final float BAR_HEIGHT = 15f;
 
-    public HealthBar(PlayerControlManager playerControlManager) {
-        this.playerControlManager = playerControlManager;
+    public HealthBar(gamePlayerManager gamePlayerManager) {
+        this.gamePlayerManager = gamePlayerManager;
         // TEXTURES
         blank = new Texture("blackbackground.PNG");
         green = new Texture("green.jpg");
@@ -34,7 +31,7 @@ public class HealthBar implements iIO {
     public void draw(SpriteBatch batch) {
         float healthBarX = 10;
         float healthBarY = Gdx.graphics.getHeight() - 30;
-        HashMap<Integer, List<Integer>> healthDataMap = playerControlManager.getHealthDataMap();
+        HashMap<Integer, List<Integer>> healthDataMap = gamePlayerManager.getHealthDataMap();
 
         for (int i = 0; i < healthDataMap.size(); i++) {
             List<Integer> healthData = healthDataMap.get(i);
