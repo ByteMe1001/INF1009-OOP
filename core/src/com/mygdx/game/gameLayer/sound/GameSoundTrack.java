@@ -25,6 +25,7 @@ public class GameSoundTrack extends SoundTrack {
 
         soundEffectMap.put("StartingScene_Button", new SoundEffect("button_sound.wav"));
         soundEffectMap.put("GameScene_Collision", new SoundEffect("explosion.wav"));
+        soundEffectMap.put("eatPowerup", new SoundEffect("eatingSound.wav"));
 
 //        soundEffectMap.put(SoundEffectType.FIRE, new SoundEffect("fire_sound.wav"));
 //        soundEffectMap.put(SoundEffectType.TOUCH, new SoundEffect("touch_sound.wav"));

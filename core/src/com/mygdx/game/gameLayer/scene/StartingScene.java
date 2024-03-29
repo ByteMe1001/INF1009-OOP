@@ -72,6 +72,7 @@ public class StartingScene extends Scene implements iIO {
         // Swap scene when clicked
         addButtonClickListener(playButton, () -> {
             // Logic to execute when the play button is clicked
+        	super.getSoundManager().stopMusic("StartingScene");
             super.getSceneManager().swapScene(new GameScene(StartingScene.super.getSceneManager(), StartingScene.super.getEntityManager(), StartingScene.super.getSoundManager(), getBatch()));
             //super.getSceneManager().swapScene(new GameScene(StartingScene.super.getSceneManager(), StartingScene.super.getSoundManager(), getBatch()));
         });

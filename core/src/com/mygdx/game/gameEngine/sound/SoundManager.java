@@ -90,6 +90,16 @@ public class SoundManager {
         }
         isMusicPlaying = false;
     }
+    
+    public void stopMusic(String sceneName) {
+        backgroundMusic music = soundTrack.getBackgroundMusic(sceneName);
+        if (music != null) {
+            music.stop();
+            isMusicPlaying = false;
+        } else {
+            throw new IllegalArgumentException("Scene name not found in sound map: " + sceneName);
+        }
+    }
 
     // TODO: change to pause logic
     // Pause all sounds and music
