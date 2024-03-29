@@ -85,14 +85,14 @@ public class Enemy extends CollidableEntities implements iAiMovement{
         //movementStrategy.move(this);
         super.update();
         shootTimer += Gdx.graphics.getDeltaTime();
-        if (getY() < Gdx.graphics.getHeight() / 2) {
-            setY(Gdx.graphics.getHeight() / 2);
             if (shootTimer >= shootInterval) {
                 shoot();
                 shootTimer = 0; // Reset the timer after shooting
                 shootInterval = 1 + random.nextFloat() * (5 - 1);
             }
-        }
+            if (getY() < Gdx.graphics.getHeight() / 2.0f) {
+                setY(Gdx.graphics.getHeight() / 2.0f);
+            }
     }
 
     public void initializeMovementStrategy() {
