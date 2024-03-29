@@ -9,4 +9,5 @@ public abstract class SoundTrack {
     public abstract void pauseAllBackgroundMusic();
     public abstract void resumeAllBackgroundMusic();
     public abstract void dispose();
+    public abstract void stopAll();
 }

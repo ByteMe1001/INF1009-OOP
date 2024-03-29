@@ -55,6 +55,22 @@ public class GameSoundTrack extends SoundTrack {
         }
     }
 
+    public void stopMusic(String sceneName) {
+        backgroundMusic music = getBackgroundMusic(sceneName);
+        if (music != null) {
+            music.stop();
+        } else {
+            throw new IllegalArgumentException("Scene name not found in sound map: " + sceneName);
+        }
+    }
+
+    public void stopAll() {
+        Collection<backgroundMusic> backgroundMusicCollection = backgroundMusicMap.values();
+        for (backgroundMusic music : backgroundMusicCollection) {
+            music.stop();
+        }
+    }
+
     public void dispose() {
         Collection<backgroundMusic> backgroundMusicCollection = backgroundMusicMap.values();
         for (backgroundMusic music : backgroundMusicCollection) {

@@ -83,11 +83,7 @@ public class SoundManager {
 
     // Stop all sounds and music
     public void stopAll() {
-        for (List<Clip> clipList : clips.values()) {
-            for (Clip clip : clipList) {
-                clip.stop();
-            }
-        }
+        soundTrack.stopAll();
         isMusicPlaying = false;
     }
     
