@@ -95,6 +95,8 @@ public class CollisionHandler {
     	        int score = player.getScore() + 10;
     	        player.setScore(score);
     	        System.out.println("Player Score: " + player.getScore());
+				enemy.setAlive(false);
+				collisionList.remove(enemy);
     	    }
     	    
     	    if (bullet.getY() >= 500) {
