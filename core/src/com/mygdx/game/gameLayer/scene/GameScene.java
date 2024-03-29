@@ -111,7 +111,6 @@ public class GameScene extends Scene implements iIO {
 
         // HealthBar
         this.healthBar = new HealthBar(gamePlayerManager);
-
     }
 
 
@@ -190,8 +189,7 @@ public class GameScene extends Scene implements iIO {
                 SceneManager sceneManager = getSceneManager();
                 SoundManager soundManager = getSoundManager();
                 SpriteBatch batch = getBatch();
-                batch.end();
-                sceneManager.swapScene(new QuizScene(sceneManager, soundManager, super.getEntityManager(), batch));
+                sceneManager.swapScene(new QuizScene(sceneManager, soundManager, entityManager, batch));
                 return; // Skip the remaining rendering code since we're going to a new scene
             }
 

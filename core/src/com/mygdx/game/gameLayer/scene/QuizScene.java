@@ -80,8 +80,6 @@ public class QuizScene extends Scene implements iIO {
         } else {
             System.out.println("SoundManager is null in QuizScene");
         }
-
-       // super.getSoundManager().playMusic("StartingScene"); // to be changed
     }
 
     private ImageButton createButton(String buttonTexturePath, final boolean answer) {
@@ -101,7 +99,6 @@ public class QuizScene extends Scene implements iIO {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 // Handle button click
-                // Here, you can implement logic to check the answer
                 if (answer) {
                     // True button clicked
                     handleTrueButtonClick();
@@ -119,35 +116,14 @@ public class QuizScene extends Scene implements iIO {
     	SceneManager sceneManager = getSceneManager();
         sceneManager.createBossScene();
         sceneManager.swapScene(sceneManager.getBossScene());
-    	//handle true button click
-       // super.getSceneManager().swapScene(new GameScene(QuizScene.super.getSceneManager(), QuizScene.super.getEntityManager(), QuizScene.super.getSoundManager(), getBatch()));
-    	//Gdx.app.exit();
-    	// TODO MAKE IT SUCH THAT WHEN THE USER CLICKS THIS, IT BRINGS THEM TO ANOTHER PAGE
-    	// THAT SAYS THANKS FOR PLAYING OR SOMETHING LIKE THAT
     }
 
 
 
     private void handleFalseButtonClick() {
-    	
     	SceneManager sceneManager = getSceneManager();
         sceneManager.createExitScene();
         sceneManager.swapScene(sceneManager.getExitScene());
-    	
-        // Handle false button click
-        //dx.app.exit(); // Exit the game if false button is clicked
-        
-        // TO MAKE IT SUCH THAT IT GOES BACK TO THE GAME SCENE AGAIN
-    	/*SceneManager sceneManager = getSceneManager();
-        SoundManager soundManager = getSoundManager();
-        SpriteBatch batch = getBatch();
-
-        // Create a new instance of GameScene
-        GameScene gameScene = new GameScene(sceneManager, new EntityManager(soundManager, batch), soundManager, batch);
-
-        // Swap to the GameScene
-        sceneManager.swapScene(gameScene); */
-
     }
 
     private void addCenterText(Table table, String text) {
