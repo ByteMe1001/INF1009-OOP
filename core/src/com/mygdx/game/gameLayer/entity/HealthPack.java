@@ -14,7 +14,6 @@ public class HealthPack extends CollidableEntities implements iAiMovement {
 
     // Texture path for the bullet
     private static final String TEXTURE_PATH = "Broccoli.png";
-    //private static final int DEFAULT_CHANGE_RATE = 0;
     private int changeRate;
     private int defaultChangeRate;
     private AIMovementStrategy movementStrategy;
@@ -67,7 +66,6 @@ public class HealthPack extends CollidableEntities implements iAiMovement {
             setAlive(false);
         }
     }
-
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~GAME LOGIC CODE BLOCK~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     @Override
     public void takeDamage(int damage) {

@@ -69,6 +69,4 @@ public enum EntityType {
         this(health, 0, x, y, scale, speed, defaultChangeRate, /* default PlayerMovement */ null, texturePath);
     }
 
-
-
 }

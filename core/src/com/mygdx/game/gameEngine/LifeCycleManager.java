@@ -27,13 +27,6 @@ public class LifeCycleManager extends Game {
     
     }
 
-//    public LifeCycleManager(SpaceShooter spaceShooter, Player player, SpriteBatch batch) {
-//        this.spaceShooter = spaceShooter;
-//        this.player = player;
-//        this.batch = batch;
-//        sceneManager = new SceneManager(spaceShooter, batch);
-//    }
-
     @Override
     public void create() {
         player = new Player();
@@ -60,11 +53,6 @@ public class LifeCycleManager extends Game {
     @Override
     public void render() {
         super.render();
-        //lifeCycleManager.run();
-//		do {
-//			lifeCycleManager.run();
-//		}
-//		while (player.isPlaying());
     }
 
     @Override
@@ -80,14 +68,6 @@ public class LifeCycleManager extends Game {
         }
     }
 
-//    public void setStartingScreen() {
-//        setScreen(getStartingScene());
-//    }
-//
-//    public void setGameScreen() {
-//        setScreen(getGameScene());
-//    }
-
     public void playerStop() {
         player.setPlaying(false);
     }
@@ -96,11 +76,5 @@ public class LifeCycleManager extends Game {
         player.setPlaying(true);
     }
 
-//    public Scene getStartingScene() {
-//        return sceneManager.getStartingScene();
-//    }
-//    public Scene getGameScene() {
-//        return sceneManager.getGameScene();
-//    }
 
 }

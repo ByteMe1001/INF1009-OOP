@@ -1,4 +1,4 @@
-package com.mygdx.game.gameLayer;
+package com.mygdx.game.gameLayer.player;
 
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.gameEngine.entity.EntityManager;
@@ -15,7 +15,7 @@ public class GamePlayerManager extends AbstractGamePlayerManager {
     private HashMap<Integer, List<Integer>> healthDataMap;
 
     public GamePlayerManager() {
-
+        // Empty constructor
     }
 
     public GamePlayerManager(ArrayList<PlayableEntity> playerEntityList) {
@@ -64,7 +64,6 @@ public class GamePlayerManager extends AbstractGamePlayerManager {
         return vector;
     }
 
-    // TODO: Add input key map according to string and inputkey function
     public String movement(PlayableEntity entity) {
         switch (inputKey1()) {               // inputKey1() or inputKey2()
             case "UP":
@@ -80,7 +79,6 @@ public class GamePlayerManager extends AbstractGamePlayerManager {
         }
     }
 
-    // TODO: Move to BOY
     public void shoot(PlayableEntity entity) {
         switch (inputKey3()) {              // inputKey3()
             case "FALSE":
@@ -92,7 +90,6 @@ public class GamePlayerManager extends AbstractGamePlayerManager {
                 break;
         }
     }
-
 
     public void addHealthData() {
         int key = 0;
@@ -106,6 +103,7 @@ public class GamePlayerManager extends AbstractGamePlayerManager {
         }
     }
 
+    // For health bar display
     public List<Integer> getHealthData(int entityId) {
         return healthDataMap.get(entityId);
     }

@@ -1,6 +1,5 @@
 package com.mygdx.game.gameEngine.entity;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.gameEngine.ai.AIControlManager;
 import com.mygdx.game.gameEngine.collision.CollisionManager;
@@ -11,7 +10,7 @@ import java.util.Random;
 
 import com.mygdx.game.gameEngine.player.AbstractGamePlayerManager;
 import com.mygdx.game.gameEngine.player.PlayerManager;
-import com.mygdx.game.gameLayer.GamePlayerManager;
+import com.mygdx.game.gameLayer.player.GamePlayerManager;
 import com.mygdx.game.gameEngine.sound.SoundManager;
 import com.mygdx.game.gameEngine.util.iAiMovement;
 import com.mygdx.game.gameEngine.util.iCollision;

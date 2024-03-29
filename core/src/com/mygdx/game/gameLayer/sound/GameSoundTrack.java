@@ -12,22 +12,20 @@ import java.util.Map;
 
 public class GameSoundTrack extends SoundTrack {
     private Map<String, backgroundMusic> backgroundMusicMap;
-    //private Map<String, SoundEffect> soundEffectMap;
-
     private Map<SoundEffectType, SoundEffect> soundEffectMap;
 
     public GameSoundTrack() {
         backgroundMusicMap = new HashMap<>();
         soundEffectMap = new HashMap<>();
 
+        // BGM addition
         backgroundMusicMap.put("StartingScene", new backgroundMusic("Ground_Theme.wav"));
         backgroundMusicMap.put("GameScene", new backgroundMusic("SkyFire.wav"));
-
+        // SFX addition
         soundEffectMap.put(SoundEffectType.BUTTON, new SoundEffect("button_sound.wav"));
         soundEffectMap.put(SoundEffectType.HIT, new SoundEffect("explosion.wav"));
         soundEffectMap.put(SoundEffectType.FIRE, new SoundEffect("laser.wav"));
         soundEffectMap.put(SoundEffectType.COLLECT, new SoundEffect("eatingSound.wav"));
-
     }
 
     public backgroundMusic getBackgroundMusic(String sceneName) {
@@ -38,6 +36,7 @@ public class GameSoundTrack extends SoundTrack {
         return soundEffectMap.get(soundEffectType);
     }
 
+    // Pause all BGM
     public void pauseAllBackgroundMusic() {
         Collection<backgroundMusic> backgroundMusicCollection = backgroundMusicMap.values();
         for (backgroundMusic music : backgroundMusicCollection) {
@@ -45,6 +44,7 @@ public class GameSoundTrack extends SoundTrack {
         }
     }
 
+    // Resume all BGM
     public void resumeAllBackgroundMusic() {
         Collection<backgroundMusic> backgroundMusicCollection = backgroundMusicMap.values();
         for (backgroundMusic music : backgroundMusicCollection) {
@@ -52,6 +52,7 @@ public class GameSoundTrack extends SoundTrack {
         }
     }
 
+    // Stop specific BGM
     public void stopMusic(String sceneName) {
         backgroundMusic music = getBackgroundMusic(sceneName);
         if (music != null) {
@@ -61,6 +62,7 @@ public class GameSoundTrack extends SoundTrack {
         }
     }
 
+    // Stop all sound
     public void stopAll() {
         Collection<backgroundMusic> backgroundMusicCollection = backgroundMusicMap.values();
         for (backgroundMusic music : backgroundMusicCollection) {
@@ -68,6 +70,7 @@ public class GameSoundTrack extends SoundTrack {
         }
     }
 
+    // Dispose method
     public void dispose() {
         Collection<backgroundMusic> backgroundMusicCollection = backgroundMusicMap.values();
         for (backgroundMusic music : backgroundMusicCollection) {
@@ -80,67 +83,3 @@ public class GameSoundTrack extends SoundTrack {
         }
     }
 }
-
-
-//package com.mygdx.game.gameLayer.sound;
-//
-//import com.mygdx.game.gameEngine.sound.SoundEffect;
-//import com.mygdx.game.gameEngine.sound.SoundEffectType;
-//import com.mygdx.game.gameEngine.sound.SoundTrack;
-//import com.mygdx.game.gameEngine.sound.backgroundMusic;
-//
-//import java.util.Collection;
-//import java.util.HashMap;
-//import java.util.Map;
-//
-//public class GameSoundTrack extends SoundTrack {
-//    private Map<String, backgroundMusic> backgroundMusicMap;
-//    private Map<SoundEffectType, SoundEffect> soundEffectMap;
-//
-//    public GameSoundTrack() {
-//        backgroundMusicMap = new HashMap<>();
-//        soundEffectMap = new HashMap<>();
-//
-//        backgroundMusicMap.put("StartingScene", new backgroundMusic("Ground_Theme.wav"));
-//        backgroundMusicMap.put("GameScene", new backgroundMusic("SkyFire.wav"));
-//
-//        soundEffectMap.put(SoundEffectType.FIRE, new SoundEffect("fire_sound.wav"));
-//        soundEffectMap.put(SoundEffectType.TOUCH, new SoundEffect("touch_sound.wav"));
-//        soundEffectMap.put(SoundEffectType.BUTTON, new SoundEffect("button_sound.wav"));
-//        soundEffectMap.put(SoundEffectType.COLLECT, new SoundEffect("collect_sound.wav"));
-//    }
-//
-//    public backgroundMusic getBackgroundMusic(String sceneName) {
-//        return backgroundMusicMap.get(sceneName);
-//    }
-//
-//    public SoundEffect getSoundEffect(SoundEffectType effectType) {
-//        return soundEffectMap.get(effectType);
-//    }
-//
-//    public void pauseAllBackgroundMusic() {
-//        Collection<backgroundMusic> backgroundMusicCollection = backgroundMusicMap.values();
-//        for (backgroundMusic music : backgroundMusicCollection) {
-//            music.pause();
-//        }
-//    }
-//
-//    public void resumeAllBackgroundMusic() {
-//        Collection<backgroundMusic> backgroundMusicCollection = backgroundMusicMap.values();
-//        for (backgroundMusic music : backgroundMusicCollection) {
-//            music.resume();
-//        }
-//    }
-//
-//    public void dispose() {
-//        Collection<backgroundMusic> backgroundMusicCollection = backgroundMusicMap.values();
-//        for (backgroundMusic music : backgroundMusicCollection) {
-//            music.dispose();
-//        }
-//
-//        Collection<SoundEffect> soundEffectCollection = soundEffectMap.values();
-//        for (SoundEffect sound : soundEffectCollection) {
-//            sound.dispose();
-//        }
-//    }
-//}

@@ -111,7 +111,6 @@ public class SceneManager implements SceneChangeListener{
     }
 
     public void disposeCurrentScene() { //remove current scene
-
         currentScene.dispose();
     }
 

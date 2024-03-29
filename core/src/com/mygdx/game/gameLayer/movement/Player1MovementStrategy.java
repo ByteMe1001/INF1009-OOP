@@ -6,9 +6,6 @@ import com.mygdx.game.gameEngine.util.iPlayerMovement;
 
 public class Player1MovementStrategy extends PlayerMovement {
 
-
-    // TODO: add player movement instructions
-    // @Override
     public float[] calculateMovement(iPlayerMovement entity, String direction) {
         switch(direction) {
             case "UP":
@@ -23,7 +20,6 @@ public class Player1MovementStrategy extends PlayerMovement {
                 return noMovement(entity);
         }
     }
-
 
     public float[] up(iPlayerMovement entity) {
         float [] vector = new float[2];

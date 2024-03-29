@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.gameEngine.entity.CollidableEntities;
-import com.mygdx.game.gameLayer.GamePlayerManager;
+import com.mygdx.game.gameLayer.player.GamePlayerManager;
 import com.mygdx.game.gameLayer.display.HealthBar;
 import com.mygdx.game.gameLayer.entity.EntityFactory;
 import com.mygdx.game.gameEngine.scene.Scene;
@@ -181,7 +181,6 @@ public class BossScene extends Scene implements iIO {
     @Override
     public void render(float deltaTime) {
         ScreenUtils.clear(0, 0, 0, 1); // Clear screen
-
         super.getBatch().begin();
         //For moving scene
         super.getBatch().draw(super.getBackground(), 0, backgroundY, 640, 640);

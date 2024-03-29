@@ -75,7 +75,6 @@ public class StartingScene extends Scene implements iIO {
             // Logic to execute when the play button is clicked
         	super.getSoundManager().stopMusic("StartingScene");
             super.getSceneManager().swapScene(new GameScene(StartingScene.super.getSceneManager(), StartingScene.super.getEntityManager(), StartingScene.super.getSoundManager(), getBatch()));
-            //super.getSceneManager().swapScene(new GameScene(StartingScene.super.getSceneManager(), StartingScene.super.getSoundManager(), getBatch()));
         });
     }
 
@@ -102,6 +101,5 @@ public class StartingScene extends Scene implements iIO {
     @Override
     public void dispose() {
         super.getSoundManager().stopAll();        // Stop music only, do not dispose sound manager
-        //stage.dispose(); // Dispose stage
     }
 }

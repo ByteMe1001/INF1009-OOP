@@ -19,13 +19,11 @@ public class CollisionHandler {
 	private PlayerManager playerManager;
     private static SoundManager soundManager;
 
-	private Player player;
     private float timeSeconds = 0f;
     private float period = 1.5f;
     
 	// Constructor to initialize collisionList
     public CollisionHandler(PlayerManager playerManager, ArrayList<iCollision> collisionList) {
-		this.player = new Player("Player");
 		this.playerManager = playerManager;
         this.collisionList = collisionList;
         soundManager = SoundManager.getInstance();
@@ -75,13 +73,10 @@ public class CollisionHandler {
     	    if (boss.getHealth() <= 0) {
     	        collisionList.remove(boss);
     	        boss.setAlive(false);
-				//playerManager.createPlayer("Player");
-				playerManager.addPlayer(player);
-				int score = playerManager.getScore(player);
+				int score = playerManager.getScore();
 				score += 500;
-				//player.setScore(score);
-				playerManager.setScore(player, score);
-				System.out.print("Score: " + playerManager.getScore(player));
+				playerManager.setScore(score);
+				System.out.print("Score: " + playerManager.getScore());
     	    }
     	    
     	    if (bullet.getY() >= 500) {
@@ -102,12 +97,10 @@ public class CollisionHandler {
     	    
     	    if (enemy.getHealth() <= 0) {
 				playerManager.createPlayer("Player");
-				playerManager.addPlayer(player);
-				int score = playerManager.getScore(player);
+				int score = playerManager.getScore();
 				score += 10;
-				//player.setScore(score);
-				playerManager.setScore(player, score);
-				System.out.print("Score: " + playerManager.getScore(player));
+				playerManager.setScore(score);
+				System.out.print("Score: " + playerManager.getScore());
 				enemy.setAlive(false);
 				collisionList.remove(enemy);
     	    }
@@ -172,147 +165,6 @@ public class CollisionHandler {
     	        collisionList.remove(healthPack);
     	    }
     	}
-
-
-     /*   if(x.getClass().equals(Boy.class) && y.getClass().equals(Boss.class)
-            || y.getClass().equals(Boy.class) && x.getClass().equals(Boss.class)){
-            // Handle collision
-
-            timeSeconds += Gdx.graphics.getDeltaTime();
-            if(timeSeconds > period){
-                timeSeconds -= period;
-                ((Boy) x).takeDamage(10);
-                //((Boss) y).takeDamage(10);
-                //System.out.println("Cooldown on Collision");
-                System.out.println("Player Health: " + ((Boy) x).getHealth());
-                System.out.println("Boss Health: " + ((Boss) y).getHealth());
-                System.out.println(x + "has collided with " + y);
-            }
-
-        }
-
-        else if(x.getClass().equals(Boy.class) && y.getClass().equals(Enemy.class)
-                || y.getClass().equals(Boy.class) && x.getClass().equals(Enemy.class)){
-            // Handle collision
-
-            timeSeconds += Gdx.graphics.getDeltaTime();
-            if(timeSeconds > period){
-                timeSeconds -= period;
-                ((Boy) x).takeDamage(10);
-                //((Boss) y).takeDamage(10);
-                //System.out.println("Cooldown on Collision");
-                System.out.println("Player Health: " + ((Boy) x).getHealth());
-                System.out.println("Enemy Health: " + ((Enemy) y).getHealth());
-                System.out.println(x + "has collided with " + y);
-            }
-
-        }
-
-
-        else if (x.getClass().equals(Bullet.class) && y.getClass().equals(Boss.class)
-                || x.getClass().equals(Boss.class) && y.getClass().equals(Bullet.class)){
-            ((Boss) x).takeDamage(10);
-            ((Bullet) y).takeDamage(10);
-            collisionList.remove(y);
-            ((Bullet) y).setAlive(false);
-            soundManager.playSE("GameScene_Collision");
-
-            System.out.println("Boss Health" + x + " " + ((Boss) x).getHealth());
-             if(((Boss) x).getHealth() == 0) {
-                 collisionList.remove(x);
-                 ((Boss) x).setAlive(false);
-
-                     int score = player.getScore(); // Retrieve the current score from the player
-                     collisionList.remove(x);
-                     ((Boss) x).setAlive(false);
-                     score += 500; // Increment the score by 10 for killing an enemy
-                     player.setScore(score); // Set the updated score back to the player
-                     System.out.println("Player Score: " + player.getScore());
-
-
-             }
-
-             if(((Bullet) y).getY() >= 500){
-                 collisionList.remove(y);
-                 ((Bullet) y).setAlive(false);
-             }
-
-        }
-
-        else if (x.getClass().equals(Bullet.class) && y.getClass().equals(Enemy.class)
-                || x.getClass().equals(Enemy.class) && y.getClass().equals(Bullet.class)){
-            ((Enemy) x).takeDamage(10);
-            collisionList.remove(y);
-            ((Bullet) y).setAlive(false);
-            soundManager.playSE("GameScene_Collision");
-            System.out.println("Boss Health" + x + " " + ((Enemy) x).getHealth());
-            if(((Enemy) x).getHealth() == 0) {
-
-                int score = player.getScore(); // Retrieve the current score from the player
-                collisionList.remove(x);
-                ((Enemy) x).setAlive(false);
-                score += 10; // Increment the score by 10 for killing an enemy
-                player.setScore(score); // Set the updated score back to the player
-                System.out.println("Player Score: " + player.getScore());
-
-            }
-            if(((Bullet) y).getY() >= 500){
-                collisionList.remove(y);
-                ((Bullet) y).setAlive(false);
-            }
-
-        }
-
-        else if (x.getClass().equals(Boy.class) && y.getClass().equals(EnemyBullet.class)
-                ||x.getClass().equals(EnemyBullet.class) && y.getClass().equals(Boy.class)){
-            ((Boy) x).takeDamage(10);
-            collisionList.remove(y);
-            ((EnemyBullet) y).setAlive(false);
-            System.out.println("Player Health: " + ((Boy) x).getHealth());
-            if(((Boy) x).getHealth() == 0) {
-                collisionList.remove(x);
-                ((Boy) x).setAlive(false);
-            }
-            if(((EnemyBullet) y).getY() == 0){
-                ((EnemyBullet) y).setAlive(false);
-                collisionList.remove(y);
-            }
-        }
-
-        else if (x.getClass().equals(Boy.class) && y.getClass().equals(HealthPack.class)){
-
-
-            int powerupLevel = ((Boy) x).getPowerUpLevel(); // Retrieve the current score from the player
-            collisionList.remove(y);
-            soundManager.playSE("eatPowerup");
-            ((HealthPack) y).setAlive(false);
-            powerupLevel += 1; // Increment the score by 10 for killing an enemy
-            ((Boy) x).setPowerUpLevel(powerupLevel); // Set the updated score back to the player
-            System.out.println("Power Up Level: " + ((Boy) x).getPowerUpLevel());
-            if(((Boy) x).getPowerUpLevel() == 1) {
-                ((Boy) x).heal(30);
-                ((Boy) x).setSpeed(((Boy) x).getSpeed() + 50);
-
-            }
-            if(((Boy) x).getPowerUpLevel() == 2) {
-                ((Boy) x).heal(40);
-                ((Boy) x).setSpeed(((Boy) x).getSpeed() + 50);
-
-            }
-            if(((Boy) x).getPowerUpLevel() == 3) {
-                ((Boy) x).heal(50);
-                ((Boy) x).setSpeed(((Boy) x).getSpeed() + 50);
-            }
-            System.out.println("Player speed increased to: " + ((Boy) x).getSpeed());
-            System.out.println("Player Healed to HP: " + ((Boy) x).getHealth());
-            collisionList.remove(y);
-            ((HealthPack) y).setAlive(false);
-            if(((HealthPack) y).getY() == 0){
-                ((HealthPack) y).setAlive(false);
-                collisionList.remove(y);
-            }
-        } */
-
 
     }
 }

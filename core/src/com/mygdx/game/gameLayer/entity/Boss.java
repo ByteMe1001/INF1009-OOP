@@ -189,30 +189,6 @@ public class Boss extends CollidableEntities implements iAiMovement{
     }
 
 
-    public void setAll() {
-        // Check if entity has finished moving if so change direction
-        if (getChangeRate() <= 0) {
-            int randomNumber = random.nextInt(4); // Random number between 0 and 3 for four directions
-            switch (randomNumber) {
-                case 0:
-                    setMovementStrategy(getMovementStrategy("LeftMovement"));
-                    break;
-                case 1:
-                    setMovementStrategy(getMovementStrategy("RightMovement"));
-                    break;
-                case 2:
-                    setMovementStrategy(getMovementStrategy("UpMovement"));
-                    break;
-                case 3:
-                    setMovementStrategy(getMovementStrategy("DownMovement"));
-                    break;
-                default:
-                    break;
-            }
-        }
-        decrementChangeRate();
-    }
-
     public void setLeftRight() {
         if (getChangeRate() <= 0) {
             int randomNumber = random.nextInt(2);
@@ -230,37 +206,6 @@ public class Boss extends CollidableEntities implements iAiMovement{
         decrementChangeRate();
     }
 
-    public void setUpDown() {
-        // Check if entity has finished moving
-        if (getChangeRate() <= 0) {
-            int randomNumber = random.nextInt(2);
-            switch (randomNumber) {
-                case 0:
-                    setMovementStrategy(getMovementStrategy("UpMovement"));
-                    break;
-                case 1:
-                    setMovementStrategy(getMovementStrategy("DownMovement"));
-                    break;
-                default:
-                    break;
-            }
-        }
-        decrementChangeRate();
-    }
-
-    public void setUp() {
-        setMovementStrategy(getMovementStrategy("UpMovement"));
-    }
-
-    public void setDown() {
-
-    }
-    public void setLeft() {
-
-    }
-    public void setRight(){
-
-    }
 }
 
 

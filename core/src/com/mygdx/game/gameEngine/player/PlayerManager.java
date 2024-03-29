@@ -48,6 +48,9 @@ public class PlayerManager {
     public void setScore(Player p, int score) {
         findPlayer(p).setScore(score);
     }
+    public void setScore(int score) {
+        playerList.get(0).setScore(score);
+    }
 
     public void setPlaying(Player p, boolean playing) {
         findPlayer(p).setPlaying(playing);

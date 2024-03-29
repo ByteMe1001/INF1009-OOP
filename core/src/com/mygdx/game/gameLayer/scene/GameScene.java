@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.gameEngine.entity.CollidableEntities;
-import com.mygdx.game.gameLayer.GamePlayerManager;
+import com.mygdx.game.gameLayer.player.GamePlayerManager;
 import com.mygdx.game.gameLayer.display.HealthBar;
 import com.mygdx.game.gameLayer.entity.EntityFactory;
 import com.mygdx.game.gameEngine.scene.Scene;
@@ -34,10 +34,8 @@ public class GameScene extends Scene implements iIO {
     private float backgroundY = 0;
     private float backgroundVelocity = 4;
 
-    // HealthBar Demo Code
+    // HealthBar
     private HealthBar healthBar;
-
-
 
     private int health = 100;
     private Texture blank, green;
@@ -49,16 +47,12 @@ public class GameScene extends Scene implements iIO {
     private float healthDecreaseInterval = 3f;
     private int healthDecreaseAmount = 10;
 
-
-
-
     private EntityManager entityManager;
     private EntityFactory entityFactory;
     private GamePlayerManager gamePlayerManager;
     SceneManager sceneManager = SceneManager.getInstance();
 
-
-
+    // Constructor
     public GameScene(SceneManager sceneManager, EntityManager entityManager, SoundManager soundManager, SpriteBatch batch) {
         super(sceneManager, entityManager, soundManager, batch);
         this.gamePlayerManager = (GamePlayerManager) (entityManager.getAbstractGamePlayerManager());
@@ -86,7 +80,6 @@ public class GameScene extends Scene implements iIO {
 
         // Create UI table
         Table uiTable = new Table();
-        //uiTable.setDebug(true); // Enable debug lines, to remove when button and positions are confirmed
         uiTable.setFillParent(true); // Table fills the entire stage
         uiTable.top().right(); // Align the table to the top right corner of the stage
 
@@ -105,23 +98,18 @@ public class GameScene extends Scene implements iIO {
         // Add UI table to the stage
         stage.addActor(uiTable);
 
-
-
         // Start playing music if not already playing
         if (!super.getSoundManager().isMusicPlaying()) {
             super.getSoundManager().playMusic("GameScene");
         }
-        //Get EntityFactory.createEntity(id,x,y,z)
 
         // Create entities
         // BOY = 0, ENEMY = 1, BOSS = 2, BULLET = 3, ENEMYBULLET = 4, HEALTHPACK = 5
         entityFactory.createEntity(0,1);        // Create player
-        entityFactory.createEntity(1,5);        // Create enemy
+        entityFactory.createEntity(1,7);        // Create enemy
         entityFactory.createEntity(2,1);        // Create boss
-//        entityFactory.createEntity(5,3);        // Create health pack
-        //pause button logic
 
-        // HealthBar Demo Code
+        // HealthBar
         this.healthBar = new HealthBar(gamePlayerManager);
 
     }
@@ -157,7 +145,6 @@ public class GameScene extends Scene implements iIO {
                 pauseButton.getStyle().imageUp = resumeButtonDrawable;
             }
         });
-
         return pauseButton;
     }
 
@@ -194,7 +181,6 @@ public class GameScene extends Scene implements iIO {
         super.getBatch().draw(super.getBackground(), 0, backgroundY + 640, 640, 640);
 
         // Game Loop
-        // PATCH FIX
         if (!getSceneManager().isPaused()) {
             super.getEntityManager().update();
             healthBar.draw(getBatch());
@@ -204,7 +190,8 @@ public class GameScene extends Scene implements iIO {
                 SceneManager sceneManager = getSceneManager();
                 SoundManager soundManager = getSoundManager();
                 SpriteBatch batch = getBatch();
-                sceneManager.swapScene(new QuizScene(sceneManager, soundManager, entityManager, batch));
+                batch.end();
+                sceneManager.swapScene(new QuizScene(sceneManager, soundManager, super.getEntityManager(), batch));
                 return; // Skip the remaining rendering code since we're going to a new scene
             }
 
@@ -220,7 +207,6 @@ public class GameScene extends Scene implements iIO {
         super.getEntityManager().draw();
         super.getBatch().end();
 
-
         // Draw stage
         stage.act(deltaTime);
         stage.draw();
@@ -231,7 +217,7 @@ public class GameScene extends Scene implements iIO {
         // Dispose of resources
         super.dispose();
         if (super.getSoundManager().isMusicPlaying()) {
-            super.getSoundManager().stopMusic("GameScene"); // can change to whatever music ltr
+            super.getSoundManager().stopMusic("GameScene");
         }
         pauseButtonTexture.dispose();
         stage.dispose();

@@ -55,7 +55,6 @@ public class QuizScene extends Scene implements iIO {
         mainTable.setFillParent(true); // Table size matches the stage size
 
         // Enable debug lines for the main table and its children
-        //mainTable.setDebug(true);
 
         // Add text to the main table
         addCenterText(mainTable, "You should consume at least 5 portions of fruit and vegetables per day.");
