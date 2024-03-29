@@ -143,9 +143,22 @@ public class Enemy extends CollidableEntities implements iAiMovement{
     // Game design logic
     @Override
     public void takeDamage(int damage) {
-        // Handle damage logic for the Boss
+        // Subtract the damage from the enemy's health
         int updatedHealth = getHealth() - damage;
         setHealth(updatedHealth);
+
+        // Check if the enemy is dead
+        if (getHealth() <= 0) {
+            // Determine if a HealthPack should spawn
+            float chance = random.nextFloat(); 
+            float spawnProbability = 0.50f; // 50% chance to spawn a HealthPack
+
+            if (chance <= spawnProbability) {
+                float x = getX();
+                float y = getY();
+                entityFactory.createEntity(5, 1, x, y); 
+            }
+        }
     }
 
     @Override
