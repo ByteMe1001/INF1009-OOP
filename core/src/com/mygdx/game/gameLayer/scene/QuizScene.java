@@ -117,9 +117,12 @@ public class QuizScene extends Scene implements iIO {
     }
 
     private void handleTrueButtonClick() {
+    	SceneManager sceneManager = getSceneManager();
+        sceneManager.createBossScene();
+        sceneManager.swapScene(sceneManager.getBossScene());
     	//handle true button click
        // super.getSceneManager().swapScene(new GameScene(QuizScene.super.getSceneManager(), QuizScene.super.getEntityManager(), QuizScene.super.getSoundManager(), getBatch()));
-    	Gdx.app.exit();
+    	//Gdx.app.exit();
     	// TODO MAKE IT SUCH THAT WHEN THE USER CLICKS THIS, IT BRINGS THEM TO ANOTHER PAGE
     	// THAT SAYS THANKS FOR PLAYING OR SOMETHING LIKE THAT
     }
@@ -127,8 +130,13 @@ public class QuizScene extends Scene implements iIO {
 
 
     private void handleFalseButtonClick() {
+    	
+    	SceneManager sceneManager = getSceneManager();
+        sceneManager.createExitScene();
+        sceneManager.swapScene(sceneManager.getExitScene());
+    	
         // Handle false button click
-        Gdx.app.exit(); // Exit the game if false button is clicked
+        //dx.app.exit(); // Exit the game if false button is clicked
         
         // TO MAKE IT SUCH THAT IT GOES BACK TO THE GAME SCENE AGAIN
     	/*SceneManager sceneManager = getSceneManager();

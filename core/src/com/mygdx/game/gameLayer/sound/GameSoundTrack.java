@@ -28,10 +28,6 @@ public class GameSoundTrack extends SoundTrack {
         soundEffectMap.put(SoundEffectType.FIRE, new SoundEffect("laser.wav"));
         soundEffectMap.put(SoundEffectType.COLLECT, new SoundEffect("eatingSound.wav"));
 
-//        soundEffectMap.put(SoundEffectType.FIRE, new SoundEffect("fire_sound.wav"));
-//        soundEffectMap.put(SoundEffectType.TOUCH, new SoundEffect("touch_sound.wav"));
-//        soundEffectMap.put(SoundEffectType.BUTTON, new SoundEffect("button_sound.wav"));
-//        soundEffectMap.put(SoundEffectType.COLLECT, new SoundEffect("collect_sound.wav"));
     }
 
     public backgroundMusic getBackgroundMusic(String sceneName) {

@@ -24,11 +24,6 @@ public class HealthPack extends CollidableEntities implements iAiMovement {
         // Do nothing for now
     }
 
-    // Constructor with ID parameter
-    public HealthPack(SpriteBatch batch) {
-        super(batch);
-    }
-
     // Parameterized constructor
     public HealthPack(int health, float x, float y, float scale,
                        Sprite sprite, float speed, int defaultChangeRate, SpriteBatch batch) {

@@ -4,9 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 
 public class backgroundMusic {
-    private Music music;
-    private float position;
+    private Music music;        // Music object
+    private float position;     // Set position to resume music
 
+    // Constructor with fileName
     public backgroundMusic(String fileName) {
         try{
             this.music = Gdx.audio.newMusic(Gdx.files.internal(fileName));
@@ -15,34 +16,38 @@ public class backgroundMusic {
         }
     }
 
+    // Play music
     public void play() {
         if (music != null) {
-            music.setPosition(position);
+            music.setPosition(position);        // Set position to resume music
             music.play();
-            //music.setLooping(true);
         }
     }
 
+    // Pause music
     public void pause() {
         if (music != null) {
             music.pause();
-            position = music.getPosition();
+            position = music.getPosition();     // Save play position
         }
     }
 
+    // Stop music
     public void stop() {
         if (music != null) {
             music.stop();
-            position = 0;
+            position = 0;                       // Reset play position
         }
     }
 
+    // Resume music
     public void resume() {
         if (music != null) {
             music.play();
         }
     }
 
+    // Dispose music
     public void dispose() {
         if (music != null) {
             music.dispose();

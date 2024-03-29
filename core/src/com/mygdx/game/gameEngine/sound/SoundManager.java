@@ -13,37 +13,15 @@ import java.util.Map;
 
 public class SoundManager {
 
-    private static SoundManager instance = null;
+    private static SoundManager instance = null;    // Singleton instance
     private SoundTrack soundTrack;
     private Map<String, URL> soundURLs;
-    private Map<String, List<Clip>> clips;
+
     private boolean isMusicPlaying = false;
 
-    // TODO: weird position
-    private Map<Clip, Long> clipPositions = new HashMap<>();
-
-
-    // TODO: THIS IS HARDCODE NEED CHANGE
     private SoundManager(SoundTrack soundTrack) {
         this.soundTrack = soundTrack;
-        clips = new HashMap<>();
     }
-
-
-    // Load track into clip map
-    private void loadClip(String sceneName) {
-        try {
-            AudioInputStream ais = AudioSystem.getAudioInputStream(soundURLs.get(sceneName));
-            Clip clip = AudioSystem.getClip();
-            clip.open(ais);
-
-            List<Clip> clipList = clips.computeIfAbsent(sceneName, k -> new ArrayList<>());
-            clipList.add(clip);
-        } catch (Exception e) {
-            System.out.println("Error loading sound for scene " + sceneName + ": " + e.getMessage());
-        }
-    }
-
 
     public static SoundManager getInstance() {
         if (instance == null) {
@@ -97,7 +75,6 @@ public class SoundManager {
         }
     }
 
-    // TODO: change to pause logic
     // Pause all sounds and music
     public void pauseAll() {
         soundTrack.pauseAllBackgroundMusic();

@@ -6,9 +6,11 @@ import com.mygdx.game.gameEngine.LifeCycleManager;
 import com.mygdx.game.gameEngine.entity.EntityManager;
 import com.mygdx.game.gameEngine.player.PlayerManager;
 import com.mygdx.game.gameEngine.sound.SoundManager;
+import com.mygdx.game.gameLayer.scene.BossScene;
 import com.mygdx.game.gameLayer.scene.GameScene;
 import com.mygdx.game.gameLayer.scene.QuizScene;
 import com.mygdx.game.gameLayer.scene.StartingScene;
+import com.mygdx.game.gameLayer.scene.exitScene;
 
 import java.util.ArrayList;
 
@@ -22,8 +24,6 @@ public class SceneManager implements SceneChangeListener{
     private SpriteBatch batch;
     private LifeCycleManager lifeCycleManager;
     private boolean isPaused;
-
-    // SceneManager to swap scenes, each scene should do all the world logic
 
     public SceneManager() {
         scenes = new ArrayList<>();
@@ -56,6 +56,14 @@ public class SceneManager implements SceneChangeListener{
     
     public void createQuizScene() {
     	scenes.add(new QuizScene(this, soundManager, entityManager, batch));
+    }
+    
+    public void createBossScene() {
+    	scenes.add(new BossScene(this, entityManager, soundManager, batch));
+    }
+    
+    public void createExitScene() {
+        scenes.add(new exitScene(this, entityManager, soundManager, batch));
     }
 
     // Scene Manager functions
@@ -123,7 +131,24 @@ public class SceneManager implements SceneChangeListener{
             return null; // No GameScene found
         }
     }
-
+    
+    public Scene getBossScene() {
+        for (Scene scene : scenes) {
+            if (scene instanceof BossScene) {
+                return scene;
+            }
+        }
+        return null; 
+    }
+    
+    public Scene getExitScene() {
+        for (Scene scene : scenes) {
+            if (scene instanceof exitScene) {
+                return scene;
+            }
+        }
+        return null;
+    }
 
     // Clear all scene assets
     public void dispose() {
@@ -144,25 +169,14 @@ public class SceneManager implements SceneChangeListener{
     }
 
     public void pause(){
-        // Pause the game
         isPaused = true; // Set the isPaused flag to true
-        //System.out.println("Game Paused"); // Print a message indicating that the game is paused
-
         // Pause sound effects and music
         soundManager.pauseAll();
-
-        // Stop entity movements
-        //super.getEntityManager().stopAllMovements(); // Implement this method in your EntityManager class
-
-
     }
 
     public void resume(){
         isPaused = false; // Set the isPaused flag to false
-        System.out.println("Game Resumed"); // Print a message indicating that the game is resumed
-
         // Resume sound effects and music
         soundManager.resumeAll();
     }
-
 }

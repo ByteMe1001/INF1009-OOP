@@ -11,20 +11,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-// TODO: CHANGE TO PLAYABLE ENTITY
 public class GamePlayerManager extends AbstractGamePlayerManager {
     private HashMap<Integer, List<Integer>> healthDataMap;
-
-
-
-    // END
 
     public GamePlayerManager() {
 
     }
 
-    public GamePlayerManager(EntityManager entityManager, ArrayList<PlayableEntity> playerEntityList) {
-        super(entityManager, playerEntityList);
+    public GamePlayerManager(ArrayList<PlayableEntity> playerEntityList) {
+        super(playerEntityList);
         healthDataMap = new HashMap<>();
     }
 
@@ -87,11 +82,11 @@ public class GamePlayerManager extends AbstractGamePlayerManager {
 
     // TODO: Move to BOY
     public void shoot(PlayableEntity entity) {
-        switch (inputKey3()) {
+        switch (inputKey3()) {              // inputKey3()
             case "FALSE":
                 break;
             case "SPACE":
-                entity.shoot(); // Assuming EntityManager is needed for bullet creation
+                entity.shoot();             // Shoot function
                 break;
             default:
                 break;
@@ -119,30 +114,3 @@ public class GamePlayerManager extends AbstractGamePlayerManager {
         return healthDataMap;
     }
 }
-
-
-
-    // Getter and setter methods
-//    public float getX() {
-//        return x;
-//    }
-//
-//    public void setX(float x) {
-//        this.x = x;
-//    }
-//
-//    public float getY() {
-//        return y;
-//    }
-//
-//    public void setY(float y) {
-//        this.y = y;
-//    }
-//
-//    public float getSpeed() {
-//        return speed;
-//    }
-
-//    public void setSpeed(float speed) {
-//        this.speed = speed;
-//    }

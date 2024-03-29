@@ -15,33 +15,26 @@ import com.mygdx.game.gameLayer.collision.CollisionHandler;
 public class CollisionManager {
 
     private ArrayList<iCollision> collisionList;
-    private EntityManager entityManager;     // Entity Manager for entity control
-    private static SoundManager soundManager;      // Sound manager for collision sounds
     private PlayerManager playerManager;
     private CollisionHandler collisionHandler;
-
-    // private CollisionStrategy collisionStrategy;
-
-    public CollisionManager(EntityManager entityManager, PlayerManager playerManager, ArrayList<iCollision> collisionList, CollisionHandler collisionHandler ) {
-        this.entityManager = entityManager;
-        this.playerManager = playerManager;
-        soundManager = SoundManager.getInstance();
-        this.collisionList = collisionList;
-        this.collisionHandler = new CollisionHandler(playerManager, collisionList);
-    }
 
     // Default constructor
     public CollisionManager() {
         // Do nothing
     }
 
+    public CollisionManager(PlayerManager playerManager, ArrayList<iCollision> collisionList) {
+        this.playerManager = playerManager;
+        this.collisionList = collisionList;
+        this.collisionHandler = new CollisionHandler(playerManager, collisionList);
+    }
+
+
     // Detect collision through n! loop within collidable list to find boundingBox overlap
     public void detectCollision(EntityManager entityManager){
         for (int i = 0; i < collisionList.size() - 1; i++){
             for (int j = i + 1; j < collisionList.size(); j++){
                 if(collisionList.get(i).collidesWith(collisionList.get(j))){ //If entities overlaps with one another, print Collision Detected in console
-                    //handleCollision(entityManager, soundManager, collisionList, collisionList.get(i), collisionList.get(j)); //handles collision logic when entity collide
-                    //System.out.println("Collision Detected");
                     collisionHandler.handleCollision(collisionList.get(i), collisionList.get(j));
                 }
             }

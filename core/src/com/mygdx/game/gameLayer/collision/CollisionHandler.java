@@ -82,10 +82,6 @@ public class CollisionHandler {
 				//player.setScore(score);
 				playerManager.setScore(player, score);
 				System.out.print("Score: " + playerManager.getScore(player));
-
-    	        //int score = player.getScore() + 500;
-    	        //player.setScore(score);
-    	        //System.out.println("Player Score: " + player.getScore());
     	    }
     	    
     	    if (bullet.getY() >= 500) {
@@ -129,6 +125,7 @@ public class CollisionHandler {
     	    boy.takeDamage(10);
     	    collisionList.remove(enemyBullet);
     	    enemyBullet.setAlive(false);
+			soundManager.playSE(SoundEffectType.COLLECT);
     	    System.out.println("Player Health: " + boy.getHealth());
     	    
     	    if (boy.getHealth() <= 0) {

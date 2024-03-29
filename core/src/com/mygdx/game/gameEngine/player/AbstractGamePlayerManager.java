@@ -12,18 +12,20 @@ import java.util.List;
 
 public abstract class AbstractGamePlayerManager implements iIO {
 
+    // List to hold player entities
     private ArrayList<PlayableEntity> playerEntityList;
-    private EntityManager entityManager;
 
+    // Constructor
     public AbstractGamePlayerManager() {
-
+        // Do nothing
     }
 
-    public AbstractGamePlayerManager(EntityManager entityManager, ArrayList<PlayableEntity> playerEntityList) {
-        this.entityManager = entityManager;
+    // Constructor with playerEntityList
+    public AbstractGamePlayerManager(ArrayList<PlayableEntity> playerEntityList) {
         this.playerEntityList = playerEntityList;
     }
 
+    // Abstract methods
     public abstract void update(EntityManager entityManager);
     public abstract String movement(PlayableEntity entity);
 
@@ -35,14 +37,6 @@ public abstract class AbstractGamePlayerManager implements iIO {
 
     public void setPlayerEntityList(ArrayList<PlayableEntity> playerEntityList) {
         this.playerEntityList = playerEntityList;
-    }
-
-    public EntityManager getEntityManager() {
-        return entityManager;
-    }
-
-    public void setEntityManager(EntityManager entityManager) {
-        this.entityManager = entityManager;
     }
 }
 

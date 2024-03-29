@@ -40,17 +40,13 @@ public abstract class Scene implements Screen {
         this.entityManager = entityManager;
         this.soundManager = soundManager;
         isPaused = false;
-
         this.batch = batch;
 
+        // Camera Settings
         camera = new OrthographicCamera();
         viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
         backgroundOffset = 0;
     }
-
-    public Scene(SceneManager sceneManager, SoundManager soundManager, SpriteBatch batch) {
-    }
-
 
     @Override
     public void dispose(){
@@ -68,7 +64,6 @@ public abstract class Scene implements Screen {
     public void setBackground (Texture background) {
         this.background = background;
     }
-
 
     @Override
     public void render(float delta) {
@@ -89,7 +84,6 @@ public abstract class Scene implements Screen {
     @Override
     public void resume() {
         sceneManager.resume();
-
     }
 
     @Override
@@ -152,10 +146,6 @@ public abstract class Scene implements Screen {
 
     public SoundManager getSoundManager() {
         return soundManager;
-    }
-
-    public void setSoundManager(SoundManager soundManager) {
-        this.soundManager = soundManager;
     }
 
 }

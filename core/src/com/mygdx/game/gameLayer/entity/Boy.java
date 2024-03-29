@@ -35,11 +35,6 @@ public class Boy extends PlayableEntity {
     }
 
     // Constructor with ID
-    public Boy(SpriteBatch batch) {
-        super(batch);
-    }
-
-    // Constructor with ID
     public Boy(int health, int maxHealth, float x, float y, float scale, Sprite sprite,
               float speed, PlayerMovement playerMovement, SpriteBatch batch) {
         super(health, maxHealth, x, y, scale, sprite ,speed, playerMovement, batch);
@@ -130,11 +125,6 @@ public class Boy extends PlayableEntity {
         // Handle destruction logic for the Boy
     }
 
-    @Override
-    // Movement method for player with movement direction lock
-    public void movement() {
-
-    }
 
     // TO USE
     public void movement(String direction) {

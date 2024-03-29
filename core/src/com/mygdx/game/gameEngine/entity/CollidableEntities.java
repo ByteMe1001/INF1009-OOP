@@ -1,4 +1,3 @@
-// CollidableEntities.java
 package com.mygdx.game.gameEngine.entity;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -15,13 +14,6 @@ public abstract class CollidableEntities extends Entity implements iCollision {
     // Constructors
     public CollidableEntities() {
         // No-arg constructor
-    }
-
-    // TODO: TESTING CODE ONLY
-    public CollidableEntities(SpriteBatch batch) {
-        super(batch);
-        this.health = 100;
-        this.speed = 30;
     }
 
     // MAIN CONSTRUCTOR
@@ -49,7 +41,7 @@ public abstract class CollidableEntities extends Entity implements iCollision {
         this.speed = speed;
     }
 
-    // TODO: Shift bounding box logic to collision manage maybe?
+    // Set bounding box position
     public void setBoundingBox() {
         // Update position of the bounding box, considering the offset
         this.boundingBox.setPosition(getX(), getY());
@@ -66,7 +58,6 @@ public abstract class CollidableEntities extends Entity implements iCollision {
 
     public abstract void destroy();
 
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~MAYBE DELETE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     @Override
     public void dispose() {
         super.dispose();
@@ -77,7 +68,6 @@ public abstract class CollidableEntities extends Entity implements iCollision {
         super.draw();
     }
 
-    // Maybe dunnid override
     @Override
     public void update() {
         setBoundingBox();
@@ -95,10 +85,3 @@ public abstract class CollidableEntities extends Entity implements iCollision {
         return boundingBox.overlaps(other.getBoundingBox());
     }
 }
-
-
-    // Shift bounding box logic to collision manage maybe?
-    // Method Overrides
-//    public void push(float deltaX, float deltaY) {
-//        super.push(deltaX, deltaY);
-//    }

@@ -28,9 +28,7 @@ public class EntityManager {
     private ArrayList<iCollision> collisionList;
     private ArrayList<Entity> newEntityList;
     private EntityFactory entityFactory;
-
     private SpriteBatch batch;
-
     private AbstractGamePlayerManager abstractGamePlayerManager;
     private AIControlManager aiControlManager;
     private CollisionHandler collisionHandler;
@@ -44,22 +42,7 @@ public class EntityManager {
     // do nothing
     }
 
-    //Constructor with collisionManager as an instance variable
-    public EntityManager(SoundManager soundManager, SpriteBatch batch) {
-        soundManager = SoundManager.getInstance();
-        this.batch = batch;
-        this.entityList = new ArrayList<Entity>();
-        this.playerEntityList = new ArrayList<PlayableEntity>();
-        this.aiEntityList = new ArrayList<iAiMovement>();
-        this.collisionList = new ArrayList<iCollision>();
-        this.newEntityList = new ArrayList<>();
-        this.collisionManager = new CollisionManager(this, playerManager, collisionList, collisionHandler);
-        this.abstractGamePlayerManager = new GamePlayerManager(this, playerEntityList);
-        this.aiControlManager = new AIControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);;
-        this.entityFactory = new EntityFactory(batch, this);
-    }
-
-    // Constructor with EntityFactory
+    // Constructor with PlayerManager and factory
     public EntityManager(PlayerManager playerManager, SpriteBatch batch) {
         this.playerManager = playerManager;
         soundManager = SoundManager.getInstance();
@@ -71,82 +54,16 @@ public class EntityManager {
         this.collisionList = new ArrayList<iCollision>();
         this.newEntityList = new ArrayList<>();
         //~~~~~~~~~~~MANAGER CREATION~~~~~~~~~~~~~~~~~~~~~~~~
-        this.collisionManager = new CollisionManager(this, playerManager, collisionList, collisionHandler);
-        this.abstractGamePlayerManager = new GamePlayerManager(this, playerEntityList);
-        this.aiControlManager = new AIControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);
+        this.collisionManager = new CollisionManager(playerManager, collisionList);
+        this.abstractGamePlayerManager = new GamePlayerManager(playerEntityList);
+        this.aiControlManager = new AIControlManager(aiEntityList);
     }
 
-    // Main testing creation
-    // Entity creations
-//    public void createPlayer() {
-//        Entity bucket = entityFactory.createEntity(EntityType.BOY); // Use factory to create bucket entity
-//        // addEntity(bucket);
-//        //System.out.println(collisionList.size());
-//    }
-//
-//
-//    public void createPlayers(int x) {
-//        for (int i = 0; i < x; i++) {
-//            Entity bucket = entityFactory.createEntity(EntityType.BOY); // Use EntityFactory to create bucket entity
-//        }
-//    }
-//
-//    public void createEnemy() {
-//        Entity droplet = entityFactory.createEntity(EntityType.ENEMY); // Use factory to create droplet entity
-//    }
-//
-//    // Main testing creation
-//    public void createEnemies(int x) {
-//        for (int i = 0; i < x; i++) {
-//        	// spawn at random parts of the screen in the top half
-//        	float randomX = random.nextFloat() * Gdx.graphics.getWidth();
-//            float randomY = (Gdx.graphics.getHeight() / 2) + random.nextFloat() * (Gdx.graphics.getHeight() / 2);
-//            Entity droplet = entityFactory.createEntity(EntityType.ENEMY);
-//            droplet.setX(randomX);
-//            droplet.setY(randomY);
-//           // Entity droplet = entityFactory.createEntity(EntityType.BOSS); // Use EntityFactory to create droplet entity
-//        }
-//    }
-//
-//    public void createBoss() {
-//        Entity droplet = entityFactory.createEntity(EntityType.BOSS); // Use factory to create droplet entity
-//    }
-//
-//    // Main testing creation
-//    public void createBosses(int x) {
-//        for (int i = 0; i < x; i++) {
-//            // spawn at random parts of the screen in the top half
-//            float randomX = random.nextFloat() * Gdx.graphics.getWidth();
-//            float randomY = (Gdx.graphics.getHeight() / 2) + random.nextFloat() * (Gdx.graphics.getHeight() / 2);
-//            Entity droplet = entityFactory.createEntity(EntityType.BOSS);
-//            droplet.setX(randomX);
-//            droplet.setY(randomY);
-//            // Entity droplet = entityFactory.createEntity(EntityType.BOSS); // Use EntityFactory to create droplet entity
-//        }
-//    }
-//
-//
-//    public void createPlayerBullets(int x) {
-//        for (int i = 0; i < x; i++) {
-//            Entity bullet = entityFactory.createEntity(EntityType.BULLET); // Use EntityFactory to create bullet entity
-//        }
-//    }
-//
-//    public void createEnemyBullets(int x){
-//        for (int i = 0; i < x; i++) {
-//            Entity bullet = entityFactory.createEntity(EntityType.ENEMYBULLET); // Use EntityFactory to create bullet entity
-//        }
-//    }
-//
-//    public void createHealthPack(int x){
-//        for (int i = 0; i < x; i++) {
-//            Entity healthPack = entityFactory.createEntity(EntityType.HEALTHPACK); // Use EntityFactory to create healthpack entity
-//        }
-//    }
-
-    // Maybe can use this function to clear all list?
     public void deleteEntity(Entity e) {
-        if (!entityList.remove(e) && !playerEntityList.remove((PlayableEntity) e) && !aiEntityList.remove((iAiMovement) e)) {
+        if (!entityList.remove(e)
+                && !collisionList.remove((iCollision) e)
+                && !playerEntityList.remove((PlayableEntity) e)
+                && !aiEntityList.remove((iAiMovement) e)) {
             throw new IllegalArgumentException("Entity not found in any entity list");
         }
     }
@@ -165,19 +82,16 @@ public class EntityManager {
 
         if (entity instanceof iCollision && collisionList != null) {
             collisionList.add((iCollision) entity); // Adding to the collision list
-//            System.out.println("Added to collision list");
             addedToList = true;
         }
 
         if (entity instanceof iAiMovement && aiEntityList != null) {
             aiEntityList.add((iAiMovement) entity); // Adding to the AI movement list
-//            System.out.println("Added to AI movement list");
             addedToList = true;
         }
 
         if (entity instanceof PlayableEntity && playerEntityList != null) {
             playerEntityList.add((PlayableEntity) entity); // Adding to the player movement list
-//            System.out.println("Added to player movement list");
             addedToList = true;
         }
 
@@ -198,9 +112,6 @@ public class EntityManager {
         updateEntities(entityList);
         entityList.addAll(newEntityList);
         newEntityList.clear();
-//        updateEntities(playerEntityList);
-//        updateEntities(aiEntityList);
-//        collisionManager.updateCollisionList(entityList, playerEntityList, aiEntityList);
         abstractGamePlayerManager.update(this);
         aiControlManager.update();
         collisionManager.detectCollision(this);
@@ -297,50 +208,6 @@ public class EntityManager {
         }
         return true;  // If bosses are dead, return true
     }
-//    public boolean getIsCollidable(Entity e) {
-//        return findEntity(e).isCollidable();
-//    }
-//
-//    public void setIsCollidable(Entity e, boolean b) {
-//        findEntity(e).setCollidable(b);
-//    }
-//
-//    public float getSpeed(Entity e) {
-//        return findEntity(e).getSpeed();
-//    }
-
-//    public int getChangeRate(Entity e) {
-//        return findEntity(e).getChangeRate();
-//    }
-//
-//    public int getDefaultChangeRate(Entity e) {
-//        return findEntity(e).getDefaultChangeRate();
-//    }
-
-//    public void setChangeRate(Entity e, int x) {
-//        findEntity(e).setChangeRate(x);
-//    }
-
-//    public void setDirection(Entity entity, int direction) {
-//        entity.setDirection(direction);
-//    }
-
-//    public void decrementChangeRate(Entity e) {
-//        Entity entity = findEntity(e);
-//        entity.setChangeRate(entity.getChangeRate() - 1);
-//    }
-
-//    public int getDirection(Entity e) {
-//        return findEntity(e).getDirection();
-//    }
-//
-//    public String getCurrentDirection(Entity e) {
-//        return findEntity(e).getCurrentDirection();
-//    }
-//
-//    public void setCurrentDirection(Entity e, String s) {
-//            findEntity(e).setCurrentDirection(s);
-//    }
 
     public float getSpriteWidth(Entity e) {
         return findEntity(e).getSpriteHeight();
@@ -350,14 +217,6 @@ public class EntityManager {
         return findEntity(e).getSpriteWidth();
     }
 
-//    public Rectangle getBoundingBox(iCollision e) {
-//        return findEntity(e).getBoundingBox();
-//    }
-//
-//    public Character getControl(Entity e) {
-//        return findEntity(e).getControl();
-//    }
-
     // Method to find entity
     private Entity findEntity(Entity e) {
         for (Entity entity : entityList) {
@@ -365,16 +224,7 @@ public class EntityManager {
                 return entity;
             }
         }
-//        for (Entity entity : playerEntityList) {
-//            if (entity == e) {
-//                return entity;
-//            }
-//        }
-//        for (Entity entity : aiEntityList) {
-//            if (entity == e) {
-//                return entity;
-//            }
-//        }
+
         throw new IllegalArgumentException("Entity not found in the entity list");
     }
     public void dispose() {

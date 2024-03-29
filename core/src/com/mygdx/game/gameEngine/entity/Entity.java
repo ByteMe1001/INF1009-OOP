@@ -5,28 +5,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
 public abstract class Entity {
-
-//    private int id;       probably dunnid
     private float x,y;               //Position
     private float scale;
     private boolean isAlive;
     private Sprite sprite;
     private SpriteBatch batch;
-//    private int id;
-//    private int health;
-//    private float width, height;
-//    private float speed;
-//    private int movementSetID;          // 1 for up down, 2 for left right, 3 for all
-//
-//    private String currentDirection = "";
-//    private boolean isAlive;
-    //private CollisionManager rect;
-
-//    private boolean isCollidable;
-//
-//    protected Rectangle boundingBox;
-//    private Character control; // CAPITAL LETTER Char to designate who controls it. A for AI, P for Player, N for nil
-//
 
     // Default constructor
       public Entity() {
@@ -53,11 +36,11 @@ public abstract class Entity {
         setSpriteSize();
     }
 
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GETTER AND SETTER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public void setSpriteSize() {
         this.sprite.setSize(getSpriteWidth() * getScale(), getSpriteHeight() * getScale());
     }
-
-    //Setters and Getters methods
 
     public float getX() {
       return x;
@@ -107,21 +90,9 @@ public abstract class Entity {
         return sprite.getHeight();
     }
 
-
-    // Shift bounding box logic to collision manage maybe?
-
-
-    //Methods
-    // Move to colliadable???
-//    public abstract void takeDamage(int damage);
-//
-//    public abstract void heal(int amount);
-//
-//    public abstract void destroy();
     public void update() {
 
     }
-    // END
 
     // Dispose method
     public void dispose() {

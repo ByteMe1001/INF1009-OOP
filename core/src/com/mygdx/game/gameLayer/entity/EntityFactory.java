@@ -3,7 +3,6 @@ package com.mygdx.game.gameLayer.entity;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.gameEngine.entity.DisplayElement;
 import com.mygdx.game.gameEngine.entity.Entity;
 import com.mygdx.game.gameEngine.entity.EntityManager;
 import com.mygdx.game.gameEngine.entity.Factory;
@@ -24,11 +23,6 @@ public class EntityFactory implements Factory {
         this.entityType = entityType;
     }
 
-//    public EntityFactory(SpriteBatch batch) {
-//        //EntityType entityType = EntityType.BOY;
-//        this.batch = batch;
-//    }
-
     public EntityFactory(SpriteBatch batch, EntityManager entityManager) {
         this.entityManager = entityManager;
         this.batch = batch;
@@ -38,13 +32,6 @@ public class EntityFactory implements Factory {
             this.entityTypeMap.put(entityType.ordinal(), entityType);
         }
     }
-
-    @Override
-    public DisplayElement createDisplayElement() {
-        // EntityFactory does not create UI elements, return null or throw an exception
-        return null;
-    }
-
 
     // TODO: change return type? void looks ok?
     @Override
@@ -82,7 +69,6 @@ public class EntityFactory implements Factory {
         return entity;
     }
 
-    // TODO: Remove quantity if not used
     public Entity createEntity(int entityTypeKey, int quantity, float x, float y) {
         EntityType entityType = entityTypeMap.get(entityTypeKey);
         Entity entity;

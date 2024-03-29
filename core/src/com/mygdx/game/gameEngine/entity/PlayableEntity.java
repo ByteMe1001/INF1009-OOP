@@ -8,18 +8,16 @@ import com.mygdx.game.gameEngine.util.iPlayerMovement;
 
 public abstract class PlayableEntity extends CollidableEntities implements iPlayerMovement {
 
-    private PlayerMovement playerMovement;
-    private int maxHealth;
+    private PlayerMovement playerMovement; // The movement strategy for the player
+    private int maxHealth; // The maximum health of the player
 
     // Constructors
     public PlayableEntity() {
         // No-arg constructor
     }
 
-    public PlayableEntity(SpriteBatch batch) {
-        super(batch);
-    }
 
+    // Constructor with variables
     public PlayableEntity(int health, int maxHealth, float x, float y, float scale,
                           Sprite sprite, float speed, PlayerMovement playerMovement, SpriteBatch batch) {
         super(health, x, y, scale, sprite, speed, batch);
@@ -27,15 +25,8 @@ public abstract class PlayableEntity extends CollidableEntities implements iPlay
         this.playerMovement = playerMovement;
     }
 
-    public void movement() {
-        // Get new coordinates and calculate
-//        this.setX(vector[0]);
-//        this.setY(vector[1]);
-    }
-
+    // Moves the entity to the given coordinates.
     public void movement(float[] vector) {
-        // Set new position
-        //float[] vector = playerMovement.movement(this);
         this.setX(vector[0]);
         this.setY(vector[1]);
     }
