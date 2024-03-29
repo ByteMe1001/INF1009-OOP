@@ -49,9 +49,7 @@ public class LifeCycleManager extends Game {
     public void dispose() {
         super.dispose();
         batch.dispose();
-        player.setScore(1);     // Demo purposes
         sceneManager.dispose();
-        System.out.println(player.getName()+" score: " + player.getScore());		// DEMO ONLY
     }
 
     @Override
