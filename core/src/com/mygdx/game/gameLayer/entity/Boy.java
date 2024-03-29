@@ -163,7 +163,7 @@ public class Boy extends PlayableEntity {
 
 
     // Initialize Boy properties
-//    private void initializeBucket(PlayerControlManager playerControlManager) {
+//    private void initializeBucket(GamePlayerManager playerControlManager) {
 //        this.playerControlManager = playerControlManager;
 //        this.setSprite(new Sprite(new Texture(BoyType.DEFAULT.getTexturePath())));
 //        this.setAlive(BoyType.DEFAULT.isAlive());

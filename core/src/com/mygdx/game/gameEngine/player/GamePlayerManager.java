@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 
 // TODO: CHANGE TO PLAYABLE ENTITY
-public class gamePlayerManager implements iIO {
+public class GamePlayerManager implements iIO {
 
     private ArrayList<iPlayerMovement> playerEntityList;
     private HashMap<Integer, List<Integer>> healthDataMap;
@@ -22,11 +22,11 @@ public class gamePlayerManager implements iIO {
     private float period = 0.2f;
     // END
 
-    public gamePlayerManager() {
+    public GamePlayerManager() {
 
     }
 
-    public gamePlayerManager(EntityManager entityManager, ArrayList<iPlayerMovement> playerEntityList) {
+    public GamePlayerManager(EntityManager entityManager, ArrayList<iPlayerMovement> playerEntityList) {
         this.entityManager = entityManager;
         this.playerEntityList = playerEntityList;
         healthDataMap = new HashMap<>();

@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.gameEngine.player.gamePlayerManager;
+import com.mygdx.game.gameEngine.player.GamePlayerManager;
 import com.mygdx.game.gameEngine.util.iIO;
 
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class HealthBar implements iIO {
 
-    private gamePlayerManager gamePlayerManager;
+    private GamePlayerManager gamePlayerManager;
     private BitmapFont font;
 
     private Texture blank, green;
@@ -21,7 +21,7 @@ public class HealthBar implements iIO {
     protected static final float BAR_WIDTH = (float) Gdx.graphics.getWidth() / 2;
     protected static final float BAR_HEIGHT = 15f;
 
-    public HealthBar(gamePlayerManager gamePlayerManager) {
+    public HealthBar(GamePlayerManager gamePlayerManager) {
         this.gamePlayerManager = gamePlayerManager;
         // TEXTURES
         blank = new Texture("blackbackground.PNG");

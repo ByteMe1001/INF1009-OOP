@@ -9,15 +9,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-import com.mygdx.game.gameEngine.player.gamePlayerManager;
+import com.mygdx.game.gameEngine.player.GamePlayerManager;
 import com.mygdx.game.gameEngine.sound.SoundManager;
 import com.mygdx.game.gameEngine.util.iAiMovement;
 import com.mygdx.game.gameEngine.util.iCollision;
 import com.mygdx.game.gameEngine.util.iPlayerMovement;
 import com.mygdx.game.gameLayer.collision.CollisionHandler;
-import com.mygdx.game.gameLayer.entity.Boss;
-import com.mygdx.game.gameLayer.entity.Enemy;
-import com.mygdx.game.gameLayer.entity.EntityFactory;
+import com.mygdx.game.gameLayer.entity.*;
 
 public class EntityManager {
 
@@ -31,7 +29,7 @@ public class EntityManager {
 
     private SpriteBatch batch;
 
-    private gamePlayerManager gamePlayerManager;
+    private GamePlayerManager gamePlayerManager;
     private AiControlManager aiControlManager;
     private CollisionHandler collisionHandler;
 
@@ -54,7 +52,7 @@ public class EntityManager {
         this.collisionList = new ArrayList<iCollision>();
         this.newEntityList = new ArrayList<>();
         this.collisionManager = new CollisionManager(this, collisionList, collisionHandler);
-        this.gamePlayerManager = new gamePlayerManager(this, playerEntityList);
+        this.gamePlayerManager = new GamePlayerManager(this, playerEntityList);
         this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);;
         this.entityFactory = new EntityFactory(batch, this);
     }
@@ -72,7 +70,7 @@ public class EntityManager {
         this.newEntityList = new ArrayList<>();
         //~~~~~~~~~~~MANAGER CREATION~~~~~~~~~~~~~~~~~~~~~~~~
         this.collisionManager = new CollisionManager(this, collisionList, collisionHandler);
-        this.gamePlayerManager = new gamePlayerManager(this, playerEntityList);
+        this.gamePlayerManager = new GamePlayerManager(this, playerEntityList);
         this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);
         this.entityFactory = new EntityFactory(batch, this);
     }
@@ -265,11 +263,11 @@ public class EntityManager {
         findEntity(e).setAlive(b);
     }
 
-    public gamePlayerManager getPlayerControlManager() {
+    public GamePlayerManager getPlayerControlManager() {
         return gamePlayerManager;
     }
 
-    public void setPlayerControlManager(gamePlayerManager gamePlayerManager) {
+    public void setPlayerControlManager(GamePlayerManager gamePlayerManager) {
         this.gamePlayerManager = gamePlayerManager;
     }
 
@@ -289,6 +287,15 @@ public class EntityManager {
             }
         }
         return true;  // If bosses are dead, return true
+    }
+
+    public boolean isPlayerDead() {
+        for (Entity entity : entityList) {
+            if (entity instanceof Boy && entity.isAlive()) {
+                return false;  // If player is alive, return false
+            }
+        }
+        return true;  // If player is dead, return true
     }
 
     public boolean areAllBossesDead() {
