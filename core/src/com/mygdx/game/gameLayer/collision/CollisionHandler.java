@@ -134,19 +134,27 @@ public class CollisionHandler {
         }
 
         else if (x.getClass().equals(Boy.class) && y.getClass().equals(HealthPack.class)){
-            ((Boy) x).heal(30);
-            
-            ((Boy) x).setPowerUpLevel(1);
+
+
+            int powerupLevel = ((Boy) x).getPowerUpLevel(); // Retrieve the current score from the player
+            collisionList.remove(y);
+            ((HealthPack) y).setAlive(false);
+            powerupLevel += 1; // Increment the score by 10 for killing an enemy
+            ((Boy) x).setPowerUpLevel(powerupLevel); // Set the updated score back to the player
+            System.out.println("Power Up Level: " + ((Boy) x).getPowerUpLevel());
             if(((Boy) x).getPowerUpLevel() == 1) {
-                ((Boy) x).setSpeed(((Boy) x).getSpeed() + 100);
+                ((Boy) x).heal(30);
+                ((Boy) x).setSpeed(((Boy) x).getSpeed() + 50);
 
             }
             if(((Boy) x).getPowerUpLevel() == 2) {
-                ((Boy) x).setSpeed(((Boy) x).getSpeed() + 100);
+                ((Boy) x).heal(40);
+                ((Boy) x).setSpeed(((Boy) x).getSpeed() + 50);
 
             }
             if(((Boy) x).getPowerUpLevel() == 3) {
-                ((Boy) x).setSpeed(((Boy) x).getSpeed() + 100);
+                ((Boy) x).heal(50);
+                ((Boy) x).setSpeed(((Boy) x).getSpeed() + 50);
             }
             System.out.println("Player speed increased to: " + ((Boy) x).getSpeed());
             System.out.println("Player Healed to HP: " + ((Boy) x).getHealth());
