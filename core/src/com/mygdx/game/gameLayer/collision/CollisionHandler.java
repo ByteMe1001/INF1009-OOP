@@ -5,6 +5,7 @@ import com.mygdx.game.gameEngine.entity.CollidableEntities;
 import com.mygdx.game.gameEngine.entity.Entity;
 import com.mygdx.game.gameEngine.player.Player;
 import com.mygdx.game.gameEngine.player.PlayerManager;
+import com.mygdx.game.gameEngine.sound.SoundEffectType;
 import com.mygdx.game.gameEngine.sound.SoundManager;
 import com.mygdx.game.gameEngine.util.iAiMovement;
 import com.mygdx.game.gameEngine.util.iCollision;
@@ -68,7 +69,7 @@ public class CollisionHandler {
     	    bullet.takeDamage(10);
     	    collisionList.remove(bullet);
     	    bullet.setAlive(false);
-    	    soundManager.playSE("GameScene_Collision");
+    	    soundManager.playSE(SoundEffectType.HIT);
     	    
     	    System.out.println("Boss Health: " + boss.getHealth());
     	    if (boss.getHealth() <= 0) {
@@ -99,7 +100,7 @@ public class CollisionHandler {
     	    enemy.takeDamage(10);
     	    collisionList.remove(bullet);
     	    bullet.setAlive(false);
-    	    soundManager.playSE("GameScene_Collision");
+    	    soundManager.playSE(SoundEffectType.HIT);
     	    System.out.println("Enemy Health: " + enemy.getHealth());
     	    
     	    if (enemy.getHealth() <= 0) {
@@ -146,7 +147,7 @@ public class CollisionHandler {
     	    
     	    int powerupLevel = boy.getPowerUpLevel();
     	    collisionList.remove(healthPack);
-    	    soundManager.playSE("eatPowerup");
+    	    soundManager.playSE(SoundEffectType.COLLECT);
     	    healthPack.setAlive(false);
     	    powerupLevel += 1;
     	    boy.setPowerUpLevel(powerupLevel);

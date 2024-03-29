@@ -5,7 +5,7 @@ import com.mygdx.game.gameEngine.sound.backgroundMusic;
 
 public abstract class SoundTrack {
     public abstract backgroundMusic getBackgroundMusic(String sceneName);
-    public abstract SoundEffect getSoundEffect(String effectName);
+    public abstract SoundEffect getSoundEffect(SoundEffectType soundEffectType);
     public abstract void pauseAllBackgroundMusic();
     public abstract void resumeAllBackgroundMusic();
     public abstract void dispose();

@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.mygdx.game.gameEngine.sound.SoundEffectType;
 import com.mygdx.game.gameEngine.sound.SoundManager;
 
 
@@ -66,11 +67,11 @@ public interface iIO {
     }
 
     // Method to handle button hover events
-    default void addCursorEnterListener(Actor actor, SoundManager soundManager, String musicKey) {
+    default void addCursorEnterListener(Actor actor, SoundManager soundManager, SoundEffectType soundEffectType) {
         actor.addListener(new InputListener() {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                soundManager.playSE(musicKey);
+                soundManager.playSE(soundEffectType);
             }
         });
     }

@@ -61,12 +61,12 @@ public class SoundManager {
     }
 
     // Play sound effect
-    public void playSE(String effectName) {
-        SoundEffect soundEffect = soundTrack.getSoundEffect(effectName);
+    public void playSE(SoundEffectType soundEffectType) {
+        SoundEffect soundEffect = soundTrack.getSoundEffect(soundEffectType);
         if (soundEffect != null) {
             soundEffect.play();
         } else {
-            throw new IllegalArgumentException("Effect name not found in sound map: " + effectName);
+            throw new IllegalArgumentException("Effect name not found in sound map: " + soundEffectType);
         }
     }
 

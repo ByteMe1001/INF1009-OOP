@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.gameEngine.entity.EntityManager;
 import com.mygdx.game.gameEngine.scene.Scene;
 import com.mygdx.game.gameEngine.scene.SceneManager;
+import com.mygdx.game.gameEngine.sound.SoundEffectType;
 import com.mygdx.game.gameEngine.sound.SoundManager;
 import com.mygdx.game.gameEngine.util.iIO;
 
@@ -67,7 +68,7 @@ public class StartingScene extends Scene implements iIO {
         super.getSoundManager().playMusic("StartingScene");
 
         // Play sound on hover
-        addCursorEnterListener(playButton, super.getSoundManager(), "StartingScene_Button");
+        addCursorEnterListener(playButton, super.getSoundManager(), SoundEffectType.BUTTON);
 
         // Swap scene when clicked
         addButtonClickListener(playButton, () -> {

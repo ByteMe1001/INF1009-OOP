@@ -7,6 +7,8 @@ import com.mygdx.game.gameEngine.entity.Entity;
 import com.mygdx.game.gameEngine.entity.EntityManager;
 import com.mygdx.game.gameEngine.entity.PlayableEntity;
 import com.mygdx.game.gameEngine.player.PlayerMovement;
+import com.mygdx.game.gameEngine.sound.SoundEffectType;
+import com.mygdx.game.gameEngine.sound.SoundManager;
 import com.mygdx.game.gameLayer.movement.Player1MovementStrategy;
 
 public class Boy extends PlayableEntity {
@@ -18,6 +20,7 @@ public class Boy extends PlayableEntity {
     private static final float BULLET_SPAWN_OFFSET_Y = 10;
     private EntityFactory entityFactory;
     private EntityManager entityManager;
+    private static SoundManager soundManager;
     private Bullet bullet;
 
     private int powerUpLevel;
@@ -42,6 +45,7 @@ public class Boy extends PlayableEntity {
         super(health, maxHealth, x, y, scale, sprite ,speed, playerMovement, batch);
         // TODO: upgrade to dynamic assignment of strat?
         this.playerMovementStrategy = new Player1MovementStrategy();
+        soundManager = SoundManager.getInstance();
     }
     public Boy(int health, int maxHealth, float x, float y, float scale, Sprite sprite,
                float speed, PlayerMovement playerMovement, SpriteBatch batch,
@@ -49,6 +53,7 @@ public class Boy extends PlayableEntity {
         super(health, maxHealth, x, y, scale, sprite, speed, playerMovement, batch);
         this.entityFactory = entityFactory;
         this.entityManager = entityManager;
+        soundManager = SoundManager.getInstance();
         this.powerUpLevel = 0;
         System.out.println(entityManager);
         this.playerMovementStrategy = new Player1MovementStrategy();
@@ -147,6 +152,7 @@ public class Boy extends PlayableEntity {
         if(timeSeconds > shootRate) {
             timeSeconds -= shootRate;
             Entity bullet = getEntityFactory().createEntity(3, 1, bulletSpawnX, bulletSpawnY);
+            soundManager.playSE(SoundEffectType.FIRE);
         }
     }
 

@@ -12,9 +12,9 @@ import java.util.Map;
 
 public class GameSoundTrack extends SoundTrack {
     private Map<String, backgroundMusic> backgroundMusicMap;
-    private Map<String, SoundEffect> soundEffectMap;
+    //private Map<String, SoundEffect> soundEffectMap;
 
-//    private Map<SoundEffectType, SoundEffect> soundEffectMap;
+    private Map<SoundEffectType, SoundEffect> soundEffectMap;
 
     public GameSoundTrack() {
         backgroundMusicMap = new HashMap<>();
@@ -23,9 +23,10 @@ public class GameSoundTrack extends SoundTrack {
         backgroundMusicMap.put("StartingScene", new backgroundMusic("Ground_Theme.wav"));
         backgroundMusicMap.put("GameScene", new backgroundMusic("SkyFire.wav"));
 
-        soundEffectMap.put("StartingScene_Button", new SoundEffect("button_sound.wav"));
-        soundEffectMap.put("GameScene_Collision", new SoundEffect("explosion.wav"));
-        soundEffectMap.put("eatPowerup", new SoundEffect("eatingSound.wav"));
+        soundEffectMap.put(SoundEffectType.BUTTON, new SoundEffect("button_sound.wav"));
+        soundEffectMap.put(SoundEffectType.HIT, new SoundEffect("explosion.wav"));
+        soundEffectMap.put(SoundEffectType.FIRE, new SoundEffect("laser.wav"));
+        soundEffectMap.put(SoundEffectType.COLLECT, new SoundEffect("eatingSound.wav"));
 
 //        soundEffectMap.put(SoundEffectType.FIRE, new SoundEffect("fire_sound.wav"));
 //        soundEffectMap.put(SoundEffectType.TOUCH, new SoundEffect("touch_sound.wav"));
@@ -37,8 +38,8 @@ public class GameSoundTrack extends SoundTrack {
         return backgroundMusicMap.get(sceneName);
     }
 
-    public SoundEffect getSoundEffect(String effectName) {
-        return soundEffectMap.get(effectName);
+    public SoundEffect getSoundEffect(SoundEffectType soundEffectType) {
+        return soundEffectMap.get(soundEffectType);
     }
 
     public void pauseAllBackgroundMusic() {
