@@ -138,6 +138,7 @@ public class CollisionHandler {
 
             int powerupLevel = ((Boy) x).getPowerUpLevel(); // Retrieve the current score from the player
             collisionList.remove(y);
+            soundManager.playSE("eatPowerup");
             ((HealthPack) y).setAlive(false);
             powerupLevel += 1; // Increment the score by 10 for killing an enemy
             ((Boy) x).setPowerUpLevel(powerupLevel); // Set the updated score back to the player

@@ -22,6 +22,7 @@ public class GameSoundTrack extends SoundTrack {
 
         soundEffectMap.put("StartingScene_Button", new SoundEffect("button_sound.wav"));
         soundEffectMap.put("GameScene_Collision", new SoundEffect("explosion.wav"));
+        soundEffectMap.put("eatPowerup", new SoundEffect("eatingSound.wav"));
     }
 
     public backgroundMusic getBackgroundMusic(String sceneName) {
