@@ -115,9 +115,9 @@ public class GameScene extends Scene implements iIO {
         // Create entities
         // BOY = 0, ENEMY = 1, BOSS = 2, BULLET = 3, ENEMYBULLET = 4, HEALTHPACK = 5
         entityFactory.createEntity(0,1);        // Create player
-        entityFactory.createEntity(1,3);        // Create enemy
+        entityFactory.createEntity(1,5);        // Create enemy
         entityFactory.createEntity(2,1);        // Create boss
-        entityFactory.createEntity(5,3);        // Create health pack
+//        entityFactory.createEntity(5,3);        // Create health pack
 //        super.getEntityManager().createEnemies(5);
 //        super.getEntityManager().createPlayerBullets(0);
 //        super.getEntityManager().createEnemyBullets(1);

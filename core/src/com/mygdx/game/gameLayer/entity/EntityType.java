@@ -26,7 +26,7 @@ public enum EntityType {
     ENEMYBULLET(10, 0, 0, 1f,
             200f, 0, "81_pizza.png"),
     HEALTHPACK(10, 500f, 500f, 1f,
-                        50f, 50, "Broccoli.png");
+                        100f, 50, "Broccoli.png");
 
     public final int health;
     public final int maxHealth;
