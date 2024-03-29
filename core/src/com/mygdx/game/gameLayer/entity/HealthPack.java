@@ -111,31 +111,7 @@ public class HealthPack extends CollidableEntities implements iAiMovement {
     }
     //Movement Logic
     public void movement() {
-        setAll();
-    }
-
-    public void setAll() {
-        // Check if entity has finished moving if so change direction
-        if (getChangeRate() <= 0) {
-            int randomNumber = random.nextInt(4); // Random number between 0 and 3 for four directions
-            switch (randomNumber) {
-                case 0:
-                    setMovementStrategy(getMovementStrategy("LeftMovement"));
-                    break;
-                case 1:
-                    setMovementStrategy(getMovementStrategy("RightMovement"));
-                    break;
-                case 2:
-                    setMovementStrategy(getMovementStrategy("UpMovement"));
-                    break;
-                case 3:
-                    setMovementStrategy(getMovementStrategy("DownMovement"));
-                    break;
-                default:
-                    break;
-            }
-        }
-        decrementChangeRate();
+        setDown();
     }
     public void setDown() {
         setMovementStrategy(getMovementStrategy("DownMovement"));
