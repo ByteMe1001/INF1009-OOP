@@ -91,9 +91,7 @@ public class QuizScene extends Scene implements iIO {
         addButtonClickListener(trueButton, () -> {
             // Logic to execute when the false button is clicked
         	super.getSoundManager().stopMusic("StartingScene");
-            getBatch().end();
-            System.out.println(QuizScene.super.getEntityManager());
-            super.getSceneManager().swapScene(new CongratsScene(super.getSceneManager(), super.getEntityManager(), super.getSoundManager(), getBatch()));
+            super.getSceneManager().swapScene(new CongratsScene(QuizScene.super.getSceneManager(), QuizScene.super.getEntityManager(), QuizScene.super.getSoundManager(), getBatch()));
             //super.getSceneManager().swapScene(new GameScene(StartingScene.super.getSceneManager(), StartingScene.super.getSoundManager(), getBatch()));
         });
         
@@ -121,13 +119,13 @@ public class QuizScene extends Scene implements iIO {
     }
 
 
-    private void handleFalseButtonClick() {
+   /* private void handleFalseButtonClick() {
 
     	SceneManager sceneManager = getSceneManager();
         sceneManager.createExitScene();
         sceneManager.swapScene(sceneManager.getExitScene());
 
-    }
+    } */
 
     private void addCenterText(Table table, String text) {
         // Create LabelStyle with the initialized font
