@@ -2,7 +2,7 @@ package com.mygdx.game.gameEngine.entity;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.gameEngine.ai.AiControlManager;
+import com.mygdx.game.gameEngine.ai.AIControlManager;
 import com.mygdx.game.gameEngine.collision.CollisionManager;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class EntityManager {
     private SpriteBatch batch;
 
     private AbstractGamePlayerManager abstractGamePlayerManager;
-    private AiControlManager aiControlManager;
+    private AIControlManager aiControlManager;
     private CollisionHandler collisionHandler;
 
     Random random = new Random();
@@ -55,7 +55,7 @@ public class EntityManager {
         this.newEntityList = new ArrayList<>();
         this.collisionManager = new CollisionManager(this, playerManager, collisionList, collisionHandler);
         this.abstractGamePlayerManager = new GamePlayerManager(this, playerEntityList);
-        this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);;
+        this.aiControlManager = new AIControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);;
         this.entityFactory = new EntityFactory(batch, this);
     }
 
@@ -73,7 +73,7 @@ public class EntityManager {
         //~~~~~~~~~~~MANAGER CREATION~~~~~~~~~~~~~~~~~~~~~~~~
         this.collisionManager = new CollisionManager(this, playerManager, collisionList, collisionHandler);
         this.abstractGamePlayerManager = new GamePlayerManager(this, playerEntityList);
-        this.aiControlManager = new AiControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);
+        this.aiControlManager = new AIControlManager(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), this, aiEntityList);
     }
 
     // Main testing creation
@@ -262,11 +262,11 @@ public class EntityManager {
     }
 
 
-    public AiControlManager getAiControlManager() {
+    public AIControlManager getAiControlManager() {
         return aiControlManager;
     }
 
-    public void setAiControlManager(AiControlManager aiControlManager) {
+    public void setAiControlManager(AIControlManager aiControlManager) {
         this.aiControlManager = aiControlManager;
     }
 

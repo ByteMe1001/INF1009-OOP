@@ -1,15 +1,12 @@
 package com.mygdx.game.gameLayer.entity;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.gameEngine.entity.CollidableEntities;
-import com.mygdx.game.gameEngine.ai.AiControlManager;
 import com.mygdx.game.gameEngine.util.iAiMovement;
 import com.mygdx.game.gameLayer.movement.*;
 import com.mygdx.game.gameEngine.entity.EntityManager;
-import com.mygdx.game.gameEngine.entity.Entity;
 
 
 import java.util.ArrayList;
@@ -48,7 +45,7 @@ public class Boss extends CollidableEntities implements iAiMovement{
 //    }
 //
 //    // Additional constructor if needed
-//    public Boss(int id, AiControlManager aiControlManager, SpriteBatch batch) {
+//    public Boss(int id, AIControlManager aiControlManager, SpriteBatch batch) {
 //        super(id, 100, 0, 0, 1f, new Sprite(new Texture(TEXTURE_PATH)), 64f, 64f, 300f, 3, batch);
 //        this.aiControlManager = aiControlManager;
 //        initializeMovementStrategy();
