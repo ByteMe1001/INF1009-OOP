@@ -13,7 +13,6 @@ import com.mygdx.game.gameEngine.player.GamePlayerManager;
 import com.mygdx.game.gameEngine.sound.SoundManager;
 import com.mygdx.game.gameEngine.util.iAiMovement;
 import com.mygdx.game.gameEngine.util.iCollision;
-import com.mygdx.game.gameEngine.util.iPlayerMovement;
 import com.mygdx.game.gameLayer.collision.CollisionHandler;
 import com.mygdx.game.gameLayer.entity.*;
 
@@ -22,7 +21,7 @@ public class EntityManager {
     private CollisionManager collisionManager;
     private ArrayList<Entity> entityList;
     private ArrayList<iAiMovement> aiEntityList;
-    private ArrayList<iPlayerMovement> playerEntityList;
+    private ArrayList<PlayableEntity> playerEntityList;
     private ArrayList<iCollision> collisionList;
     private ArrayList<Entity> newEntityList;
     private EntityFactory entityFactory;
@@ -47,7 +46,7 @@ public class EntityManager {
         soundManager = SoundManager.getInstance();
         this.batch = batch;
         this.entityList = new ArrayList<Entity>();
-        this.playerEntityList = new ArrayList<iPlayerMovement>();
+        this.playerEntityList = new ArrayList<PlayableEntity>();
         this.aiEntityList = new ArrayList<iAiMovement>();
         this.collisionList = new ArrayList<iCollision>();
         this.newEntityList = new ArrayList<>();
@@ -64,7 +63,7 @@ public class EntityManager {
         this.batch = batch;
         //~~~~~~~~~~~LIST CREATION~~~~~~~~~~~~~~~~~~~~~~~~~~
         this.entityList = new ArrayList<Entity>();
-        this.playerEntityList = new ArrayList<iPlayerMovement>();
+        this.playerEntityList = new ArrayList<PlayableEntity>();
         this.aiEntityList = new ArrayList<iAiMovement>();
         this.collisionList = new ArrayList<iCollision>();
         this.newEntityList = new ArrayList<>();
@@ -145,7 +144,7 @@ public class EntityManager {
 
     // Maybe can use this function to clear all list?
     public void deleteEntity(Entity e) {
-        if (!entityList.remove(e) && !playerEntityList.remove((iPlayerMovement) e) && !aiEntityList.remove((iAiMovement) e)) {
+        if (!entityList.remove(e) && !playerEntityList.remove((PlayableEntity) e) && !aiEntityList.remove((iAiMovement) e)) {
             throw new IllegalArgumentException("Entity not found in any entity list");
         }
     }
@@ -174,8 +173,8 @@ public class EntityManager {
             addedToList = true;
         }
 
-        if (entity instanceof iPlayerMovement && playerEntityList != null) {
-            playerEntityList.add((iPlayerMovement) entity); // Adding to the player movement list
+        if (entity instanceof PlayableEntity && playerEntityList != null) {
+            playerEntityList.add((PlayableEntity) entity); // Adding to the player movement list
 //            System.out.println("Added to player movement list");
             addedToList = true;
         }
@@ -215,7 +214,7 @@ public class EntityManager {
                 if (entity instanceof iCollision) {
                     collisionList.remove(entity);
                 }
-                if (entity instanceof iPlayerMovement) {
+                if (entity instanceof PlayableEntity) {
                     playerEntityList.remove(entity);
                 }
                 if (entity instanceof iAiMovement) {

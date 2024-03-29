@@ -2,6 +2,7 @@ package com.mygdx.game.gameEngine.player;
 
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.gameEngine.entity.EntityManager;
+import com.mygdx.game.gameEngine.entity.PlayableEntity;
 import com.mygdx.game.gameEngine.util.iIO;
 import com.mygdx.game.gameEngine.util.iPlayerMovement;
 
@@ -12,7 +13,7 @@ import java.util.List;
 // TODO: CHANGE TO PLAYABLE ENTITY
 public class GamePlayerManager implements iIO {
 
-    private ArrayList<iPlayerMovement> playerEntityList;
+    private ArrayList<PlayableEntity> playerEntityList;
     private HashMap<Integer, List<Integer>> healthDataMap;
 
     private EntityManager entityManager;
@@ -26,7 +27,7 @@ public class GamePlayerManager implements iIO {
 
     }
 
-    public GamePlayerManager(EntityManager entityManager, ArrayList<iPlayerMovement> playerEntityList) {
+    public GamePlayerManager(EntityManager entityManager, ArrayList<PlayableEntity> playerEntityList) {
         this.entityManager = entityManager;
         this.playerEntityList = playerEntityList;
         healthDataMap = new HashMap<>();
@@ -34,7 +35,7 @@ public class GamePlayerManager implements iIO {
 
     // PLease fix remove args
     public void update(EntityManager entityManager) {
-        for (iPlayerMovement e : playerEntityList) {
+        for (PlayableEntity e : playerEntityList) {
             e.movement(movement(e));
             shoot(e, e.getX(), e.getY());
             addHealthData();
@@ -74,7 +75,7 @@ public class GamePlayerManager implements iIO {
     }
 
     // TODO: Add input key map according to string and inputkey function
-    public String movement(iPlayerMovement entity) {
+    public String movement(PlayableEntity entity) {
         switch (inputKey1()) {               // inputKey1() or inputKey2()
             case "UP":
                 return "UP";
@@ -90,7 +91,7 @@ public class GamePlayerManager implements iIO {
     }
 
     // TODO: Move to BOY
-    public void shoot(iPlayerMovement entity, float x, float y) {
+    public void shoot(PlayableEntity entity, float x, float y) {
         switch (inputKey3()) {
             case "FALSE":
                 break;
