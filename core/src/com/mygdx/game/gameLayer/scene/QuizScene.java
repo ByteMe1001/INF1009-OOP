@@ -21,9 +21,16 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.mygdx.game.gameLayer.GamePlayerManager;
+import com.mygdx.game.gameLayer.entity.EntityFactory;
 
 
 public class QuizScene extends Scene implements iIO {
+
+    private EntityManager entityManager;
+    private EntityFactory entityFactory;
+    private GamePlayerManager gamePlayerManager;
+    SceneManager sceneManager = SceneManager.getInstance();
 
     private final static String TRUE_BUTTON_TEXTURE_PATH = "true_button.png";
     private final static String FALSE_BUTTON_TEXTURE_PATH = "false_button.png";
@@ -35,6 +42,7 @@ public class QuizScene extends Scene implements iIO {
 
     public QuizScene(SceneManager sceneManager, SoundManager soundManager, EntityManager entityManager, SpriteBatch batch) {
     	super(sceneManager, entityManager, soundManager, batch);
+        System.out.println(super.getEntityManager());
     }
 
     @Override
@@ -84,7 +92,9 @@ public class QuizScene extends Scene implements iIO {
         addButtonClickListener(trueButton, () -> {
             // Logic to execute when the false button is clicked
         	super.getSoundManager().stopMusic("StartingScene");
-            super.getSceneManager().swapScene(new BossScene(QuizScene.super.getSceneManager(), QuizScene.super.getEntityManager(), QuizScene.super.getSoundManager(), getBatch()));
+            getBatch().end();
+            System.out.println(QuizScene.super.getEntityManager());
+            super.getSceneManager().swapScene(new BossScene(super.getSceneManager(), super.getEntityManager(), super.getSoundManager(), getBatch()));
             //super.getSceneManager().swapScene(new GameScene(StartingScene.super.getSceneManager(), StartingScene.super.getSoundManager(), getBatch()));
         });
         

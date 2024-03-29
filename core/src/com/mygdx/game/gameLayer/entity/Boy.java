@@ -50,7 +50,6 @@ public class Boy extends PlayableEntity {
         this.entityManager = entityManager;
         soundManager = SoundManager.getInstance();
         this.powerUpLevel = 0;
-        System.out.println(entityManager);
         this.playerMovementStrategy = new Player1MovementStrategy();
     }
 
