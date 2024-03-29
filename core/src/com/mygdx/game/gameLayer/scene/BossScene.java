@@ -148,23 +148,17 @@ public class BossScene extends Scene implements iIO {
         pauseButton.getImageCell().align(Align.center);
 
         // Add click listener to the pause button
-        //pause button logic
-        // Pause button logic
-        pauseButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-
-                SceneManager sceneManager = getSceneManager();
-                if (sceneManager.isPaused()) {
-                    sceneManager.resume();
-                    pauseButton.getStyle().imageUp = pauseButtonDrawable;
-                } else {
-                    sceneManager.pause();
-                    pauseButton.getStyle().imageUp = resumeButtonDrawable;
-                }
+        addButtonClickListener(pauseButton, () -> {
+            // Pause button logic
+            SceneManager sceneManager = getSceneManager();
+            if (sceneManager.isPaused()) {
+                sceneManager.resume();
+                pauseButton.getStyle().imageUp = pauseButtonDrawable;
+            } else {
+                sceneManager.pause();
+                pauseButton.getStyle().imageUp = resumeButtonDrawable;
             }
         });
-
 
         return pauseButton;
     }
@@ -185,20 +179,18 @@ public class BossScene extends Scene implements iIO {
         TextureRegionDrawable backBtnDrawable = new TextureRegionDrawable(backBtnRegion);
         ImageButton backButton = new ImageButton(backBtnDrawable);
 
-        backButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                // Stop and dispose of the music
-                getSoundManager().stopAll();
-                getSoundManager().dispose();
+        addButtonClickListener(backButton, () -> {
+            // Back button logic
+            // Stop and dispose of the music
+            getSoundManager().stopAll();
+            getSoundManager().dispose();
 
-                // Clear entities
-                getEntityManager().dispose();
+            // Clear entities
+            getEntityManager().dispose();
 
-                // Navigate to the StartingScene
-                sceneManager.createStartingScene();
-                sceneManager.swapScene(sceneManager.getStartingScene());
-            }
+            // Navigate to the StartingScene
+            sceneManager.createStartingScene();
+            sceneManager.swapScene(sceneManager.getStartingScene());
         });
 
         return backButton;
