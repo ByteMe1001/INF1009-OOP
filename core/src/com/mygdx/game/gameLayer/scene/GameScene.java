@@ -182,7 +182,6 @@ public class GameScene extends Scene implements iIO {
         // Game Loop
         if (!getSceneManager().isPaused()) {
             super.getEntityManager().update();
-            healthBar.draw(getBatch());
 
          // Check if all boss entities are dead and go to the QuizScene
             if (super.getEntityManager().areAllEnemiesDead()) {
@@ -200,6 +199,8 @@ public class GameScene extends Scene implements iIO {
                 backgroundY = 0;
             }
         }
+
+        healthBar.draw(getBatch());
 
         // Entity Rendering
         super.getEntityManager().draw();

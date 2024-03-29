@@ -3,11 +3,11 @@ package com.mygdx.game.gameLayer.scene;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
+
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.gameEngine.entity.EntityManager;
@@ -21,8 +21,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.mygdx.game.gameLayer.GamePlayerManager;
+
 import com.mygdx.game.gameLayer.entity.EntityFactory;
+import com.mygdx.game.gameLayer.player.GamePlayerManager;
 
 
 public class QuizScene extends Scene implements iIO {
@@ -61,8 +62,6 @@ public class QuizScene extends Scene implements iIO {
         // Create a table to hold text and buttons
         Table mainTable = new Table();
         mainTable.setFillParent(true); // Table size matches the stage size
-
-        // Enable debug lines for the main table and its children
 
         // Add text to the main table
         addCenterText(mainTable, "You should consume at least 5 portions of fruit and vegetables per day.");
@@ -104,8 +103,6 @@ public class QuizScene extends Scene implements iIO {
             super.getSceneManager().swapScene(new exitScene(QuizScene.super.getSceneManager(), QuizScene.super.getEntityManager(), QuizScene.super.getSoundManager(), getBatch()));
             //super.getSceneManager().swapScene(new GameScene(StartingScene.super.getSceneManager(), StartingScene.super.getSoundManager(), getBatch()));
         });
-
-       // super.getSoundManager().playMusic("StartingScene"); // to be changed
     }
 
     private ImageButton createButton(String buttonTexturePath, final boolean answer) {
@@ -120,63 +117,16 @@ public class QuizScene extends Scene implements iIO {
         // Set the size of the button
         button.setSize(buttonTexture.getWidth() * BUTTON_SCALE, buttonTexture.getHeight() * BUTTON_SCALE);
 
-        // Add click listener to the button
-       /* button.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                // Handle button click
-                // Here, you can implement logic to check the answer
-                if (answer) {
-                    // True button clicked
-                    handleTrueButtonClick();
-                } else {
-                    // False button clicked
-                    handleFalseButtonClick();
-                }
-            }
-        }); */
-
         return button;
     }
 
-   /* private void handleTrueButtonClick() {
-    	SceneManager sceneManager = getSceneManager();
-        sceneManager.createBossScene();
-        sceneManager.swapScene(sceneManager.getBossScene());
-    	//handle true button click
-       // super.getSceneManager().swapScene(new GameScene(QuizScene.super.getSceneManager(), QuizScene.super.getEntityManager(), QuizScene.super.getSoundManager(), getBatch()));
-    	//Gdx.app.exit();
-    	// TODO MAKE IT SUCH THAT WHEN THE USER CLICKS THIS, IT BRINGS THEM TO ANOTHER PAGE
-    	// THAT SAYS THANKS FOR PLAYING OR SOMETHING LIKE THAT
-    } */
-
-
 
     private void handleFalseButtonClick() {
 
     	SceneManager sceneManager = getSceneManager();
         sceneManager.createExitScene();
         sceneManager.swapScene(sceneManager.getExitScene());
-    	
-        // Handle false button click
-        //dx.app.exit(); // Exit the game if false button is clicked
-        
-        // TO MAKE IT SUCH THAT IT GOES BACK TO THE GAME SCENE AGAIN
-    	/*SceneManager sceneManager = getSceneManager();
-        SoundManager soundManager = getSoundManager();
-        SpriteBatch batch = getBatch();
 
-        // Create a new instance of GameScene
-        GameScene gameScene = new GameScene(sceneManager, new EntityManager(soundManager, batch), soundManager, batch);
-
-        // Swap to the GameScene
-        sceneManager.swapScene(gameScene); */
-
-    //}
-    private void handleFalseButtonClick() {
-    	SceneManager sceneManager = getSceneManager();
-        sceneManager.createExitScene();
-        sceneManager.swapScene(sceneManager.getExitScene());
     }
 
     private void addCenterText(Table table, String text) {
