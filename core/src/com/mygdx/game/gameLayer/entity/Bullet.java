@@ -1,11 +1,9 @@
 package com.mygdx.game.gameLayer.entity;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.gameEngine.entity.CollidableEntities;
-import com.mygdx.game.gameEngine.ai.AiControlManager;
 import com.mygdx.game.gameEngine.util.iAiMovement;
 import com.mygdx.game.gameLayer.movement.*;
 

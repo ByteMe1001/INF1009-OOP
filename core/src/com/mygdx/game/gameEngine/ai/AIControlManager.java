@@ -7,7 +7,7 @@ import com.mygdx.game.gameEngine.util.iAiMovement;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class AiControlManager{
+public class AIControlManager {
     private ArrayList<iAiMovement> aiEntityList; // Stores all AI-controlled entities
     private EntityManager entityManager;
     private float screenWidth; // The width of the screen to keep entities within bounds
@@ -16,7 +16,7 @@ public class AiControlManager{
     private Random random;
 
 
-    public AiControlManager(float screenWidth, float screenHeight, EntityManager entityManager, ArrayList<iAiMovement> aiEntityList) {
+    public AIControlManager(float screenWidth, float screenHeight, EntityManager entityManager, ArrayList<iAiMovement> aiEntityList) {
         this.aiEntityList = aiEntityList;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
