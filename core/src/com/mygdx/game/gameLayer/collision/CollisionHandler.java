@@ -75,13 +75,14 @@ public class CollisionHandler {
     	    if (boss.getHealth() <= 0) {
     	        collisionList.remove(boss);
     	        boss.setAlive(false);
-				playerManager.createPlayer("Player");
+				//playerManager.createPlayer("Player");
 				playerManager.addPlayer(player);
 				int score = playerManager.getScore(player);
 				score += 500;
 				//player.setScore(score);
 				playerManager.setScore(player, score);
 				System.out.print("Score: " + playerManager.getScore(player));
+
     	        //int score = player.getScore() + 500;
     	        //player.setScore(score);
     	        //System.out.println("Player Score: " + player.getScore());
