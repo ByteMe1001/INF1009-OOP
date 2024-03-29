@@ -8,10 +8,9 @@ import com.mygdx.game.gameEngine.util.iPlayerMovement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 // TODO: CHANGE TO PLAYABLE ENTITY
-public class PlayerControlManager implements iIO {
+public class GamePlayerManager implements iIO {
 
     private ArrayList<iPlayerMovement> playerEntityList;
     private HashMap<Integer, List<Integer>> healthDataMap;
@@ -23,11 +22,11 @@ public class PlayerControlManager implements iIO {
     private float period = 0.2f;
     // END
 
-    public PlayerControlManager() {
+    public GamePlayerManager() {
 
     }
 
-    public PlayerControlManager(EntityManager entityManager, ArrayList<iPlayerMovement> playerEntityList) {
+    public GamePlayerManager(EntityManager entityManager, ArrayList<iPlayerMovement> playerEntityList) {
         this.entityManager = entityManager;
         this.playerEntityList = playerEntityList;
         healthDataMap = new HashMap<>();
