@@ -18,11 +18,13 @@ public class CollisionHandler {
 	private PlayerManager playerManager;
     private static SoundManager soundManager;
 
+	private Player player;
     private float timeSeconds = 0f;
     private float period = 1.5f;
     
 	// Constructor to initialize collisionList
     public CollisionHandler(PlayerManager playerManager, ArrayList<iCollision> collisionList) {
+		this.player = new Player("Player");
 		this.playerManager = playerManager;
         this.collisionList = collisionList;
         soundManager = SoundManager.getInstance();
@@ -72,6 +74,13 @@ public class CollisionHandler {
     	    if (boss.getHealth() <= 0) {
     	        collisionList.remove(boss);
     	        boss.setAlive(false);
+				playerManager.createPlayer("Player");
+				playerManager.addPlayer(player);
+				int score = playerManager.getScore(player);
+				score += 500;
+				//player.setScore(score);
+				playerManager.setScore(player, score);
+				System.out.print("Score: " + playerManager.getScore(player));
     	        //int score = player.getScore() + 500;
     	        //player.setScore(score);
     	        //System.out.println("Player Score: " + player.getScore());
@@ -94,9 +103,13 @@ public class CollisionHandler {
     	    System.out.println("Enemy Health: " + enemy.getHealth());
     	    
     	    if (enemy.getHealth() <= 0) {
-    	        //int score = player.getScore() + 10;
-    	        //player.setScore(score);
-    	        //System.out.println("Player Score: " + player.getScore());
+				playerManager.createPlayer("Player");
+				playerManager.addPlayer(player);
+				int score = playerManager.getScore(player);
+				score += 10;
+				//player.setScore(score);
+				playerManager.setScore(player, score);
+				System.out.print("Score: " + playerManager.getScore(player));
 				enemy.setAlive(false);
 				collisionList.remove(enemy);
     	    }
