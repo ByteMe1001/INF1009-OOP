@@ -146,7 +146,7 @@ public class SceneManager implements SceneChangeListener{
     public void pause(){
         // Pause the game
         isPaused = true; // Set the isPaused flag to true
-        System.out.println("Game Paused"); // Print a message indicating that the game is paused
+        //System.out.println("Game Paused"); // Print a message indicating that the game is paused
 
         // Pause sound effects and music
         soundManager.pauseAll();
